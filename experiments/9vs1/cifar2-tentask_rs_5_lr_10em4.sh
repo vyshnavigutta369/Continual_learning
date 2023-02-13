@@ -50,4 +50,4 @@ python -u run.py --dataset $DATASET --train_aug --rand_split --gpuid $GPUID --re
         --overwrite $OVERWRITE --max_task $MAXTASK \
         --model_name $MODELNAME --model_type resnet \
         --learner_type er --learner_name TR \
-        --log_dir ${OUTDIR} --plot_dir $PLOT_DIR --oracle_dir $ORACLE_DIR
+        --log_dir ${OUTDIR} --plot_dir $PLOT_DIR --oracle_dir $ORACLE_DIR  --oracle_flag
