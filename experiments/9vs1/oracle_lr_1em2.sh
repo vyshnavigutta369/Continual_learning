@@ -31,7 +31,7 @@ BS=128 # batch size
 WD=0 # weight decay
 MOM=0.9 # momentum
 OPT="SGD" # optimizer
-LR=0.00001 # learning rate
+LR=0.01 # learning rate
 
 OLD_VS_NEW="9v1" ## BE MINDFUL OF THIS PARAM
 
@@ -49,7 +49,7 @@ python -u run.py --dataset $DATASET --train_aug --rand_split --gpuid $GPUID --re
         --optimizer $OPT --lr $LR --momentum $MOM --weight_decay $WD \
         --overwrite $OVERWRITE --max_task $MAXTASK \
         --model_name $MODELNAME --model_type resnet \
-        --learner_type default --learner_name NormalNN \
+        --learner_type default --learner_name NormalNN --oracle_flag\
         --log_dir ${OUTDIR}
 
 # if [ $EXP_FLAG -eq -1 ] 
