@@ -221,9 +221,10 @@ class TR(NormalNN):
 
                 # Evaluate the performance of current task
                 if val_loader is not None:
-                    self.validation(val_loader, train_val=True)
+                    val_method = self.validation(val_loader, train_val=True)
                     if epoch in self.epochs_of_interest:
-                        self.task_acc["Method"][epoch].append(self.validation(val_loader, task_in = task))
+                        # self.task_acc["Method"][epoch].append(self.validation(val_loader, task_in = task))
+                        self.task_acc["Method"][epoch].append(val_method)
                         self.task_acc["Oracle"][epoch].append(val_target)  
 
                 ## PLOTS AND TABLES
