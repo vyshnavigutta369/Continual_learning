@@ -131,8 +131,8 @@ class TR(NormalNN):
             self.per_class_new_features = {}
             # per_class_accuracy = {"MSE": {}, "MMD_linear": {}, "MMD_rbf": {}, "MMD_poly": {}, "CKA_linear": {}, "CKA_kernel": {}}
             # per_class_dist_shift = {"MSE": {}, "MMD_linear": {}, "MMD_rbf": {}, "MMD_poly": {}, "CKA_linear": {}, "CKA_kernel": {}}
-            self.per_class_accuracy = {"MMD_rbf": {}}
-            self.per_class_dist_shift = {"MMD_rbf": {}}
+            self.per_class_accuracy = {"MMD_rbf": {}} ## For testing MMD_poly, change to {"MMD_poly": {}}
+            self.per_class_dist_shift = {"MMD_rbf": {}} ## For testing MMD_poly, change to {"MMD_poly": {}}
         
             losses = AverageMeter()
             acc = AverageMeter()
