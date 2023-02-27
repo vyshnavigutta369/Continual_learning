@@ -1,0 +1,4 @@
+numpy
+argparse
+pyaml
+pillow<=6.1
