@@ -8,8 +8,11 @@ import torch.utils.data as data
 from .utils import download_url, check_integrity
 import torch
 import torch.nn.functional as F
+from datasets import concatenate_datasets
+import copy
 
-
+from utils.utils import getBack, near_split, ratio_breakdown
+    
 class DualDataLoader(object):
     def __init__(self, dset_a, dset_b):
         self.dset_a = dset_a
@@ -72,62 +75,35 @@ class ReplayDataset(torch.utils.data.Dataset):
         self.targets= []
         self.weights = []
 
-    def extend(self, dataset, class_replay_counts, class_replay_weights=None):
+    def extend(self, dataset, class_replay_counts=None, class_replay_ratios=None, class_replay_weights=None):
         
         to_replay_class_count = {}
         self.class_mapping = dataset.class_mapping
-        # print (set(dataset.targets))
+
+        
         for data, target in zip(dataset.data, dataset.targets):
-            # print (target)
-            if class_replay_counts[self.class_mapping[target]] ==-1:
+            if class_replay_ratios is not None:
+                self.data.extend([data for _ in range(class_replay_ratios[self.class_mapping[target]])])
+                self.targets.extend([target for _ in range(class_replay_ratios[self.class_mapping[target]])])
+            elif class_replay_weights is not None:
                 self.data.append(data)
                 self.targets.append(target)
                 if class_replay_weights:
                     self.weights.append(class_replay_weights[self.class_mapping[target]])
-            else: 
+            elif class_replay_counts is not None: 
+                if class_replay_counts[self.class_mapping[target]] == 5000:
+                    self.data.append(data)
+                    self.targets.append(target)
+                    continue
                 if target not in to_replay_class_count.keys():
                     to_replay_class_count[target] = 0
                 if to_replay_class_count[target] < class_replay_counts[self.class_mapping[target]]:
                     self.data.append(data)
                     self.targets.append(target)
-                    if class_replay_weights:
-                        self.weights.append(class_replay_weights[self.class_mapping[target]])
                     to_replay_class_count[target] +=1
-        # print (to_replay_class_count)
-        
-        print ('class_mapping:', self.class_mapping)
-
-
-    def extend_replay(self, dataset, logits=None, proba=None, task_counter= None, task_labels=None):
-        # self.init_tensors(data, targets, logits, task_labels, proba, curr_task)
-        self.class_mapping = dataset.class_mapping
-        data, targets = dataset.data, dataset.targets
-        self.data.extend(data)
-        self.targets.extend(targets)
-        self.logits.extend(logits)
-        self.task_labels.extend(task_labels)
-        self.task_counter.extend(task_counter)
-        self.replay_count_dict = np.concatenate([ self.replay_count_dict, np.array([0 for _ in range(len(data))])], axis=0)
-        
-        if proba is not None:
-            self.proba= np.concatenate([ self.proba, proba], axis=0)
-        # if task_counter is not None:
-        #     self.task_counter =  np.concatenate([self.task_counter, task_counter], axis=0)
-    
-
-    def get_data(self, num_samples, replay_strategy, replay_ixs_to_exclude = [], return_index=False):
-
-        # sample_ind = np.random.choice(len(self.data), num_samples, replace=False)
-        
-        indices = np.arange(len(self))
-        sample_ind = get_replay_samples(replay_strategy, num_samples, replay_ixs= indices,
-                                         replay_count_dict=self.replay_count_dict, proba_list=self.proba,
-                                         task_counter=self.task_counter, replay_ixs_to_exclude = replay_ixs_to_exclude)
-        sample_data, sample_targets = self[sample_ind]
-        if return_index:
-            return sample_ind, sample_data, sample_targets
-        return sample_data, sample_targets
-
+            else:
+                raise Exception("Requires one of class_replay_ratios, class_replay_weights or class_replay_counts to add to the Replay dataset!!")
+               
 
     def empty(self) -> None:
         """
@@ -159,12 +135,10 @@ class ReplayDataset(torch.utils.data.Dataset):
         # to return a PIL Image
         #
 
-        # print (self.targets)
         if not isinstance(index, int):
 
             data = np.array(self.data)
             targets = np.array(self.targets)[index]
-            # print (sorted(targets))
             imgs = []
             for i, (ix, target) in enumerate(zip(index, targets)):
             
@@ -177,11 +151,10 @@ class ReplayDataset(torch.utils.data.Dataset):
                     else:
                         img = self.transform(img)
                 imgs.append(img)
-                # print (targets[i])
                 targets[i] = self.class_mapping[target]
-                # print (img.shape)
             return torch.stack(imgs, axis=0), torch.Tensor(targets), index ## CORRECT
         else:
+            
             img, target = self.data[index], self.targets[index]
             img = Image.fromarray(img)
 
@@ -200,19 +173,120 @@ class ReplayDataset(torch.utils.data.Dataset):
 
 # For active replay dataloader, need to make a dataloader object which acts like a replay dataloader in rehearsal.py but returns
 # active dynamic replay batches not random
-class ActiveDataLoader(object):
-    def __init__(self, dataset):
-        super(ActiveDataLoader, self).__init__()
+class BatchSampler(object): ## TODO OPTIMIZE!! super slow
+    def __init__(self, dataset, batch_size, new_classes, old_classes, class_counts=None):
+        super(BatchSampler, self).__init__()
         self.dataset = dataset
+        self.class_counts = class_counts
+        self.batch_size = batch_size
+        
+        self.old_classes = old_classes
+        self.new_classes = new_classes
+        self.classes = self.old_classes+self.new_classes
 
-    # make empty functions to act like a dataloader
-    def iter(self):
-        pass
+        self.class_mapping = { v: k for k,v in self.dataset.class_mapping.items() if k!=-1}
+        self.labels_to_names = { v: k for k,v in self.dataset.class_to_idx.items()}      
 
-    # here we will need to do active data sampling (rather than random sampling as is typically done)
-    def next(self):
-        pass
+        self.init_params(class_counts) 
 
+    def init_params(self, class_ratios=None, class_counts=None):
+
+        if hasattr(self, 'indices'):
+            seen_indices = []
+            seen_labels = []
+            for i,y in enumerate(self.dataset.targets):
+                if i not in self.indices:
+                    seen_indices.append(i)
+                    seen_labels.append(self.dataset.class_mapping[y])
+            self.indices.extend(seen_indices)
+            self.labels.extend(seen_labels)
+        else:
+            self.labels = [ self.dataset.class_mapping[y] for y in  self.dataset.targets]
+            self.indices = [i for i in range(len(self.labels))]
+
+        self.class_counts = class_counts
+        
+        if self.class_counts is None:
+            self.compute_class_counts(class_ratios)
+
+        self.goal = False
+        self.cl_ind = {}
+        self.new_cl_filled= []   
+        self.batch_no=0          
+            
+    def compute_class_counts(self, class_ratios=None):
+
+        if len(self.old_classes)==0:
+            self.class_counts=  { i: c for i, c in enumerate(near_split(int(self.batch_size/2), len(self.new_classes))) }
+        else:
+            if class_ratios is not None:
+                self.class_ratios = class_ratios
+            else:
+                # self.class_ratios = { 0: 3, 1: 1, 2: 6, 3: 8, 4: 6, 5: 3, 6: 3, 7: 1, 8: 6, 9: 8} ## default
+                raise Exception("Both Class counts & Class ratios cannot be None for using custom batch sampler")
+                
+            class_ratios_old = {k: self.class_ratios[k] for k in self.class_ratios if k in self.old_classes}
+            class_ratios_new = {k: self.class_ratios[k] for k in self.class_ratios if k in self.new_classes}
+
+            factor = float(sum(class_ratios_old.values()))
+            class_ratios_old = {k: class_ratios_old[k]/factor for k in class_ratios_old}
+            factor = float(sum(class_ratios_new.values()))
+            class_ratios_new = {k: class_ratios_new[k]/factor for k in class_ratios_new}
+
+            self.class_counts= {k: x for k,x in zip(class_ratios_old, ratio_breakdown(int(self.batch_size/2), list(class_ratios_old.values())) )} \
+                            | {k: x for k,x in zip(class_ratios_new, ratio_breakdown(int(self.batch_size/2), list(class_ratios_new.values())) )}
+
+    def get_data(self):
+             
+        ind= []
+        labels = []
+        counts= {}
+        filled = set()
+        
+        for i, y in zip(self.indices, self.labels):
+
+            if len(filled) == len(self.class_counts):
+                break
+                
+            if y not in counts:
+                counts[y]=0
+            if y not in self.cl_ind:
+                self.cl_ind[y]= []
+            if counts[y] < self.class_counts[y]:
+                self.cl_ind[y].append(i)
+                ind.append(i)
+                labels.append(y)
+                counts[y]+=1
+            else:
+                filled.add(y)
+
+        for i,y in zip(ind, labels):
+            self.labels.remove(y)
+            self.indices.remove(i)
+
+        for cl in self.classes:
+            if cl not in set(self.labels):
+                if cl in self.new_classes:
+                    self.new_cl_filled.append(cl)
+                self.indices.extend(self.cl_ind[cl])
+                self.labels.extend([cl for _ in range(len(self.cl_ind[cl]))])
+
+        if set(self.new_cl_filled) == set(self.new_classes):
+            self.goal = True
+
+        if (self.batch_no==0):
+            print ('class_counts: ', {self.labels_to_names[self.class_mapping[cl]]: counts[cl] for cl in counts})
+        return ind
+
+    def __iter__(self):
+        
+        batch_inds = []
+        while not self.goal:
+            batch_ind = self.get_data()
+            self.batch_no+=1
+            batch_inds.append(batch_ind)
+            yield batch_ind
+        # return iter(batch_inds)
 
 class iDataset(data.Dataset):
     
@@ -309,8 +383,9 @@ class iDataset(data.Dataset):
         Returns:
             tuple: (image, target) where target is index of the target class
         """
+        
+        # print (index)
         img, target = self.data[index], self.targets[index]
-
         # doing this so that it is consistent with all other datasets
         # to return a PIL Image
         img = Image.fromarray(img)
@@ -361,7 +436,12 @@ class iDataset(data.Dataset):
         self.coreset = (np.concatenate(list(reversed(data)), axis=0), np.concatenate(list(reversed(targets)), axis=0))
         np.random.set_state(state)
 
-
+    def extend(self, dataset):
+        
+        if len(dataset)>0:
+            self.data = np.concatenate([self.data, dataset.data])
+            self.targets = np.concatenate([self.targets, dataset.targets])
+            self.class_mapping = dataset.class_mapping
 
     def load(self):
         pass
@@ -434,20 +514,9 @@ class iCIFAR2(iDataset):
                 else:
                     entry = pickle.load(f, encoding='latin1')
 
-                # data =[]
-                # labels =[]
-                # for (sample, label) in zip(entry['data'], entry['labels']):
-                #     if label==2 or label==3:
-                #         # print ('helllloooooooo')
-                #         data.append(sample)
-                #         labels.append(label)
                 self.data.append(entry['data'])
                 
-                # print (entry['batch_label'])
                 if 'labels' in entry:
-                    # print ('hello', entry['labels'])
-                    # if entry['labels'] == 2 or entry['labels'] == 3:
-                    #     print ('yes')
                     self.targets.extend(entry['labels'])
                 else:
                     self.targets.extend(entry['fine_labels'])
@@ -456,7 +525,6 @@ class iCIFAR2(iDataset):
                 
         
         self.data = np.vstack(self.data).reshape(-1, 3, 32, 32)
-        # print ('no of classes', len(self.data))
         self.data = self.data.transpose((0, 2, 3, 1))  # convert to HWC
         self._load_meta()
         # print (self.class_to_idx)
@@ -495,124 +563,6 @@ class iCIFAR2(iDataset):
             if not check_integrity(fpath, md5):
                 return False
         return True
-
-class iCIFAR8(iDataset):
-    """`CIFAR10 <https://www.cs.toronto.edu/~kriz/cifar.html>`_ Dataset.
-    This is a subclass of the iDataset Dataset.
-    """
-    base_folder = 'cifar-10-batches-py'
-    url = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
-    filename = "cifar-10-python.tar.gz"
-    tgz_md5 = 'c58f30108f718f92721af3b95e74349a'
-    train_list = [
-        ['data_batch_1', 'c99cafc152244af753f735de768cd75f'],
-        ['data_batch_2', 'd4bba439e000b95fd0a9bffe97cbabec'],
-        ['data_batch_3', '54ebc095f3ab1f0389bbae665268c751'],
-        ['data_batch_4', '634d18415352ddfa80567beed471001a'],
-        ['data_batch_5', '482c414d41f54cd18b22e5b47cb7c3cb'],
-    ]
-
-    test_list = [
-        ['test_batch', '40351d587109b95175f43aff81a1287e'],
-    ]
-    meta = {
-        'filename': 'batches.meta',
-        'key': 'label_names',
-        'md5': '5ff9c542aee3614f3951f8cda6e48888',
-    }
-    im_size=32
-    nch=3
-
-    def load(self):
-
-        # download dataset
-        if self.download_flag:
-            self.download()
-
-        if not self._check_integrity():
-            raise RuntimeError('Dataset not found or corrupted.' +
-                               ' You can use download=True to download it')
-
-        if self.train or self.validation:
-            downloaded_list = self.train_list
-        else:
-            downloaded_list = self.test_list
-
-        self.data = []
-        self.targets = []
-        self.course_targets = []
-
-        # now load the picked numpy arrays
-        for file_name, checksum in downloaded_list:
-            file_path = os.path.join(self.root, self.base_folder, file_name)
-            with open(file_path, 'rb') as f:
-                if sys.version_info[0] == 2:
-                    entry = pickle.load(f)
-                else:
-                    entry = pickle.load(f, encoding='latin1')
-
-                data =[]
-                labels =[]
-                for (sample, label) in zip(entry['data'], entry['labels']):
-                    if label == 2 or label ==3:
-                        continue
-                    data.append(sample)
-                    labels.append(label)
-                self.data.append(data)
-                
-                # print (entry['batch_label'])
-                if 'labels' in entry:
-                    # print ('hello', entry['labels'])
-                    # if entry['labels'] == 2 or entry['labels'] == 3:
-                    #     print ('yes')
-                    self.targets.extend(labels)
-                else:
-                    self.targets.extend(['fine_labels'])
-                if 'coarse_labels' in entry:
-                    self.course_targets.extend(entry['coarse_labels'])
-                
-        print ('number of distinct classes', len(set(self.targets)))
-        print ('no of classes', len(self.data))
-        self.data = np.vstack(self.data).reshape(-1, 3, 32, 32)
-        self.data = self.data.transpose((0, 2, 3, 1))  # convert to HWC
-        self._load_meta()
-        # print (self.class_to_idx)
-
-    def download(self):
-        import tarfile
-
-        if self._check_integrity():
-            print('Files already downloaded and verified')
-            return
-
-        download_url(self.url, self.root, self.filename, self.tgz_md5)
-
-        # extract file
-        with tarfile.open(os.path.join(self.root, self.filename), "r:gz") as tar:
-            tar.extractall(path=self.root)
-
-    def _load_meta(self):
-        path = os.path.join(self.root, self.base_folder, self.meta['filename'])
-        if not check_integrity(path, self.meta['md5']):
-            raise RuntimeError('Dataset metadata file not found or corrupted.' +
-                               ' You can use download=True to download it')
-        with open(path, 'rb') as infile:
-            if sys.version_info[0] == 2:
-                data = pickle.load(infile)
-            else:
-                data = pickle.load(infile, encoding='latin1')
-            self.classes = data[self.meta['key']]
-        self.class_to_idx = {_class: i for i, _class in enumerate(self.classes)}
-
-    def _check_integrity(self):
-        root = self.root
-        for fentry in (self.train_list + self.test_list):
-            filename, md5 = fentry[0], fentry[1]
-            fpath = os.path.join(root, self.base_folder, filename)
-            if not check_integrity(fpath, md5):
-                return False
-        return True
-
 
 
 class iCIFAR10(iDataset):

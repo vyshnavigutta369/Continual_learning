@@ -4,16 +4,21 @@ import torch.nn as nn
 from torch.nn import functional as F
 import torchvision.transforms as T
 
-from utils.metric import AverageMeter, Timer, MMD, per_class_plots
+
+from utils.pytorchvis import draw_graph
+from torchviz import make_dot
 from models.resnet import BiasLayer
-from .default import NormalNN,  accumulate_acc, loss_fn_kd, loss_fn_class_kd, pad_tensors, Teacher
-from dataloaders.utils import transform_with_pca, make_video_ffmpeg, visualise, create_video, SupConLoss
-from sklearn.cluster import KMeans
+from .default import NormalNN,  accumulate_acc, loss_fn_kd, loss_fn_class_kd, Teacher
+
+from utils.metric import AverageMeter, Timer, MMD
+from utils.visualisation import per_class_plots
+from utils.utils import getBack
 
 import numpy as np
 import copy
-import os, math
+import os
 from collections import Counter
+import json
 
 class TR(NormalNN):
     """
@@ -40,83 +45,49 @@ class TR(NormalNN):
         self.tasks = learner_config['tasks']
 
         self.loss_type = learner_config['loss_type']
-
-        self.weight_with = learner_config['weight_with']
-        self.weight_reverse = learner_config['weight_reverse']
         
+        self.loss_MMD = MMD()
+        self.ce_loss = nn.BCELoss()
 
-        # self.weight_with_sim = learner_config['weight_with_sim']
+        self.is_dual_data_loader= learner_config['dual_dataloader']
+        self.is_weighted_sampler = learner_config['weighted_sampler']
 
-    def weight_replay(self, data, n_clusters=4):
-
-        ## data dict of class: sim value to a target
-        classes = self.class_mapping.keys()
-        X = data
+        if self.weight_with==6:
+            self.class_ratios_manual= json.loads(learner_config['class_ratios'])
         
-        # print ('data:', X)
-
-        kmeans =  KMeans(n_clusters).fit(X.reshape(-1,1))  ## TODO tune n_clusers
-        cluster_centers = kmeans.cluster_centers_.flatten()
-        # cluster_centers = [ (x-np.mean(cluster_centers))/np.var(cluster_centers) for x in cluster_centers]
-        cluster_centers = [ x/sum(cluster_centers) for x in cluster_centers]
-        # print ('cluster centers normed:', cluster_centers)
-        cluster_labels = kmeans.labels_
-        # print ('cluster_labels:', cluster_labels)
-        factor =  float(1/min(cluster_centers))
-        # print (cluster_centers*factor)
-        cluster_replay_ratio = { i: math.ceil(ratio) for i, ratio in enumerate(([ x*factor for x in cluster_centers]))}
-        if self.weight_reverse:
-            
-            cluster_replay_ratio_sorted = { k: v for k,v in sorted(cluster_replay_ratio.items(), key=lambda x:x[1])}
-            cluster_replay_ratio_vals = sorted(cluster_replay_ratio_sorted.values(), reverse=True)
-            cluster_replay_ratio_sorted = { k: cluster_replay_ratio_vals[i] for i,k in enumerate(cluster_replay_ratio_sorted)}
-            cluster_replay_ratio = { k: cluster_replay_ratio_sorted[k] for k in cluster_replay_ratio}
-
-
-        class_replay_ratio = { cl: cluster_replay_ratio[label] for cl, label in zip(classes,cluster_labels) if cl not in self.new_classes}
-        print ('class_replay_ratio: ', { self.labels_to_names[self.class_mapping[cl]]: class_replay_ratio[cl]for cl in class_replay_ratio})
-
-        # print ('cluster labels:', cluster_labels)
-        return class_replay_ratio
-        
-    
     ##########################################
     #           MODEL TRAINING               #
     ##########################################
 
-    def loss_ceigen(self, per_class_features):        
-
-        per_class_features = torch.Tensor(pad_tensors(per_class_features)).cuda()
-
-        per_class_old_features = torch.Tensor(per_class_features[len(self.per_class_new_features_train):]).cuda()
-        per_class_features = torch.Tensor(per_class_features[:len(self.per_class_new_features_train)]).cuda()
-        MMD_metric = MMD()
-        distilled = MMD_metric.mmd_poly(per_class_old_features, per_class_features)
-        interference_m = 1-torch.divide(distilled, torch.diag(distilled))
-        return interference_m
         
     def learn_batch(self, train_loader, train_dataset, replay_dataset, model_save_dir, val_target, task, val_loader=None):
         
         # try to load model
         need_train = True
 
+        self.train_loader = train_loader
         self.train_dataset = train_dataset
+        self.replay_dataset = replay_dataset
         self.val_target = val_target
+        self.model_save_dir = model_save_dir
+        self.plot_dir = self.model_save_dir.replace('_outputs', 'plots_and_tables')
         self.init_params()
 
         if not self.overwrite:
             try:
                 self.load_model(model_save_dir)
-                self.load_replay_counts(model_save_dir+'class_replay_counts.npy')
+                if self.replay:
+                    self.load_replay_counts(model_save_dir)
+                else:
+                    self.load_replay_counts(self.model_log_dir)
                 need_train = False
             except:
                 pass
 
-        self.model_save_dir = model_save_dir
+       
         print ('model_save_dir: ', model_save_dir)
 
         if not os.path.exists(self.plot_dir): os.makedirs(self.plot_dir)
-
 
         # trains
         if need_train:
@@ -137,7 +108,7 @@ class TR(NormalNN):
             losses_bl = AverageMeter()
             acc = AverageMeter()
             acc_bl = AverageMeter()
-            batch_time = AverageMeter()
+            self.batch_time = AverageMeter()
             batch_timer = Timer()
 
             self.init_plot_params()
@@ -157,93 +128,73 @@ class TR(NormalNN):
                 batch_timer.tic()
 
                 self.init_params()
-                
-    
-                for i, (x, y, indices, x_r, y_r, replay_indices)  in enumerate(train_loader):
 
-                    self.init_params_batch()
-                    
-                    if epoch==0:
-                        break
-                    # verify in train mode
+                if epoch>0:
+                    for i, data  in enumerate(self.train_loader):
 
-                    self.model.train()
-                    
-                    if self.gpu:
-                        x =x.cuda()
-                        y = y.cuda()
+                        try:
+                            x, y, indices, x_r, y_r, replay_indices = data
+                        except:
+                            x, y, indices = data
+
+                        self.init_params_batch()
+                                 
+                        self.model.train()
+                        
+                        if self.gpu:
+                            x = x.cuda()
+                            y = y.cuda()
+                            
+                            try:
+                                x_r = x_r.cuda()
+                                y_r = y_r.cuda()
+                                x_tot = torch.cat([x, x_r])
+                                y_tot = torch.cat([y, y_r])
+                                indices = torch.cat([indices, replay_indices])
+                            except:
+                                x_tot = x
+                                y_tot = y
+                                
+                        # for l,ind in zip(y_tot, indices):
+                        #     self.check_replay_counts[int(l)].add(int(ind))
+                        # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})           
+                        
+                        output, new_feats = self.forward(x_tot, pen=True)
                         if self.replay:
-                            x_r = x_r.cuda()
-                            y_r = y_r.cuda()
-                            x_tot = torch.cat([x, x_r])
-                            y_tot = torch.cat([y, y_r])
-                            indices = indices.tolist() + replay_indices.tolist()
+                            y_hat, _, old_features = self.previous_teacher.generate_scores(x_tot, allowed_predictions=list(range(self.last_valid_out_dim)))
+                            loss = self.update_model(output, y_tot, new_feats, old_features, y_hat)
                         else:
-                            indices = indices.tolist()
-                            x_tot = x
-                            y_tot = y
-                   
-                    # for l,ind in zip(y_r,replay_indices):
-                    #     self.check_replay_counts[int(l)].add(int(ind))
-
-                    output, new_feats = self.model.forward(x_tot, pen=True)  
-                    
-                    per_class_features= None
-
-                    self.helper(indices, y_tot, new_datas_train= x_tot)
-                    self.process_attr_batch()
+                            loss = self.update_model(output, y_tot)
+    
+                        if self.with_class_balance==1:
+                            x_bl, y_bl = self.get_class_balanced_data(indices, x_tot, y_tot)
+                            output_bl = self.forward(x_bl, balanced=True)
+                            loss += self.update_model(output_bl, y_bl, new_optimizer=True)
                         
-                    if self.replay:
-                        y_hat, _, old_features = self.previous_teacher.generate_scores(x_tot)
-                        per_class_new_features, per_class_old_features= self.split_by_class(y_tot, new_feats,old_features)
-                        per_class_features= per_class_new_features+per_class_old_features
-
-                    loss = self.update_model(output, y_tot, per_class_features)
-
-                    _, x_bl, y_bl, _, _, _ = self.get_class_balanced_data(indices, x_tot, y_tot)
-                    
-                    if self.with_class_balance==1:
-
-                        output_bl = self.model.forward(x_bl, balanced=True)   
-                        loss += self.update_model(output_bl, y_bl, per_class_features, new_optimizer=True)
+                        # measure elapsed time
+                        self.batch_time.update(batch_timer.toc())  
+                        batch_timer.tic()
                         
-                    
-                    # measure elapsed time
-                    batch_time.update(batch_timer.toc())  
-                    batch_timer.tic()
-                    
-                    # measure accuracy and record loss
-                    y = y.detach()
-                    # accumulate_acc(output[:len(y)], y, acc, topk=(self.top_k,))
-                    losses.update(loss,  y.size(0)) 
-                    batch_timer.tic()
-                    
-                    # if self.with_class_balance==1:
-                    #     accumulate_acc(output_bl, y_bl, acc_bl, topk=(self.top_k,))
-                    #     losses_bl.update(loss_bl,  y_bl.size(0)) 
-
-                    # print (self.blah)
-                    
+                        # measure accuracy and record loss
+                        y = y.detach()
+                        # accumulate_acc(output[:len(y)], y, acc, topk=(self.top_k,))
+                        losses.update(loss, y.size(0)) 
+                        batch_timer.tic()
+                        self.step_count+=1
+                        
+                        # if self.replay: 
+                        #     self.validation(val_loader, train_val=True)         
 
                 # eval update
+                # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})
                 self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
-                # self.log(' * Train Loss {loss.avg:.3f} | Train Acc {acc.avg:.3f}'.format(loss=losses,acc=acc))
-                # if self.with_class_balance==1:
-                #     self.log(' * BL head train Loss {loss.avg:.3f} | BL Train Acc {acc.avg:.3f}'.format(loss=losses_bl,acc=acc_bl))
 
                 ## PLOTS AND TABLES
                 
-
                 # Evaluate the performance of current task
                 if val_loader is not None:
                     self.val_method_task_acc = self.validation(val_loader, train_val=True)
-                    
                     self.analyze()
-                    if self.replay and epoch in self.epochs_of_interest:
-                        val_method_avg_acc = float(sum(self.class_accuracy_epoch.values()))/len(self.class_accuracy_epoch)*100
-                        # val_target = 0 ##TODO REMOVE THIS 
-                        self.avg_acc["Method"].append(val_method_avg_acc)
-                        self.avg_acc["Oracle"].append(val_target) 
                         
                 # reset
                 losses = AverageMeter()
@@ -251,13 +202,9 @@ class TR(NormalNN):
                 acc = AverageMeter()
                 acc_bl = AverageMeter()
 
-               
-            # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})
-
             if self.replay:
-                per_class_plots(self.per_class_accuracy, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.replay_size,  self.avg_acc, self.task_acc, base_path=self.plot_dir+'_after/')
+                per_class_plots(self.per_class_accuracy, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc, base_path=self.plot_dir+'_after/')
         
-
         self.model.eval()
 
         self.last_valid_out_dim = self.valid_out_dim
@@ -267,56 +214,65 @@ class TR(NormalNN):
         teacher = Teacher(solver=self.model)
         self.previous_teacher = copy.deepcopy(teacher)
 
-        if not self.replay:
-            # print (self.class_replay_counts)
-            replay_dataset.extend(train_dataset, self.class_replay_counts)
+        
+        if not self.is_dual_data_loader:
+            print ('class_counts_for_replay: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_counts[cl] for cl in self.class_replay_counts})
+            replay_dataset.extend(train_dataset, class_replay_counts = self.class_replay_counts)
+        elif not self.is_weighted_sampler:
+            # self.class_replay_ratios = self.class_replay_ratios if hasattr(self, 'class_replay_ratios') else { i: 1 for i in self.old_classes}
+            print ('class_ratios_for_replay: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_ratios[cl] for cl in self.class_replay_ratios})
+            replay_dataset.extend(train_dataset, class_replay_ratios= self.class_replay_ratios)
+        elif self.is_weighted_sampler and self.is_dual_data_loader:
+            print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
+            replay_dataset.extend(train_dataset, class_replay_weights= self.class_replay_weights)
+        else:
+            raise Exception("Appropriate sampler for the replay dataset not implemented!")
 
-        print ('size of replay_dataset:',  len(replay_dataset))
+        print ('size of replay dataset:',  len(replay_dataset))
         self.replay=True
 
         try:
-            return batch_time.avg, self.config['schedule'][-1]
+            return self.batch_time.avg, self.config['schedule'][-1]
         except:
             return None, None
 
-    def update_model(self, logits, targets, per_class_features, logits_replay= [], target_scores = [], dw_scale = 1, new_optimizer=False):
+    def update_model(self, logits, targets, new_features=None, old_features=None, target_KD=None, new_optimizer=False):
         
-        # print (logits.requires_grad)
-
         
-
-        if self.replay_type == 'random_sample' or new_optimizer:
-            # if new_optimizer:
-            #     for i in targets:
-            #         self.blah[int(i)]+=1
-            #     print (self.blah)
+        if self.loss_type!= 'ova':
             dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]
-            # print (dw_cls.shape)
-        elif self.replay_type == 'gradient_cb':
-            h_m = Counter([int(i) for i in targets]) ## map
-            b_t = max(h_m.values())
-            h_m = { i: b_t/h_m[i] for i in h_m}
-            dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]*torch.Tensor([h_m[int(i)] for i in targets]).cuda()
-            # dw_a = self.dw_k[-1 * torch.ones(len(targets)-len(logits_replay)).long()]
-            # dw_b = self.dw_k[-1 * torch.ones(len(logits_replay)).long()]
-            # print ('dw_a:', dw_a)
-            # print ('dw_b:',dw_b)
-            # dw_cls = torch.cat([dw_a, dw_b])*torch.Tensor([h_m[int(i)] for i in targets]).to("cuda")
-            # dw_cls = torch.cat([dw_a, dw_b])
-            # print (dw_cls)
-        
-        total_loss = self.criterion(logits, targets.long(), dw_cls)
-        # print ('total_loss: ', total_loss)
-        if self.replay:
-            print (total_loss)
-            total_loss +=  0.8 *self.loss_ceigen(per_class_features).mean()
-            print (total_loss)
+            total_loss = self.criterion(logits, targets.long(), dw_cls)
+        else:
+            # class loss
+            if target_KD is not None:
+                target_mod = get_one_hot(targets, self.valid_out_dim)
+                target_mod[:, :self.last_valid_out_dim] = torch.sigmoid(target_KD)
+                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
+            else:
+                target_mod = get_one_hot(targets, self.valid_out_dim)
+                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
+            
+        if self.loss_type == 'pred_kd' and self.replay and not new_optimizer:
+            
+            labels_end_ind = torch.cumsum(torch.bincount(targets.long()), dim=0).cpu()
+            labels_ind = torch.argsort(targets)
+            new_features = new_features[labels_ind]
+            old_features = old_features[labels_ind]
 
-        if self.loss_type == 'pred_kd' and len(target_scores)>0:   # KD
-            # print ('pred_kd')
-            dw_KD = self.dw_k[-1 * torch.ones(len(target_scores),).long()]
-            loss_distill = loss_fn_kd(logits_replay, target_scores, dw_KD, np.arange(self.last_valid_out_dim).tolist(), self.DTemp)
-            total_loss += self.mu * loss_distill
+            distilled = self.loss_MMD.mmd_poly(old_features, new_features, labels_end_ind= labels_end_ind)
+            # print ('before norm:', distilled)
+            distilled = distilled/distilled.sum(1)
+            
+            # sim_to_new_cls = self.sim_to_new_cls
+            dw_cls = 1-torch.Tensor(self.sim_to_new_cls)
+            interference_m = torch.divide(distilled, 1-torch.diag(distilled))
+            interference_m *= dw_cls
+            # interference_m /= interference_m.sum(1)
+            interf_loss =  0.04*(interference_m.mean())
+            # print ('total_loss: ', total_loss)
+            # print ('interf_loss: ', interf_loss)
+            total_loss +=  interf_loss
+            
 
         if not new_optimizer:
             self.optimizer.zero_grad()
@@ -326,16 +282,10 @@ class TR(NormalNN):
             self.new_optimizer.zero_grad()
             total_loss.backward()
             self.new_optimizer.step()
+
         return total_loss.detach()
 
     
-
-def get_one_hot(target,num_class):
-    one_hot=torch.zeros(target.shape[0],num_class).cuda()
-    one_hot=one_hot.scatter(1,target.long().view(-1,1),1.)
-    return one_hot
-
-
 def get_one_hot(target,num_class):
     one_hot=torch.zeros(target.shape[0],num_class).cuda()
     one_hot=one_hot.scatter(1,target.long().view(-1,1),1.)

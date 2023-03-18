@@ -3,12 +3,19 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 import models
-from utils.metric import accuracy, AverageMeter, Timer, new_vs_old_class_comparison, distribution_shift_comparison, per_class_plots
+
 import copy
-import numpy as np
-from utils.schedulers import CosineSchedule
 from collections import Counter
-import os
+
+import numpy as np
+import os, math
+
+from sklearn.cluster import KMeans
+
+from utils.schedulers import CosineSchedule
+from utils.metric import accuracy, AverageMeter, Timer, new_vs_old_class_comparison, distribution_shift_comparison
+from utils.visualisation import per_class_plots
+from utils.utils import getBack, near_split, ratio_breakdown
 
 class NormalNN(nn.Module):
     """
@@ -50,6 +57,8 @@ class NormalNN(nn.Module):
 
         # supervised criterion
         self.criterion_fn = nn.CrossEntropyLoss(reduction="none")
+
+        self.model_log_dir = learner_config['model_log_dir']
         
         # cuda gpu
         if learner_config['gpuid'][0] >= 0:
@@ -74,19 +83,22 @@ class NormalNN(nn.Module):
         # initialize optimizer
         self.init_optimizer()
 
-        self.plot_dir = learner_config['plot_dir']
         self.with_class_balance = learner_config['with_class_balance']
 
-        self.replay=False ## TODO REMOVE THIS
-        self.replay_size='Oracle'
-        self.new_classes = learner_config['new_classes']
-        self.old_classes = learner_config['old_classes']
+        self.replay=False
+        self.weight_with = learner_config['weight_with']
+        self.weight_reverse = learner_config['weight_reverse']
 
-        
+        self.is_oracle=False if self.learner_name!='NormalNN' else True
 
+        if self.is_oracle:
+            # print ('HELLLOOOOO')
+            self.replay_size='Oracle'
+            self.new_classes = learner_config['new_classes']
+            self.old_classes = learner_config['old_classes']
+            
     def init_plot_params(self):
-
-        is_oracle=False if self.learner_name!='NormalNN' else True
+        
 
         self.per_class_accuracy = {"MMD_poly": {}}
         self.per_class_dist_shift = {"MMD_poly": {}}
@@ -96,17 +108,21 @@ class NormalNN(nn.Module):
             self.epochs_of_interest.insert(1,1)
         if self.epochs_of_interest[-1]!=self.config['schedule'][-1]:
             self.epochs_of_interest.append(self.config['schedule'][-1])
+        self.steps_of_interest = []
+        self.times_of_interest = []
+
         if self.replay:
-            if not is_oracle:
+            if not self.is_oracle:
                 self.avg_acc = { "Oracle": [], "Method": []}
                 self.task_acc = { "Oracle": {epoch: [] for epoch in self.epochs_of_interest}, "Method": {epoch: [] for epoch in self.epochs_of_interest}}
             else:
                 self.avg_acc = { "Oracle": []}
                 self.task_acc = { "Oracle": {epoch: [] for epoch in self.epochs_of_interest}}
+                
+        # self.check_replay_counts = { int(i): set() for i in self.class_mapping}
+        self.step_count=0
 
     def init_params(self):
-
-        is_oracle=False if self.learner_name!='NormalNN' else True
 
         self.class_mapping = { v: k for k,v in self.train_dataset.class_mapping.items() if k!=-1}
         self.labels_to_names = { v: k for k,v in self.train_dataset.class_to_idx.items()}
@@ -114,18 +130,28 @@ class NormalNN(nn.Module):
         self.per_class_old_features = {}
         self.per_class_new_features = {}
         
-        
-        self.check_replay_counts = { int(i): set() for i in self.class_mapping}
-        if not is_oracle and not self.replay:
-            # self.old_classes = set([int(y) for _,batch_y,_,_,_,_ in train_loader for y in batch_y ])
-            self.old_classes = set([self.train_dataset.class_mapping[int(y)] for y in self.train_dataset.targets])
-            self.new_classes = set(self.class_mapping.keys())-set(self.old_classes)
+        if not self.is_oracle:
+            if self.replay:
+                self.old_classes = set([self.replay_dataset.class_mapping[int(y)] for y in self.replay_dataset.targets])
+            self.new_classes = set([self.train_dataset.class_mapping[int(y)] for y in self.train_dataset.targets])
+            
+        self.classes = self.old_classes.union(self.new_classes) if self.replay else self.new_classes
 
-    def process_attr(self):
-
-        self.per_class_correct_predictions = { k: sum(self.per_class_correct_predictions[k].values()) for k in self.per_class_correct_predictions if self.per_class_correct_predictions}
-        self.per_class_old_features = { k: list(self.per_class_old_features[k].values()) for k in self.per_class_old_features if self.per_class_old_features}
-        self.per_class_new_features = { k: list(self.per_class_new_features[k].values()) for k in self.per_class_new_features if self.per_class_new_features}
+        self.check_replay_counts = { int(i): set() for i in self.classes}
+            
+        try:
+            self.class_ratios_manual = { self.train_dataset.class_mapping[self.train_dataset.class_to_idx[cl]]: self.class_ratios_manual[cl] for cl in self.class_ratios_manual if self.class_ratios_manual}
+            if hasattr(self, 'class_counts'):
+                self.train_loader.batch_sampler.init_params(class_counts=self.class_counts)
+            elif hasattr(self, 'class_ratios') and self.epoch==1: ##TODO need to improve this
+                self.class_ratios |= { k: max(self.class_ratios.values()) for k in self.new_classes}
+                self.train_loader.batch_sampler.init_params(self.class_ratios)
+            elif hasattr(self, 'class_ratios') and self.epoch>1:
+                self.train_loader.batch_sampler.init_params(self.class_ratios)
+            else:
+                self.train_loader.batch_sampler.init_params()
+        except:
+            pass
 
     
     def init_params_batch(self):
@@ -135,7 +161,18 @@ class NormalNN(nn.Module):
         self.per_class_new_data_train = {}
         self.per_class_indices_train = {}
 
-    
+        # self.check_replay_counts = { int(i): set() for i in self.classes}
+
+
+    def process_attr(self):
+        
+        # if self.per_class_correct_predictions:
+        #     print (self.per_class_correct_predictions[0].keys())
+        self.per_class_correct_predictions = { k: float(sum(self.per_class_correct_predictions[k].values())) for k in self.per_class_correct_predictions if self.per_class_correct_predictions}
+        self.per_class_old_features = { k: list(self.per_class_old_features[k].values()) for k in self.per_class_old_features if self.per_class_old_features}
+        self.per_class_new_features = { k: list(self.per_class_new_features[k].values()) for k in self.per_class_new_features if self.per_class_new_features}
+
+
     def process_attr_batch(self):
 
         self.per_class_indices_train = { k: list(self.per_class_new_data_train[k].keys()) for k in self.per_class_new_data_train if self.per_class_new_data_train}
@@ -143,24 +180,8 @@ class NormalNN(nn.Module):
         self.per_class_new_features_train = [ list(self.per_class_new_features_train[k].values()) for k in self.per_class_new_features_train if self.per_class_new_features_train]
         self.per_class_old_features_train = [ list(self.per_class_old_features_train[k].values()) for k in self.per_class_old_features_train if self.per_class_old_features_train]
 
-    def split_by_class(self, labels, new_features=None, old_features=None):
-        
-        labels_end_ind = torch.cumsum(torch.bincount(labels), dim=0).cpu()
-        labels_ind = torch.argsort(labels)
 
-        if new_features is not None:
-            new_features = new_features[labels_ind]
-            class_wise_new_features_split = torch.tensor_split(new_features, labels_end_ind[:-1], dim=0)
-            class_wise_new_features_split_p = torch.nn.utils.rnn.pad_sequence(class_wise_new_features_split, batch_first=True)
-        if old_features is not None:
-            old_features = old_features[labels_ind]
-            class_wise_old_features_split = torch.tensor_split(old_features, labels_end_ind[:-1], dim=0)
-            class_wise_old_features_split_p = torch.nn.utils.rnn.pad_sequence(class_wise_old_features_split, batch_first=True)
-
-        return class_wise_new_features_split_p, class_wise_old_features_split_p
-
-
-    def helper(self, indices, labels, old_features=None, new_features=None, predictions= None, new_datas_train=None, old_features_train=None, new_features_train=None):
+    def helper_old(self, indices, labels, old_features=None, new_features=None, predictions= None, new_datas_train=None, old_features_train=None, new_features_train=None):
 
         
         for i,(index, label) in enumerate(zip(indices, labels)):
@@ -201,9 +222,70 @@ class NormalNN(nn.Module):
                             
         # print ('per_class_correct_predictions:', self.per_class_correct_predictions)
 
+    def split_by_class(self, indices, labels, old_features=None, new_features=None, predictions= None, new_datas_train=None, old_features_train=None, new_features_train=None):
+        
+        labels_end_ind = torch.cumsum(torch.bincount(labels.long()), dim=0).cpu()
+        labels_ind = torch.argsort(labels).tolist()
+        
+        indices = indices[labels_ind]
+        class_wise_indices_split = torch.tensor_split(indices, labels_end_ind[:-1], dim=0)
+        class_wise_indices_split = [ cl_ind.tolist() for cl_ind in class_wise_indices_split if cl_ind.shape[0]>0]
+
+        def dict_by_class(data):
+            class_wise_split = torch.tensor_split(data[labels_ind], labels_end_ind[:-1], dim=0)
+            class_wise_split = [ cl_split for cl_split in class_wise_split if cl_split.shape[0]>0]
+            return {int(i): dict(zip(j, x)) for i,j,x in zip(set(labels.tolist()), class_wise_indices_split, class_wise_split)}
+
+        if predictions is not None:
+            # print ((predictions==labels).int())
+            
+            cl_split = dict_by_class((predictions==labels).int())
+            
+            # print ('1:', self.per_class_correct_predictions.keys())
+            # print ('2:', cl_split.keys())
+            if self.per_class_correct_predictions:
+                self.per_class_correct_predictions = { k: {**self.per_class_correct_predictions.get(k,{}), **cl_split.get(k,{})} for k in list(cl_split.keys())+list(self.per_class_correct_predictions.keys())}
+            else:
+                self.per_class_correct_predictions = cl_split
+            
+            # print ('3:', self.per_class_correct_predictions.keys())
+
+        if old_features is not None:
+            cl_split = dict_by_class(old_features)
+            if self.per_class_old_features:
+                self.per_class_old_features = { k: {**self.per_class_old_features.get(k,{}), **cl_split.get(k,{})} for k in list(cl_split.keys())+list(self.per_class_old_features.keys())}
+            else:
+                self.per_class_old_features = cl_split
+
+        if new_features is not None:
+            cl_split = dict_by_class(new_features)
+            if self.per_class_new_features:
+                self.per_class_new_features = { k: {**self.per_class_new_features.get(k,{}), **cl_split.get(k,{})} for k in list(cl_split.keys())+list(self.per_class_new_features.keys())}
+            else:
+                self.per_class_new_features = cl_split
+
+        if new_datas_train is not None:
+            # if self.per_class_new_data_train:
+                # print ('1:', self.per_class_new_data_train[0].keys())
+            self.per_class_new_data_train.update(dict_by_class(new_datas_train))
+            # print ({i: len(x) for i,x in self.per_class_new_data_train.items()})
+            # print ('2:', self.per_class_new_data_train[0].keys())
+
+        if old_features_train is not None:
+            self.per_class_old_features_train.update(dict_by_class(old_features_train))
+
+        if new_features_train is not None:
+            self.per_class_new_features_train.update(dict_by_class(new_features_train))
+
+        # getBack(class_wise_new_features_split[0].grad_fn)
+        # class_wise_data_split_p = torch.nn.utils.rnn.pad_sequence(class_wise_new_features_split, batch_first=True)
+
     def get_class_balanced_data(self, indices, data, labels):
 
-        # self.helper(indices, labels, new_datas_train=data)
+        # self.helper(indices, labels, new_datas_train= data)
+        self.split_by_class(indices, labels, new_datas_train=data)
+        self.process_attr_batch()
+        # print ({i: len(x) for i,x in self.per_class_new_data_train.items()})
 
         no_of_samples_per_class_balanced = int(min([len(self.per_class_new_data_train[cl]) for cl in self.per_class_new_data_train]))
         
@@ -211,26 +293,20 @@ class NormalNN(nn.Module):
         indices_bl = torch.Tensor([]).cuda()
         labels_bl = torch.Tensor([]).cuda()
 
-        data_ubl = torch.Tensor([]).cuda()
-        indices_ubl = torch.Tensor([]).cuda()
-        labels_ubl = torch.Tensor([]).cuda()
-
+    
         for cl in self.per_class_new_data_train:
-            data_bl = torch.cat((data_bl, torch.Tensor(self.per_class_new_data_train[cl][:no_of_samples_per_class_balanced]).cuda() ))
-            data_ubl = torch.cat((data_ubl, torch.Tensor(self.per_class_new_data_train[cl][no_of_samples_per_class_balanced:]).cuda() ))
 
-            indices_bl = torch.cat((indices_bl, torch.Tensor(self.per_class_indices_train[cl][:no_of_samples_per_class_balanced]).cuda() ))
-            indices_ubl = torch.cat((indices_ubl, torch.Tensor(self.per_class_indices_train[cl][no_of_samples_per_class_balanced:]).cuda() ))
-
-            labels_bl = torch.cat((labels_bl, torch.Tensor([cl for i in range(no_of_samples_per_class_balanced)]).cuda() ))
-            labels_ubl= torch.cat((labels_ubl, torch.Tensor([cl for i in range(len(self.per_class_new_data_train[cl])-no_of_samples_per_class_balanced)]).cuda() ))
-
+            # data_bl = torch.cat((data_bl, torch.Tensor(self.per_class_new_data_train[cl][:no_of_samples_per_class_balanced]).cuda() ))
+            data_bl = torch.cat((data_bl, torch.stack(self.per_class_new_data_train[cl][:no_of_samples_per_class_balanced]) ))
+            indices_bl = torch.cat((indices_bl, torch.tensor(self.per_class_indices_train[cl][:no_of_samples_per_class_balanced]).cuda() ))
+            labels_bl = torch.cat((labels_bl, torch.tensor([cl]*no_of_samples_per_class_balanced).cuda() ))
+            
         # print (data_bl.shape)
         # print (labels_bl.shape)
         # data_bl = data_bl.split(self.batch_size)
         # labels_bl = labels_bl.split(self.batch_size)
-        
-        return indices_bl, data_bl, labels_bl, indices_ubl, data_ubl, labels_ubl
+       
+        return data_bl, labels_bl
 
     def update_balanced_head(self, data, labels):
         
@@ -247,66 +323,137 @@ class NormalNN(nn.Module):
 
         return loss, output
 
+    def weight_replay(self, data, classes, n_clusters=5):
+
+        ## data dict of class: sim value to a target
+        X = data
+        # print (n_clusters)
+        # print (len(classes))
+        n_clusters = min(n_clusters, len(classes))
+        # print ('X: ', data)
+        kmeans =  KMeans(n_clusters).fit(X.reshape(-1,1))  ## TODO tune n_clusers
+        cluster_centers = kmeans.cluster_centers_.flatten()
+        # print ('cluster_centers:', cluster_centers)
+        # cluster_centers = [ (x-np.mean(cluster_centers))/np.var(cluster_centers) for x in cluster_centers]
+        cluster_centers = [ x/sum(cluster_centers) for x in cluster_centers]
+        # print ('cluster centers normed:', cluster_centers)
+        cluster_labels = kmeans.labels_
+        # print ('cluster_labels:', cluster_labels)
+        factor =  float(1/min(cluster_centers))
+        
+        # print (factor)
+        cluster_replay_ratio = { i: math.ceil(ratio) for i, ratio in enumerate(([ x*factor for x in cluster_centers]))}
+
+        if self.weight_reverse:
+            # print ('yesss')
+            cluster_replay_ratio_sorted = { k: v for k,v in sorted(cluster_replay_ratio.items(), key=lambda x:x[1])}
+            cluster_replay_ratio_vals = sorted(cluster_replay_ratio_sorted.values(), reverse=True)
+            cluster_replay_ratio_sorted = { k: cluster_replay_ratio_vals[i] for i,k in enumerate(cluster_replay_ratio_sorted)}
+            cluster_replay_ratio = { k: cluster_replay_ratio_sorted[k] for k in cluster_replay_ratio}
+        
+        self.class_replay_ratios = { cl: cluster_replay_ratio[label] for cl, label in zip(classes,cluster_labels) if cl in self.new_classes}
+        self.class_ratios =  { cl: cluster_replay_ratio[label] for cl, label in zip(classes,cluster_labels) }
+        
+
     def analyze(self):
 
         self.process_attr()
-        # print ('per class correct predictions: ', self.per_class_correct_predictions)
-
-        is_oracle=False if self.learner_name!='NormalNN' else True
-
-        if not is_oracle and not self.replay and self.epoch==self.epochs_of_interest[-1]:
-            class_accuracy_epoch, class_dist_shift_epoch = distribution_shift_comparison(self.per_class_new_features, self.per_class_old_features, self.per_class_correct_predictions)
-            
-            if int(self.weight_with)==0:
-                self.class_replay_counts = { i:  self.replay_size for i in self.old_classes}
-            else:
-                if int(self.weight_with)==1:
-                    class_dist_shift_epoch = np.mean([ list(class_dist_shift_epoch[k].values()) for k in class_dist_shift_epoch], axis=0 )
-                    class_replay_ratios = self.weight_replay(class_dist_shift_epoch)
-                elif int(self.weight_with)==2:
-                    class_accuracy_epoch  = np.array(list(class_accuracy_epoch.values()))
-                    class_replay_ratios = self.weight_replay(class_accuracy_epoch)
-                else:
-                    class_replay_ratios =  {'airplane': 3, 'automobile': 1, 'deer': 6, 'dog': 10, 'frog': 6, 'horse': 3, 'ship': 3, 'truck': 1}
-                    class_replay_ratios = { self.train_dataset.class_mapping[self.train_dataset.class_to_idx[cl]]: class_replay_ratios[cl] for cl in class_replay_ratios}
-                factor = (len(self.old_classes)* self.replay_size)/sum(class_replay_ratios.values())
-                self.class_replay_counts={ k: class_replay_ratios[k]*factor for k in class_replay_ratios }
-            
-            np.save(self.model_save_dir+'class_replay_counts.npy', self.class_replay_counts)
-
-            print ('class_replay_counts:', self.class_replay_counts)
-
-        if self.replay and self.epoch in self.epochs_of_interest:    
-
-            # print ('yeaaahhhh')
+        # print (self.per_class_correct_predictions)
+        
+        if self.replay:   
             if self.epoch>0:
                 base_path=self.plot_dir+'_after/new_vs_old/epoch_' + str(self.epoch)+'/'
             else:
                 base_path=self.plot_dir+'_before/new_vs_old/'
             if not os.path.exists(base_path): os.makedirs(base_path)
-            sim_table = new_vs_old_class_comparison(self.new_classes, self.old_classes, self.per_class_new_features, self.labels_to_names, self.class_mapping, replay_size = self.replay_size, base_path=base_path, is_oracle=is_oracle)
-            # class_replay_weights = self.weight_replay(sim_table)
+            
+            if int(self.weight_with)==3:  ## similaity
+                sim_table = new_vs_old_class_comparison(self.new_classes, self.old_classes, self.per_class_new_features, self.labels_to_names, self.class_mapping, replay_size = self.replay_size, base_path=base_path, is_oracle=self.is_oracle)
+                self.sim_to_new_cls = np.array([[ sim_table[k][cl] for cl in sim_table[k]] for k in sim_table]).mean(0)
+                # self.sim_to_new_cls = 1-np.array([[ sim_table[k][cl] for cl in sim_table[k]] for k in sim_table]).mean(0) ## for interference
+            
 
+        if (not self.replay and self.epoch==self.epochs_of_interest[-1]) or (self.replay and self.epoch in self.epochs_of_interest):
             self.class_accuracy_epoch, class_dist_shift_epoch = distribution_shift_comparison(self.per_class_new_features, self.per_class_old_features, self.per_class_correct_predictions)
             
-            # self.per_class_accuracy = { key: { key2: self.per_class_accuracy[key].get(key2,[])+[class_accuracy_epoch[key].get(key2,[])] for key2 in class_accuracy_epoch[key]} for key in class_accuracy_epoch }
             self.per_class_accuracy = { key: self.per_class_accuracy.get(key,[])+[self.class_accuracy_epoch.get(key,[])] for key in self.class_accuracy_epoch }
             self.per_class_dist_shift = { key: { key2: self.per_class_dist_shift[key].get(key2,[])+[class_dist_shift_epoch[key].get(key2,[])] for key2 in class_dist_shift_epoch[key]} for key in class_dist_shift_epoch }
 
-            if not is_oracle:
-                self.task_acc["Method"][self.epoch].append(self.val_method_task_acc)  
-                self.task_acc["Oracle"][self.epoch].append(self.val_target)  
-            else:
-                self.task_acc["Oracle"][self.epoch].append(self.val_method_task_acc)  
-            if self.epoch == self.epochs_of_interest[-1]:
+            if self.replay and self.epoch == self.epochs_of_interest[-1]:
                 np.save(self.plot_dir+'_after/per_class_accuracy.npy', self.per_class_accuracy)
                 np.save(self.plot_dir+'_after/per_class_dist_shift.npy', self.per_class_dist_shift) 
-                self.task_acc = { m: [round(sum(self.task_acc[m][k])/len(self.task_acc[m][k]),2) for k in self.task_acc[m] ] for m in self.task_acc }
-                # print ('task acc: ', self.task_acc)
-        
-        # print ('per_class_accuracy: ', self.per_class_accuracy)
-        # print ('per_class_dist_shift: ',self.per_class_dist_shift)
 
+        if not self.is_oracle and ((not self.replay and self.epoch==self.epochs_of_interest[-1]) or (self.replay and self.epoch in self.epochs_of_interest)):
+
+            if int(self.weight_with)>=4: ## provides class counts
+                if int(self.weight_with)==4: ## balanced weighting 50%-50%
+                    if self.replay:
+                        self.class_counts = { i: c for i, c in zip(self.classes, ratio_breakdown(self.batch_size, [1.0/len(self.old_classes)]*len(self.old_classes)) + ratio_breakdown(self.batch_size, [1.0/len(self.new_classes)]*len(self.new_classes))) }
+                    else:
+                        self.class_counts = { i: c for i, c in zip(self.classes, ratio_breakdown(self.batch_size, [1.0/len(self.new_classes)]*len(self.new_classes))) }
+                    self.class_replay_ratios= { i:1 for i in self.new_classes}
+
+                if int(self.weight_with)==5: ## regular dual dataloader
+                    self.class_replay_ratios= { i:1 for i in self.new_classes}
+                if int(self.weight_with)==6: ## custom weighting 50%-50%
+                    self.class_replay_ratios= { cl: self.class_ratios_manual[cl] for cl in self.class_ratios_manual if cl in self.new_classes}
+                    class_ratios_new = [x/float(sum(self.class_replay_ratios.values())) for x in self.class_replay_ratios.values()]
+                    # print (class_ratios_new)
+                    if self.replay:
+                        class_ratios_old= { cl: self.class_ratios_manual[cl] for cl in self.class_ratios_manual if cl in self.old_classes}
+                        class_ratios_old = [x/float(sum(class_ratios_old.values())) for x in class_ratios_old.values()]
+                        # print (class_ratios_old)
+                        self.class_counts = { i: c for i, c in zip(self.classes, ratio_breakdown(self.batch_size, class_ratios_old) + ratio_breakdown(self.batch_size, class_ratios_new)) }
+                    else:
+                        self.class_counts = { i: c for i, c in zip(self.classes, ratio_breakdown(self.batch_size, class_ratios_new)) }
+
+            elif self.epoch>=1 and self.epoch in self.epochs_of_interest: ## provides class_ratios
+                if int(self.weight_with)==1: ## dist shift
+                    classes = [ list(class_dist_shift_epoch[k].keys()) for k in class_dist_shift_epoch][0]
+                    class_dist_shift_epoch_mean = np.mean([ list(class_dist_shift_epoch[k].values()) for k in class_dist_shift_epoch], axis=0)
+                    self.weight_replay(class_dist_shift_epoch_mean, classes)
+                elif int(self.weight_with)==2: ## acc shift
+                    # print (self.class_accuracy_epoch)
+                    classes = [ list(self.class_accuracy_epoch.keys()) ][0]
+                    class_accuracy_epoch = np.array(list(self.class_accuracy_epoch.values()))
+                    self.weight_replay(class_accuracy_epoch, classes)
+                elif int(self.weight_with)==3: ## sim shift
+                    # if self.replay:
+                    #     mini = np.min(self.sim_to_new_cls) - 0.05 ##TODO change this to better ratio
+                    #     self.class_ratios = { k: y for k,y in enumerate([(x-mini)/(np.max(self.sim_to_new_cls)-mini) for x in self.sim_to_new_cls])}
+                    # else:
+                    #     self.class_ratios = { k: 1 for k in self.new_classes}
+                    # self.class_replay_ratios = {k: x for k,x in self.class_ratios.items() if k in self.new_classes}
+                    if self.replay:
+                        classes = [ list(sim_table[k].keys()) for k in sim_table][0]
+                        self.weight_replay(self.sim_to_new_cls, classes)
+                    else:
+                        self.class_ratios = { k: 1 for k in self.classes}
+                        self.class_replay_ratios = {k: 1 for k in self.new_classes}
+                   
+              
+            self.class_replay_counts = { i:  self.replay_size for i in self.new_classes}
+            self.class_replay_weights = { i: self.class_replay_ratios[i]/self.replay_size for i in self.class_replay_ratios}  ## TODO this will change when using advanced weighting sample-level
+            
+            save_dir = self.model_save_dir if self.replay else self.model_log_dir
+            np.save(save_dir+'class_replay_counts.npy', self.class_replay_counts)
+            np.save(save_dir+'class_replay_ratios.npy', self.class_replay_ratios)
+            np.save(save_dir+'class_replay_weights.npy', self.class_replay_weights)
+
+
+        if self.replay and self.epoch in self.epochs_of_interest:
+            val_method_avg_acc = float(sum(self.class_accuracy_epoch.values()))/len(self.class_accuracy_epoch)*100
+        
+            if not self.is_oracle:
+                self.avg_acc["Method"].append(val_method_avg_acc)
+                if self.val_target is None:
+                    self.val_target = 0
+                self.avg_acc["Oracle"].append(self.val_target) 
+            else:
+                self.avg_acc["Oracle"].append(val_method_avg_acc)
+
+            self.steps_of_interest.append(self.step_count)
+            self.times_of_interest.append(round(self.batch_time.avg,3))
 
 
     ##########################################
@@ -318,18 +465,17 @@ class NormalNN(nn.Module):
         # try to load model
         need_train = True
         self.train_dataset = train_dataset
+        self.plot_dir = model_save_dir.replace('_outputs', 'plots_and_tables')
         self.val_target = val_target
 
         task_index = self.tasks.index(task)+1
         if self.tasks[0]!= task:
             self.replay=True ## TODO need to chage this
             model_save_dir_prev = model_save_dir.replace('task-'+str(task_index), 'task-'+str(task_index-1))
-            # print (model_save_dir_prev)
             self.load_prev_model(model_save_dir_prev)
             self.previous_teacher = Teacher(solver=self.prev_model)
             self.last_valid_out_dim = len(self.tasks[task_index-2])
-            # print (self.previous_teacher)
-
+            
         self.init_params()
 
         if not self.overwrite:
@@ -356,16 +502,11 @@ class NormalNN(nn.Module):
             if self.cuda:
                 self.dw_k = self.dw_k.cuda()
             
-            # # Evaluate the performance of current task
-            # self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=0,total=self.config['schedule'][-1]))
-            # if val_loader is not None:
-            #     self.validation(val_loader)
-        
             losses = AverageMeter()
             losses_bl = AverageMeter()
             acc = AverageMeter()
             acc_bl = AverageMeter()
-            batch_time = AverageMeter()
+            self.batch_time = AverageMeter()
             batch_timer = Timer()
 
             self.init_plot_params()
@@ -401,14 +542,13 @@ class NormalNN(nn.Module):
                     # model update
                     output, new_feats = self.model.forward(x, pen=True)    
                     loss = self.update_model(output, y)
-                    # loss, output= self.update_model(x, y)
-
+                    
                     if self.with_class_balance==1:
                         output_bl, y_bl = self.get_class_balanced_data(indices, y.detach(), new_feats.detach())
                         loss_bl = self.update_model(output_bl, y_bl, new_optimizer=True)
 
                     # measure elapsed time
-                    batch_time.update(batch_timer.toc())  
+                    self.batch_time.update(batch_timer.toc())  
                     batch_timer.tic()
                     
                     # measure accuracy and record loss
@@ -417,23 +557,23 @@ class NormalNN(nn.Module):
                     losses.update(loss,  y.size(0)) 
                     batch_timer.tic()
 
-                    if self.with_class_balance==1:
-                        accumulate_acc(output_bl, y_bl, acc_bl, topk=(self.top_k,))
-                        losses_bl.update(loss_bl,  y_bl.size(0))
+                    # if self.with_class_balance==1:
+                    #     accumulate_acc(output_bl, y_bl, acc_bl, topk=(self.top_k,))
+                    #     losses_bl.update(loss_bl,  y_bl.size(0))
 
                 # eval update
                 self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
                 self.log(' * Loss {loss.avg:.3f} | Train Acc {acc.avg:.3f}'.format(loss=losses,acc=acc))
-                if self.with_class_balance==1:
-                    self.log(' * BL head train Loss {loss.avg:.3f} | BL Train Acc {acc.avg:.3f}'.format(loss=losses_bl,acc=acc_bl))
+                # if self.with_class_balance==1:
+                #     self.log(' * BL head train Loss {loss.avg:.3f} | BL Train Acc {acc.avg:.3f}'.format(loss=losses_bl,acc=acc_bl))
 
                 # Evaluate the performance of current task
                 if val_loader is not None:
                     self.val_method_task_acc = self.validation(val_loader, train_val=True)
                     self.analyze()
-                    if self.replay and epoch in self.epochs_of_interest:
-                        val_method_avg_acc = float(sum(self.class_accuracy_epoch.values()))/len(self.class_accuracy_epoch)*100
-                        self.avg_acc["Oracle"].append(val_method_avg_acc)
+                    # if self.replay and epoch in self.epochs_of_interest:
+                    #     val_method_avg_acc = float(sum(self.class_accuracy_epoch.values()))/len(self.class_accuracy_epoch)*100
+                    #     self.avg_acc["Oracle"].append(val_method_avg_acc)
 
                 # reset
                 losses = AverageMeter()
@@ -444,7 +584,7 @@ class NormalNN(nn.Module):
         self.model.eval()
 
         if self.replay:
-            per_class_plots(self.per_class_accuracy, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.replay_size,  self.avg_acc, self.task_acc, base_path=self.plot_dir+'_after/', is_oracle=True)
+            per_class_plots(self.per_class_accuracy, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc,  base_path=self.plot_dir+'_after/', is_oracle=True)
         
 
         self.last_valid_out_dim = self.valid_out_dim
@@ -456,7 +596,7 @@ class NormalNN(nn.Module):
         self.previous_teacher = copy.deepcopy(teacher)
 
         try:
-            return batch_time.avg, self.config['schedule'][-1]
+            return self.batch_time.avg, self.config['schedule'][-1]
         except:
             return None, None
 
@@ -466,18 +606,24 @@ class NormalNN(nn.Module):
 
     def update_model(self, logits, targets, new_optimizer=False):
         
-        if self.replay_type == 'random_sample':
-            dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]
-            # print (dw_cls.shape)
-        elif self.replay_type == 'gradient_cb':
-            h_m = Counter([int(i) for i in targets]) ## map
-            h_m = { i: 1/h_m[i] for i in h_m}
-            # dw_a = self.dw_k[-1 * torch.ones(len(targets)-len(logits_replay)).long()]
-            # dw_b = self.dw_k[-1 * torch.ones(len(logits_replay)).long()]
-            # dw_cls = torch.cat([dw_a, dw_b])*torch.Tensor([h_m[int(i)] for i in targets]).to("cuda")
-            dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]*torch.Tensor([h_m[int(i)] for i in targets]).cuda()
-
-        total_loss = self.criterion(logits, targets.long(), dw_cls)
+        if self.loss_type!= 'ova':
+            if self.replay_type == 'random_sample':
+                dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]
+            elif self.replay_type == 'gradient_cb':
+                h_m = Counter([int(i) for i in targets]) ## map
+                h_m = { i: 1/h_m[i] for i in h_m}
+                dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]*torch.Tensor([h_m[int(i)] for i in targets]).cuda()
+            total_loss = self.criterion(logits, targets.long(), dw_cls)
+        else:
+            # class loss
+            if target_KD is not None:
+                target_mod = get_one_hot(targets, self.valid_out_dim)
+                target_mod[:, :self.last_valid_out_dim] = torch.sigmoid(target_KD)
+                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
+            else:
+                target_mod = get_one_hot(targets, self.valid_out_dim)
+                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
+        
         
         if not new_optimizer:
             self.optimizer.zero_grad()
@@ -497,8 +643,7 @@ class NormalNN(nn.Module):
         if self.with_class_balance==1:
             balanced= True
 
-        # print (self.epoch)
-
+        
         if model is None:
             model = self.model
 
@@ -510,26 +655,32 @@ class NormalNN(nn.Module):
         orig_mode = model.training
         model.eval()
 
-        # all_targets = set()
         for i, (input, target, indices) in enumerate(dataloader):
-            # for lab in target:
-            #     all_targets.add(int(lab))
             if self.gpu:
                 with torch.no_grad():
                     input = input.cuda()
                     target = target.cuda()
             if task_in is None:
-                # output = model.forward(input)[:, :self.valid_out_dim]
                 output, new_feats = model.forward(input, pen=True, balanced=balanced)
                 acc = accumulate_acc(output, target, acc, topk=(self.top_k,))
 
                 if not train_val:
                     continue
+
+                if not self.replay and self.epoch<self.epochs_of_interest[-1]:
+                    if self.epoch==1:
+                        if not hasattr(self, 'old_feats'):
+                            self.old_feats=[]
+                        self.old_feats.append(new_feats)
+                    continue
+                elif not self.replay and self.epoch==self.epochs_of_interest[-1]:
+                    old_feats = self.old_feats[i]
                 
                 if self.replay:
                     _, _, old_feats = self.previous_teacher.generate_scores(input, allowed_predictions=list(range(self.last_valid_out_dim)), balanced=balanced)
-                    predictions = torch.argmax(output, dim=1)
-                    self.helper(indices.tolist(), target, old_feats, new_feats, predictions)
+                predictions = torch.argmax(output, dim=1)
+                # self.helper(indices.tolist(), target, old_feats, new_feats, predictions)
+                self.split_by_class(indices, target, old_features=old_feats, new_features=new_feats, predictions=predictions)
             else:
                 mask = target >= task_in[0]
                 mask_ind = mask.nonzero().view(-1) 
@@ -548,6 +699,7 @@ class NormalNN(nn.Module):
         if verbal:
             self.log(' * Val Acc {acc.avg:.3f}, Total time {time:.2f}'
                     .format(acc=acc, time=batch_timer.toc()))
+        
         return acc.avg
 
     def data_weighting(self, dataset, num_seen=None):
@@ -588,15 +740,38 @@ class NormalNN(nn.Module):
 
     def load_replay_counts(self, filename):
 
-        if self.weight_with==0:
-            self.class_replay_counts = { i:  self.replay_size for i in self.old_classes}
-        elif self.weight_with==1:
-            self.class_replay_counts =  np.load(filename)
-        elif self.weight_with==3:
-            class_replay_ratios =  {'airplane': 3, 'automobile': 1, 'deer': 6, 'dog': 10, 'frog': 6, 'horse': 3, 'ship': 3, 'truck': 1}
-            class_replay_ratios = { self.train_dataset.class_mapping[self.train_dataset.class_to_idx[cl]]: class_replay_ratios[cl] for cl in class_replay_ratios}
-            factor = (len(self.old_classes)* self.replay_size)/sum(class_replay_ratios.values())
-            self.class_replay_counts={ k: class_replay_ratios[k]*factor for k in class_replay_ratios }
+        # if  self.weight_with>=4:
+        if not self.is_dual_data_loader:
+            try:
+                self.class_replay_counts = np.load(filename+'class_replay_counts.npy', allow_pickle=True)[()]
+            except:
+                self.class_replay_counts = { i:  self.replay_size for i in self.classes}
+        elif not self.is_weighted_sampler:
+            if self.weight_with<=3:
+                self.class_replay_ratios = np.load(filename+'class_replay_ratios.npy', allow_pickle=True)[()]
+            elif self.weight_with==5:
+                self.class_replay_ratios =  { cl: 1 for cl in self.classes}
+            elif self.weight_with==6:
+                self.class_replay_ratios =  { cl: self.class_ratios_manual[cl] for cl in self.class_ratios_manual if cl in self.classes}
+                # else:
+                #     self.class_replay_ratios =  { cl: 1 for cl in self.old_classes}
+                # self.class_replay_ratios = { 0: 1, 1: 1, 2: 2, 3: 2, 4: 1, 5: 1, 6: 1, 7: 1} # 84.39
+                # self.class_replay_ratios = { 0: 2, 1: 1, 2: 3, 3: 3, 4: 2, 5: 2, 6: 2, 7: 1}  # 84.05
+                # self.class_replay_ratios = { 0: 3, 1: 1, 2: 5, 3: 5, 4: 3, 5: 3, 6: 3, 7: 1}  # 84.45
+                # self.class_replay_ratios = { 0: 4, 1: 1, 2: 7, 3: 7, 4: 4, 5: 4, 6: 4, 7: 1}  # 84.14
+                
+                # self.class_replay_ratios = { 0: 2, 1: 2, 2: 1, 3: 1, 4: 2, 5: 2, 6: 2, 7: 2} # 83.68
+                # self.class_replay_ratios = { 0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1} # 84.5
+                # self.class_replay_ratios = { 0: 3, 1: 1, 2: 5, 3: 7, 4: 3, 5: 3, 6: 3, 7: 1}  # 83.68`
+        elif self.is_weighted_sampler and self.is_dual_data_loader:
+            try:
+                self.class_replay_weights = np.load(file_name+'class_replay_weights.npy', allow_pickle=True)[()]
+            except:
+                self.class_replay_weights =  { cl: 1 for cl in self.class_replay_weights if cl in self.old_classes}
+        
+        # else:
+            # self.class_replay_counts =  np.load(filename)
+        
 
     # sets model optimizers
     def init_optimizer(self):
@@ -667,8 +842,11 @@ class NormalNN(nn.Module):
     def reset_model(self):
         self.model.apply(weight_reset)
 
-    def forward(self, x):
-        return self.model.forward(x)[:, :self.valid_out_dim]
+    def forward(self, x, pen=False, balanced=False):
+        if pen:
+            output, new_feats = self.model.forward(x, pen=True, balanced=balanced)
+            return output[:, :self.valid_out_dim], new_feats
+        return self.model.forward(x, balanced=balanced)[:, :self.valid_out_dim]
 
     def predict(self, inputs):
         self.model.eval()
@@ -789,12 +967,9 @@ class Teacher(nn.Module):
         # get predicted logit-scores
         with torch.no_grad():
             y_hat_to_compute_scores, y_feat = self.solver.forward(x, pen=True, balanced=balanced)
-        # print (y_hat_to_compute_scores)
-        # print ('y_hat_to_compute_scores: ', y_hat_to_compute_scores.shape)
-        # print ('allowed_predictions:', allowed_predictions)
+        
         y_hat = y_hat_to_compute_scores[:, allowed_predictions]
-        # print (y_hat)
-        # print ('y_hat: ', y_hat.shape)
+        
         # set model back to its initial mode
         self.train(mode=mode)
 
@@ -829,3 +1004,4 @@ class Teacher(nn.Module):
         self.train(mode=mode)
 
         return y_hat
+

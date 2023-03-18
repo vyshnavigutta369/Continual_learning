@@ -1,0 +1,2246 @@
+digraph {
+	graph [size="336.3,336.3"]
+	node [align=left fontsize=12 height=0.2 ranksep=0.1 shape=box style=filled]
+	<MeanBackward0 object at 0x7fe4d9ef4640> [label=<MeanBackward0> fillcolor=""]
+	<MulBackward0 object at 0x7fe4b0c17700> [label=<MulBackward0> fillcolor=""]
+	<NllLossBackward0 object at 0x7fe4e5ef03d0> [label=<NllLossBackward0> fillcolor=""]
+	<LogSoftmaxBackward0 object at 0x7fe4aaa61f10> [label=<LogSoftmaxBackward0> fillcolor=""]
+	<AddmmBackward0 object at 0x7fe4e089ac40> [label=<AddmmBackward0> fillcolor=""]
+	<AccumulateGrad object at 0x7fe4aaa61430> [label=<AccumulateGrad> fillcolor=green]
+	<AddmmBackward0 object at 0x7fe4e089ac40> -> <AccumulateGrad object at 0x7fe4aaa61430>
+	<ViewBackward0 object at 0x7fe4aaab66a0> [label=<ViewBackward0> fillcolor=""]
+	<AvgPool2DBackward0 object at 0x7fe4aaab6550> [label=<AvgPool2DBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaab6820> [label=<ReluBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaab65b0> [label=<AddBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab61f0> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaab6520> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaab63a0> [label=<ReluBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab64f0> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaab6280> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaab68e0> [label=<ReluBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaab64c0> [label=<AddBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab67c0> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa5eb20> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa5e580> [label=<ReluBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5eee0> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e3a0> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa5ea60> [label=<ReluBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa5ec40> [label=<AddBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e640> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e760> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa5e130> [label=<ReluBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e2b0> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e7c0> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa5e1f0> [label=<ReluBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa5e280> [label=<AddBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e5e0> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e5b0> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa5e610> [label=<ReluBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa65160> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa65970> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa65070> [label=<ReluBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa65040> [label=<AddBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10070> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa10040> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa102b0> [label=<ReluBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10370> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa10340> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa10190> [label=<ReluBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa10400> [label=<AddBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa105b0> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa10610> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa10880> [label=<ReluBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10970> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa10940> [label=<ConvolutionBackward0> fillcolor=""]
+	<ReluBackward0 object at 0x7fe4aaa107c0> [label=<ReluBackward0> fillcolor=""]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10a00> [label=<CudnnBatchNormBackward0> fillcolor=""]
+	<ConvolutionBackward0 object at 0x7fe4aaa10bb0> [label=<ConvolutionBackward0> fillcolor=""]
+	<AccumulateGrad object at 0x7fe4aaa10c70> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa10bb0> -> <AccumulateGrad object at 0x7fe4aaa10c70>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10a00> -> <ConvolutionBackward0 object at 0x7fe4aaa10bb0>
+	<AccumulateGrad object at 0x7fe4aaa10d90> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10a00> -> <AccumulateGrad object at 0x7fe4aaa10d90>
+	<AccumulateGrad object at 0x7fe4aaa10d30> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10a00> -> <AccumulateGrad object at 0x7fe4aaa10d30>
+	<ReluBackward0 object at 0x7fe4aaa107c0> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa10a00>
+	<ConvolutionBackward0 object at 0x7fe4aaa10940> -> <ReluBackward0 object at 0x7fe4aaa107c0>
+	<AccumulateGrad object at 0x7fe4aaa10a90> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa10940> -> <AccumulateGrad object at 0x7fe4aaa10a90>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10970> -> <ConvolutionBackward0 object at 0x7fe4aaa10940>
+	<AccumulateGrad object at 0x7fe4aaa10b20> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10970> -> <AccumulateGrad object at 0x7fe4aaa10b20>
+	<AccumulateGrad object at 0x7fe4aaa10ac0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10970> -> <AccumulateGrad object at 0x7fe4aaa10ac0>
+	<ReluBackward0 object at 0x7fe4aaa10880> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa10970>
+	<ConvolutionBackward0 object at 0x7fe4aaa10610> -> <ReluBackward0 object at 0x7fe4aaa10880>
+	<AccumulateGrad object at 0x7fe4aaa105e0> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa10610> -> <AccumulateGrad object at 0x7fe4aaa105e0>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa105b0> -> <ConvolutionBackward0 object at 0x7fe4aaa10610>
+	<AccumulateGrad object at 0x7fe4aaa10820> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa105b0> -> <AccumulateGrad object at 0x7fe4aaa10820>
+	<AccumulateGrad object at 0x7fe4aaa10850> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa105b0> -> <AccumulateGrad object at 0x7fe4aaa10850>
+	<AddBackward0 object at 0x7fe4aaa10400> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa105b0>
+	<ReluBackward0 object at 0x7fe4aaa10190> -> <AddBackward0 object at 0x7fe4aaa10400>
+	<ConvolutionBackward0 object at 0x7fe4aaa10340> -> <ReluBackward0 object at 0x7fe4aaa10190>
+	<AccumulateGrad object at 0x7fe4aaa10490> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa10340> -> <AccumulateGrad object at 0x7fe4aaa10490>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10370> -> <ConvolutionBackward0 object at 0x7fe4aaa10340>
+	<AccumulateGrad object at 0x7fe4aaa10550> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10370> -> <AccumulateGrad object at 0x7fe4aaa10550>
+	<AccumulateGrad object at 0x7fe4aaa104f0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10370> -> <AccumulateGrad object at 0x7fe4aaa104f0>
+	<ReluBackward0 object at 0x7fe4aaa102b0> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa10370>
+	<ConvolutionBackward0 object at 0x7fe4aaa10040> -> <ReluBackward0 object at 0x7fe4aaa102b0>
+	<AccumulateGrad object at 0x7fe4aaa10160> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa10040> -> <AccumulateGrad object at 0x7fe4aaa10160>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10070> -> <ConvolutionBackward0 object at 0x7fe4aaa10040>
+	<AccumulateGrad object at 0x7fe4aaa10250> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10070> -> <AccumulateGrad object at 0x7fe4aaa10250>
+	<AccumulateGrad object at 0x7fe4aaa10280> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa10070> -> <AccumulateGrad object at 0x7fe4aaa10280>
+	<AddBackward0 object at 0x7fe4aaa65040> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa10070>
+	<ReluBackward0 object at 0x7fe4aaa65070> -> <AddBackward0 object at 0x7fe4aaa65040>
+	<ConvolutionBackward0 object at 0x7fe4aaa65970> -> <ReluBackward0 object at 0x7fe4aaa65070>
+	<AccumulateGrad object at 0x7fe4aaa65250> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa65970> -> <AccumulateGrad object at 0x7fe4aaa65250>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa65160> -> <ConvolutionBackward0 object at 0x7fe4aaa65970>
+	<AccumulateGrad object at 0x7fe4aaa65be0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa65160> -> <AccumulateGrad object at 0x7fe4aaa65be0>
+	<AccumulateGrad object at 0x7fe4aaa651f0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa65160> -> <AccumulateGrad object at 0x7fe4aaa651f0>
+	<ReluBackward0 object at 0x7fe4aaa5e610> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa65160>
+	<ConvolutionBackward0 object at 0x7fe4aaa5e5b0> -> <ReluBackward0 object at 0x7fe4aaa5e610>
+	<AccumulateGrad object at 0x7fe4aaa5eeb0> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e5b0> -> <AccumulateGrad object at 0x7fe4aaa5eeb0>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e5e0> -> <ConvolutionBackward0 object at 0x7fe4aaa5e5b0>
+	<AccumulateGrad object at 0x7fe4aaa5ef70> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e5e0> -> <AccumulateGrad object at 0x7fe4aaa5ef70>
+	<AccumulateGrad object at 0x7fe4aaa5e250> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e5e0> -> <AccumulateGrad object at 0x7fe4aaa5e250>
+	<AddBackward0 object at 0x7fe4aaa5e280> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa5e5e0>
+	<ConstantPadNdBackward0 object at 0x7fe4aaa5e670> [label=<ConstantPadNdBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa5ee20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa650a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa65bb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa65100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa65bb0> -> <SliceBackward0 object at 0x7fe4aaa65100>
+	<SliceBackward0 object at 0x7fe4aaa650a0> -> <SliceBackward0 object at 0x7fe4aaa65bb0>
+	<SliceBackward0 object at 0x7fe4aaa5ee20> -> <SliceBackward0 object at 0x7fe4aaa650a0>
+	<ConstantPadNdBackward0 object at 0x7fe4aaa5e670> -> <SliceBackward0 object at 0x7fe4aaa5ee20>
+	<AddBackward0 object at 0x7fe4aaa5e280> -> <ConstantPadNdBackward0 object at 0x7fe4aaa5e670>
+	<ReluBackward0 object at 0x7fe4aaa5e1f0> -> <AddBackward0 object at 0x7fe4aaa5e280>
+	<ConvolutionBackward0 object at 0x7fe4aaa5e7c0> -> <ReluBackward0 object at 0x7fe4aaa5e1f0>
+	<AccumulateGrad object at 0x7fe4aaa5e3d0> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e7c0> -> <AccumulateGrad object at 0x7fe4aaa5e3d0>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e2b0> -> <ConvolutionBackward0 object at 0x7fe4aaa5e7c0>
+	<AccumulateGrad object at 0x7fe4aaa5e4f0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e2b0> -> <AccumulateGrad object at 0x7fe4aaa5e4f0>
+	<AccumulateGrad object at 0x7fe4aaa5e340> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e2b0> -> <AccumulateGrad object at 0x7fe4aaa5e340>
+	<ReluBackward0 object at 0x7fe4aaa5e130> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa5e2b0>
+	<ConvolutionBackward0 object at 0x7fe4aaa5e760> -> <ReluBackward0 object at 0x7fe4aaa5e130>
+	<AccumulateGrad object at 0x7fe4aaa5ea90> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e760> -> <AccumulateGrad object at 0x7fe4aaa5ea90>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e640> -> <ConvolutionBackward0 object at 0x7fe4aaa5e760>
+	<AccumulateGrad object at 0x7fe4aaa5e1c0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e640> -> <AccumulateGrad object at 0x7fe4aaa5e1c0>
+	<AccumulateGrad object at 0x7fe4aaa5e190> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5e640> -> <AccumulateGrad object at 0x7fe4aaa5e190>
+	<AddBackward0 object at 0x7fe4aaa5ec40> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa5e640>
+	<ReluBackward0 object at 0x7fe4aaa5ea60> -> <AddBackward0 object at 0x7fe4aaa5ec40>
+	<ConvolutionBackward0 object at 0x7fe4aaa5e3a0> -> <ReluBackward0 object at 0x7fe4aaa5ea60>
+	<AccumulateGrad object at 0x7fe4aaa5e8e0> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa5e3a0> -> <AccumulateGrad object at 0x7fe4aaa5e8e0>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5eee0> -> <ConvolutionBackward0 object at 0x7fe4aaa5e3a0>
+	<AccumulateGrad object at 0x7fe4aaa5e7f0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5eee0> -> <AccumulateGrad object at 0x7fe4aaa5e7f0>
+	<AccumulateGrad object at 0x7fe4aaa5e160> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaa5eee0> -> <AccumulateGrad object at 0x7fe4aaa5e160>
+	<ReluBackward0 object at 0x7fe4aaa5e580> -> <CudnnBatchNormBackward0 object at 0x7fe4aaa5eee0>
+	<ConvolutionBackward0 object at 0x7fe4aaa5eb20> -> <ReluBackward0 object at 0x7fe4aaa5e580>
+	<AccumulateGrad object at 0x7fe4aaa5e9a0> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaa5eb20> -> <AccumulateGrad object at 0x7fe4aaa5e9a0>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab67c0> -> <ConvolutionBackward0 object at 0x7fe4aaa5eb20>
+	<AccumulateGrad object at 0x7fe4aaa5e850> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab67c0> -> <AccumulateGrad object at 0x7fe4aaa5e850>
+	<AccumulateGrad object at 0x7fe4aaa5efd0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab67c0> -> <AccumulateGrad object at 0x7fe4aaa5efd0>
+	<AddBackward0 object at 0x7fe4aaab64c0> -> <CudnnBatchNormBackward0 object at 0x7fe4aaab67c0>
+	<ConstantPadNdBackward0 object at 0x7fe4aaa5e8b0> [label=<ConstantPadNdBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa5e700> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa5e940> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa65220> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa5e520> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa65220> -> <SliceBackward0 object at 0x7fe4aaa5e520>
+	<SliceBackward0 object at 0x7fe4aaa5e940> -> <SliceBackward0 object at 0x7fe4aaa65220>
+	<SliceBackward0 object at 0x7fe4aaa5e700> -> <SliceBackward0 object at 0x7fe4aaa5e940>
+	<ConstantPadNdBackward0 object at 0x7fe4aaa5e8b0> -> <SliceBackward0 object at 0x7fe4aaa5e700>
+	<AddBackward0 object at 0x7fe4aaab64c0> -> <ConstantPadNdBackward0 object at 0x7fe4aaa5e8b0>
+	<ReluBackward0 object at 0x7fe4aaab68e0> -> <AddBackward0 object at 0x7fe4aaab64c0>
+	<ConvolutionBackward0 object at 0x7fe4aaab6280> -> <ReluBackward0 object at 0x7fe4aaab68e0>
+	<AccumulateGrad object at 0x7fe4aaab6700> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaab6280> -> <AccumulateGrad object at 0x7fe4aaab6700>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab64f0> -> <ConvolutionBackward0 object at 0x7fe4aaab6280>
+	<AccumulateGrad object at 0x7fe4aaab6a90> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab64f0> -> <AccumulateGrad object at 0x7fe4aaab6a90>
+	<AccumulateGrad object at 0x7fe4aaab6d30> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab64f0> -> <AccumulateGrad object at 0x7fe4aaab6d30>
+	<ReluBackward0 object at 0x7fe4aaab63a0> -> <CudnnBatchNormBackward0 object at 0x7fe4aaab64f0>
+	<ConvolutionBackward0 object at 0x7fe4aaab6520> -> <ReluBackward0 object at 0x7fe4aaab63a0>
+	<AccumulateGrad object at 0x7fe4aaab67f0> [label=<AccumulateGrad> fillcolor=green]
+	<ConvolutionBackward0 object at 0x7fe4aaab6520> -> <AccumulateGrad object at 0x7fe4aaab67f0>
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab61f0> -> <ConvolutionBackward0 object at 0x7fe4aaab6520>
+	<AccumulateGrad object at 0x7fe4aaab6400> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab61f0> -> <AccumulateGrad object at 0x7fe4aaab6400>
+	<AccumulateGrad object at 0x7fe4aaab63d0> [label=<AccumulateGrad> fillcolor=green]
+	<CudnnBatchNormBackward0 object at 0x7fe4aaab61f0> -> <AccumulateGrad object at 0x7fe4aaab63d0>
+	<AddBackward0 object at 0x7fe4aaab65b0> -> <CudnnBatchNormBackward0 object at 0x7fe4aaab61f0>
+	<ReluBackward0 object at 0x7fe4aaab6820> -> <AddBackward0 object at 0x7fe4aaab65b0>
+	<AvgPool2DBackward0 object at 0x7fe4aaab6550> -> <ReluBackward0 object at 0x7fe4aaab6820>
+	<ViewBackward0 object at 0x7fe4aaab66a0> -> <AvgPool2DBackward0 object at 0x7fe4aaab6550>
+	<AddmmBackward0 object at 0x7fe4e089ac40> -> <ViewBackward0 object at 0x7fe4aaab66a0>
+	<TBackward0 object at 0x7fe4aaab65e0> [label=<TBackward0> fillcolor=""]
+	<AccumulateGrad object at 0x7fe4aaab62e0> [label=<AccumulateGrad> fillcolor=green]
+	<TBackward0 object at 0x7fe4aaab65e0> -> <AccumulateGrad object at 0x7fe4aaab62e0>
+	<AddmmBackward0 object at 0x7fe4e089ac40> -> <TBackward0 object at 0x7fe4aaab65e0>
+	<LogSoftmaxBackward0 object at 0x7fe4aaa61f10> -> <AddmmBackward0 object at 0x7fe4e089ac40>
+	<NllLossBackward0 object at 0x7fe4e5ef03d0> -> <LogSoftmaxBackward0 object at 0x7fe4aaa61f10>
+	<MulBackward0 object at 0x7fe4b0c17700> -> <NllLossBackward0 object at 0x7fe4e5ef03d0>
+	<MeanBackward0 object at 0x7fe4d9ef4640> -> <MulBackward0 object at 0x7fe4b0c17700>
+	<MulBackward0 object at 0x7fe4d9ef4670> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa61fd0> [label=<MeanBackward0> fillcolor=""]
+	<DivBackward0 object at 0x7fe4e089ae20> [label=<DivBackward0> fillcolor=""]
+	<RsubBackward1 object at 0x7fe4b0c17640> [label=<RsubBackward1> fillcolor=""]
+	<DivBackward0 object at 0x7fe4aaab6af0> [label=<DivBackward0> fillcolor=""]
+	<CopySlices object at 0x7fe4aaab6310> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaab62b0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaab6460> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaab6340> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa5ea30> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e100> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e1f0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e2e0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e3d0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e490> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e580> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e670> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e730> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e820> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e910> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1e9d0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1eac0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1ebb0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1ec70> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1ed60> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1ef70> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa1efd0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39070> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39160> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39220> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39310> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39400> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa394c0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa395b0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa396a0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39760> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39850> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39940> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39a00> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39af0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39be0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39ca0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39d90> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39040> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aaa39fd0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf040> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf160> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf220> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf310> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf400> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf4c0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf5b0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf6a0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf760> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf850> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf940> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bfa00> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bfaf0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bfbe0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bfca0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bfd90> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bf070> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9bffd0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4070> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4160> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4220> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4310> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4400> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c44c0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c45b0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c46a0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4760> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4850> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4940> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4a00> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4af0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4be0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4ca0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4d90> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4040> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c4fd0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3040> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3160> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3220> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3310> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3400> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c34c0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c35b0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c36a0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3760> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3850> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3940> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3a00> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3af0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3be0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3ca0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3d90> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3070> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9c3fd0> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9cd040> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9cd160> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9cd310> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9cd400> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9cd430> [label=<CopySlices> fillcolor=""]
+	<CopySlices object at 0x7fe4aa9cd4f0> [label=<CopySlices> fillcolor=""]
+	<SubBackward0 object at 0x7fe4aa9cd5e0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cd640> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cd6d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd910> [label=<SliceBackward0> fillcolor=""]
+	<PowBackward0 object at 0x7fe4aa9cd970> [label=<PowBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cda00> [label=<AddBackward0> fillcolor=""]
+	<MulBackward0 object at 0x7fe4aa9cdac0> [label=<MulBackward0> fillcolor=""]
+	<MmBackward0 object at 0x7fe4aa9cdb80> [label=<MmBackward0> fillcolor=""]
+	<IndexBackward0 object at 0x7fe4aa9cdc10> [label=<IndexBackward0> fillcolor=""]
+	<MmBackward0 object at 0x7fe4aa9cdb80> -> <IndexBackward0 object at 0x7fe4aa9cdc10>
+	<TransposeBackward0 object at 0x7fe4aa9cddf0> [label=<TransposeBackward0> fillcolor=""]
+	<MmBackward0 object at 0x7fe4aa9cdb80> -> <TransposeBackward0 object at 0x7fe4aa9cddf0>
+	<MulBackward0 object at 0x7fe4aa9cdac0> -> <MmBackward0 object at 0x7fe4aa9cdb80>
+	<AddBackward0 object at 0x7fe4aa9cda00> -> <MulBackward0 object at 0x7fe4aa9cdac0>
+	<PowBackward0 object at 0x7fe4aa9cd970> -> <AddBackward0 object at 0x7fe4aa9cda00>
+	<SliceBackward0 object at 0x7fe4aa9cd910> -> <PowBackward0 object at 0x7fe4aa9cd970>
+	<SliceBackward0 object at 0x7fe4aa9cd370> -> <SliceBackward0 object at 0x7fe4aa9cd910>
+	<MeanBackward0 object at 0x7fe4aa9cd6d0> -> <SliceBackward0 object at 0x7fe4aa9cd370>
+	<AddBackward0 object at 0x7fe4aa9cd640> -> <MeanBackward0 object at 0x7fe4aa9cd6d0>
+	<SubBackward0 object at 0x7fe4aa9cd5e0> -> <AddBackward0 object at 0x7fe4aa9cd640>
+	<MulBackward0 object at 0x7fe4aa9cd850> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cdb20> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd760> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd9d0> [label=<SliceBackward0> fillcolor=""]
+	<PowBackward0 object at 0x7fe4aa9cdbe0> [label=<PowBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cdd30> [label=<AddBackward0> fillcolor=""]
+	<MulBackward0 object at 0x7fe4aa9cd880> [label=<MulBackward0> fillcolor=""]
+	<MmBackward0 object at 0x7fe4aa9cdf70> [label=<MmBackward0> fillcolor=""]
+	<TransposeBackward0 object at 0x7fe4aa9cd8e0> [label=<TransposeBackward0> fillcolor=""]
+	<MmBackward0 object at 0x7fe4aa9cdf70> -> <TransposeBackward0 object at 0x7fe4aa9cd8e0>
+	<MulBackward0 object at 0x7fe4aa9cd880> -> <MmBackward0 object at 0x7fe4aa9cdf70>
+	<AddBackward0 object at 0x7fe4aa9cdd30> -> <MulBackward0 object at 0x7fe4aa9cd880>
+	<PowBackward0 object at 0x7fe4aa9cdbe0> -> <AddBackward0 object at 0x7fe4aa9cdd30>
+	<SliceBackward0 object at 0x7fe4aa9cd9d0> -> <PowBackward0 object at 0x7fe4aa9cdbe0>
+	<SliceBackward0 object at 0x7fe4aa9cd760> -> <SliceBackward0 object at 0x7fe4aa9cd9d0>
+	<MeanBackward0 object at 0x7fe4aa9cdb20> -> <SliceBackward0 object at 0x7fe4aa9cd760>
+	<MulBackward0 object at 0x7fe4aa9cd850> -> <MeanBackward0 object at 0x7fe4aa9cdb20>
+	<SubBackward0 object at 0x7fe4aa9cd5e0> -> <MulBackward0 object at 0x7fe4aa9cd850>
+	<CopySlices object at 0x7fe4aa9cd4f0> -> <SubBackward0 object at 0x7fe4aa9cd5e0>
+	<CopySlices object at 0x7fe4aa9cd430> -> <CopySlices object at 0x7fe4aa9cd4f0>
+	<SubBackward0 object at 0x7fe4aa9cd670> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cdc70> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cdca0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd820> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cdeb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd820> -> <SliceBackward0 object at 0x7fe4aa9cdeb0>
+	<MeanBackward0 object at 0x7fe4aa9cdca0> -> <SliceBackward0 object at 0x7fe4aa9cd820>
+	<AddBackward0 object at 0x7fe4aa9cdc70> -> <MeanBackward0 object at 0x7fe4aa9cdca0>
+	<SubBackward0 object at 0x7fe4aa9cd670> -> <AddBackward0 object at 0x7fe4aa9cdc70>
+	<MulBackward0 object at 0x7fe4aa9cda90> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cd730> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd550> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cdd90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd550> -> <SliceBackward0 object at 0x7fe4aa9cdd90>
+	<MeanBackward0 object at 0x7fe4aa9cd730> -> <SliceBackward0 object at 0x7fe4aa9cd550>
+	<MulBackward0 object at 0x7fe4aa9cda90> -> <MeanBackward0 object at 0x7fe4aa9cd730>
+	<SubBackward0 object at 0x7fe4aa9cd670> -> <MulBackward0 object at 0x7fe4aa9cda90>
+	<CopySlices object at 0x7fe4aa9cd430> -> <SubBackward0 object at 0x7fe4aa9cd670>
+	<CopySlices object at 0x7fe4aa9cd400> -> <CopySlices object at 0x7fe4aa9cd430>
+	<SubBackward0 object at 0x7fe4aa9cd580> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cd790> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cdb50> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cddc0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cde20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cddc0> -> <SliceBackward0 object at 0x7fe4aa9cde20>
+	<MeanBackward0 object at 0x7fe4aa9cdb50> -> <SliceBackward0 object at 0x7fe4aa9cddc0>
+	<AddBackward0 object at 0x7fe4aa9cd790> -> <MeanBackward0 object at 0x7fe4aa9cdb50>
+	<SubBackward0 object at 0x7fe4aa9cd580> -> <AddBackward0 object at 0x7fe4aa9cd790>
+	<MulBackward0 object at 0x7fe4aa9cdbb0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cda60> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd460> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d62e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd460> -> <SliceBackward0 object at 0x7fe4aa9d62e0>
+	<MeanBackward0 object at 0x7fe4aa9cda60> -> <SliceBackward0 object at 0x7fe4aa9cd460>
+	<MulBackward0 object at 0x7fe4aa9cdbb0> -> <MeanBackward0 object at 0x7fe4aa9cda60>
+	<SubBackward0 object at 0x7fe4aa9cd580> -> <MulBackward0 object at 0x7fe4aa9cdbb0>
+	<CopySlices object at 0x7fe4aa9cd400> -> <SubBackward0 object at 0x7fe4aa9cd580>
+	<CopySlices object at 0x7fe4aa9cd310> -> <CopySlices object at 0x7fe4aa9cd400>
+	<SubBackward0 object at 0x7fe4aa9cd490> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cdcd0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cdfa0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6280> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d62b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6280> -> <SliceBackward0 object at 0x7fe4aa9d62b0>
+	<MeanBackward0 object at 0x7fe4aa9cdfa0> -> <SliceBackward0 object at 0x7fe4aa9d6280>
+	<AddBackward0 object at 0x7fe4aa9cdcd0> -> <MeanBackward0 object at 0x7fe4aa9cdfa0>
+	<SubBackward0 object at 0x7fe4aa9cd490> -> <AddBackward0 object at 0x7fe4aa9cdcd0>
+	<MulBackward0 object at 0x7fe4aa9cde80> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cdee0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6520> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6190> -> <SliceBackward0 object at 0x7fe4aa9d6520>
+	<MeanBackward0 object at 0x7fe4aa9cdee0> -> <SliceBackward0 object at 0x7fe4aa9d6190>
+	<MulBackward0 object at 0x7fe4aa9cde80> -> <MeanBackward0 object at 0x7fe4aa9cdee0>
+	<SubBackward0 object at 0x7fe4aa9cd490> -> <MulBackward0 object at 0x7fe4aa9cde80>
+	<CopySlices object at 0x7fe4aa9cd310> -> <SubBackward0 object at 0x7fe4aa9cd490>
+	<CopySlices object at 0x7fe4aa9cd160> -> <CopySlices object at 0x7fe4aa9cd310>
+	<SubBackward0 object at 0x7fe4aa9cd190> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cd5b0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9cd280> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6100> -> <SliceBackward0 object at 0x7fe4aa9d6640>
+	<MeanBackward0 object at 0x7fe4aa9cd280> -> <SliceBackward0 object at 0x7fe4aa9d6100>
+	<AddBackward0 object at 0x7fe4aa9cd5b0> -> <MeanBackward0 object at 0x7fe4aa9cd280>
+	<SubBackward0 object at 0x7fe4aa9cd190> -> <AddBackward0 object at 0x7fe4aa9cd5b0>
+	<MulBackward0 object at 0x7fe4aa9cd7f0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6790> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6700> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6250> -> <SliceBackward0 object at 0x7fe4aa9d6700>
+	<MeanBackward0 object at 0x7fe4aa9d6790> -> <SliceBackward0 object at 0x7fe4aa9d6250>
+	<MulBackward0 object at 0x7fe4aa9cd7f0> -> <MeanBackward0 object at 0x7fe4aa9d6790>
+	<SubBackward0 object at 0x7fe4aa9cd190> -> <MulBackward0 object at 0x7fe4aa9cd7f0>
+	<CopySlices object at 0x7fe4aa9cd160> -> <SubBackward0 object at 0x7fe4aa9cd190>
+	<CopySlices object at 0x7fe4aa9cd040> -> <CopySlices object at 0x7fe4aa9cd160>
+	<SubBackward0 object at 0x7fe4aa9cd2b0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cd4c0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d61c0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6460> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d66a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6460> -> <SliceBackward0 object at 0x7fe4aa9d66a0>
+	<MeanBackward0 object at 0x7fe4aa9d61c0> -> <SliceBackward0 object at 0x7fe4aa9d6460>
+	<AddBackward0 object at 0x7fe4aa9cd4c0> -> <MeanBackward0 object at 0x7fe4aa9d61c0>
+	<SubBackward0 object at 0x7fe4aa9cd2b0> -> <AddBackward0 object at 0x7fe4aa9cd4c0>
+	<MulBackward0 object at 0x7fe4aa9cd3d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d69d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d65b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6820> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d65b0> -> <SliceBackward0 object at 0x7fe4aa9d6820>
+	<MeanBackward0 object at 0x7fe4aa9d69d0> -> <SliceBackward0 object at 0x7fe4aa9d65b0>
+	<MulBackward0 object at 0x7fe4aa9cd3d0> -> <MeanBackward0 object at 0x7fe4aa9d69d0>
+	<SubBackward0 object at 0x7fe4aa9cd2b0> -> <MulBackward0 object at 0x7fe4aa9cd3d0>
+	<CopySlices object at 0x7fe4aa9cd040> -> <SubBackward0 object at 0x7fe4aa9cd2b0>
+	<CopySlices object at 0x7fe4aa9c3fd0> -> <CopySlices object at 0x7fe4aa9cd040>
+	<SubBackward0 object at 0x7fe4aa9cd1c0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cd220> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6130> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6880> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d68e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6880> -> <SliceBackward0 object at 0x7fe4aa9d68e0>
+	<MeanBackward0 object at 0x7fe4aa9d6130> -> <SliceBackward0 object at 0x7fe4aa9d6880>
+	<AddBackward0 object at 0x7fe4aa9cd220> -> <MeanBackward0 object at 0x7fe4aa9d6130>
+	<SubBackward0 object at 0x7fe4aa9cd1c0> -> <AddBackward0 object at 0x7fe4aa9cd220>
+	<MulBackward0 object at 0x7fe4aa9cd6a0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6c10> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d64c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6bb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d64c0> -> <SliceBackward0 object at 0x7fe4aa9d6bb0>
+	<MeanBackward0 object at 0x7fe4aa9d6c10> -> <SliceBackward0 object at 0x7fe4aa9d64c0>
+	<MulBackward0 object at 0x7fe4aa9cd6a0> -> <MeanBackward0 object at 0x7fe4aa9d6c10>
+	<SubBackward0 object at 0x7fe4aa9cd1c0> -> <MulBackward0 object at 0x7fe4aa9cd6a0>
+	<CopySlices object at 0x7fe4aa9c3fd0> -> <SubBackward0 object at 0x7fe4aa9cd1c0>
+	<CopySlices object at 0x7fe4aa9c3070> -> <CopySlices object at 0x7fe4aa9c3fd0>
+	<SubBackward0 object at 0x7fe4aa9c3f40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cd130> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d67f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d69a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6d30> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d69a0> -> <SliceBackward0 object at 0x7fe4aa9d6d30>
+	<MeanBackward0 object at 0x7fe4aa9d67f0> -> <SliceBackward0 object at 0x7fe4aa9d69a0>
+	<AddBackward0 object at 0x7fe4aa9cd130> -> <MeanBackward0 object at 0x7fe4aa9d67f0>
+	<SubBackward0 object at 0x7fe4aa9c3f40> -> <AddBackward0 object at 0x7fe4aa9cd130>
+	<MulBackward0 object at 0x7fe4aa9cd3a0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6e50> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6a30> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6df0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6a30> -> <SliceBackward0 object at 0x7fe4aa9d6df0>
+	<MeanBackward0 object at 0x7fe4aa9d6e50> -> <SliceBackward0 object at 0x7fe4aa9d6a30>
+	<MulBackward0 object at 0x7fe4aa9cd3a0> -> <MeanBackward0 object at 0x7fe4aa9d6e50>
+	<SubBackward0 object at 0x7fe4aa9c3f40> -> <MulBackward0 object at 0x7fe4aa9cd3a0>
+	<CopySlices object at 0x7fe4aa9c3070> -> <SubBackward0 object at 0x7fe4aa9c3f40>
+	<CopySlices object at 0x7fe4aa9c3d90> -> <CopySlices object at 0x7fe4aa9c3070>
+	<SubBackward0 object at 0x7fe4aa9c3e80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9cd0d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6580> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6b50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d66d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6b50> -> <SliceBackward0 object at 0x7fe4aa9d66d0>
+	<MeanBackward0 object at 0x7fe4aa9d6580> -> <SliceBackward0 object at 0x7fe4aa9d6b50>
+	<AddBackward0 object at 0x7fe4aa9cd0d0> -> <MeanBackward0 object at 0x7fe4aa9d6580>
+	<SubBackward0 object at 0x7fe4aa9c3e80> -> <AddBackward0 object at 0x7fe4aa9cd0d0>
+	<MulBackward0 object at 0x7fe4aa9cd2e0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6f40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6fd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6eb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6fd0> -> <SliceBackward0 object at 0x7fe4aa9d6eb0>
+	<MeanBackward0 object at 0x7fe4aa9d6f40> -> <SliceBackward0 object at 0x7fe4aa9d6fd0>
+	<MulBackward0 object at 0x7fe4aa9cd2e0> -> <MeanBackward0 object at 0x7fe4aa9d6f40>
+	<SubBackward0 object at 0x7fe4aa9c3e80> -> <MulBackward0 object at 0x7fe4aa9cd2e0>
+	<CopySlices object at 0x7fe4aa9c3d90> -> <SubBackward0 object at 0x7fe4aa9c3e80>
+	<CopySlices object at 0x7fe4aa9c3ca0> -> <CopySlices object at 0x7fe4aa9c3d90>
+	<SubBackward0 object at 0x7fe4aa9c3ee0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3eb0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6f70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6910> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6d90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9d6910> -> <SliceBackward0 object at 0x7fe4aa9d6d90>
+	<MeanBackward0 object at 0x7fe4aa9d6f70> -> <SliceBackward0 object at 0x7fe4aa9d6910>
+	<AddBackward0 object at 0x7fe4aa9c3eb0> -> <MeanBackward0 object at 0x7fe4aa9d6f70>
+	<SubBackward0 object at 0x7fe4aa9c3ee0> -> <AddBackward0 object at 0x7fe4aa9c3eb0>
+	<MulBackward0 object at 0x7fe4aa9c3fa0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9d6fa0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd1f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc310> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd1f0> -> <SliceBackward0 object at 0x7fe4aa9dc310>
+	<MeanBackward0 object at 0x7fe4aa9d6fa0> -> <SliceBackward0 object at 0x7fe4aa9cd1f0>
+	<MulBackward0 object at 0x7fe4aa9c3fa0> -> <MeanBackward0 object at 0x7fe4aa9d6fa0>
+	<SubBackward0 object at 0x7fe4aa9c3ee0> -> <MulBackward0 object at 0x7fe4aa9c3fa0>
+	<CopySlices object at 0x7fe4aa9c3ca0> -> <SubBackward0 object at 0x7fe4aa9c3ee0>
+	<CopySlices object at 0x7fe4aa9c3be0> -> <CopySlices object at 0x7fe4aa9c3ca0>
+	<SubBackward0 object at 0x7fe4aa9c3e20> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9d6ca0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c3f10> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc2b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc430> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc2b0> -> <SliceBackward0 object at 0x7fe4aa9dc430>
+	<MeanBackward0 object at 0x7fe4aa9c3f10> -> <SliceBackward0 object at 0x7fe4aa9dc2b0>
+	<AddBackward0 object at 0x7fe4aa9d6ca0> -> <MeanBackward0 object at 0x7fe4aa9c3f10>
+	<SubBackward0 object at 0x7fe4aa9c3e20> -> <AddBackward0 object at 0x7fe4aa9d6ca0>
+	<MulBackward0 object at 0x7fe4aa9d6ee0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c3df0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc0a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc3a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc0a0> -> <SliceBackward0 object at 0x7fe4aa9dc3a0>
+	<MeanBackward0 object at 0x7fe4aa9c3df0> -> <SliceBackward0 object at 0x7fe4aa9dc0a0>
+	<MulBackward0 object at 0x7fe4aa9d6ee0> -> <MeanBackward0 object at 0x7fe4aa9c3df0>
+	<SubBackward0 object at 0x7fe4aa9c3e20> -> <MulBackward0 object at 0x7fe4aa9d6ee0>
+	<CopySlices object at 0x7fe4aa9c3be0> -> <SubBackward0 object at 0x7fe4aa9c3e20>
+	<CopySlices object at 0x7fe4aa9c3af0> -> <CopySlices object at 0x7fe4aa9c3be0>
+	<SubBackward0 object at 0x7fe4aa9c3d30> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3d00> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc250> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc070> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc490> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc070> -> <SliceBackward0 object at 0x7fe4aa9dc490>
+	<MeanBackward0 object at 0x7fe4aa9dc250> -> <SliceBackward0 object at 0x7fe4aa9dc070>
+	<AddBackward0 object at 0x7fe4aa9c3d00> -> <MeanBackward0 object at 0x7fe4aa9dc250>
+	<SubBackward0 object at 0x7fe4aa9c3d30> -> <AddBackward0 object at 0x7fe4aa9c3d00>
+	<MulBackward0 object at 0x7fe4aa9c3c10> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc790> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc550> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc5e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc550> -> <SliceBackward0 object at 0x7fe4aa9dc5e0>
+	<MeanBackward0 object at 0x7fe4aa9dc790> -> <SliceBackward0 object at 0x7fe4aa9dc550>
+	<MulBackward0 object at 0x7fe4aa9c3c10> -> <MeanBackward0 object at 0x7fe4aa9dc790>
+	<SubBackward0 object at 0x7fe4aa9c3d30> -> <MulBackward0 object at 0x7fe4aa9c3c10>
+	<CopySlices object at 0x7fe4aa9c3af0> -> <SubBackward0 object at 0x7fe4aa9c3d30>
+	<CopySlices object at 0x7fe4aa9c3a00> -> <CopySlices object at 0x7fe4aa9c3af0>
+	<SubBackward0 object at 0x7fe4aa9c3c40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9d68b0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc1f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc6a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc640> -> <SliceBackward0 object at 0x7fe4aa9dc6a0>
+	<MeanBackward0 object at 0x7fe4aa9dc1f0> -> <SliceBackward0 object at 0x7fe4aa9dc640>
+	<AddBackward0 object at 0x7fe4aa9d68b0> -> <MeanBackward0 object at 0x7fe4aa9dc1f0>
+	<SubBackward0 object at 0x7fe4aa9c3c40> -> <AddBackward0 object at 0x7fe4aa9d68b0>
+	<MulBackward0 object at 0x7fe4aa9c3e50> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc9d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc190> -> <SliceBackward0 object at 0x7fe4aa9dc970>
+	<MeanBackward0 object at 0x7fe4aa9dc9d0> -> <SliceBackward0 object at 0x7fe4aa9dc190>
+	<MulBackward0 object at 0x7fe4aa9c3e50> -> <MeanBackward0 object at 0x7fe4aa9dc9d0>
+	<SubBackward0 object at 0x7fe4aa9c3c40> -> <MulBackward0 object at 0x7fe4aa9c3e50>
+	<CopySlices object at 0x7fe4aa9c3a00> -> <SubBackward0 object at 0x7fe4aa9c3c40>
+	<CopySlices object at 0x7fe4aa9c3940> -> <CopySlices object at 0x7fe4aa9c3a00>
+	<SubBackward0 object at 0x7fe4aa9c3b80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3b50> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc5b0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc760> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcaf0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc760> -> <SliceBackward0 object at 0x7fe4aa9dcaf0>
+	<MeanBackward0 object at 0x7fe4aa9dc5b0> -> <SliceBackward0 object at 0x7fe4aa9dc760>
+	<AddBackward0 object at 0x7fe4aa9c3b50> -> <MeanBackward0 object at 0x7fe4aa9dc5b0>
+	<SubBackward0 object at 0x7fe4aa9c3b80> -> <AddBackward0 object at 0x7fe4aa9c3b50>
+	<MulBackward0 object at 0x7fe4aa9c3c70> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dcc10> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc7f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcbb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc7f0> -> <SliceBackward0 object at 0x7fe4aa9dcbb0>
+	<MeanBackward0 object at 0x7fe4aa9dcc10> -> <SliceBackward0 object at 0x7fe4aa9dc7f0>
+	<MulBackward0 object at 0x7fe4aa9c3c70> -> <MeanBackward0 object at 0x7fe4aa9dcc10>
+	<SubBackward0 object at 0x7fe4aa9c3b80> -> <MulBackward0 object at 0x7fe4aa9c3c70>
+	<CopySlices object at 0x7fe4aa9c3940> -> <SubBackward0 object at 0x7fe4aa9c3b80>
+	<CopySlices object at 0x7fe4aa9c3850> -> <CopySlices object at 0x7fe4aa9c3940>
+	<SubBackward0 object at 0x7fe4aa9c3a90> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3a60> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc4c0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc910> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcb50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dc910> -> <SliceBackward0 object at 0x7fe4aa9dcb50>
+	<MeanBackward0 object at 0x7fe4aa9dc4c0> -> <SliceBackward0 object at 0x7fe4aa9dc910>
+	<AddBackward0 object at 0x7fe4aa9c3a60> -> <MeanBackward0 object at 0x7fe4aa9dc4c0>
+	<SubBackward0 object at 0x7fe4aa9c3a90> -> <AddBackward0 object at 0x7fe4aa9c3a60>
+	<MulBackward0 object at 0x7fe4aa9c3d60> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dce50> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dca60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcca0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dca60> -> <SliceBackward0 object at 0x7fe4aa9dcca0>
+	<MeanBackward0 object at 0x7fe4aa9dce50> -> <SliceBackward0 object at 0x7fe4aa9dca60>
+	<MulBackward0 object at 0x7fe4aa9c3d60> -> <MeanBackward0 object at 0x7fe4aa9dce50>
+	<SubBackward0 object at 0x7fe4aa9c3a90> -> <MulBackward0 object at 0x7fe4aa9c3d60>
+	<CopySlices object at 0x7fe4aa9c3850> -> <SubBackward0 object at 0x7fe4aa9c3a90>
+	<CopySlices object at 0x7fe4aa9c3760> -> <CopySlices object at 0x7fe4aa9c3850>
+	<SubBackward0 object at 0x7fe4aa9c39a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3970> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc670> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcd00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcf10> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcd00> -> <SliceBackward0 object at 0x7fe4aa9dcf10>
+	<MeanBackward0 object at 0x7fe4aa9dc670> -> <SliceBackward0 object at 0x7fe4aa9dcd00>
+	<AddBackward0 object at 0x7fe4aa9c3970> -> <MeanBackward0 object at 0x7fe4aa9dc670>
+	<SubBackward0 object at 0x7fe4aa9c39a0> -> <AddBackward0 object at 0x7fe4aa9c3970>
+	<MulBackward0 object at 0x7fe4aa9c3ac0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dceb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcfd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcc70> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcfd0> -> <SliceBackward0 object at 0x7fe4aa9dcc70>
+	<MeanBackward0 object at 0x7fe4aa9dceb0> -> <SliceBackward0 object at 0x7fe4aa9dcfd0>
+	<MulBackward0 object at 0x7fe4aa9c3ac0> -> <MeanBackward0 object at 0x7fe4aa9dceb0>
+	<SubBackward0 object at 0x7fe4aa9c39a0> -> <MulBackward0 object at 0x7fe4aa9c3ac0>
+	<CopySlices object at 0x7fe4aa9c3760> -> <SubBackward0 object at 0x7fe4aa9c39a0>
+	<CopySlices object at 0x7fe4aa9c36a0> -> <CopySlices object at 0x7fe4aa9c3760>
+	<SubBackward0 object at 0x7fe4aa9c38e0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c38b0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dcf70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcd60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dce20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcd60> -> <SliceBackward0 object at 0x7fe4aa9dce20>
+	<MeanBackward0 object at 0x7fe4aa9dcf70> -> <SliceBackward0 object at 0x7fe4aa9dcd60>
+	<AddBackward0 object at 0x7fe4aa9c38b0> -> <MeanBackward0 object at 0x7fe4aa9dcf70>
+	<SubBackward0 object at 0x7fe4aa9c38e0> -> <AddBackward0 object at 0x7fe4aa9c38b0>
+	<MulBackward0 object at 0x7fe4aa9c3bb0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dc4f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcd90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3310> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9dcd90> -> <SliceBackward0 object at 0x7fe4aa9e3310>
+	<MeanBackward0 object at 0x7fe4aa9dc4f0> -> <SliceBackward0 object at 0x7fe4aa9dcd90>
+	<MulBackward0 object at 0x7fe4aa9c3bb0> -> <MeanBackward0 object at 0x7fe4aa9dc4f0>
+	<SubBackward0 object at 0x7fe4aa9c38e0> -> <MulBackward0 object at 0x7fe4aa9c3bb0>
+	<CopySlices object at 0x7fe4aa9c36a0> -> <SubBackward0 object at 0x7fe4aa9c38e0>
+	<CopySlices object at 0x7fe4aa9c35b0> -> <CopySlices object at 0x7fe4aa9c36a0>
+	<SubBackward0 object at 0x7fe4aa9c37f0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c37c0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dcd30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3400> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e32e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3400> -> <SliceBackward0 object at 0x7fe4aa9e32e0>
+	<MeanBackward0 object at 0x7fe4aa9dcd30> -> <SliceBackward0 object at 0x7fe4aa9e3400>
+	<AddBackward0 object at 0x7fe4aa9c37c0> -> <MeanBackward0 object at 0x7fe4aa9dcd30>
+	<SubBackward0 object at 0x7fe4aa9c37f0> -> <AddBackward0 object at 0x7fe4aa9c37c0>
+	<MulBackward0 object at 0x7fe4aa9c3910> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9dcb80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3550> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3190> -> <SliceBackward0 object at 0x7fe4aa9e3550>
+	<MeanBackward0 object at 0x7fe4aa9dcb80> -> <SliceBackward0 object at 0x7fe4aa9e3190>
+	<MulBackward0 object at 0x7fe4aa9c3910> -> <MeanBackward0 object at 0x7fe4aa9dcb80>
+	<SubBackward0 object at 0x7fe4aa9c37f0> -> <MulBackward0 object at 0x7fe4aa9c3910>
+	<CopySlices object at 0x7fe4aa9c35b0> -> <SubBackward0 object at 0x7fe4aa9c37f0>
+	<CopySlices object at 0x7fe4aa9c34c0> -> <CopySlices object at 0x7fe4aa9c35b0>
+	<SubBackward0 object at 0x7fe4aa9c3700> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9dce80> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c3610> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e31c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3460> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e31c0> -> <SliceBackward0 object at 0x7fe4aa9e3460>
+	<MeanBackward0 object at 0x7fe4aa9c3610> -> <SliceBackward0 object at 0x7fe4aa9e31c0>
+	<AddBackward0 object at 0x7fe4aa9dce80> -> <MeanBackward0 object at 0x7fe4aa9c3610>
+	<SubBackward0 object at 0x7fe4aa9c3700> -> <AddBackward0 object at 0x7fe4aa9dce80>
+	<MulBackward0 object at 0x7fe4aa9c36d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3790> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3250> -> <SliceBackward0 object at 0x7fe4aa9e3730>
+	<MeanBackward0 object at 0x7fe4aa9e3790> -> <SliceBackward0 object at 0x7fe4aa9e3250>
+	<MulBackward0 object at 0x7fe4aa9c36d0> -> <MeanBackward0 object at 0x7fe4aa9e3790>
+	<SubBackward0 object at 0x7fe4aa9c3700> -> <MulBackward0 object at 0x7fe4aa9c36d0>
+	<CopySlices object at 0x7fe4aa9c34c0> -> <SubBackward0 object at 0x7fe4aa9c3700>
+	<CopySlices object at 0x7fe4aa9c3400> -> <CopySlices object at 0x7fe4aa9c34c0>
+	<SubBackward0 object at 0x7fe4aa9c3640> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3820> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3370> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3520> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e38b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3520> -> <SliceBackward0 object at 0x7fe4aa9e38b0>
+	<MeanBackward0 object at 0x7fe4aa9e3370> -> <SliceBackward0 object at 0x7fe4aa9e3520>
+	<AddBackward0 object at 0x7fe4aa9c3820> -> <MeanBackward0 object at 0x7fe4aa9e3370>
+	<SubBackward0 object at 0x7fe4aa9c3640> -> <AddBackward0 object at 0x7fe4aa9c3820>
+	<MulBackward0 object at 0x7fe4aa9c3730> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e39d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e35b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e35b0> -> <SliceBackward0 object at 0x7fe4aa9e3970>
+	<MeanBackward0 object at 0x7fe4aa9e39d0> -> <SliceBackward0 object at 0x7fe4aa9e35b0>
+	<MulBackward0 object at 0x7fe4aa9c3730> -> <MeanBackward0 object at 0x7fe4aa9e39d0>
+	<SubBackward0 object at 0x7fe4aa9c3640> -> <MulBackward0 object at 0x7fe4aa9c3730>
+	<CopySlices object at 0x7fe4aa9c3400> -> <SubBackward0 object at 0x7fe4aa9c3640>
+	<CopySlices object at 0x7fe4aa9c3310> -> <CopySlices object at 0x7fe4aa9c3400>
+	<SubBackward0 object at 0x7fe4aa9c3550> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3520> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3490> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e36d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3910> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e36d0> -> <SliceBackward0 object at 0x7fe4aa9e3910>
+	<MeanBackward0 object at 0x7fe4aa9e3490> -> <SliceBackward0 object at 0x7fe4aa9e36d0>
+	<AddBackward0 object at 0x7fe4aa9c3520> -> <MeanBackward0 object at 0x7fe4aa9e3490>
+	<SubBackward0 object at 0x7fe4aa9c3550> -> <AddBackward0 object at 0x7fe4aa9c3520>
+	<MulBackward0 object at 0x7fe4aa9c39d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3c10> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3820> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3a60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3820> -> <SliceBackward0 object at 0x7fe4aa9e3a60>
+	<MeanBackward0 object at 0x7fe4aa9e3c10> -> <SliceBackward0 object at 0x7fe4aa9e3820>
+	<MulBackward0 object at 0x7fe4aa9c39d0> -> <MeanBackward0 object at 0x7fe4aa9e3c10>
+	<SubBackward0 object at 0x7fe4aa9c3550> -> <MulBackward0 object at 0x7fe4aa9c39d0>
+	<CopySlices object at 0x7fe4aa9c3310> -> <SubBackward0 object at 0x7fe4aa9c3550>
+	<CopySlices object at 0x7fe4aa9c3220> -> <CopySlices object at 0x7fe4aa9c3310>
+	<SubBackward0 object at 0x7fe4aa9c3460> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3430> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3430> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3ac0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3b20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3ac0> -> <SliceBackward0 object at 0x7fe4aa9e3b20>
+	<MeanBackward0 object at 0x7fe4aa9e3430> -> <SliceBackward0 object at 0x7fe4aa9e3ac0>
+	<AddBackward0 object at 0x7fe4aa9c3430> -> <MeanBackward0 object at 0x7fe4aa9e3430>
+	<SubBackward0 object at 0x7fe4aa9c3460> -> <AddBackward0 object at 0x7fe4aa9c3430>
+	<MulBackward0 object at 0x7fe4aa9c3580> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3e50> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e33a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3df0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e33a0> -> <SliceBackward0 object at 0x7fe4aa9e3df0>
+	<MeanBackward0 object at 0x7fe4aa9e3e50> -> <SliceBackward0 object at 0x7fe4aa9e33a0>
+	<MulBackward0 object at 0x7fe4aa9c3580> -> <MeanBackward0 object at 0x7fe4aa9e3e50>
+	<SubBackward0 object at 0x7fe4aa9c3460> -> <MulBackward0 object at 0x7fe4aa9c3580>
+	<CopySlices object at 0x7fe4aa9c3220> -> <SubBackward0 object at 0x7fe4aa9c3460>
+	<CopySlices object at 0x7fe4aa9c3160> -> <CopySlices object at 0x7fe4aa9c3220>
+	<SubBackward0 object at 0x7fe4aa9c33a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3370> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3a30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3be0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3cd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3be0> -> <SliceBackward0 object at 0x7fe4aa9e3cd0>
+	<MeanBackward0 object at 0x7fe4aa9e3a30> -> <SliceBackward0 object at 0x7fe4aa9e3be0>
+	<AddBackward0 object at 0x7fe4aa9c3370> -> <MeanBackward0 object at 0x7fe4aa9e3a30>
+	<SubBackward0 object at 0x7fe4aa9c33a0> -> <AddBackward0 object at 0x7fe4aa9c3370>
+	<MulBackward0 object at 0x7fe4aa9c3670> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3d90> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3fd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3ee0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3fd0> -> <SliceBackward0 object at 0x7fe4aa9e3ee0>
+	<MeanBackward0 object at 0x7fe4aa9e3d90> -> <SliceBackward0 object at 0x7fe4aa9e3fd0>
+	<MulBackward0 object at 0x7fe4aa9c3670> -> <MeanBackward0 object at 0x7fe4aa9e3d90>
+	<SubBackward0 object at 0x7fe4aa9c33a0> -> <MulBackward0 object at 0x7fe4aa9c3670>
+	<CopySlices object at 0x7fe4aa9c3160> -> <SubBackward0 object at 0x7fe4aa9c33a0>
+	<CopySlices object at 0x7fe4aa9c3040> -> <CopySlices object at 0x7fe4aa9c3160>
+	<SubBackward0 object at 0x7fe4aa9c32b0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3280> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3f10> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3eb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3130> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e3eb0> -> <SliceBackward0 object at 0x7fe4aa9e3130>
+	<MeanBackward0 object at 0x7fe4aa9e3f10> -> <SliceBackward0 object at 0x7fe4aa9e3eb0>
+	<AddBackward0 object at 0x7fe4aa9c3280> -> <MeanBackward0 object at 0x7fe4aa9e3f10>
+	<SubBackward0 object at 0x7fe4aa9c32b0> -> <AddBackward0 object at 0x7fe4aa9c3280>
+	<MulBackward0 object at 0x7fe4aa9c33d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e3f70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9310> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9cd100> -> <SliceBackward0 object at 0x7fe4aa9e9310>
+	<MeanBackward0 object at 0x7fe4aa9e3f70> -> <SliceBackward0 object at 0x7fe4aa9cd100>
+	<MulBackward0 object at 0x7fe4aa9c33d0> -> <MeanBackward0 object at 0x7fe4aa9e3f70>
+	<SubBackward0 object at 0x7fe4aa9c32b0> -> <MulBackward0 object at 0x7fe4aa9c33d0>
+	<CopySlices object at 0x7fe4aa9c3040> -> <SubBackward0 object at 0x7fe4aa9c32b0>
+	<CopySlices object at 0x7fe4aa9c4fd0> -> <CopySlices object at 0x7fe4aa9c3040>
+	<SubBackward0 object at 0x7fe4aa9c31c0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9e3c70> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c32e0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e91f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e90d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e91f0> -> <SliceBackward0 object at 0x7fe4aa9e90d0>
+	<MeanBackward0 object at 0x7fe4aa9c32e0> -> <SliceBackward0 object at 0x7fe4aa9e91f0>
+	<AddBackward0 object at 0x7fe4aa9e3c70> -> <MeanBackward0 object at 0x7fe4aa9c32e0>
+	<SubBackward0 object at 0x7fe4aa9c31c0> -> <AddBackward0 object at 0x7fe4aa9e3c70>
+	<MulBackward0 object at 0x7fe4aa9e3b50> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c3490> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e91c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e91c0> -> <SliceBackward0 object at 0x7fe4aa9e9370>
+	<MeanBackward0 object at 0x7fe4aa9c3490> -> <SliceBackward0 object at 0x7fe4aa9e91c0>
+	<MulBackward0 object at 0x7fe4aa9e3b50> -> <MeanBackward0 object at 0x7fe4aa9c3490>
+	<SubBackward0 object at 0x7fe4aa9c31c0> -> <MulBackward0 object at 0x7fe4aa9e3b50>
+	<CopySlices object at 0x7fe4aa9c4fd0> -> <SubBackward0 object at 0x7fe4aa9c31c0>
+	<CopySlices object at 0x7fe4aa9c4040> -> <CopySlices object at 0x7fe4aa9c4fd0>
+	<SubBackward0 object at 0x7fe4aa9c4f40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c3130> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e92e0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9220> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9670> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9220> -> <SliceBackward0 object at 0x7fe4aa9e9670>
+	<MeanBackward0 object at 0x7fe4aa9e92e0> -> <SliceBackward0 object at 0x7fe4aa9e9220>
+	<AddBackward0 object at 0x7fe4aa9c3130> -> <MeanBackward0 object at 0x7fe4aa9e92e0>
+	<SubBackward0 object at 0x7fe4aa9c4f40> -> <AddBackward0 object at 0x7fe4aa9c3130>
+	<MulBackward0 object at 0x7fe4aa9c31f0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9790> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9550> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9550> -> <SliceBackward0 object at 0x7fe4aa9e9730>
+	<MeanBackward0 object at 0x7fe4aa9e9790> -> <SliceBackward0 object at 0x7fe4aa9e9550>
+	<MulBackward0 object at 0x7fe4aa9c31f0> -> <MeanBackward0 object at 0x7fe4aa9e9790>
+	<SubBackward0 object at 0x7fe4aa9c4f40> -> <MulBackward0 object at 0x7fe4aa9c31f0>
+	<CopySlices object at 0x7fe4aa9c4040> -> <SubBackward0 object at 0x7fe4aa9c4f40>
+	<CopySlices object at 0x7fe4aa9c4d90> -> <CopySlices object at 0x7fe4aa9c4040>
+	<SubBackward0 object at 0x7fe4aa9c4e80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c30d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9070> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9490> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e96d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9490> -> <SliceBackward0 object at 0x7fe4aa9e96d0>
+	<MeanBackward0 object at 0x7fe4aa9e9070> -> <SliceBackward0 object at 0x7fe4aa9e9490>
+	<AddBackward0 object at 0x7fe4aa9c30d0> -> <MeanBackward0 object at 0x7fe4aa9e9070>
+	<SubBackward0 object at 0x7fe4aa9c4e80> -> <AddBackward0 object at 0x7fe4aa9c30d0>
+	<MulBackward0 object at 0x7fe4aa9c3190> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e99d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e95e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9820> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e95e0> -> <SliceBackward0 object at 0x7fe4aa9e9820>
+	<MeanBackward0 object at 0x7fe4aa9e99d0> -> <SliceBackward0 object at 0x7fe4aa9e95e0>
+	<MulBackward0 object at 0x7fe4aa9c3190> -> <MeanBackward0 object at 0x7fe4aa9e99d0>
+	<SubBackward0 object at 0x7fe4aa9c4e80> -> <MulBackward0 object at 0x7fe4aa9c3190>
+	<CopySlices object at 0x7fe4aa9c4d90> -> <SubBackward0 object at 0x7fe4aa9c4e80>
+	<CopySlices object at 0x7fe4aa9c4ca0> -> <CopySlices object at 0x7fe4aa9c4d90>
+	<SubBackward0 object at 0x7fe4aa9c4ee0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4eb0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9250> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9880> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e98e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9880> -> <SliceBackward0 object at 0x7fe4aa9e98e0>
+	<MeanBackward0 object at 0x7fe4aa9e9250> -> <SliceBackward0 object at 0x7fe4aa9e9880>
+	<AddBackward0 object at 0x7fe4aa9c4eb0> -> <MeanBackward0 object at 0x7fe4aa9e9250>
+	<SubBackward0 object at 0x7fe4aa9c4ee0> -> <AddBackward0 object at 0x7fe4aa9c4eb0>
+	<MulBackward0 object at 0x7fe4aa9c4fa0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9c10> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9160> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9bb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9160> -> <SliceBackward0 object at 0x7fe4aa9e9bb0>
+	<MeanBackward0 object at 0x7fe4aa9e9c10> -> <SliceBackward0 object at 0x7fe4aa9e9160>
+	<MulBackward0 object at 0x7fe4aa9c4fa0> -> <MeanBackward0 object at 0x7fe4aa9e9c10>
+	<SubBackward0 object at 0x7fe4aa9c4ee0> -> <MulBackward0 object at 0x7fe4aa9c4fa0>
+	<CopySlices object at 0x7fe4aa9c4ca0> -> <SubBackward0 object at 0x7fe4aa9c4ee0>
+	<CopySlices object at 0x7fe4aa9c4be0> -> <CopySlices object at 0x7fe4aa9c4ca0>
+	<SubBackward0 object at 0x7fe4aa9c4e20> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9e3af0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e97f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e99a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9d30> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e99a0> -> <SliceBackward0 object at 0x7fe4aa9e9d30>
+	<MeanBackward0 object at 0x7fe4aa9e97f0> -> <SliceBackward0 object at 0x7fe4aa9e99a0>
+	<AddBackward0 object at 0x7fe4aa9e3af0> -> <MeanBackward0 object at 0x7fe4aa9e97f0>
+	<SubBackward0 object at 0x7fe4aa9c4e20> -> <AddBackward0 object at 0x7fe4aa9e3af0>
+	<MulBackward0 object at 0x7fe4aa9c4df0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9e50> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9a30> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9df0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9a30> -> <SliceBackward0 object at 0x7fe4aa9e9df0>
+	<MeanBackward0 object at 0x7fe4aa9e9e50> -> <SliceBackward0 object at 0x7fe4aa9e9a30>
+	<MulBackward0 object at 0x7fe4aa9c4df0> -> <MeanBackward0 object at 0x7fe4aa9e9e50>
+	<SubBackward0 object at 0x7fe4aa9c4e20> -> <MulBackward0 object at 0x7fe4aa9c4df0>
+	<CopySlices object at 0x7fe4aa9c4be0> -> <SubBackward0 object at 0x7fe4aa9c4e20>
+	<CopySlices object at 0x7fe4aa9c4af0> -> <CopySlices object at 0x7fe4aa9c4be0>
+	<SubBackward0 object at 0x7fe4aa9c4d30> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4d00> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e94f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9b50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9700> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9b50> -> <SliceBackward0 object at 0x7fe4aa9e9700>
+	<MeanBackward0 object at 0x7fe4aa9e94f0> -> <SliceBackward0 object at 0x7fe4aa9e9b50>
+	<AddBackward0 object at 0x7fe4aa9c4d00> -> <MeanBackward0 object at 0x7fe4aa9e94f0>
+	<SubBackward0 object at 0x7fe4aa9c4d30> -> <AddBackward0 object at 0x7fe4aa9c4d00>
+	<MulBackward0 object at 0x7fe4aa9c4e50> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9f40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9fd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9eb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e9fd0> -> <SliceBackward0 object at 0x7fe4aa9e9eb0>
+	<MeanBackward0 object at 0x7fe4aa9e9f40> -> <SliceBackward0 object at 0x7fe4aa9e9fd0>
+	<MulBackward0 object at 0x7fe4aa9c4e50> -> <MeanBackward0 object at 0x7fe4aa9e9f40>
+	<SubBackward0 object at 0x7fe4aa9c4d30> -> <MulBackward0 object at 0x7fe4aa9c4e50>
+	<CopySlices object at 0x7fe4aa9c4af0> -> <SubBackward0 object at 0x7fe4aa9c4d30>
+	<CopySlices object at 0x7fe4aa9c4a00> -> <CopySlices object at 0x7fe4aa9c4af0>
+	<SubBackward0 object at 0x7fe4aa9c4c40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4c10> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9f70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e98b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0070> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9e98b0> -> <SliceBackward0 object at 0x7fe4aa9f0070>
+	<MeanBackward0 object at 0x7fe4aa9e9f70> -> <SliceBackward0 object at 0x7fe4aa9e98b0>
+	<AddBackward0 object at 0x7fe4aa9c4c10> -> <MeanBackward0 object at 0x7fe4aa9e9f70>
+	<SubBackward0 object at 0x7fe4aa9c4c40> -> <AddBackward0 object at 0x7fe4aa9c4c10>
+	<MulBackward0 object at 0x7fe4aa9c4f10> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9e9d90> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9c4b50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9c4b50> -> <SliceBackward0 object at 0x7fe4aa9f0370>
+	<MeanBackward0 object at 0x7fe4aa9e9d90> -> <SliceBackward0 object at 0x7fe4aa9c4b50>
+	<MulBackward0 object at 0x7fe4aa9c4f10> -> <MeanBackward0 object at 0x7fe4aa9e9d90>
+	<SubBackward0 object at 0x7fe4aa9c4c40> -> <MulBackward0 object at 0x7fe4aa9c4f10>
+	<CopySlices object at 0x7fe4aa9c4a00> -> <SubBackward0 object at 0x7fe4aa9c4c40>
+	<CopySlices object at 0x7fe4aa9c4940> -> <CopySlices object at 0x7fe4aa9c4a00>
+	<SubBackward0 object at 0x7fe4aa9c4b80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9e9ca0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c4a60> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f00a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0460> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f00a0> -> <SliceBackward0 object at 0x7fe4aa9f0460>
+	<MeanBackward0 object at 0x7fe4aa9c4a60> -> <SliceBackward0 object at 0x7fe4aa9f00a0>
+	<AddBackward0 object at 0x7fe4aa9e9ca0> -> <MeanBackward0 object at 0x7fe4aa9c4a60>
+	<SubBackward0 object at 0x7fe4aa9c4b80> -> <AddBackward0 object at 0x7fe4aa9e9ca0>
+	<MulBackward0 object at 0x7fe4aa9e9fa0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c4d60> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0130> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f03d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0130> -> <SliceBackward0 object at 0x7fe4aa9f03d0>
+	<MeanBackward0 object at 0x7fe4aa9c4d60> -> <SliceBackward0 object at 0x7fe4aa9f0130>
+	<MulBackward0 object at 0x7fe4aa9e9fa0> -> <MeanBackward0 object at 0x7fe4aa9c4d60>
+	<SubBackward0 object at 0x7fe4aa9c4b80> -> <MulBackward0 object at 0x7fe4aa9e9fa0>
+	<CopySlices object at 0x7fe4aa9c4940> -> <SubBackward0 object at 0x7fe4aa9c4b80>
+	<CopySlices object at 0x7fe4aa9c4850> -> <CopySlices object at 0x7fe4aa9c4940>
+	<SubBackward0 object at 0x7fe4aa9c4a90> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4c70> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f0100> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f04c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0190> -> <SliceBackward0 object at 0x7fe4aa9f04c0>
+	<MeanBackward0 object at 0x7fe4aa9f0100> -> <SliceBackward0 object at 0x7fe4aa9f0190>
+	<AddBackward0 object at 0x7fe4aa9c4c70> -> <MeanBackward0 object at 0x7fe4aa9f0100>
+	<SubBackward0 object at 0x7fe4aa9c4a90> -> <AddBackward0 object at 0x7fe4aa9c4c70>
+	<MulBackward0 object at 0x7fe4aa9c4970> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f07c0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0580> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0610> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0580> -> <SliceBackward0 object at 0x7fe4aa9f0610>
+	<MeanBackward0 object at 0x7fe4aa9f07c0> -> <SliceBackward0 object at 0x7fe4aa9f0580>
+	<MulBackward0 object at 0x7fe4aa9c4970> -> <MeanBackward0 object at 0x7fe4aa9f07c0>
+	<SubBackward0 object at 0x7fe4aa9c4a90> -> <MulBackward0 object at 0x7fe4aa9c4970>
+	<CopySlices object at 0x7fe4aa9c4850> -> <SubBackward0 object at 0x7fe4aa9c4a90>
+	<CopySlices object at 0x7fe4aa9c4760> -> <CopySlices object at 0x7fe4aa9c4850>
+	<SubBackward0 object at 0x7fe4aa9c49a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9e9ee0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f01f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0670> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f06d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0670> -> <SliceBackward0 object at 0x7fe4aa9f06d0>
+	<MeanBackward0 object at 0x7fe4aa9f01f0> -> <SliceBackward0 object at 0x7fe4aa9f0670>
+	<AddBackward0 object at 0x7fe4aa9e9ee0> -> <MeanBackward0 object at 0x7fe4aa9f01f0>
+	<SubBackward0 object at 0x7fe4aa9c49a0> -> <AddBackward0 object at 0x7fe4aa9e9ee0>
+	<MulBackward0 object at 0x7fe4aa9c4bb0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f0a00> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f09a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0250> -> <SliceBackward0 object at 0x7fe4aa9f09a0>
+	<MeanBackward0 object at 0x7fe4aa9f0a00> -> <SliceBackward0 object at 0x7fe4aa9f0250>
+	<MulBackward0 object at 0x7fe4aa9c4bb0> -> <MeanBackward0 object at 0x7fe4aa9f0a00>
+	<SubBackward0 object at 0x7fe4aa9c49a0> -> <MulBackward0 object at 0x7fe4aa9c4bb0>
+	<CopySlices object at 0x7fe4aa9c4760> -> <SubBackward0 object at 0x7fe4aa9c49a0>
+	<CopySlices object at 0x7fe4aa9c46a0> -> <CopySlices object at 0x7fe4aa9c4760>
+	<SubBackward0 object at 0x7fe4aa9c48e0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c48b0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f05e0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0790> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0b20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0790> -> <SliceBackward0 object at 0x7fe4aa9f0b20>
+	<MeanBackward0 object at 0x7fe4aa9f05e0> -> <SliceBackward0 object at 0x7fe4aa9f0790>
+	<AddBackward0 object at 0x7fe4aa9c48b0> -> <MeanBackward0 object at 0x7fe4aa9f05e0>
+	<SubBackward0 object at 0x7fe4aa9c48e0> -> <AddBackward0 object at 0x7fe4aa9c48b0>
+	<MulBackward0 object at 0x7fe4aa9c49d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f0c40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0820> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0be0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0820> -> <SliceBackward0 object at 0x7fe4aa9f0be0>
+	<MeanBackward0 object at 0x7fe4aa9f0c40> -> <SliceBackward0 object at 0x7fe4aa9f0820>
+	<MulBackward0 object at 0x7fe4aa9c49d0> -> <MeanBackward0 object at 0x7fe4aa9f0c40>
+	<SubBackward0 object at 0x7fe4aa9c48e0> -> <MulBackward0 object at 0x7fe4aa9c49d0>
+	<CopySlices object at 0x7fe4aa9c46a0> -> <SubBackward0 object at 0x7fe4aa9c48e0>
+	<CopySlices object at 0x7fe4aa9c45b0> -> <CopySlices object at 0x7fe4aa9c46a0>
+	<SubBackward0 object at 0x7fe4aa9c47f0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c47c0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f04f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0940> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0b80> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0940> -> <SliceBackward0 object at 0x7fe4aa9f0b80>
+	<MeanBackward0 object at 0x7fe4aa9f04f0> -> <SliceBackward0 object at 0x7fe4aa9f0940>
+	<AddBackward0 object at 0x7fe4aa9c47c0> -> <MeanBackward0 object at 0x7fe4aa9f04f0>
+	<SubBackward0 object at 0x7fe4aa9c47f0> -> <AddBackward0 object at 0x7fe4aa9c47c0>
+	<MulBackward0 object at 0x7fe4aa9c4ac0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f0e80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0a90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0cd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0a90> -> <SliceBackward0 object at 0x7fe4aa9f0cd0>
+	<MeanBackward0 object at 0x7fe4aa9f0e80> -> <SliceBackward0 object at 0x7fe4aa9f0a90>
+	<MulBackward0 object at 0x7fe4aa9c4ac0> -> <MeanBackward0 object at 0x7fe4aa9f0e80>
+	<SubBackward0 object at 0x7fe4aa9c47f0> -> <MulBackward0 object at 0x7fe4aa9c4ac0>
+	<CopySlices object at 0x7fe4aa9c45b0> -> <SubBackward0 object at 0x7fe4aa9c47f0>
+	<CopySlices object at 0x7fe4aa9c44c0> -> <CopySlices object at 0x7fe4aa9c45b0>
+	<SubBackward0 object at 0x7fe4aa9c4700> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c46d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f06a0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0d30> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0dc0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0d30> -> <SliceBackward0 object at 0x7fe4aa9f0dc0>
+	<MeanBackward0 object at 0x7fe4aa9f06a0> -> <SliceBackward0 object at 0x7fe4aa9f0d30>
+	<AddBackward0 object at 0x7fe4aa9c46d0> -> <MeanBackward0 object at 0x7fe4aa9f06a0>
+	<SubBackward0 object at 0x7fe4aa9c4700> -> <AddBackward0 object at 0x7fe4aa9c46d0>
+	<MulBackward0 object at 0x7fe4aa9c4820> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f0e50> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0fa0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0eb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0fa0> -> <SliceBackward0 object at 0x7fe4aa9f0eb0>
+	<MeanBackward0 object at 0x7fe4aa9f0e50> -> <SliceBackward0 object at 0x7fe4aa9f0fa0>
+	<MulBackward0 object at 0x7fe4aa9c4820> -> <MeanBackward0 object at 0x7fe4aa9f0e50>
+	<SubBackward0 object at 0x7fe4aa9c4700> -> <MulBackward0 object at 0x7fe4aa9c4820>
+	<CopySlices object at 0x7fe4aa9c44c0> -> <SubBackward0 object at 0x7fe4aa9c4700>
+	<CopySlices object at 0x7fe4aa9c4400> -> <CopySlices object at 0x7fe4aa9c44c0>
+	<SubBackward0 object at 0x7fe4aa9c4640> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4610> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f0f40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0bb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0ca0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f0bb0> -> <SliceBackward0 object at 0x7fe4aa9f0ca0>
+	<MeanBackward0 object at 0x7fe4aa9f0f40> -> <SliceBackward0 object at 0x7fe4aa9f0bb0>
+	<AddBackward0 object at 0x7fe4aa9c4610> -> <MeanBackward0 object at 0x7fe4aa9f0f40>
+	<SubBackward0 object at 0x7fe4aa9c4640> -> <AddBackward0 object at 0x7fe4aa9c4610>
+	<MulBackward0 object at 0x7fe4aa9c4910> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f0d90> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9c4520> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6340> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9c4520> -> <SliceBackward0 object at 0x7fe4aa9f6340>
+	<MeanBackward0 object at 0x7fe4aa9f0d90> -> <SliceBackward0 object at 0x7fe4aa9c4520>
+	<MulBackward0 object at 0x7fe4aa9c4910> -> <MeanBackward0 object at 0x7fe4aa9f0d90>
+	<SubBackward0 object at 0x7fe4aa9c4640> -> <MulBackward0 object at 0x7fe4aa9c4910>
+	<CopySlices object at 0x7fe4aa9c4400> -> <SubBackward0 object at 0x7fe4aa9c4640>
+	<CopySlices object at 0x7fe4aa9c4310> -> <CopySlices object at 0x7fe4aa9c4400>
+	<SubBackward0 object at 0x7fe4aa9c4550> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9f0520> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c4430> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6430> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6430> -> <SliceBackward0 object at 0x7fe4aa9f6100>
+	<MeanBackward0 object at 0x7fe4aa9c4430> -> <SliceBackward0 object at 0x7fe4aa9f6430>
+	<AddBackward0 object at 0x7fe4aa9f0520> -> <MeanBackward0 object at 0x7fe4aa9c4430>
+	<SubBackward0 object at 0x7fe4aa9c4550> -> <AddBackward0 object at 0x7fe4aa9f0520>
+	<MulBackward0 object at 0x7fe4aa9f0ee0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9c4730> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f60a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6160> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f60a0> -> <SliceBackward0 object at 0x7fe4aa9f6160>
+	<MeanBackward0 object at 0x7fe4aa9c4730> -> <SliceBackward0 object at 0x7fe4aa9f60a0>
+	<MulBackward0 object at 0x7fe4aa9f0ee0> -> <MeanBackward0 object at 0x7fe4aa9c4730>
+	<SubBackward0 object at 0x7fe4aa9c4550> -> <MulBackward0 object at 0x7fe4aa9f0ee0>
+	<CopySlices object at 0x7fe4aa9c4310> -> <SubBackward0 object at 0x7fe4aa9c4550>
+	<CopySlices object at 0x7fe4aa9c4220> -> <CopySlices object at 0x7fe4aa9c4310>
+	<SubBackward0 object at 0x7fe4aa9c4460> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4670> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6310> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6280> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6490> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6280> -> <SliceBackward0 object at 0x7fe4aa9f6490>
+	<MeanBackward0 object at 0x7fe4aa9f6310> -> <SliceBackward0 object at 0x7fe4aa9f6280>
+	<AddBackward0 object at 0x7fe4aa9c4670> -> <MeanBackward0 object at 0x7fe4aa9f6310>
+	<SubBackward0 object at 0x7fe4aa9c4460> -> <AddBackward0 object at 0x7fe4aa9c4670>
+	<MulBackward0 object at 0x7fe4aa9c4370> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f67c0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6580> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6760> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6580> -> <SliceBackward0 object at 0x7fe4aa9f6760>
+	<MeanBackward0 object at 0x7fe4aa9f67c0> -> <SliceBackward0 object at 0x7fe4aa9f6580>
+	<MulBackward0 object at 0x7fe4aa9c4370> -> <MeanBackward0 object at 0x7fe4aa9f67c0>
+	<SubBackward0 object at 0x7fe4aa9c4460> -> <MulBackward0 object at 0x7fe4aa9c4370>
+	<CopySlices object at 0x7fe4aa9c4220> -> <SubBackward0 object at 0x7fe4aa9c4460>
+	<CopySlices object at 0x7fe4aa9c4160> -> <CopySlices object at 0x7fe4aa9c4220>
+	<SubBackward0 object at 0x7fe4aa9c43a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4580> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6880> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f63a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6940> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f63a0> -> <SliceBackward0 object at 0x7fe4aa9f6940>
+	<MeanBackward0 object at 0x7fe4aa9f6880> -> <SliceBackward0 object at 0x7fe4aa9f63a0>
+	<AddBackward0 object at 0x7fe4aa9c4580> -> <MeanBackward0 object at 0x7fe4aa9f6880>
+	<SubBackward0 object at 0x7fe4aa9c43a0> -> <AddBackward0 object at 0x7fe4aa9c4580>
+	<MulBackward0 object at 0x7fe4aa9c4490> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6a60> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f65e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f69d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f65e0> -> <SliceBackward0 object at 0x7fe4aa9f69d0>
+	<MeanBackward0 object at 0x7fe4aa9f6a60> -> <SliceBackward0 object at 0x7fe4aa9f65e0>
+	<MulBackward0 object at 0x7fe4aa9c4490> -> <MeanBackward0 object at 0x7fe4aa9f6a60>
+	<SubBackward0 object at 0x7fe4aa9c43a0> -> <MulBackward0 object at 0x7fe4aa9c4490>
+	<CopySlices object at 0x7fe4aa9c4160> -> <SubBackward0 object at 0x7fe4aa9c43a0>
+	<CopySlices object at 0x7fe4aa9c4070> -> <CopySlices object at 0x7fe4aa9c4160>
+	<SubBackward0 object at 0x7fe4aa9c42b0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4280> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f68e0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6550> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6820> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6550> -> <SliceBackward0 object at 0x7fe4aa9f6820>
+	<MeanBackward0 object at 0x7fe4aa9f68e0> -> <SliceBackward0 object at 0x7fe4aa9f6550>
+	<AddBackward0 object at 0x7fe4aa9c4280> -> <MeanBackward0 object at 0x7fe4aa9f68e0>
+	<SubBackward0 object at 0x7fe4aa9c42b0> -> <AddBackward0 object at 0x7fe4aa9c4280>
+	<MulBackward0 object at 0x7fe4aa9c4190> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6c70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6460> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6bb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6460> -> <SliceBackward0 object at 0x7fe4aa9f6bb0>
+	<MeanBackward0 object at 0x7fe4aa9f6c70> -> <SliceBackward0 object at 0x7fe4aa9f6460>
+	<MulBackward0 object at 0x7fe4aa9c4190> -> <MeanBackward0 object at 0x7fe4aa9f6c70>
+	<SubBackward0 object at 0x7fe4aa9c42b0> -> <MulBackward0 object at 0x7fe4aa9c4190>
+	<CopySlices object at 0x7fe4aa9c4070> -> <SubBackward0 object at 0x7fe4aa9c42b0>
+	<CopySlices object at 0x7fe4aa9bffd0> -> <CopySlices object at 0x7fe4aa9c4070>
+	<SubBackward0 object at 0x7fe4aa9c41c0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c43d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6b20> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6850> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6a90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6850> -> <SliceBackward0 object at 0x7fe4aa9f6a90>
+	<MeanBackward0 object at 0x7fe4aa9f6b20> -> <SliceBackward0 object at 0x7fe4aa9f6850>
+	<AddBackward0 object at 0x7fe4aa9c43d0> -> <MeanBackward0 object at 0x7fe4aa9f6b20>
+	<SubBackward0 object at 0x7fe4aa9c41c0> -> <AddBackward0 object at 0x7fe4aa9c43d0>
+	<MulBackward0 object at 0x7fe4aa9c42e0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6eb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f63d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f63d0> -> <SliceBackward0 object at 0x7fe4aa9f6970>
+	<MeanBackward0 object at 0x7fe4aa9f6eb0> -> <SliceBackward0 object at 0x7fe4aa9f63d0>
+	<MulBackward0 object at 0x7fe4aa9c42e0> -> <MeanBackward0 object at 0x7fe4aa9f6eb0>
+	<SubBackward0 object at 0x7fe4aa9c41c0> -> <MulBackward0 object at 0x7fe4aa9c42e0>
+	<CopySlices object at 0x7fe4aa9bffd0> -> <SubBackward0 object at 0x7fe4aa9c41c0>
+	<CopySlices object at 0x7fe4aa9bf070> -> <CopySlices object at 0x7fe4aa9bffd0>
+	<SubBackward0 object at 0x7fe4aa9bff40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c4130> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6c40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6ac0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6b80> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6ac0> -> <SliceBackward0 object at 0x7fe4aa9f6b80>
+	<MeanBackward0 object at 0x7fe4aa9f6c40> -> <SliceBackward0 object at 0x7fe4aa9f6ac0>
+	<AddBackward0 object at 0x7fe4aa9c4130> -> <MeanBackward0 object at 0x7fe4aa9f6c40>
+	<SubBackward0 object at 0x7fe4aa9bff40> -> <AddBackward0 object at 0x7fe4aa9c4130>
+	<MulBackward0 object at 0x7fe4aa9c40d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6fd0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6d30> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6f40> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6d30> -> <SliceBackward0 object at 0x7fe4aa9f6f40>
+	<MeanBackward0 object at 0x7fe4aa9f6fd0> -> <SliceBackward0 object at 0x7fe4aa9f6d30>
+	<MulBackward0 object at 0x7fe4aa9c40d0> -> <MeanBackward0 object at 0x7fe4aa9f6fd0>
+	<SubBackward0 object at 0x7fe4aa9bff40> -> <MulBackward0 object at 0x7fe4aa9c40d0>
+	<CopySlices object at 0x7fe4aa9bf070> -> <SubBackward0 object at 0x7fe4aa9bff40>
+	<CopySlices object at 0x7fe4aa9bfd90> -> <CopySlices object at 0x7fe4aa9bf070>
+	<SubBackward0 object at 0x7fe4aa9bfe80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9c41f0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6df0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6cd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f6cd0> -> <SliceBackward0 object at 0x7fe4aa9fd100>
+	<MeanBackward0 object at 0x7fe4aa9f6df0> -> <SliceBackward0 object at 0x7fe4aa9f6cd0>
+	<AddBackward0 object at 0x7fe4aa9c41f0> -> <MeanBackward0 object at 0x7fe4aa9f6df0>
+	<SubBackward0 object at 0x7fe4aa9bfe80> -> <AddBackward0 object at 0x7fe4aa9c41f0>
+	<MulBackward0 object at 0x7fe4aa9c4100> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9f6f70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f61c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9f61c0> -> <SliceBackward0 object at 0x7fe4aa9fd370>
+	<MeanBackward0 object at 0x7fe4aa9f6f70> -> <SliceBackward0 object at 0x7fe4aa9f61c0>
+	<MulBackward0 object at 0x7fe4aa9c4100> -> <MeanBackward0 object at 0x7fe4aa9f6f70>
+	<SubBackward0 object at 0x7fe4aa9bfe80> -> <MulBackward0 object at 0x7fe4aa9c4100>
+	<CopySlices object at 0x7fe4aa9bfd90> -> <SubBackward0 object at 0x7fe4aa9bfe80>
+	<CopySlices object at 0x7fe4aa9bfca0> -> <CopySlices object at 0x7fe4aa9bfd90>
+	<SubBackward0 object at 0x7fe4aa9bfee0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9f6e50> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9bffa0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd1c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd250> -> <SliceBackward0 object at 0x7fe4aa9fd1c0>
+	<MeanBackward0 object at 0x7fe4aa9bffa0> -> <SliceBackward0 object at 0x7fe4aa9fd250>
+	<AddBackward0 object at 0x7fe4aa9f6e50> -> <MeanBackward0 object at 0x7fe4aa9bffa0>
+	<SubBackward0 object at 0x7fe4aa9bfee0> -> <AddBackward0 object at 0x7fe4aa9f6e50>
+	<MulBackward0 object at 0x7fe4aa9f6640> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9bfeb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd340> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd3d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd340> -> <SliceBackward0 object at 0x7fe4aa9fd3d0>
+	<MeanBackward0 object at 0x7fe4aa9bfeb0> -> <SliceBackward0 object at 0x7fe4aa9fd340>
+	<MulBackward0 object at 0x7fe4aa9f6640> -> <MeanBackward0 object at 0x7fe4aa9bfeb0>
+	<SubBackward0 object at 0x7fe4aa9bfee0> -> <MulBackward0 object at 0x7fe4aa9f6640>
+	<CopySlices object at 0x7fe4aa9bfca0> -> <SubBackward0 object at 0x7fe4aa9bfee0>
+	<CopySlices object at 0x7fe4aa9bfbe0> -> <CopySlices object at 0x7fe4aa9bfca0>
+	<SubBackward0 object at 0x7fe4aa9bfe20> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bfdf0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fd070> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd220> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd6d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd220> -> <SliceBackward0 object at 0x7fe4aa9fd6d0>
+	<MeanBackward0 object at 0x7fe4aa9fd070> -> <SliceBackward0 object at 0x7fe4aa9fd220>
+	<AddBackward0 object at 0x7fe4aa9bfdf0> -> <MeanBackward0 object at 0x7fe4aa9fd070>
+	<SubBackward0 object at 0x7fe4aa9bfe20> -> <AddBackward0 object at 0x7fe4aa9bfdf0>
+	<MulBackward0 object at 0x7fe4aa9bfd00> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fd7f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd5b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd790> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd5b0> -> <SliceBackward0 object at 0x7fe4aa9fd790>
+	<MeanBackward0 object at 0x7fe4aa9fd7f0> -> <SliceBackward0 object at 0x7fe4aa9fd5b0>
+	<MulBackward0 object at 0x7fe4aa9bfd00> -> <MeanBackward0 object at 0x7fe4aa9fd7f0>
+	<SubBackward0 object at 0x7fe4aa9bfe20> -> <MulBackward0 object at 0x7fe4aa9bfd00>
+	<CopySlices object at 0x7fe4aa9bfbe0> -> <SubBackward0 object at 0x7fe4aa9bfe20>
+	<CopySlices object at 0x7fe4aa9bfaf0> -> <CopySlices object at 0x7fe4aa9bfbe0>
+	<SubBackward0 object at 0x7fe4aa9bfd30> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9f6b50> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fd2b0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd4f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd4f0> -> <SliceBackward0 object at 0x7fe4aa9fd730>
+	<MeanBackward0 object at 0x7fe4aa9fd2b0> -> <SliceBackward0 object at 0x7fe4aa9fd4f0>
+	<AddBackward0 object at 0x7fe4aa9f6b50> -> <MeanBackward0 object at 0x7fe4aa9fd2b0>
+	<SubBackward0 object at 0x7fe4aa9bfd30> -> <AddBackward0 object at 0x7fe4aa9f6b50>
+	<MulBackward0 object at 0x7fe4aa9bff10> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fda30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd880> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd640> -> <SliceBackward0 object at 0x7fe4aa9fd880>
+	<MeanBackward0 object at 0x7fe4aa9fda30> -> <SliceBackward0 object at 0x7fe4aa9fd640>
+	<MulBackward0 object at 0x7fe4aa9bff10> -> <MeanBackward0 object at 0x7fe4aa9fda30>
+	<SubBackward0 object at 0x7fe4aa9bfd30> -> <MulBackward0 object at 0x7fe4aa9bff10>
+	<CopySlices object at 0x7fe4aa9bfaf0> -> <SubBackward0 object at 0x7fe4aa9bfd30>
+	<CopySlices object at 0x7fe4aa9bfa00> -> <CopySlices object at 0x7fe4aa9bfaf0>
+	<SubBackward0 object at 0x7fe4aa9bfc40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bfc10> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fd0d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd8e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd940> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd8e0> -> <SliceBackward0 object at 0x7fe4aa9fd940>
+	<MeanBackward0 object at 0x7fe4aa9fd0d0> -> <SliceBackward0 object at 0x7fe4aa9fd8e0>
+	<AddBackward0 object at 0x7fe4aa9bfc10> -> <MeanBackward0 object at 0x7fe4aa9fd0d0>
+	<SubBackward0 object at 0x7fe4aa9bfc40> -> <AddBackward0 object at 0x7fe4aa9bfc10>
+	<MulBackward0 object at 0x7fe4aa9bfd60> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fdc70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fdc10> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd190> -> <SliceBackward0 object at 0x7fe4aa9fdc10>
+	<MeanBackward0 object at 0x7fe4aa9fdc70> -> <SliceBackward0 object at 0x7fe4aa9fd190>
+	<MulBackward0 object at 0x7fe4aa9bfd60> -> <MeanBackward0 object at 0x7fe4aa9fdc70>
+	<SubBackward0 object at 0x7fe4aa9bfc40> -> <MulBackward0 object at 0x7fe4aa9bfd60>
+	<CopySlices object at 0x7fe4aa9bfa00> -> <SubBackward0 object at 0x7fe4aa9bfc40>
+	<CopySlices object at 0x7fe4aa9bf940> -> <CopySlices object at 0x7fe4aa9bfa00>
+	<SubBackward0 object at 0x7fe4aa9bfb80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bfb50> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fd850> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fda00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fdd90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fda00> -> <SliceBackward0 object at 0x7fe4aa9fdd90>
+	<MeanBackward0 object at 0x7fe4aa9fd850> -> <SliceBackward0 object at 0x7fe4aa9fda00>
+	<AddBackward0 object at 0x7fe4aa9bfb50> -> <MeanBackward0 object at 0x7fe4aa9fd850>
+	<SubBackward0 object at 0x7fe4aa9bfb80> -> <AddBackward0 object at 0x7fe4aa9bfb50>
+	<MulBackward0 object at 0x7fe4aa9bfe50> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fdeb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fda90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fde50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fda90> -> <SliceBackward0 object at 0x7fe4aa9fde50>
+	<MeanBackward0 object at 0x7fe4aa9fdeb0> -> <SliceBackward0 object at 0x7fe4aa9fda90>
+	<MulBackward0 object at 0x7fe4aa9bfe50> -> <MeanBackward0 object at 0x7fe4aa9fdeb0>
+	<SubBackward0 object at 0x7fe4aa9bfb80> -> <MulBackward0 object at 0x7fe4aa9bfe50>
+	<CopySlices object at 0x7fe4aa9bf940> -> <SubBackward0 object at 0x7fe4aa9bfb80>
+	<CopySlices object at 0x7fe4aa9bf850> -> <CopySlices object at 0x7fe4aa9bf940>
+	<SubBackward0 object at 0x7fe4aa9bfa90> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bfa60> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fddf0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fdbb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fdbb0> -> <SliceBackward0 object at 0x7fe4aa9fd970>
+	<MeanBackward0 object at 0x7fe4aa9fddf0> -> <SliceBackward0 object at 0x7fe4aa9fdbb0>
+	<AddBackward0 object at 0x7fe4aa9bfa60> -> <MeanBackward0 object at 0x7fe4aa9fddf0>
+	<SubBackward0 object at 0x7fe4aa9bfa90> -> <AddBackward0 object at 0x7fe4aa9bfa60>
+	<MulBackward0 object at 0x7fe4aa9bfbb0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fdfd0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd760> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fde20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fd760> -> <SliceBackward0 object at 0x7fe4aa9fde20>
+	<MeanBackward0 object at 0x7fe4aa9fdfd0> -> <SliceBackward0 object at 0x7fe4aa9fd760>
+	<MulBackward0 object at 0x7fe4aa9bfbb0> -> <MeanBackward0 object at 0x7fe4aa9fdfd0>
+	<SubBackward0 object at 0x7fe4aa9bfa90> -> <MulBackward0 object at 0x7fe4aa9bfbb0>
+	<CopySlices object at 0x7fe4aa9bf850> -> <SubBackward0 object at 0x7fe4aa9bfa90>
+	<CopySlices object at 0x7fe4aa9bf760> -> <CopySlices object at 0x7fe4aa9bf850>
+	<SubBackward0 object at 0x7fe4aa9bf9a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf970> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fd910> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fdd00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9fdd00> -> <SliceBackward0 object at 0x7fe4aa985250>
+	<MeanBackward0 object at 0x7fe4aa9fd910> -> <SliceBackward0 object at 0x7fe4aa9fdd00>
+	<AddBackward0 object at 0x7fe4aa9bf970> -> <MeanBackward0 object at 0x7fe4aa9fd910>
+	<SubBackward0 object at 0x7fe4aa9bf9a0> -> <AddBackward0 object at 0x7fe4aa9bf970>
+	<MulBackward0 object at 0x7fe4aa9bfc70> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9fde80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9bf8b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9bf8b0> -> <SliceBackward0 object at 0x7fe4aa985370>
+	<MeanBackward0 object at 0x7fe4aa9fde80> -> <SliceBackward0 object at 0x7fe4aa9bf8b0>
+	<MulBackward0 object at 0x7fe4aa9bfc70> -> <MeanBackward0 object at 0x7fe4aa9fde80>
+	<SubBackward0 object at 0x7fe4aa9bf9a0> -> <MulBackward0 object at 0x7fe4aa9bfc70>
+	<CopySlices object at 0x7fe4aa9bf760> -> <SubBackward0 object at 0x7fe4aa9bf9a0>
+	<CopySlices object at 0x7fe4aa9bf6a0> -> <CopySlices object at 0x7fe4aa9bf760>
+	<SubBackward0 object at 0x7fe4aa9bf8e0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9fd550> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9bf7c0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985040> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985490> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985040> -> <SliceBackward0 object at 0x7fe4aa985490>
+	<MeanBackward0 object at 0x7fe4aa9bf7c0> -> <SliceBackward0 object at 0x7fe4aa985040>
+	<AddBackward0 object at 0x7fe4aa9fd550> -> <MeanBackward0 object at 0x7fe4aa9bf7c0>
+	<SubBackward0 object at 0x7fe4aa9bf8e0> -> <AddBackward0 object at 0x7fe4aa9fd550>
+	<MulBackward0 object at 0x7fe4aa9fdfa0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9bfac0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9851f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985400> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9851f0> -> <SliceBackward0 object at 0x7fe4aa985400>
+	<MeanBackward0 object at 0x7fe4aa9bfac0> -> <SliceBackward0 object at 0x7fe4aa9851f0>
+	<MulBackward0 object at 0x7fe4aa9fdfa0> -> <MeanBackward0 object at 0x7fe4aa9bfac0>
+	<SubBackward0 object at 0x7fe4aa9bf8e0> -> <MulBackward0 object at 0x7fe4aa9fdfa0>
+	<CopySlices object at 0x7fe4aa9bf6a0> -> <SubBackward0 object at 0x7fe4aa9bf8e0>
+	<CopySlices object at 0x7fe4aa9bf5b0> -> <CopySlices object at 0x7fe4aa9bf6a0>
+	<SubBackward0 object at 0x7fe4aa9bf7f0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf9d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9850d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985310> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9854f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985310> -> <SliceBackward0 object at 0x7fe4aa9854f0>
+	<MeanBackward0 object at 0x7fe4aa9850d0> -> <SliceBackward0 object at 0x7fe4aa985310>
+	<AddBackward0 object at 0x7fe4aa9bf9d0> -> <MeanBackward0 object at 0x7fe4aa9850d0>
+	<SubBackward0 object at 0x7fe4aa9bf7f0> -> <AddBackward0 object at 0x7fe4aa9bf9d0>
+	<MulBackward0 object at 0x7fe4aa9bf6d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9857f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9855b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9855b0> -> <SliceBackward0 object at 0x7fe4aa985640>
+	<MeanBackward0 object at 0x7fe4aa9857f0> -> <SliceBackward0 object at 0x7fe4aa9855b0>
+	<MulBackward0 object at 0x7fe4aa9bf6d0> -> <MeanBackward0 object at 0x7fe4aa9857f0>
+	<SubBackward0 object at 0x7fe4aa9bf7f0> -> <MulBackward0 object at 0x7fe4aa9bf6d0>
+	<CopySlices object at 0x7fe4aa9bf5b0> -> <SubBackward0 object at 0x7fe4aa9bf7f0>
+	<CopySlices object at 0x7fe4aa9bf4c0> -> <CopySlices object at 0x7fe4aa9bf5b0>
+	<SubBackward0 object at 0x7fe4aa9bf700> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9fdd30> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985100> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9856a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985700> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9856a0> -> <SliceBackward0 object at 0x7fe4aa985700>
+	<MeanBackward0 object at 0x7fe4aa985100> -> <SliceBackward0 object at 0x7fe4aa9856a0>
+	<AddBackward0 object at 0x7fe4aa9fdd30> -> <MeanBackward0 object at 0x7fe4aa985100>
+	<SubBackward0 object at 0x7fe4aa9bf700> -> <AddBackward0 object at 0x7fe4aa9fdd30>
+	<MulBackward0 object at 0x7fe4aa9bf910> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985a30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9852b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9859d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9852b0> -> <SliceBackward0 object at 0x7fe4aa9859d0>
+	<MeanBackward0 object at 0x7fe4aa985a30> -> <SliceBackward0 object at 0x7fe4aa9852b0>
+	<MulBackward0 object at 0x7fe4aa9bf910> -> <MeanBackward0 object at 0x7fe4aa985a30>
+	<SubBackward0 object at 0x7fe4aa9bf700> -> <MulBackward0 object at 0x7fe4aa9bf910>
+	<CopySlices object at 0x7fe4aa9bf4c0> -> <SubBackward0 object at 0x7fe4aa9bf700>
+	<CopySlices object at 0x7fe4aa9bf400> -> <CopySlices object at 0x7fe4aa9bf4c0>
+	<SubBackward0 object at 0x7fe4aa9bf640> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf610> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985610> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9857c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985b50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9857c0> -> <SliceBackward0 object at 0x7fe4aa985b50>
+	<MeanBackward0 object at 0x7fe4aa985610> -> <SliceBackward0 object at 0x7fe4aa9857c0>
+	<AddBackward0 object at 0x7fe4aa9bf610> -> <MeanBackward0 object at 0x7fe4aa985610>
+	<SubBackward0 object at 0x7fe4aa9bf640> -> <AddBackward0 object at 0x7fe4aa9bf610>
+	<MulBackward0 object at 0x7fe4aa9bf730> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985c70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985850> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985c10> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985850> -> <SliceBackward0 object at 0x7fe4aa985c10>
+	<MeanBackward0 object at 0x7fe4aa985c70> -> <SliceBackward0 object at 0x7fe4aa985850>
+	<MulBackward0 object at 0x7fe4aa9bf730> -> <MeanBackward0 object at 0x7fe4aa985c70>
+	<SubBackward0 object at 0x7fe4aa9bf640> -> <MulBackward0 object at 0x7fe4aa9bf730>
+	<CopySlices object at 0x7fe4aa9bf400> -> <SubBackward0 object at 0x7fe4aa9bf640>
+	<CopySlices object at 0x7fe4aa9bf310> -> <CopySlices object at 0x7fe4aa9bf400>
+	<SubBackward0 object at 0x7fe4aa9bf550> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf520> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985520> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985bb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985970> -> <SliceBackward0 object at 0x7fe4aa985bb0>
+	<MeanBackward0 object at 0x7fe4aa985520> -> <SliceBackward0 object at 0x7fe4aa985970>
+	<AddBackward0 object at 0x7fe4aa9bf520> -> <MeanBackward0 object at 0x7fe4aa985520>
+	<SubBackward0 object at 0x7fe4aa9bf550> -> <AddBackward0 object at 0x7fe4aa9bf520>
+	<MulBackward0 object at 0x7fe4aa9bf820> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985eb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985ac0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985d00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985ac0> -> <SliceBackward0 object at 0x7fe4aa985d00>
+	<MeanBackward0 object at 0x7fe4aa985eb0> -> <SliceBackward0 object at 0x7fe4aa985ac0>
+	<MulBackward0 object at 0x7fe4aa9bf820> -> <MeanBackward0 object at 0x7fe4aa985eb0>
+	<SubBackward0 object at 0x7fe4aa9bf550> -> <MulBackward0 object at 0x7fe4aa9bf820>
+	<CopySlices object at 0x7fe4aa9bf310> -> <SubBackward0 object at 0x7fe4aa9bf550>
+	<CopySlices object at 0x7fe4aa9bf220> -> <CopySlices object at 0x7fe4aa9bf310>
+	<SubBackward0 object at 0x7fe4aa9bf460> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf430> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9856d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985d60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985df0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985d60> -> <SliceBackward0 object at 0x7fe4aa985df0>
+	<MeanBackward0 object at 0x7fe4aa9856d0> -> <SliceBackward0 object at 0x7fe4aa985d60>
+	<AddBackward0 object at 0x7fe4aa9bf430> -> <MeanBackward0 object at 0x7fe4aa9856d0>
+	<SubBackward0 object at 0x7fe4aa9bf460> -> <AddBackward0 object at 0x7fe4aa9bf430>
+	<MulBackward0 object at 0x7fe4aa9bf580> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985e80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985fd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985ee0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985fd0> -> <SliceBackward0 object at 0x7fe4aa985ee0>
+	<MeanBackward0 object at 0x7fe4aa985e80> -> <SliceBackward0 object at 0x7fe4aa985fd0>
+	<MulBackward0 object at 0x7fe4aa9bf580> -> <MeanBackward0 object at 0x7fe4aa985e80>
+	<SubBackward0 object at 0x7fe4aa9bf460> -> <MulBackward0 object at 0x7fe4aa9bf580>
+	<CopySlices object at 0x7fe4aa9bf220> -> <SubBackward0 object at 0x7fe4aa9bf460>
+	<CopySlices object at 0x7fe4aa9bf160> -> <CopySlices object at 0x7fe4aa9bf220>
+	<SubBackward0 object at 0x7fe4aa9bf3a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf370> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985f70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985be0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985cd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa985be0> -> <SliceBackward0 object at 0x7fe4aa985cd0>
+	<MeanBackward0 object at 0x7fe4aa985f70> -> <SliceBackward0 object at 0x7fe4aa985be0>
+	<AddBackward0 object at 0x7fe4aa9bf370> -> <MeanBackward0 object at 0x7fe4aa985f70>
+	<SubBackward0 object at 0x7fe4aa9bf3a0> -> <AddBackward0 object at 0x7fe4aa9bf370>
+	<MulBackward0 object at 0x7fe4aa9bf670> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa985dc0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9bf280> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9bf280> -> <SliceBackward0 object at 0x7fe4aa98b370>
+	<MeanBackward0 object at 0x7fe4aa985dc0> -> <SliceBackward0 object at 0x7fe4aa9bf280>
+	<MulBackward0 object at 0x7fe4aa9bf670> -> <MeanBackward0 object at 0x7fe4aa985dc0>
+	<SubBackward0 object at 0x7fe4aa9bf3a0> -> <MulBackward0 object at 0x7fe4aa9bf670>
+	<CopySlices object at 0x7fe4aa9bf160> -> <SubBackward0 object at 0x7fe4aa9bf3a0>
+	<CopySlices object at 0x7fe4aa9bf040> -> <CopySlices object at 0x7fe4aa9bf160>
+	<SubBackward0 object at 0x7fe4aa9bf2b0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa985550> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9bf190> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b460> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b130> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b460> -> <SliceBackward0 object at 0x7fe4aa98b130>
+	<MeanBackward0 object at 0x7fe4aa9bf190> -> <SliceBackward0 object at 0x7fe4aa98b460>
+	<AddBackward0 object at 0x7fe4aa985550> -> <MeanBackward0 object at 0x7fe4aa9bf190>
+	<SubBackward0 object at 0x7fe4aa9bf2b0> -> <AddBackward0 object at 0x7fe4aa985550>
+	<MulBackward0 object at 0x7fe4aa985f10> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9bf490> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b0d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b0d0> -> <SliceBackward0 object at 0x7fe4aa98b190>
+	<MeanBackward0 object at 0x7fe4aa9bf490> -> <SliceBackward0 object at 0x7fe4aa98b0d0>
+	<MulBackward0 object at 0x7fe4aa985f10> -> <MeanBackward0 object at 0x7fe4aa9bf490>
+	<SubBackward0 object at 0x7fe4aa9bf2b0> -> <MulBackward0 object at 0x7fe4aa985f10>
+	<CopySlices object at 0x7fe4aa9bf040> -> <SubBackward0 object at 0x7fe4aa9bf2b0>
+	<CopySlices object at 0x7fe4aaa39fd0> -> <CopySlices object at 0x7fe4aa9bf040>
+	<SubBackward0 object at 0x7fe4aa9bf1c0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf3d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98b340> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b2b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b4c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b2b0> -> <SliceBackward0 object at 0x7fe4aa98b4c0>
+	<MeanBackward0 object at 0x7fe4aa98b340> -> <SliceBackward0 object at 0x7fe4aa98b2b0>
+	<AddBackward0 object at 0x7fe4aa9bf3d0> -> <MeanBackward0 object at 0x7fe4aa98b340>
+	<SubBackward0 object at 0x7fe4aa9bf1c0> -> <AddBackward0 object at 0x7fe4aa9bf3d0>
+	<MulBackward0 object at 0x7fe4aa9bf130> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98b7f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b5b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b790> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b5b0> -> <SliceBackward0 object at 0x7fe4aa98b790>
+	<MeanBackward0 object at 0x7fe4aa98b7f0> -> <SliceBackward0 object at 0x7fe4aa98b5b0>
+	<MulBackward0 object at 0x7fe4aa9bf130> -> <MeanBackward0 object at 0x7fe4aa98b7f0>
+	<SubBackward0 object at 0x7fe4aa9bf1c0> -> <MulBackward0 object at 0x7fe4aa9bf130>
+	<CopySlices object at 0x7fe4aaa39fd0> -> <SubBackward0 object at 0x7fe4aa9bf1c0>
+	<CopySlices object at 0x7fe4aaa39040> -> <CopySlices object at 0x7fe4aaa39fd0>
+	<SubBackward0 object at 0x7fe4aaa39f40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa985730> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98b3d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b580> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b910> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b580> -> <SliceBackward0 object at 0x7fe4aa98b910>
+	<MeanBackward0 object at 0x7fe4aa98b3d0> -> <SliceBackward0 object at 0x7fe4aa98b580>
+	<AddBackward0 object at 0x7fe4aa985730> -> <MeanBackward0 object at 0x7fe4aa98b3d0>
+	<SubBackward0 object at 0x7fe4aaa39f40> -> <AddBackward0 object at 0x7fe4aa985730>
+	<MulBackward0 object at 0x7fe4aa9bf2e0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98ba30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b610> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b9d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b610> -> <SliceBackward0 object at 0x7fe4aa98b9d0>
+	<MeanBackward0 object at 0x7fe4aa98ba30> -> <SliceBackward0 object at 0x7fe4aa98b610>
+	<MulBackward0 object at 0x7fe4aa9bf2e0> -> <MeanBackward0 object at 0x7fe4aa98ba30>
+	<SubBackward0 object at 0x7fe4aaa39f40> -> <MulBackward0 object at 0x7fe4aa9bf2e0>
+	<CopySlices object at 0x7fe4aaa39040> -> <SubBackward0 object at 0x7fe4aaa39f40>
+	<CopySlices object at 0x7fe4aaa39d90> -> <CopySlices object at 0x7fe4aaa39040>
+	<SubBackward0 object at 0x7fe4aaa39e80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf0d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98b1f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b730> -> <SliceBackward0 object at 0x7fe4aa98b970>
+	<MeanBackward0 object at 0x7fe4aa98b1f0> -> <SliceBackward0 object at 0x7fe4aa98b730>
+	<AddBackward0 object at 0x7fe4aa9bf0d0> -> <MeanBackward0 object at 0x7fe4aa98b1f0>
+	<SubBackward0 object at 0x7fe4aaa39e80> -> <AddBackward0 object at 0x7fe4aa9bf0d0>
+	<MulBackward0 object at 0x7fe4aa9bf100> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98bc70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b880> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bac0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b880> -> <SliceBackward0 object at 0x7fe4aa98bac0>
+	<MeanBackward0 object at 0x7fe4aa98bc70> -> <SliceBackward0 object at 0x7fe4aa98b880>
+	<MulBackward0 object at 0x7fe4aa9bf100> -> <MeanBackward0 object at 0x7fe4aa98bc70>
+	<SubBackward0 object at 0x7fe4aaa39e80> -> <MulBackward0 object at 0x7fe4aa9bf100>
+	<CopySlices object at 0x7fe4aaa39d90> -> <SubBackward0 object at 0x7fe4aaa39e80>
+	<CopySlices object at 0x7fe4aaa39ca0> -> <CopySlices object at 0x7fe4aaa39d90>
+	<SubBackward0 object at 0x7fe4aaa39ee0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39eb0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98b490> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bb20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bb80> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bb20> -> <SliceBackward0 object at 0x7fe4aa98bb80>
+	<MeanBackward0 object at 0x7fe4aa98b490> -> <SliceBackward0 object at 0x7fe4aa98bb20>
+	<AddBackward0 object at 0x7fe4aaa39eb0> -> <MeanBackward0 object at 0x7fe4aa98b490>
+	<SubBackward0 object at 0x7fe4aaa39ee0> -> <AddBackward0 object at 0x7fe4aaa39eb0>
+	<MulBackward0 object at 0x7fe4aaa39fa0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98beb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b4f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98be50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b4f0> -> <SliceBackward0 object at 0x7fe4aa98be50>
+	<MeanBackward0 object at 0x7fe4aa98beb0> -> <SliceBackward0 object at 0x7fe4aa98b4f0>
+	<MulBackward0 object at 0x7fe4aaa39fa0> -> <MeanBackward0 object at 0x7fe4aa98beb0>
+	<SubBackward0 object at 0x7fe4aaa39ee0> -> <MulBackward0 object at 0x7fe4aaa39fa0>
+	<CopySlices object at 0x7fe4aaa39ca0> -> <SubBackward0 object at 0x7fe4aaa39ee0>
+	<CopySlices object at 0x7fe4aaa39be0> -> <CopySlices object at 0x7fe4aaa39ca0>
+	<SubBackward0 object at 0x7fe4aaa39e20> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa9bf1f0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98ba90> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bc40> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98b9a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bc40> -> <SliceBackward0 object at 0x7fe4aa98b9a0>
+	<MeanBackward0 object at 0x7fe4aa98ba90> -> <SliceBackward0 object at 0x7fe4aa98bc40>
+	<AddBackward0 object at 0x7fe4aa9bf1f0> -> <MeanBackward0 object at 0x7fe4aa98ba90>
+	<SubBackward0 object at 0x7fe4aaa39e20> -> <AddBackward0 object at 0x7fe4aa9bf1f0>
+	<MulBackward0 object at 0x7fe4aaa39df0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98bfd0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bb50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bbb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bb50> -> <SliceBackward0 object at 0x7fe4aa98bbb0>
+	<MeanBackward0 object at 0x7fe4aa98bfd0> -> <SliceBackward0 object at 0x7fe4aa98bb50>
+	<MulBackward0 object at 0x7fe4aaa39df0> -> <MeanBackward0 object at 0x7fe4aa98bfd0>
+	<SubBackward0 object at 0x7fe4aaa39e20> -> <MulBackward0 object at 0x7fe4aaa39df0>
+	<CopySlices object at 0x7fe4aaa39be0> -> <SubBackward0 object at 0x7fe4aaa39e20>
+	<CopySlices object at 0x7fe4aaa39af0> -> <CopySlices object at 0x7fe4aaa39be0>
+	<SubBackward0 object at 0x7fe4aaa39d30> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39d00> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98b400> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bcd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98bcd0> -> <SliceBackward0 object at 0x7fe4aa98f100>
+	<MeanBackward0 object at 0x7fe4aa98b400> -> <SliceBackward0 object at 0x7fe4aa98bcd0>
+	<AddBackward0 object at 0x7fe4aaa39d00> -> <MeanBackward0 object at 0x7fe4aa98b400>
+	<SubBackward0 object at 0x7fe4aaa39d30> -> <AddBackward0 object at 0x7fe4aaa39d00>
+	<MulBackward0 object at 0x7fe4aaa39e50> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98bdf0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9c3100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9c3100> -> <SliceBackward0 object at 0x7fe4aa98f370>
+	<MeanBackward0 object at 0x7fe4aa98bdf0> -> <SliceBackward0 object at 0x7fe4aa9c3100>
+	<MulBackward0 object at 0x7fe4aaa39e50> -> <MeanBackward0 object at 0x7fe4aa98bdf0>
+	<SubBackward0 object at 0x7fe4aaa39d30> -> <MulBackward0 object at 0x7fe4aaa39e50>
+	<CopySlices object at 0x7fe4aaa39af0> -> <SubBackward0 object at 0x7fe4aaa39d30>
+	<CopySlices object at 0x7fe4aaa39a00> -> <CopySlices object at 0x7fe4aaa39af0>
+	<SubBackward0 object at 0x7fe4aaa39c40> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa98bf40> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa39d60> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f1c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f250> -> <SliceBackward0 object at 0x7fe4aa98f1c0>
+	<MeanBackward0 object at 0x7fe4aaa39d60> -> <SliceBackward0 object at 0x7fe4aa98f250>
+	<AddBackward0 object at 0x7fe4aa98bf40> -> <MeanBackward0 object at 0x7fe4aaa39d60>
+	<SubBackward0 object at 0x7fe4aaa39c40> -> <AddBackward0 object at 0x7fe4aa98bf40>
+	<MulBackward0 object at 0x7fe4aa98bf70> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa39f10> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f340> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f3d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f340> -> <SliceBackward0 object at 0x7fe4aa98f3d0>
+	<MeanBackward0 object at 0x7fe4aaa39f10> -> <SliceBackward0 object at 0x7fe4aa98f340>
+	<MulBackward0 object at 0x7fe4aa98bf70> -> <MeanBackward0 object at 0x7fe4aaa39f10>
+	<SubBackward0 object at 0x7fe4aaa39c40> -> <MulBackward0 object at 0x7fe4aa98bf70>
+	<CopySlices object at 0x7fe4aaa39a00> -> <SubBackward0 object at 0x7fe4aaa39c40>
+	<CopySlices object at 0x7fe4aaa39940> -> <CopySlices object at 0x7fe4aaa39a00>
+	<SubBackward0 object at 0x7fe4aaa39b80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39b50> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98f070> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f220> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f6d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f220> -> <SliceBackward0 object at 0x7fe4aa98f6d0>
+	<MeanBackward0 object at 0x7fe4aa98f070> -> <SliceBackward0 object at 0x7fe4aa98f220>
+	<AddBackward0 object at 0x7fe4aaa39b50> -> <MeanBackward0 object at 0x7fe4aa98f070>
+	<SubBackward0 object at 0x7fe4aaa39b80> -> <AddBackward0 object at 0x7fe4aaa39b50>
+	<MulBackward0 object at 0x7fe4aaa39c70> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98f7f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f5b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f790> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f5b0> -> <SliceBackward0 object at 0x7fe4aa98f790>
+	<MeanBackward0 object at 0x7fe4aa98f7f0> -> <SliceBackward0 object at 0x7fe4aa98f5b0>
+	<MulBackward0 object at 0x7fe4aaa39c70> -> <MeanBackward0 object at 0x7fe4aa98f7f0>
+	<SubBackward0 object at 0x7fe4aaa39b80> -> <MulBackward0 object at 0x7fe4aaa39c70>
+	<CopySlices object at 0x7fe4aaa39940> -> <SubBackward0 object at 0x7fe4aaa39b80>
+	<CopySlices object at 0x7fe4aaa39850> -> <CopySlices object at 0x7fe4aaa39940>
+	<SubBackward0 object at 0x7fe4aaa39a90> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39a60> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98f2b0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f4f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f4f0> -> <SliceBackward0 object at 0x7fe4aa98f730>
+	<MeanBackward0 object at 0x7fe4aa98f2b0> -> <SliceBackward0 object at 0x7fe4aa98f4f0>
+	<AddBackward0 object at 0x7fe4aaa39a60> -> <MeanBackward0 object at 0x7fe4aa98f2b0>
+	<SubBackward0 object at 0x7fe4aaa39a90> -> <AddBackward0 object at 0x7fe4aaa39a60>
+	<MulBackward0 object at 0x7fe4aaa39c10> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98fa30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f880> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f640> -> <SliceBackward0 object at 0x7fe4aa98f880>
+	<MeanBackward0 object at 0x7fe4aa98fa30> -> <SliceBackward0 object at 0x7fe4aa98f640>
+	<MulBackward0 object at 0x7fe4aaa39c10> -> <MeanBackward0 object at 0x7fe4aa98fa30>
+	<SubBackward0 object at 0x7fe4aaa39a90> -> <MulBackward0 object at 0x7fe4aaa39c10>
+	<CopySlices object at 0x7fe4aaa39850> -> <SubBackward0 object at 0x7fe4aaa39a90>
+	<CopySlices object at 0x7fe4aaa39760> -> <CopySlices object at 0x7fe4aaa39850>
+	<SubBackward0 object at 0x7fe4aaa399a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39970> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98f0d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f8e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f940> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f8e0> -> <SliceBackward0 object at 0x7fe4aa98f940>
+	<MeanBackward0 object at 0x7fe4aa98f0d0> -> <SliceBackward0 object at 0x7fe4aa98f8e0>
+	<AddBackward0 object at 0x7fe4aaa39970> -> <MeanBackward0 object at 0x7fe4aa98f0d0>
+	<SubBackward0 object at 0x7fe4aaa399a0> -> <AddBackward0 object at 0x7fe4aaa39970>
+	<MulBackward0 object at 0x7fe4aaa39ac0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98fc70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fc10> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f190> -> <SliceBackward0 object at 0x7fe4aa98fc10>
+	<MeanBackward0 object at 0x7fe4aa98fc70> -> <SliceBackward0 object at 0x7fe4aa98f190>
+	<MulBackward0 object at 0x7fe4aaa39ac0> -> <MeanBackward0 object at 0x7fe4aa98fc70>
+	<SubBackward0 object at 0x7fe4aaa399a0> -> <MulBackward0 object at 0x7fe4aaa39ac0>
+	<CopySlices object at 0x7fe4aaa39760> -> <SubBackward0 object at 0x7fe4aaa399a0>
+	<CopySlices object at 0x7fe4aaa396a0> -> <CopySlices object at 0x7fe4aaa39760>
+	<SubBackward0 object at 0x7fe4aaa398e0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa398b0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98f850> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fa00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fd90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fa00> -> <SliceBackward0 object at 0x7fe4aa98fd90>
+	<MeanBackward0 object at 0x7fe4aa98f850> -> <SliceBackward0 object at 0x7fe4aa98fa00>
+	<AddBackward0 object at 0x7fe4aaa398b0> -> <MeanBackward0 object at 0x7fe4aa98f850>
+	<SubBackward0 object at 0x7fe4aaa398e0> -> <AddBackward0 object at 0x7fe4aaa398b0>
+	<MulBackward0 object at 0x7fe4aaa39bb0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98feb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fa90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fe50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fa90> -> <SliceBackward0 object at 0x7fe4aa98fe50>
+	<MeanBackward0 object at 0x7fe4aa98feb0> -> <SliceBackward0 object at 0x7fe4aa98fa90>
+	<MulBackward0 object at 0x7fe4aaa39bb0> -> <MeanBackward0 object at 0x7fe4aa98feb0>
+	<SubBackward0 object at 0x7fe4aaa398e0> -> <MulBackward0 object at 0x7fe4aaa39bb0>
+	<CopySlices object at 0x7fe4aaa396a0> -> <SubBackward0 object at 0x7fe4aaa398e0>
+	<CopySlices object at 0x7fe4aaa395b0> -> <CopySlices object at 0x7fe4aaa396a0>
+	<SubBackward0 object at 0x7fe4aaa397f0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa397c0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98fdf0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fbb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fbb0> -> <SliceBackward0 object at 0x7fe4aa98f970>
+	<MeanBackward0 object at 0x7fe4aa98fdf0> -> <SliceBackward0 object at 0x7fe4aa98fbb0>
+	<AddBackward0 object at 0x7fe4aaa397c0> -> <MeanBackward0 object at 0x7fe4aa98fdf0>
+	<SubBackward0 object at 0x7fe4aaa397f0> -> <AddBackward0 object at 0x7fe4aaa397c0>
+	<MulBackward0 object at 0x7fe4aaa39910> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98ffd0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f760> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fe20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98f760> -> <SliceBackward0 object at 0x7fe4aa98fe20>
+	<MeanBackward0 object at 0x7fe4aa98ffd0> -> <SliceBackward0 object at 0x7fe4aa98f760>
+	<MulBackward0 object at 0x7fe4aaa39910> -> <MeanBackward0 object at 0x7fe4aa98ffd0>
+	<SubBackward0 object at 0x7fe4aaa397f0> -> <MulBackward0 object at 0x7fe4aaa39910>
+	<CopySlices object at 0x7fe4aaa395b0> -> <SubBackward0 object at 0x7fe4aaa397f0>
+	<CopySlices object at 0x7fe4aaa394c0> -> <CopySlices object at 0x7fe4aaa395b0>
+	<SubBackward0 object at 0x7fe4aaa39700> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa396d0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98f910> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fd00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa98fd00> -> <SliceBackward0 object at 0x7fe4aa996250>
+	<MeanBackward0 object at 0x7fe4aa98f910> -> <SliceBackward0 object at 0x7fe4aa98fd00>
+	<AddBackward0 object at 0x7fe4aaa396d0> -> <MeanBackward0 object at 0x7fe4aa98f910>
+	<SubBackward0 object at 0x7fe4aaa39700> -> <AddBackward0 object at 0x7fe4aaa396d0>
+	<MulBackward0 object at 0x7fe4aaa399d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98fe80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa39610> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa39610> -> <SliceBackward0 object at 0x7fe4aa996370>
+	<MeanBackward0 object at 0x7fe4aa98fe80> -> <SliceBackward0 object at 0x7fe4aaa39610>
+	<MulBackward0 object at 0x7fe4aaa399d0> -> <MeanBackward0 object at 0x7fe4aa98fe80>
+	<SubBackward0 object at 0x7fe4aaa39700> -> <MulBackward0 object at 0x7fe4aaa399d0>
+	<CopySlices object at 0x7fe4aaa394c0> -> <SubBackward0 object at 0x7fe4aaa39700>
+	<CopySlices object at 0x7fe4aaa39400> -> <CopySlices object at 0x7fe4aaa394c0>
+	<SubBackward0 object at 0x7fe4aaa39640> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa98f550> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa39520> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996070> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996490> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996070> -> <SliceBackward0 object at 0x7fe4aa996490>
+	<MeanBackward0 object at 0x7fe4aaa39520> -> <SliceBackward0 object at 0x7fe4aa996070>
+	<AddBackward0 object at 0x7fe4aa98f550> -> <MeanBackward0 object at 0x7fe4aaa39520>
+	<SubBackward0 object at 0x7fe4aaa39640> -> <AddBackward0 object at 0x7fe4aa98f550>
+	<MulBackward0 object at 0x7fe4aa98ffa0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa39820> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9961f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996400> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9961f0> -> <SliceBackward0 object at 0x7fe4aa996400>
+	<MeanBackward0 object at 0x7fe4aaa39820> -> <SliceBackward0 object at 0x7fe4aa9961f0>
+	<MulBackward0 object at 0x7fe4aa98ffa0> -> <MeanBackward0 object at 0x7fe4aaa39820>
+	<SubBackward0 object at 0x7fe4aaa39640> -> <MulBackward0 object at 0x7fe4aa98ffa0>
+	<CopySlices object at 0x7fe4aaa39400> -> <SubBackward0 object at 0x7fe4aaa39640>
+	<CopySlices object at 0x7fe4aaa39310> -> <CopySlices object at 0x7fe4aaa39400>
+	<SubBackward0 object at 0x7fe4aaa39550> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39730> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9960d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996310> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9964f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996310> -> <SliceBackward0 object at 0x7fe4aa9964f0>
+	<MeanBackward0 object at 0x7fe4aa9960d0> -> <SliceBackward0 object at 0x7fe4aa996310>
+	<AddBackward0 object at 0x7fe4aaa39730> -> <MeanBackward0 object at 0x7fe4aa9960d0>
+	<SubBackward0 object at 0x7fe4aaa39550> -> <AddBackward0 object at 0x7fe4aaa39730>
+	<MulBackward0 object at 0x7fe4aaa39430> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9967f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9965b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9965b0> -> <SliceBackward0 object at 0x7fe4aa996640>
+	<MeanBackward0 object at 0x7fe4aa9967f0> -> <SliceBackward0 object at 0x7fe4aa9965b0>
+	<MulBackward0 object at 0x7fe4aaa39430> -> <MeanBackward0 object at 0x7fe4aa9967f0>
+	<SubBackward0 object at 0x7fe4aaa39550> -> <MulBackward0 object at 0x7fe4aaa39430>
+	<CopySlices object at 0x7fe4aaa39310> -> <SubBackward0 object at 0x7fe4aaa39550>
+	<CopySlices object at 0x7fe4aaa39220> -> <CopySlices object at 0x7fe4aaa39310>
+	<SubBackward0 object at 0x7fe4aaa39460> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa98fd30> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996100> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9966a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996700> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9966a0> -> <SliceBackward0 object at 0x7fe4aa996700>
+	<MeanBackward0 object at 0x7fe4aa996100> -> <SliceBackward0 object at 0x7fe4aa9966a0>
+	<AddBackward0 object at 0x7fe4aa98fd30> -> <MeanBackward0 object at 0x7fe4aa996100>
+	<SubBackward0 object at 0x7fe4aaa39460> -> <AddBackward0 object at 0x7fe4aa98fd30>
+	<MulBackward0 object at 0x7fe4aaa39670> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996a30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9962b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9969d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9962b0> -> <SliceBackward0 object at 0x7fe4aa9969d0>
+	<MeanBackward0 object at 0x7fe4aa996a30> -> <SliceBackward0 object at 0x7fe4aa9962b0>
+	<MulBackward0 object at 0x7fe4aaa39670> -> <MeanBackward0 object at 0x7fe4aa996a30>
+	<SubBackward0 object at 0x7fe4aaa39460> -> <MulBackward0 object at 0x7fe4aaa39670>
+	<CopySlices object at 0x7fe4aaa39220> -> <SubBackward0 object at 0x7fe4aaa39460>
+	<CopySlices object at 0x7fe4aaa39160> -> <CopySlices object at 0x7fe4aaa39220>
+	<SubBackward0 object at 0x7fe4aaa393a0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39370> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996610> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9967c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996b50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9967c0> -> <SliceBackward0 object at 0x7fe4aa996b50>
+	<MeanBackward0 object at 0x7fe4aa996610> -> <SliceBackward0 object at 0x7fe4aa9967c0>
+	<AddBackward0 object at 0x7fe4aaa39370> -> <MeanBackward0 object at 0x7fe4aa996610>
+	<SubBackward0 object at 0x7fe4aaa393a0> -> <AddBackward0 object at 0x7fe4aaa39370>
+	<MulBackward0 object at 0x7fe4aaa39490> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996c70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996850> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996c10> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996850> -> <SliceBackward0 object at 0x7fe4aa996c10>
+	<MeanBackward0 object at 0x7fe4aa996c70> -> <SliceBackward0 object at 0x7fe4aa996850>
+	<MulBackward0 object at 0x7fe4aaa39490> -> <MeanBackward0 object at 0x7fe4aa996c70>
+	<SubBackward0 object at 0x7fe4aaa393a0> -> <MulBackward0 object at 0x7fe4aaa39490>
+	<CopySlices object at 0x7fe4aaa39160> -> <SubBackward0 object at 0x7fe4aaa393a0>
+	<CopySlices object at 0x7fe4aaa39070> -> <CopySlices object at 0x7fe4aaa39160>
+	<SubBackward0 object at 0x7fe4aaa392b0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39280> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996520> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996bb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996970> -> <SliceBackward0 object at 0x7fe4aa996bb0>
+	<MeanBackward0 object at 0x7fe4aa996520> -> <SliceBackward0 object at 0x7fe4aa996970>
+	<AddBackward0 object at 0x7fe4aaa39280> -> <MeanBackward0 object at 0x7fe4aa996520>
+	<SubBackward0 object at 0x7fe4aaa392b0> -> <AddBackward0 object at 0x7fe4aaa39280>
+	<MulBackward0 object at 0x7fe4aaa39580> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996eb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996ac0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996d00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996ac0> -> <SliceBackward0 object at 0x7fe4aa996d00>
+	<MeanBackward0 object at 0x7fe4aa996eb0> -> <SliceBackward0 object at 0x7fe4aa996ac0>
+	<MulBackward0 object at 0x7fe4aaa39580> -> <MeanBackward0 object at 0x7fe4aa996eb0>
+	<SubBackward0 object at 0x7fe4aaa392b0> -> <MulBackward0 object at 0x7fe4aaa39580>
+	<CopySlices object at 0x7fe4aaa39070> -> <SubBackward0 object at 0x7fe4aaa392b0>
+	<CopySlices object at 0x7fe4aaa1efd0> -> <CopySlices object at 0x7fe4aaa39070>
+	<SubBackward0 object at 0x7fe4aaa391c0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39190> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9966d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996d60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996df0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996d60> -> <SliceBackward0 object at 0x7fe4aa996df0>
+	<MeanBackward0 object at 0x7fe4aa9966d0> -> <SliceBackward0 object at 0x7fe4aa996d60>
+	<AddBackward0 object at 0x7fe4aaa39190> -> <MeanBackward0 object at 0x7fe4aa9966d0>
+	<SubBackward0 object at 0x7fe4aaa391c0> -> <AddBackward0 object at 0x7fe4aaa39190>
+	<MulBackward0 object at 0x7fe4aaa392e0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996e80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996fd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996ee0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996fd0> -> <SliceBackward0 object at 0x7fe4aa996ee0>
+	<MeanBackward0 object at 0x7fe4aa996e80> -> <SliceBackward0 object at 0x7fe4aa996fd0>
+	<MulBackward0 object at 0x7fe4aaa392e0> -> <MeanBackward0 object at 0x7fe4aa996e80>
+	<SubBackward0 object at 0x7fe4aaa391c0> -> <MulBackward0 object at 0x7fe4aaa392e0>
+	<CopySlices object at 0x7fe4aaa1efd0> -> <SubBackward0 object at 0x7fe4aaa391c0>
+	<CopySlices object at 0x7fe4aaa1ef70> -> <CopySlices object at 0x7fe4aaa1efd0>
+	<SubBackward0 object at 0x7fe4aaa1ef10> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa39130> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996f70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996be0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996cd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa996be0> -> <SliceBackward0 object at 0x7fe4aa996cd0>
+	<MeanBackward0 object at 0x7fe4aa996f70> -> <SliceBackward0 object at 0x7fe4aa996be0>
+	<AddBackward0 object at 0x7fe4aaa39130> -> <MeanBackward0 object at 0x7fe4aa996f70>
+	<SubBackward0 object at 0x7fe4aaa1ef10> -> <AddBackward0 object at 0x7fe4aaa39130>
+	<MulBackward0 object at 0x7fe4aaa393d0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa996dc0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa390d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa390d0> -> <SliceBackward0 object at 0x7fe4aa99c370>
+	<MeanBackward0 object at 0x7fe4aa996dc0> -> <SliceBackward0 object at 0x7fe4aaa390d0>
+	<MulBackward0 object at 0x7fe4aaa393d0> -> <MeanBackward0 object at 0x7fe4aa996dc0>
+	<SubBackward0 object at 0x7fe4aaa1ef10> -> <MulBackward0 object at 0x7fe4aaa393d0>
+	<CopySlices object at 0x7fe4aaa1ef70> -> <SubBackward0 object at 0x7fe4aaa1ef10>
+	<CopySlices object at 0x7fe4aaa1ed60> -> <CopySlices object at 0x7fe4aaa1ef70>
+	<SubBackward0 object at 0x7fe4aaa1edc0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa996550> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa98bd30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c460> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c130> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c460> -> <SliceBackward0 object at 0x7fe4aa99c130>
+	<MeanBackward0 object at 0x7fe4aa98bd30> -> <SliceBackward0 object at 0x7fe4aa99c460>
+	<AddBackward0 object at 0x7fe4aa996550> -> <MeanBackward0 object at 0x7fe4aa98bd30>
+	<SubBackward0 object at 0x7fe4aaa1edc0> -> <AddBackward0 object at 0x7fe4aa996550>
+	<MulBackward0 object at 0x7fe4aa996f10> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa39100> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c0d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c0d0> -> <SliceBackward0 object at 0x7fe4aa99c190>
+	<MeanBackward0 object at 0x7fe4aaa39100> -> <SliceBackward0 object at 0x7fe4aa99c0d0>
+	<MulBackward0 object at 0x7fe4aa996f10> -> <MeanBackward0 object at 0x7fe4aaa39100>
+	<SubBackward0 object at 0x7fe4aaa1edc0> -> <MulBackward0 object at 0x7fe4aa996f10>
+	<CopySlices object at 0x7fe4aaa1ed60> -> <SubBackward0 object at 0x7fe4aaa1edc0>
+	<CopySlices object at 0x7fe4aaa1ec70> -> <CopySlices object at 0x7fe4aaa1ed60>
+	<SubBackward0 object at 0x7fe4aaa1eeb0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1ee80> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99c340> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c2b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c4c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c2b0> -> <SliceBackward0 object at 0x7fe4aa99c4c0>
+	<MeanBackward0 object at 0x7fe4aa99c340> -> <SliceBackward0 object at 0x7fe4aa99c2b0>
+	<AddBackward0 object at 0x7fe4aaa1ee80> -> <MeanBackward0 object at 0x7fe4aa99c340>
+	<SubBackward0 object at 0x7fe4aaa1eeb0> -> <AddBackward0 object at 0x7fe4aaa1ee80>
+	<MulBackward0 object at 0x7fe4aaa1ee50> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99c7f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c5b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c790> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c5b0> -> <SliceBackward0 object at 0x7fe4aa99c790>
+	<MeanBackward0 object at 0x7fe4aa99c7f0> -> <SliceBackward0 object at 0x7fe4aa99c5b0>
+	<MulBackward0 object at 0x7fe4aaa1ee50> -> <MeanBackward0 object at 0x7fe4aa99c7f0>
+	<SubBackward0 object at 0x7fe4aaa1eeb0> -> <MulBackward0 object at 0x7fe4aaa1ee50>
+	<CopySlices object at 0x7fe4aaa1ec70> -> <SubBackward0 object at 0x7fe4aaa1eeb0>
+	<CopySlices object at 0x7fe4aaa1ebb0> -> <CopySlices object at 0x7fe4aaa1ec70>
+	<SubBackward0 object at 0x7fe4aaa1edf0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa996730> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99c3d0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c580> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c910> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c580> -> <SliceBackward0 object at 0x7fe4aa99c910>
+	<MeanBackward0 object at 0x7fe4aa99c3d0> -> <SliceBackward0 object at 0x7fe4aa99c580>
+	<AddBackward0 object at 0x7fe4aa996730> -> <MeanBackward0 object at 0x7fe4aa99c3d0>
+	<SubBackward0 object at 0x7fe4aaa1edf0> -> <AddBackward0 object at 0x7fe4aa996730>
+	<MulBackward0 object at 0x7fe4aaa1efa0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99ca30> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c610> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c9d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c610> -> <SliceBackward0 object at 0x7fe4aa99c9d0>
+	<MeanBackward0 object at 0x7fe4aa99ca30> -> <SliceBackward0 object at 0x7fe4aa99c610>
+	<MulBackward0 object at 0x7fe4aaa1efa0> -> <MeanBackward0 object at 0x7fe4aa99ca30>
+	<SubBackward0 object at 0x7fe4aaa1edf0> -> <MulBackward0 object at 0x7fe4aaa1efa0>
+	<CopySlices object at 0x7fe4aaa1ebb0> -> <SubBackward0 object at 0x7fe4aaa1edf0>
+	<CopySlices object at 0x7fe4aaa1eac0> -> <CopySlices object at 0x7fe4aaa1ebb0>
+	<SubBackward0 object at 0x7fe4aaa1ed00> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1ecd0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99c1f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c730> -> <SliceBackward0 object at 0x7fe4aa99c970>
+	<MeanBackward0 object at 0x7fe4aa99c1f0> -> <SliceBackward0 object at 0x7fe4aa99c730>
+	<AddBackward0 object at 0x7fe4aaa1ecd0> -> <MeanBackward0 object at 0x7fe4aa99c1f0>
+	<SubBackward0 object at 0x7fe4aaa1ed00> -> <AddBackward0 object at 0x7fe4aaa1ecd0>
+	<MulBackward0 object at 0x7fe4aaa1ee20> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99cc70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c880> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cac0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c880> -> <SliceBackward0 object at 0x7fe4aa99cac0>
+	<MeanBackward0 object at 0x7fe4aa99cc70> -> <SliceBackward0 object at 0x7fe4aa99c880>
+	<MulBackward0 object at 0x7fe4aaa1ee20> -> <MeanBackward0 object at 0x7fe4aa99cc70>
+	<SubBackward0 object at 0x7fe4aaa1ed00> -> <MulBackward0 object at 0x7fe4aaa1ee20>
+	<CopySlices object at 0x7fe4aaa1eac0> -> <SubBackward0 object at 0x7fe4aaa1ed00>
+	<CopySlices object at 0x7fe4aaa1e9d0> -> <CopySlices object at 0x7fe4aaa1eac0>
+	<SubBackward0 object at 0x7fe4aaa1ec10> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1ebe0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99c490> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cb20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cb80> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cb20> -> <SliceBackward0 object at 0x7fe4aa99cb80>
+	<MeanBackward0 object at 0x7fe4aa99c490> -> <SliceBackward0 object at 0x7fe4aa99cb20>
+	<AddBackward0 object at 0x7fe4aaa1ebe0> -> <MeanBackward0 object at 0x7fe4aa99c490>
+	<SubBackward0 object at 0x7fe4aaa1ec10> -> <AddBackward0 object at 0x7fe4aaa1ebe0>
+	<MulBackward0 object at 0x7fe4aaa1eee0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99ceb0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c4f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99ce50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c4f0> -> <SliceBackward0 object at 0x7fe4aa99ce50>
+	<MeanBackward0 object at 0x7fe4aa99ceb0> -> <SliceBackward0 object at 0x7fe4aa99c4f0>
+	<MulBackward0 object at 0x7fe4aaa1eee0> -> <MeanBackward0 object at 0x7fe4aa99ceb0>
+	<SubBackward0 object at 0x7fe4aaa1ec10> -> <MulBackward0 object at 0x7fe4aaa1eee0>
+	<CopySlices object at 0x7fe4aaa1e9d0> -> <SubBackward0 object at 0x7fe4aaa1ec10>
+	<CopySlices object at 0x7fe4aaa1e910> -> <CopySlices object at 0x7fe4aaa1e9d0>
+	<SubBackward0 object at 0x7fe4aaa1eb50> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1eb20> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99ca90> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cc40> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99c9a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cc40> -> <SliceBackward0 object at 0x7fe4aa99c9a0>
+	<MeanBackward0 object at 0x7fe4aa99ca90> -> <SliceBackward0 object at 0x7fe4aa99cc40>
+	<AddBackward0 object at 0x7fe4aaa1eb20> -> <MeanBackward0 object at 0x7fe4aa99ca90>
+	<SubBackward0 object at 0x7fe4aaa1eb50> -> <AddBackward0 object at 0x7fe4aaa1eb20>
+	<MulBackward0 object at 0x7fe4aaa1ec40> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99cfd0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cb50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cbb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99cb50> -> <SliceBackward0 object at 0x7fe4aa99cbb0>
+	<MeanBackward0 object at 0x7fe4aa99cfd0> -> <SliceBackward0 object at 0x7fe4aa99cb50>
+	<MulBackward0 object at 0x7fe4aaa1ec40> -> <MeanBackward0 object at 0x7fe4aa99cfd0>
+	<SubBackward0 object at 0x7fe4aaa1eb50> -> <MulBackward0 object at 0x7fe4aaa1ec40>
+	<CopySlices object at 0x7fe4aaa1e910> -> <SubBackward0 object at 0x7fe4aaa1eb50>
+	<CopySlices object at 0x7fe4aaa1e820> -> <CopySlices object at 0x7fe4aaa1e910>
+	<SubBackward0 object at 0x7fe4aaa1ea60> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1ea30> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99c400> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99ccd0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2100> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa99ccd0> -> <SliceBackward0 object at 0x7fe4aa9a2100>
+	<MeanBackward0 object at 0x7fe4aa99c400> -> <SliceBackward0 object at 0x7fe4aa99ccd0>
+	<AddBackward0 object at 0x7fe4aaa1ea30> -> <MeanBackward0 object at 0x7fe4aa99c400>
+	<SubBackward0 object at 0x7fe4aaa1ea60> -> <AddBackward0 object at 0x7fe4aaa1ea30>
+	<MulBackward0 object at 0x7fe4aaa1ed30> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa99cdf0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa1e940> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2370> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aaa1e940> -> <SliceBackward0 object at 0x7fe4aa9a2370>
+	<MeanBackward0 object at 0x7fe4aa99cdf0> -> <SliceBackward0 object at 0x7fe4aaa1e940>
+	<MulBackward0 object at 0x7fe4aaa1ed30> -> <MeanBackward0 object at 0x7fe4aa99cdf0>
+	<SubBackward0 object at 0x7fe4aaa1ea60> -> <MulBackward0 object at 0x7fe4aaa1ed30>
+	<CopySlices object at 0x7fe4aaa1e820> -> <SubBackward0 object at 0x7fe4aaa1ea60>
+	<CopySlices object at 0x7fe4aaa1e730> -> <CopySlices object at 0x7fe4aaa1e820>
+	<SubBackward0 object at 0x7fe4aaa1e970> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa99cf40> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa1e880> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2250> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a21c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2250> -> <SliceBackward0 object at 0x7fe4aa9a21c0>
+	<MeanBackward0 object at 0x7fe4aaa1e880> -> <SliceBackward0 object at 0x7fe4aa9a2250>
+	<AddBackward0 object at 0x7fe4aa99cf40> -> <MeanBackward0 object at 0x7fe4aaa1e880>
+	<SubBackward0 object at 0x7fe4aaa1e970> -> <AddBackward0 object at 0x7fe4aa99cf40>
+	<MulBackward0 object at 0x7fe4aa99cf70> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa1eb80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2340> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a23d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2340> -> <SliceBackward0 object at 0x7fe4aa9a23d0>
+	<MeanBackward0 object at 0x7fe4aaa1eb80> -> <SliceBackward0 object at 0x7fe4aa9a2340>
+	<MulBackward0 object at 0x7fe4aa99cf70> -> <MeanBackward0 object at 0x7fe4aaa1eb80>
+	<SubBackward0 object at 0x7fe4aaa1e970> -> <MulBackward0 object at 0x7fe4aa99cf70>
+	<CopySlices object at 0x7fe4aaa1e730> -> <SubBackward0 object at 0x7fe4aaa1e970>
+	<CopySlices object at 0x7fe4aaa1e670> -> <CopySlices object at 0x7fe4aaa1e730>
+	<SubBackward0 object at 0x7fe4aaa1e8b0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1ea90> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2070> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2220> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a26d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2220> -> <SliceBackward0 object at 0x7fe4aa9a26d0>
+	<MeanBackward0 object at 0x7fe4aa9a2070> -> <SliceBackward0 object at 0x7fe4aa9a2220>
+	<AddBackward0 object at 0x7fe4aaa1ea90> -> <MeanBackward0 object at 0x7fe4aa9a2070>
+	<SubBackward0 object at 0x7fe4aaa1e8b0> -> <AddBackward0 object at 0x7fe4aaa1ea90>
+	<MulBackward0 object at 0x7fe4aaa1e790> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a27f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a25b0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2790> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a25b0> -> <SliceBackward0 object at 0x7fe4aa9a2790>
+	<MeanBackward0 object at 0x7fe4aa9a27f0> -> <SliceBackward0 object at 0x7fe4aa9a25b0>
+	<MulBackward0 object at 0x7fe4aaa1e790> -> <MeanBackward0 object at 0x7fe4aa9a27f0>
+	<SubBackward0 object at 0x7fe4aaa1e8b0> -> <MulBackward0 object at 0x7fe4aaa1e790>
+	<CopySlices object at 0x7fe4aaa1e670> -> <SubBackward0 object at 0x7fe4aaa1e8b0>
+	<CopySlices object at 0x7fe4aaa1e580> -> <CopySlices object at 0x7fe4aaa1e670>
+	<SubBackward0 object at 0x7fe4aaa1e7c0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aa99cd30> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a22b0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a24f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a24f0> -> <SliceBackward0 object at 0x7fe4aa9a2730>
+	<MeanBackward0 object at 0x7fe4aa9a22b0> -> <SliceBackward0 object at 0x7fe4aa9a24f0>
+	<AddBackward0 object at 0x7fe4aa99cd30> -> <MeanBackward0 object at 0x7fe4aa9a22b0>
+	<SubBackward0 object at 0x7fe4aaa1e7c0> -> <AddBackward0 object at 0x7fe4aa99cd30>
+	<MulBackward0 object at 0x7fe4aaa1e9a0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2ac0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2a60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2640> -> <SliceBackward0 object at 0x7fe4aa9a2a60>
+	<MeanBackward0 object at 0x7fe4aa9a2ac0> -> <SliceBackward0 object at 0x7fe4aa9a2640>
+	<MulBackward0 object at 0x7fe4aaa1e9a0> -> <MeanBackward0 object at 0x7fe4aa9a2ac0>
+	<SubBackward0 object at 0x7fe4aaa1e7c0> -> <MulBackward0 object at 0x7fe4aaa1e9a0>
+	<CopySlices object at 0x7fe4aaa1e580> -> <SubBackward0 object at 0x7fe4aaa1e7c0>
+	<CopySlices object at 0x7fe4aaa1e490> -> <CopySlices object at 0x7fe4aaa1e580>
+	<SubBackward0 object at 0x7fe4aaa1e6d0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e6a0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2850> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a28e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a28e0> -> <SliceBackward0 object at 0x7fe4aa9a2190>
+	<MeanBackward0 object at 0x7fe4aa9a2850> -> <SliceBackward0 object at 0x7fe4aa9a28e0>
+	<AddBackward0 object at 0x7fe4aaa1e6a0> -> <MeanBackward0 object at 0x7fe4aa9a2850>
+	<SubBackward0 object at 0x7fe4aaa1e6d0> -> <AddBackward0 object at 0x7fe4aaa1e6a0>
+	<MulBackward0 object at 0x7fe4aaa1e7f0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2d00> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2880> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2ca0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2880> -> <SliceBackward0 object at 0x7fe4aa9a2ca0>
+	<MeanBackward0 object at 0x7fe4aa9a2d00> -> <SliceBackward0 object at 0x7fe4aa9a2880>
+	<MulBackward0 object at 0x7fe4aaa1e7f0> -> <MeanBackward0 object at 0x7fe4aa9a2d00>
+	<SubBackward0 object at 0x7fe4aaa1e6d0> -> <MulBackward0 object at 0x7fe4aaa1e7f0>
+	<CopySlices object at 0x7fe4aaa1e490> -> <SubBackward0 object at 0x7fe4aaa1e6d0>
+	<CopySlices object at 0x7fe4aaa1e3d0> -> <CopySlices object at 0x7fe4aaa1e490>
+	<SubBackward0 object at 0x7fe4aaa1e610> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e5e0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2a90> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a20d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2e20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a20d0> -> <SliceBackward0 object at 0x7fe4aa9a2e20>
+	<MeanBackward0 object at 0x7fe4aa9a2a90> -> <SliceBackward0 object at 0x7fe4aa9a20d0>
+	<AddBackward0 object at 0x7fe4aaa1e5e0> -> <MeanBackward0 object at 0x7fe4aa9a2a90>
+	<SubBackward0 object at 0x7fe4aaa1e610> -> <AddBackward0 object at 0x7fe4aaa1e5e0>
+	<MulBackward0 object at 0x7fe4aaa1e8e0> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2f40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2b20> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2ee0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2b20> -> <SliceBackward0 object at 0x7fe4aa9a2ee0>
+	<MeanBackward0 object at 0x7fe4aa9a2f40> -> <SliceBackward0 object at 0x7fe4aa9a2b20>
+	<MulBackward0 object at 0x7fe4aaa1e8e0> -> <MeanBackward0 object at 0x7fe4aa9a2f40>
+	<SubBackward0 object at 0x7fe4aaa1e610> -> <MulBackward0 object at 0x7fe4aaa1e8e0>
+	<CopySlices object at 0x7fe4aaa1e3d0> -> <SubBackward0 object at 0x7fe4aaa1e610>
+	<CopySlices object at 0x7fe4aaa1e2e0> -> <CopySlices object at 0x7fe4aaa1e3d0>
+	<SubBackward0 object at 0x7fe4aaa1e520> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e4f0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2e80> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2dc0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2eb0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2dc0> -> <SliceBackward0 object at 0x7fe4aa9a2eb0>
+	<MeanBackward0 object at 0x7fe4aa9a2e80> -> <SliceBackward0 object at 0x7fe4aa9a2dc0>
+	<AddBackward0 object at 0x7fe4aaa1e4f0> -> <MeanBackward0 object at 0x7fe4aa9a2e80>
+	<SubBackward0 object at 0x7fe4aaa1e520> -> <AddBackward0 object at 0x7fe4aaa1e4f0>
+	<MulBackward0 object at 0x7fe4aaa1e640> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2760> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2970> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2fa0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2970> -> <SliceBackward0 object at 0x7fe4aa9a2fa0>
+	<MeanBackward0 object at 0x7fe4aa9a2760> -> <SliceBackward0 object at 0x7fe4aa9a2970>
+	<MulBackward0 object at 0x7fe4aaa1e640> -> <MeanBackward0 object at 0x7fe4aa9a2760>
+	<SubBackward0 object at 0x7fe4aaa1e520> -> <MulBackward0 object at 0x7fe4aaa1e640>
+	<CopySlices object at 0x7fe4aaa1e2e0> -> <SubBackward0 object at 0x7fe4aaa1e520>
+	<CopySlices object at 0x7fe4aaa1e1f0> -> <CopySlices object at 0x7fe4aaa1e2e0>
+	<SubBackward0 object at 0x7fe4aaa1e430> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e400> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2d90> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2f10> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab1f0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9a2f10> -> <SliceBackward0 object at 0x7fe4aa9ab1f0>
+	<MeanBackward0 object at 0x7fe4aa9a2d90> -> <SliceBackward0 object at 0x7fe4aa9a2f10>
+	<AddBackward0 object at 0x7fe4aaa1e400> -> <MeanBackward0 object at 0x7fe4aa9a2d90>
+	<SubBackward0 object at 0x7fe4aaa1e430> -> <AddBackward0 object at 0x7fe4aaa1e400>
+	<MulBackward0 object at 0x7fe4aaa1e700> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2fd0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab3a0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab400> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab3a0> -> <SliceBackward0 object at 0x7fe4aa9ab400>
+	<MeanBackward0 object at 0x7fe4aa9a2fd0> -> <SliceBackward0 object at 0x7fe4aa9ab3a0>
+	<MulBackward0 object at 0x7fe4aaa1e700> -> <MeanBackward0 object at 0x7fe4aa9a2fd0>
+	<SubBackward0 object at 0x7fe4aaa1e430> -> <MulBackward0 object at 0x7fe4aaa1e700>
+	<CopySlices object at 0x7fe4aaa1e1f0> -> <SubBackward0 object at 0x7fe4aaa1e430>
+	<CopySlices object at 0x7fe4aaa1e100> -> <CopySlices object at 0x7fe4aaa1e1f0>
+	<SubBackward0 object at 0x7fe4aaa1e370> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e340> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9a2c40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab340> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab520> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab340> -> <SliceBackward0 object at 0x7fe4aa9ab520>
+	<MeanBackward0 object at 0x7fe4aa9a2c40> -> <SliceBackward0 object at 0x7fe4aa9ab340>
+	<AddBackward0 object at 0x7fe4aaa1e340> -> <MeanBackward0 object at 0x7fe4aa9a2c40>
+	<SubBackward0 object at 0x7fe4aaa1e370> -> <AddBackward0 object at 0x7fe4aaa1e340>
+	<MulBackward0 object at 0x7fe4aaa1e460> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aaa391f0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab280> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab490> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab280> -> <SliceBackward0 object at 0x7fe4aa9ab490>
+	<MeanBackward0 object at 0x7fe4aaa391f0> -> <SliceBackward0 object at 0x7fe4aa9ab280>
+	<MulBackward0 object at 0x7fe4aaa1e460> -> <MeanBackward0 object at 0x7fe4aaa391f0>
+	<SubBackward0 object at 0x7fe4aaa1e370> -> <MulBackward0 object at 0x7fe4aaa1e460>
+	<CopySlices object at 0x7fe4aaa1e100> -> <SubBackward0 object at 0x7fe4aaa1e370>
+	<CopySlices object at 0x7fe4aaa5ea30> -> <CopySlices object at 0x7fe4aaa1e100>
+	<SubBackward0 object at 0x7fe4aaa1e160> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e2b0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9ab160> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab190> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab580> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab190> -> <SliceBackward0 object at 0x7fe4aa9ab580>
+	<MeanBackward0 object at 0x7fe4aa9ab160> -> <SliceBackward0 object at 0x7fe4aa9ab190>
+	<AddBackward0 object at 0x7fe4aaa1e2b0> -> <MeanBackward0 object at 0x7fe4aa9ab160>
+	<SubBackward0 object at 0x7fe4aaa1e160> -> <AddBackward0 object at 0x7fe4aaa1e2b0>
+	<MulBackward0 object at 0x7fe4aaa1e550> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9ab880> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab640> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab6d0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab640> -> <SliceBackward0 object at 0x7fe4aa9ab6d0>
+	<MeanBackward0 object at 0x7fe4aa9ab880> -> <SliceBackward0 object at 0x7fe4aa9ab640>
+	<MulBackward0 object at 0x7fe4aaa1e550> -> <MeanBackward0 object at 0x7fe4aa9ab880>
+	<SubBackward0 object at 0x7fe4aaa1e160> -> <MulBackward0 object at 0x7fe4aaa1e550>
+	<CopySlices object at 0x7fe4aaa5ea30> -> <SubBackward0 object at 0x7fe4aaa1e160>
+	<CopySlices object at 0x7fe4aaab6340> -> <CopySlices object at 0x7fe4aaa5ea30>
+	<SubBackward0 object at 0x7fe4aaa5e790> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e1c0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9ab220> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab730> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab790> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab730> -> <SliceBackward0 object at 0x7fe4aa9ab790>
+	<MeanBackward0 object at 0x7fe4aa9ab220> -> <SliceBackward0 object at 0x7fe4aa9ab730>
+	<AddBackward0 object at 0x7fe4aaa1e1c0> -> <MeanBackward0 object at 0x7fe4aa9ab220>
+	<SubBackward0 object at 0x7fe4aaa5e790> -> <AddBackward0 object at 0x7fe4aaa1e1c0>
+	<MulBackward0 object at 0x7fe4aaa1e280> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9abac0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab070> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9aba60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab070> -> <SliceBackward0 object at 0x7fe4aa9aba60>
+	<MeanBackward0 object at 0x7fe4aa9abac0> -> <SliceBackward0 object at 0x7fe4aa9ab070>
+	<MulBackward0 object at 0x7fe4aaa1e280> -> <MeanBackward0 object at 0x7fe4aa9abac0>
+	<SubBackward0 object at 0x7fe4aaa5e790> -> <MulBackward0 object at 0x7fe4aaa1e280>
+	<CopySlices object at 0x7fe4aaab6340> -> <SubBackward0 object at 0x7fe4aaa5e790>
+	<CopySlices object at 0x7fe4aaab6460> -> <CopySlices object at 0x7fe4aaab6340>
+	<SubBackward0 object at 0x7fe4aaa5eb80> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa5ed60> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9ab6a0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab850> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abbe0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab850> -> <SliceBackward0 object at 0x7fe4aa9abbe0>
+	<MeanBackward0 object at 0x7fe4aa9ab6a0> -> <SliceBackward0 object at 0x7fe4aa9ab850>
+	<AddBackward0 object at 0x7fe4aaa5ed60> -> <MeanBackward0 object at 0x7fe4aa9ab6a0>
+	<SubBackward0 object at 0x7fe4aaa5eb80> -> <AddBackward0 object at 0x7fe4aaa5ed60>
+	<MulBackward0 object at 0x7fe4aaa5e820> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9abd00> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab8e0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abca0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab8e0> -> <SliceBackward0 object at 0x7fe4aa9abca0>
+	<MeanBackward0 object at 0x7fe4aa9abd00> -> <SliceBackward0 object at 0x7fe4aa9ab8e0>
+	<MulBackward0 object at 0x7fe4aaa5e820> -> <MeanBackward0 object at 0x7fe4aa9abd00>
+	<SubBackward0 object at 0x7fe4aaa5eb80> -> <MulBackward0 object at 0x7fe4aaa5e820>
+	<CopySlices object at 0x7fe4aaab6460> -> <SubBackward0 object at 0x7fe4aaa5eb80>
+	<CopySlices object at 0x7fe4aaab62b0> -> <CopySlices object at 0x7fe4aaab6460>
+	<SubBackward0 object at 0x7fe4aaab6cd0> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaa1e3a0> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9ab5b0> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9aba00> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abc40> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9aba00> -> <SliceBackward0 object at 0x7fe4aa9abc40>
+	<MeanBackward0 object at 0x7fe4aa9ab5b0> -> <SliceBackward0 object at 0x7fe4aa9aba00>
+	<AddBackward0 object at 0x7fe4aaa1e3a0> -> <MeanBackward0 object at 0x7fe4aa9ab5b0>
+	<SubBackward0 object at 0x7fe4aaab6cd0> -> <AddBackward0 object at 0x7fe4aaa1e3a0>
+	<MulBackward0 object at 0x7fe4aaa5e910> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9abf40> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abb50> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9ab7c0> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abb50> -> <SliceBackward0 object at 0x7fe4aa9ab7c0>
+	<MeanBackward0 object at 0x7fe4aa9abf40> -> <SliceBackward0 object at 0x7fe4aa9abb50>
+	<MulBackward0 object at 0x7fe4aaa5e910> -> <MeanBackward0 object at 0x7fe4aa9abf40>
+	<SubBackward0 object at 0x7fe4aaab6cd0> -> <MulBackward0 object at 0x7fe4aaa5e910>
+	<CopySlices object at 0x7fe4aaab62b0> -> <SubBackward0 object at 0x7fe4aaab6cd0>
+	<CopySlices object at 0x7fe4aaab6310> -> <CopySlices object at 0x7fe4aaab62b0>
+	<SubBackward0 object at 0x7fe4aaab6c70> [label=<SubBackward0> fillcolor=""]
+	<AddBackward0 object at 0x7fe4aaab6a60> [label=<AddBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9abe50> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abd90> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abe80> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abd90> -> <SliceBackward0 object at 0x7fe4aa9abe80>
+	<MeanBackward0 object at 0x7fe4aa9abe50> -> <SliceBackward0 object at 0x7fe4aa9abd90>
+	<AddBackward0 object at 0x7fe4aaab6a60> -> <MeanBackward0 object at 0x7fe4aa9abe50>
+	<SubBackward0 object at 0x7fe4aaab6c70> -> <AddBackward0 object at 0x7fe4aaab6a60>
+	<MulBackward0 object at 0x7fe4aaa5e490> [label=<MulBackward0> fillcolor=""]
+	<MeanBackward0 object at 0x7fe4aa9abc70> [label=<MeanBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abf10> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abd60> [label=<SliceBackward0> fillcolor=""]
+	<SliceBackward0 object at 0x7fe4aa9abf10> -> <SliceBackward0 object at 0x7fe4aa9abd60>
+	<MeanBackward0 object at 0x7fe4aa9abc70> -> <SliceBackward0 object at 0x7fe4aa9abf10>
+	<MulBackward0 object at 0x7fe4aaa5e490> -> <MeanBackward0 object at 0x7fe4aa9abc70>
+	<SubBackward0 object at 0x7fe4aaab6c70> -> <MulBackward0 object at 0x7fe4aaa5e490>
+	<CopySlices object at 0x7fe4aaab6310> -> <SubBackward0 object at 0x7fe4aaab6c70>
+	<DivBackward0 object at 0x7fe4aaab6af0> -> <CopySlices object at 0x7fe4aaab6310>
+	<SumBackward1 object at 0x7fe4aaab6df0> [label=<SumBackward1> fillcolor=""]
+	<DivBackward0 object at 0x7fe4aaab6af0> -> <SumBackward1 object at 0x7fe4aaab6df0>
+	<RsubBackward1 object at 0x7fe4b0c17640> -> <DivBackward0 object at 0x7fe4aaab6af0>
+	<DivBackward0 object at 0x7fe4e089ae20> -> <RsubBackward1 object at 0x7fe4b0c17640>
+	<DiagBackward0 object at 0x7fe4e089ab50> [label=<DiagBackward0> fillcolor=""]
+	<DivBackward0 object at 0x7fe4e089ae20> -> <DiagBackward0 object at 0x7fe4e089ab50>
+	<MeanBackward0 object at 0x7fe4aaa61fd0> -> <DivBackward0 object at 0x7fe4e089ae20>
+	<MulBackward0 object at 0x7fe4d9ef4670> -> <MeanBackward0 object at 0x7fe4aaa61fd0>
+}

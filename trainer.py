@@ -9,7 +9,8 @@ from torch.utils.data import DataLoader,  WeightedRandomSampler
 import learners
 import yaml
 from torch.utils.tensorboard import SummaryWriter
-
+from datasets import concatenate_datasets
+import copy
 
 class Trainer:
 
@@ -38,24 +39,26 @@ class Trainer:
             Dataset = dataloaders.iCIFAR2
             num_classes = 10
             self.dataset_size = [32,32,3]
-        elif args.dataset == 'CIFAR8':
-            Dataset = dataloaders.iCIFAR8
-            num_classes = 10
-            self.dataset_size = [32,32,3]
+            class_order = [0,1,4,5,6,7,8,9,2,3]
+            class_order_logits = [0,1,4,5,6,7,8,9,2,3]
         elif args.dataset == 'CIFAR10':
             Dataset = dataloaders.iCIFAR10
             num_classes = 10
             self.dataset_size = [32,32,3]
-        elif args.dataset == 'CIFAR100':
+            class_order = [0,1,4,5,6,7,8,9,2,3]
+            class_order_logits = [0,1,4,5,6,7,8,9,2,3]
+        elif args.dataset == 'CIFAR100': ## TODO add class order logits
             Dataset = dataloaders.iCIFAR100
             num_classes = 100
             self.dataset_size = [32,32,3]
-        elif args.dataset == 'ImageNet':
+            class_order = np.arange(num_classes).tolist()
+            class_order_logits = np.arange(num_classes).tolist()
+        elif args.dataset == 'ImageNet':   ## TODO add class order logits
             Dataset = dataloaders.iIMAGENET
             num_classes = 1000
             self.dataset_size = [224,224,3]
             self.top_k = 5
-        elif args.dataset == 'TinyImageNet':
+        elif args.dataset == 'TinyImageNet':  ## TODO add class order logits
             Dataset = dataloaders.iTinyIMNET
             num_classes = 200
             self.dataset_size = [64,64,3]
@@ -63,10 +66,6 @@ class Trainer:
             raise ValueError('Dataset not implemented!')
 
         # load tasks
-        class_order = [0,1,4,5,6,7,8,9,2,3]
-        class_order_logits = [0,1,4,5,6,7,8,9,2,3]
-        # class_order = [0,1,2,3,4,5,6,7,8,9]
-        # class_order_logits = [0,1,2,3,4,5,6,7,8,9]
         if args.rand_split:
             print('=============================================')
             print('Shuffling....')
@@ -129,6 +128,7 @@ class Trainer:
                         'temp': args.temp,
                         'out_dim': num_classes,
                         'overwrite': args.overwrite == 1,
+                        'model_log_dir': args.log_dir,
                         'mu': args.mu,
                         'beta': args.beta,
                         'eps': args.eps,
@@ -143,12 +143,14 @@ class Trainer:
                         'ub_rat': args.ub_rat,
                         'buffer_update': args.buffer_update,
                         'reuse_replay_ixs': args.reuse_replay_ixs,
-                        'plot_dir': args.plot_dir,
                         'weight_with': args.weight_with,
                         'weight_reverse': args.weight_reverse,
                         'with_class_balance': args.with_class_balance,
-                        'old_classes': None,
-                        'new_classes': None
+                        'dual_dataloader': args.dual_dataloader,
+                        'weighted_sampler': args.weighted_sampler,
+                        'class_ratios': args.class_ratios,
+                        'new_classes': None,
+                        'old_classes': None
                         }
         self.learner_type, self.learner_name = args.learner_type, args.learner_name
         self.learner = learners.__dict__[self.learner_type].__dict__[self.learner_name](self.learner_config)
@@ -191,17 +193,18 @@ class Trainer:
             task = self.tasks_logits[i]
             if self.oracle_flag:
                 self.train_dataset.load_dataset(i, train=False)
-                if i==0:
-                    old_classes = set([self.train_dataset.class_mapping[int(y)] for y in self.train_dataset.targets])
-                    new_classes = set(self.train_dataset.class_mapping.keys())-set(old_classes)
-                    if -1 in old_classes:
-                        old_classes.remove(-1)
-                    if -1 in new_classes:
-                        new_classes.remove(-1)
+                if i==0: ##TODO fix this
+                    old_classes = None
+                    new_classes = set([self.train_dataset.class_mapping[int(y)] for y in self.train_dataset.targets])
                 self.learner_config['old_classes']= old_classes
                 self.learner_config['new_classes']= new_classes
-                
+                if i>0:
+                    old_classes = new_classes.union(old_classes) if old_classes is not None else new_classes
+                    new_classes = (set([self.train_dataset.class_mapping[int(y)] for y in self.train_dataset.targets])-set(old_classes)) 
+                self.learner_config['old_classes'] = old_classes
+                self.learner_config['new_classes'] = new_classes
                 self.learner = learners.__dict__[self.learner_type].__dict__[self.learner_name](self.learner_config)
+                
                 self.add_dim += len(task)
             else:
                 self.train_dataset.load_dataset(i, train=True)
@@ -218,27 +221,22 @@ class Trainer:
                 train_dataset_loader = DataLoader(self.train_dataset, batch_size=int(self.batch_size/4), shuffle=True, drop_last=False, num_workers=int(self.workers))
             else:
                 train_dataset_loader = DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, drop_last=False, num_workers=int(self.workers))
+
             if len(self.replay_dataset) > 0:
-                #print (self.batch_size_replay)
-                # sampler = WeightedRandomSampler(self.replay_dataset.weights, num_samples=len(self.replay_dataset), replacement=False)
-                # replay_loader = DataLoader(self.replay_dataset, batch_size=self.batch_size, shuffle=False, drop_last=False, num_workers=int(self.workers), sampler=sampler) ## TODO shuffl = true if no data weighting
-                replay_loader = DataLoader(self.replay_dataset, batch_size=self.batch_size, shuffle=True, drop_last=False, num_workers=int(self.workers))
+                if self.learner_config['weighted_sampler']:
+                    sampler = WeightedRandomSampler(self.replay_dataset.weights, num_samples=len(self.replay_dataset), replacement=True)
+                    replay_loader = DataLoader(self.replay_dataset, batch_size=self.batch_size, shuffle=False, drop_last=False, num_workers=int(self.workers), sampler=sampler)
+                else:
+                    replay_loader = DataLoader(self.replay_dataset, batch_size=self.batch_size, shuffle=True, drop_last=False, num_workers=int(self.workers))
             else:
                 replay_loader = None
 
             ## MY CHANGES 
             static_replay_train_loader = dataloaders.DualDataLoader(train_dataset_loader, replay_loader)
-            balanced_data_loader = dataloaders.DualDataLoader(train_dataset_loader, replay_loader)
             
             # get val target
             if self.oracle_dir is None:
                 val_target = None
-                # load_file = '/srv/kira-lab/share4/vgutta7/memory-is-cheap-main/_outputs/Sep22/tentask/CIFAR100/oracle' + '/results-acc/global.yaml'
-                # with open(load_file, 'r') as yaml_file:
-                #     yaml_result = yaml.safe_load(yaml_file)
-                # val_target = yaml_result['history'][i][self.seed]
-                # self.model_first_dir = '/srv/kira-lab/share4/vgutta7/memory-is-cheap-main/_outputs/Sep22/tentask/CIFAR100/oracle'
-                # oracle_acc.append(val_target)
             else:
                 load_file = self.oracle_dir + '/results-acc/global.yaml'
                 with open(load_file, 'r') as yaml_file:
@@ -256,11 +254,14 @@ class Trainer:
                 model_save_dir = self.model_top_dir + '/models/repeat-'+str(self.seed+1)+'/task-'+self.task_names[i]+'/'
             if not os.path.exists(model_save_dir): os.makedirs(model_save_dir)
             
-            if self.learner_config['learner_name'] == 'EWC_MC':
-                avg_train_time = self.learner.learn_batch(train_dataset_loader, self.train_dataset, model_save_dir, test_loader)
-                epochs_converge = None
-            else:
+            if self.learner_config['dual_dataloader'] or self.learner_config['weighted_sampler']:
                 avg_train_time, epochs_converge = self.learner.learn_batch(static_replay_train_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+            else:
+                train_replay_dataset = copy.deepcopy(self.train_dataset)
+                train_replay_dataset.extend(self.replay_dataset)
+                batch_sampler = dataloaders.BatchSampler(train_replay_dataset, self.batch_size*2, list(set(self.train_dataset.targets)), list(set(self.replay_dataset.targets)) )
+                dynamic_replay_train_loader = DataLoader(train_replay_dataset, batch_sampler=batch_sampler)
+                avg_train_time, epochs_converge = self.learner.learn_batch(dynamic_replay_train_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
 
             # save model
             self.learner.save_model(model_save_dir)

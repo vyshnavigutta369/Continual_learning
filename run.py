@@ -10,6 +10,7 @@ import numpy as np
 import yaml
 import random
 from trainer import Trainer
+import json
 
 def create_args():
     
@@ -77,6 +78,11 @@ def create_args():
     parser.add_argument('--weight_reverse', type=bool,default=False, help='weight_shift_reverse')
     parser.add_argument('--with_class_balance', type=int, default=0, help='with_class_balance')
 
+    parser.add_argument('--dual_dataloader', type=bool, default=False, help='dual_dataloader')
+    parser.add_argument('--weighted_sampler', type=bool, default=False, help='weighted_sampler')
+
+    parser.add_argument('--class_ratios', type=str, default=None, help='class_ratios')
+
     return parser
 
 def get_args(argv):
@@ -137,7 +143,7 @@ if __name__ == '__main__':
 
             # next repeat needed
             start_r = avg_metrics[metric_keys[0]][save_keys[0]].shape[-1]
-
+            
             # extend if more repeats left
             if start_r < args.repeat:
                 max_task = avg_metrics['acc']['global'].shape[0]
@@ -150,7 +156,7 @@ if __name__ == '__main__':
         except:
             start_r = 0
 
-    # start_r = 0
+    start_r = 0
     # run trials
     #start_r = 0
     for r in range(start_r, args.repeat):
