@@ -32,7 +32,7 @@ def create_args():
     parser.add_argument('--dataroot', type=str, default='data', help="The root folder of dataset or downloaded data")
     parser.add_argument('--dataset', type=str, default='MNIST', help="CIFAR10|MNIST")
     parser.add_argument('--load_model_dir', type=str, default=None, help="try loading from external model directory")
-    parser.add_argument('--workers', type=int, default=8, help="#Thread for dataloader")
+    parser.add_argument('--workers', type=int, default=4, help="#Thread for dataloader")
     parser.add_argument('--validation', default=False, action='store_true', help='Evaluate on fold of training dataset rather than testing data')
     parser.add_argument('--repeat', type=int, default=1, help="Repeat the experiment N times")
     parser.add_argument('--overwrite', type=int, default=0, metavar='N', help='Train regardless of whether saved model exists')
@@ -93,7 +93,7 @@ class Logger(object):
         self.log.flush()
 
 if __name__ == '__main__':
-
+    
     args = get_args(sys.argv[1:])
 
     # determinstic backend

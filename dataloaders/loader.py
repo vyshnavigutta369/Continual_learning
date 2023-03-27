@@ -47,7 +47,17 @@ class DualDataLoader(object):
                 x_b, y_b, ix_b = next(self.iter_b)
             # shuffle_idx = torch.randperm(len(y_b), device=y_b.device)
             # x_b, y_b = x_b[shuffle_idx], y_b[shuffle_idx]
-
+            # if len(y_b) < len(y_a):
+            #     try:
+            #         x_b, y_b, ix_b = next(self.iter_b)
+            #     except:
+            #         self.iter_b = iter(self.dset_b)
+            #         x_b, y_b, ix_b = next(self.iter_b)
+            
+            # if len(y_b) < len(y_a) or len(y_a) < len(y_b):
+            #     print(len(y_a))
+            #     print(len(y_b))
+            #     print(apple)
             return x_a, y_a, ix_a, x_b, y_b, ix_b
 
         else:
@@ -71,22 +81,41 @@ class ReplayDataset(torch.utils.data.Dataset):
         self.data = []
         self.targets= []
         
-
-    def extend(self, dataset, replay_size=50):
+    def extend(self, dataset, replay_size=50, smart=False):
         
-        to_replay_class_count = {}
-        # print (dataset.targets)
-        for data, target in zip(dataset.data, dataset.targets):
-            # print (target)
-            if target not in to_replay_class_count.keys():
-                to_replay_class_count[target] = 0
-            if to_replay_class_count[target] < replay_size:
+        if replay_size == 1:
+            for data, target in zip(dataset.data, dataset.targets):
+                
                 self.data.append(data)
                 self.targets.append(target)
-                to_replay_class_count[target] +=1
-        # print (to_replay_class_count)
+                
+                if smart:
+                    if target == 0 or target == 1:
+                        self.data.append(data)
+                        self.targets.append(target)
+        else: 
+                
+            to_replay_class_count = {}
+            for data, target in zip(dataset.data, dataset.targets):
+                if target not in to_replay_class_count.keys():
+                    to_replay_class_count[target] = 0
+                
+                if target == 0 or target == 1:
+                    replay_size_edit = replay_size * 2.5
+                else:
+                    replay_size_edit = replay_size * 0.5
+                
+                if not smart: replay_size_edit = replay_size
+
+                if to_replay_class_count[target] < replay_size_edit:
+                    self.data.append(data)
+                    self.targets.append(target)
+                    to_replay_class_count[target] +=1
+
         self.class_mapping = dataset.class_mapping
-        # print ('class_mapping:', self.class_mapping)
+
+    
+
 
 
     def extend_replay(self, dataset, logits=None, proba=None, task_counter= None, task_labels=None):

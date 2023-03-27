@@ -2,18 +2,20 @@ import os
 import os.path
 import hashlib
 import errno
+import torch
 from torchvision import transforms
 import numpy as np
-from sklearn.decomposition import PCA
-import subprocess
-# from pca import pca
-from pathlib import Path
-import os
-import pandas as pd
-import plotly.express as px
-import torch.nn as nn
+import random
+from PIL import Image, ImageEnhance, ImageOps, ImageFilter
+from torchvision import transforms as T
+import PIL
+import PIL.ImageOps
+import PIL.ImageEnhance
+import PIL.ImageDraw
+from PIL import Image
 import torch
- 
+import torch.nn as nn
+
 dataset_stats = {
     'CIFAR2' : {'mean': (0.49139967861519607, 0.48215840839460783, 0.44653091444546567),
                  'std' : (0.2470322324632819, 0.24348512800005573, 0.26158784172796434),
@@ -26,66 +28,29 @@ dataset_stats = {
                  'size' : 32},
     'CIFAR100': {'mean': (0.5070751592371323, 0.48654887331495095, 0.4409178433670343),
                  'std' : (0.2673342858792409, 0.25643846291708816, 0.2761504713256834),
-                 'size' : 32},   
+                 'size' : 32},
+    'ImageNet32': {'mean': (0.4037, 0.3823, 0.3432),
+                 'std' : (0.2417, 0.2340, 0.2235),
+                 'size' : 32},
+    'ImageNet84': {'mean': (0.4399, 0.4184, 0.3772),
+                 'std' : (0.2250, 0.2199, 0.2139),
+                 'size' : 84},
     'ImageNet': {'mean': (0.485, 0.456, 0.406),
                  'std' : (0.229, 0.224, 0.225),
-                 'size' : 224},      
+                 'size' : 224},   
     'TinyImageNet': {'mean': (0.4389, 0.4114, 0.3682),
                  'std' : (0.2402, 0.2350, 0.2268),
-                 'size' : 64},  
+                 'size' : 64},   
+    'ImageNet_R': {
+                 'size' : 224}, 
+    'ImageNet_D': {
+                 'size' : 224},
+    'DomainNet': {
+                 'size' : 224},  
                 }
 
 # transformations
-def get_transform(dataset='cifar100', phase='test', aug=True, dgr=False):
-    transform_list = []
-
-    # get crop size
-    crop_size = dataset_stats[dataset]['size']
-
-    # get mean and std
-    dset_mean = dataset_stats[dataset]['mean']
-    dset_std = dataset_stats[dataset]['std']
-    if dgr:
-        if len(dset_mean) == 1:
-            dset_mean = (0.0,)
-            dset_std = (1.0,)
-        else:
-            dset_mean = (0.0,0.0,0.0)
-            dset_std = (1.0,1.0,1.0)
-
-    if phase == 'train' and aug:
-        if dataset == 'ImageNet':
-            transform_list.extend([
-                transforms.RandomResizedCrop(224),
-                transforms.RandomHorizontalFlip(),
-                transforms.ToTensor(),
-                transforms.Normalize(dset_mean, dset_std),
-                                ])
-        else:
-            transform_list.extend([
-                transforms.ColorJitter(brightness=63/255, contrast=0.8),
-                transforms.RandomHorizontalFlip(p=0.5),
-                transforms.RandomCrop(crop_size, padding=4),
-                transforms.ToTensor(),
-                transforms.Normalize(dset_mean, dset_std),
-                                ])
-    else:
-        if dataset == 'ImageNet':
-            transform_list.extend([
-                transforms.Resize(256),
-                transforms.CenterCrop(224),
-                transforms.ToTensor(),
-                transforms.Normalize(dset_mean, dset_std),
-                                ])
-        else:
-            transform_list.extend([
-                    transforms.ToTensor(),
-                    transforms.Normalize(dset_mean, dset_std),
-                                    ])
-
-    return transforms.Compose(transform_list)
-
-def get_transformnew(dataset='cifar100', phase='test', aug=True, resize_imnet=False):
+def get_transform(dataset='cifar100', phase='test', aug=True, resize_imnet=False):
     transform_list = []
     # get out size
     crop_size = dataset_stats[dataset]['size']
@@ -123,7 +88,6 @@ def get_transformnew(dataset='cifar100', phase='test', aug=True, resize_imnet=Fa
 
 
     return transforms.Compose(transform_list)
-
 
 def check_integrity(fpath, md5):
     if not os.path.isfile(fpath):

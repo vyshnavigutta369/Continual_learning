@@ -239,9 +239,17 @@ class NormalNN(nn.Module):
     def load_model(self, filename):
         self.model.load_state_dict(torch.load(filename + 'class.pth'))
         self.log('=> Load Done')
-        if self.gpu:
-            self.model = self.model.cuda()
         self.model.eval()
+
+    def cuda(self):
+        
+        # Multi-GPU
+        if len(self.config['gpuid']) > 1:
+            self.model = torch.nn.DataParallel(self.model, device_ids=self.config['gpuid'])
+        else:
+            torch.cuda.set_device(self.config['gpuid'][0])
+        self.model = self.model.cuda()
+        return self
 
     # sets model optimizers
     def init_optimizer(self):
@@ -263,8 +271,11 @@ class NormalNN(nn.Module):
         # create optimizers
         self.optimizer = torch.optim.__dict__[self.config['optimizer']](**optimizer_arg)
         
-        # create schedulesif self.schedule_type == 'decay':
-        self.scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=self.schedule, gamma=0.1)
+        # create schedules
+        if self.schedule_type == 'cosine':
+            self.scheduler = CosineSchedule(self.optimizer, K=self.schedule[-1])
+        elif self.schedule_type == 'decay':
+            self.scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=self.schedule, gamma=0.1)
 
     # returns optimizer for passed model
     def new_optimizer(self, model):
@@ -328,15 +339,7 @@ class NormalNN(nn.Module):
     def count_parameter(self):
         return sum(p.numel() for p in self.model.parameters())   
 
-    def cuda(self):
-        torch.cuda.set_device(self.config['gpuid'][0])
-        self.model = self.model.cuda()
-        self.criterion_fn = self.criterion_fn.cuda()
-        
-        # Multi-GPU
-        if len(self.config['gpuid']) > 1:
-            self.model = torch.nn.DataParallel(self.model, device_ids=self.config['gpuid'], output_device=self.config['gpuid'][0])
-        return self
+    
 
     def _get_device(self):
         device = 'cuda' if torch.cuda.is_available() else 'cpu'

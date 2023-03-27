@@ -39,7 +39,7 @@ def accuracy(output, target, topk=(1,)):
 def new_vs_old_class_comparison(new_classes, old_classes, class_features, labels_to_names, class_mapping, replay_size, dim=0, base_path = 'plots_and_tables/replay_of_/', plot_fig=True):
     
     # metrics = ["MSE", "MMD_linear", "MMD_rbf", "MMD_poly", "CKA_linear", "CKA_kernel"]
-    metrics = ["MMD_rbf"]
+    metrics = ["MMD_poly"]
     # paths_to_save_metric_results = [base_path+'new_vs_old_class_MSE.csv', base_path+'new_vs_old_class_MMD_linear.csv', base_path+'new_vs_old_class_MMD_rbf.csv', base_path+'new_vs_old_class_MMD_poly.csv', 
     #                                 base_path+'new_vs_old_class_CKA_linear.csv', base_path+'new_vs_old_class_CKA_kernel.csv']
     paths_to_save_metric_results = [base_path+'new_vs_old_class_MMD_rbf.csv']
@@ -157,7 +157,9 @@ def distribution_shift_comparison(class_new_features, class_old_features, per_cl
 def per_class_plots(per_class_accuracy, per_class_dist_shift, task_acc, labels_to_names, class_mapping, epochs_of_interest, replay_size, base_path = 'plots_and_tables/'):
 
     colors  = ['r','g', 'b', 'y', 'tomato', 'k', 'c', 'maroon', 'olive', 'm']
-    colors = {labels_to_names[class_mapping[k]]:c for k, c in zip(class_mapping.keys(), colors)} | { k: c for k, c in zip(task_acc.keys(), colors)}
+    colors_a = {labels_to_names[class_mapping[k]]:c for k, c in zip(class_mapping.keys(), colors)}
+    colors_b = { k: c for k, c in zip(task_acc.keys(), colors)}
+    colors = {**colors_a, **colors_b}
 
     def plot_utils(data):
         
@@ -198,7 +200,7 @@ def per_class_plots(per_class_accuracy, per_class_dist_shift, task_acc, labels_t
         plt.xlabel(xlabel)
         plt.xticks(xi, x)
 
-        plt.gca().set_ylim(bottom=y_lim_bottom, top=max_v+0.01)
+        plt.gca().set_ylim(bottom=y_lim_bottom, top=max_v*1.05)
         
         plt.ylabel(ylabel) 
         plt.title(title)

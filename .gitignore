@@ -1,3 +1,4 @@
 _outputs/
 __pycache__/
-
+data/
+plots_and_tables/

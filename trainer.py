@@ -63,20 +63,22 @@ class Trainer:
             raise ValueError('Dataset not implemented!')
 
         # load tasks
-        class_order = [0,1,4,5,6,7,8,9,2,3]
-        class_order_logits = [0,1,4,5,6,7,8,9,2,3]
-        if args.rand_split:
-            print('=============================================')
-            print('Shuffling....')
-            print('pre-shuffle:' + str(class_order))
-            if args.dataset == 'ImageNet':
-                np.random.seed(1993)
-                np.random.shuffle(class_order)
-            elif not self.seed == 0:
-                random.seed(self.seed)
-                random.shuffle(class_order)
-            print('post-shuffle:' + str(class_order))
-            print('=============================================')
+        class_order = [0,1,2,3,4,5,6,7,8,9]
+        class_order_logits = [0,1,2,3,4,5,6,7,8,9]
+        # class_order = [0,1,4,5,6,7,8,9,2,3]
+        # class_order_logits = [0,1,4,5,6,7,8,9,2,3]
+        # if args.rand_split:
+        #     print('=============================================')
+        #     print('Shuffling....')
+        #     print('pre-shuffle:' + str(class_order))
+        #     if args.dataset == 'ImageNet':
+        #         np.random.seed(1993)
+        #         np.random.shuffle(class_order)
+        #     elif not self.seed == 0:
+        #         random.seed(self.seed)
+        #         random.shuffle(class_order)
+        #     print('post-shuffle:' + str(class_order))
+        #     print('=============================================')
         self.tasks = []
         self.tasks_logits = []
         p = 0
@@ -193,7 +195,7 @@ class Trainer:
             self.learner.add_valid_output_dim(self.add_dim)
 
             # load dataloader
-            train_dataset_loader = DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, drop_last=False, num_workers=int(self.workers))
+            train_dataset_loader = DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, drop_last=True, num_workers=int(self.workers))
 
             if len(self.replay_dataset) > 0:
                 #print (self.batch_size_replay)
@@ -230,11 +232,12 @@ class Trainer:
                 model_save_dir = self.model_top_dir + '/models/repeat-'+str(self.seed+1)+'/task-'+self.task_names[i]+'/'
             if not os.path.exists(model_save_dir): os.makedirs(model_save_dir)
             
-            if self.learner_config['replay_type']!= 'random_sample' and self.learner_config['replay_type']!= 'gradient_cb':
-                avg_train_time, epochs_converge = self.learner.learn_incremental_batch(train_dataset_loader, replay_loader, self.train_dataset,  self.replay_dataset, task, model_save_dir, val_target, test_loader)
-                # replay_ixs_count = len(set(self.learner.replay_item_ixs_all_tasks))
-            else:
-                avg_train_time, epochs_converge = self.learner.learn_batch(static_replay_train_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+            avg_train_time, epochs_converge = self.learner.learn_batch(static_replay_train_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+            # if self.learner_config['replay_type']!= 'random_sample' and self.learner_config['replay_type']!= 'gradient_cb':
+            #     avg_train_time, epochs_converge = self.learner.learn_incremental_batch(train_dataset_loader, replay_loader, self.train_dataset,  self.replay_dataset, task, model_save_dir, val_target, test_loader)
+            #     # replay_ixs_count = len(set(self.learner.replay_item_ixs_all_tasks))
+            # else:
+            #     avg_train_time, epochs_converge = self.learner.learn_batch(static_replay_train_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
 
             # save model
             self.learner.save_model(model_save_dir)
@@ -268,7 +271,7 @@ class Trainer:
         tb.close()
         return avg_metrics, np.array(oracle_acc)
 
-    def summarize_acc(self, acc_dict, acc_table, acc_table_pt):
+    def summarize_acc(self, acc_dict, acc_table, acc_table_pt, acc_table_global):
 
         # unpack dictionary
         avg_acc_all = acc_dict['global']
@@ -286,7 +289,7 @@ class Trainer:
                 cls_acc_sum += acc_table[val_name][train_name]
                 avg_acc_pt[j,i,self.seed] = acc_table[val_name][train_name]
                 avg_acc_pt_local[j,i,self.seed] = acc_table_pt[val_name][train_name]
-            avg_acc_history[i] = cls_acc_sum / (i + 1)
+            avg_acc_history[i] = acc_table_global[i]
 
         # Gather the final avg accuracy
         avg_acc_all[:,self.seed] = avg_acc_history
@@ -294,13 +297,16 @@ class Trainer:
         # repack dictionary and return
         return {'global': avg_acc_all,'pt': avg_acc_pt,'pt-local': avg_acc_pt_local}
     
-    def task_eval(self, t_index, local=False):
+    def task_eval(self, t_index, local=False, global_eval=False):
 
         val_name = self.task_names[t_index]
         print('validation split name:', val_name)
 
         # eval
-        self.test_dataset.load_dataset(t_index, train=True)
+        if global_eval:
+            self.test_dataset.load_dataset(t_index, train=False)
+        else:
+            self.test_dataset.load_dataset(t_index, train=True)
         test_loader  = DataLoader(self.test_dataset, batch_size=self.batch_size, shuffle=False, drop_last=False, num_workers=self.workers)   ## MY CHANGES
         if local:
             return self.learner.validation(test_loader, task_in = self.tasks_logits[t_index])
@@ -320,6 +326,7 @@ class Trainer:
         r_matrix = np.zeros((self.max_task, self.max_task))
 
         tb = SummaryWriter(self.log_dir+'/runs')
+        acc_table_global = []
         for i in range(self.max_task):
 
             # load model
@@ -346,9 +353,12 @@ class Trainer:
                 tb.add_scalar('acc-pt-local',metric_table_local['acc'][val_name][self.task_names[i]], j)
                 r_matrix[i][j] = metric_table_local['acc'][val_name][self.task_names[i]]
 
+            # global acc evaluate
+            acc_table_global.append(self.task_eval(j, global_eval=True))
+
         # summarize metrics
         tb.close()
-        avg_metrics['acc'] = self.summarize_acc(avg_metrics['acc'], metric_table['acc'],  metric_table_local['acc'])
+        avg_metrics['acc'] = self.summarize_acc(avg_metrics['acc'], metric_table['acc'],  metric_table_local['acc'],acc_table_global)
 
         return avg_metrics, r_matrix
 
