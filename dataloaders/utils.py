@@ -36,7 +36,48 @@ dataset_stats = {
                 }
 
 # transformations
-def get_transform(dataset='cifar100', phase='test', aug=True, dgr=False):
+
+def get_transform_(dataset='cifar100', phase='test', aug=True, resize_imnet=False):
+    transform_list = []
+    # get out size
+    crop_size = dataset_stats[dataset]['size']
+
+    # get mean and std
+    dset_mean = (0.0,0.0,0.0) # dataset_stats[dataset]['mean']
+    dset_std = (1.0,1.0,1.0) # dataset_stats[dataset]['std']
+
+    if dataset == 'ImageNet32' or dataset == 'ImageNet84':
+        transform_list.extend([
+            transforms.Resize((crop_size,crop_size))
+        ])
+
+    if phase == 'train':
+        transform_list.extend([
+            transforms.RandomResizedCrop(224),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(dset_mean, dset_std),
+                            ])
+    else:
+        if dataset.startswith('ImageNet') or dataset == 'DomainNet':
+            transform_list.extend([
+                transforms.Resize(256),
+                transforms.CenterCrop(224),
+                transforms.ToTensor(),
+                transforms.Normalize(dset_mean, dset_std),
+                                ])
+        else:
+            transform_list.extend([
+                transforms.Resize(224),
+                transforms.ToTensor(),
+                transforms.Normalize(dset_mean, dset_std),
+                                ])
+
+
+    return transforms.Compose(transform_list)
+
+
+def get_transform(dataset='cifar100', phase='test', aug=True, dgr=False): ## TODO for non-pretrained, select correct get_transform automatically
     transform_list = []
 
     # get crop size
@@ -85,7 +126,7 @@ def get_transform(dataset='cifar100', phase='test', aug=True, dgr=False):
 
     return transforms.Compose(transform_list)
 
-def get_transformnew(dataset='cifar100', phase='test', aug=True, resize_imnet=False):
+def get_transformold(dataset='cifar100', phase='test', aug=True, resize_imnet=False):
     transform_list = []
     # get out size
     crop_size = dataset_stats[dataset]['size']

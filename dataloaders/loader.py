@@ -10,7 +10,7 @@ import torch
 import torch.nn.functional as F
 from datasets import concatenate_datasets
 import copy
-
+import collections
 from utils.utils import getBack, near_split, ratio_breakdown
     
 class DualDataLoader(object):
@@ -73,37 +73,94 @@ class ReplayDataset(torch.utils.data.Dataset):
         
         self.data = []
         self.targets= []
-        self.weights = []
+        self.sample_weights = []
+        self.class_weights = []
+        # self.weights=[]
 
-    def extend(self, dataset, class_replay_counts=None, class_replay_ratios=None, class_replay_weights=None):
+    def extend(self, dataset, class_replay_counts=None, class_replay_ratios=None, class_replay_weights=None, weights=None, replay_strategy=''):
         
         to_replay_class_count = {}
         self.class_mapping = dataset.class_mapping
 
-        
-        for data, target in zip(dataset.data, dataset.targets):
+        for i, (data, target) in enumerate(zip(dataset.data, dataset.targets)):
             if class_replay_ratios is not None:
                 self.data.extend([data for _ in range(class_replay_ratios[self.class_mapping[target]])])
                 self.targets.extend([target for _ in range(class_replay_ratios[self.class_mapping[target]])])
             elif class_replay_weights is not None:
                 self.data.append(data)
                 self.targets.append(target)
-                if class_replay_weights:
-                    self.weights.append(class_replay_weights[self.class_mapping[target]])
-            elif class_replay_counts is not None: 
-                if class_replay_counts[self.class_mapping[target]] == 5000:
-                    self.data.append(data)
-                    self.targets.append(target)
-                    continue
-                if target not in to_replay_class_count.keys():
-                    to_replay_class_count[target] = 0
-                if to_replay_class_count[target] < class_replay_counts[self.class_mapping[target]]:
-                    self.data.append(data)
-                    self.targets.append(target)
-                    to_replay_class_count[target] +=1
+                if class_replay_weights is not None and weights is not None:
+                    self.sample_weights.append(weights[i])
+                    self.class_weights.append(class_replay_weights[self.class_mapping[target]])
+                elif weights is not None:
+                    self.sample_weights.append(weights[i])
+                elif class_replay_weights is not None:
+                    self.class_weights.append(class_replay_weights[self.class_mapping[target]])
+                # self.weights.append(1)
             else:
-                raise Exception("Requires one of class_replay_ratios, class_replay_weights or class_replay_counts to add to the Replay dataset!!")
+                raise Exception("Requires one of class_replay_ratios, class_replay_weights to add to the Replay dataset!!")
+        
                
+    def update_weights(self, batch_new_weights, indices):
+        """
+        Update the weights for the last batch.
+        The indices corresponding the the weights in batch_new_weights
+        should be the indices that have been copied into self.batch
+        :param batch_new_weights: float or double array; new weights value for the last batch.
+        :param indices: int list; indices of the samples to update.
+        """
+        assert len(indices) == batch_new_weights.size()[0], "number of weights in " \
+                                                               "input batch does not " \
+                                                               "correspond to the number " \
+                                                               "of indices."
+        # Update the weights for all the indices in self.batch
+        # for idx, new_weight in zip(indices, batch_new_weights):
+            
+        #     # self.weights[idx]= ((self.weights[idx]/self.class_weights[idx])*new_weight) if len(self.class_weights)>0 else new_weight  
+        #     self.sample_weights[idx] = new_weight
+
+        # print (self.weights)
+        # print (indices)
+        # print (batch_new_weights)
+        try:
+            self.sample_weights = torch.Tensor(self.sample_weights).cuda()
+        except:
+            pass
+        self.sample_weights[indices] = batch_new_weights
+        self.sample_weights = self.sample_weights.cpu().tolist()
+
+    def update_all_weights(self, class_replay_weights):
+
+        for i, (data, target) in enumerate(zip(self.data, self.targets)):
+            self.class_weights[i] = class_replay_weights[self.class_mapping[target]]
+
+    def get_weight_distribution(self, replay_strategy=''):
+        # Apply softmax to the weights vector.
+        # This seems to be the most numerically stable way
+        # to compute the softmax
+        
+        self.min_val = True if 'min' in replay_strategy else False 
+        # weights= torch.Tensor(self.class_weights)
+
+        
+        if self.min_val:
+            weights = 1 / (torch.Tensor(self.sample_weights) + 1e-7)
+        else:
+            weights = torch.Tensor(self.sample_weights)
+    
+        # weights/= weights.mean()
+        # self.weights = F.log_softmax(
+        #     1 * weights, dim=0).data.exp()
+        self.weights= (weights-weights.min())/(weights.max()-weights.min())
+        # self.weights =weights.exp()
+
+        # print ('1: ', self.weights)
+        
+        # print ('2: ', self.weights)
+        self.weights = F.log_softmax(
+            self.weights, dim=0).data.exp()
+        self.weights*=torch.Tensor(self.class_weights)
+        # print ('3: ', collections.Counter(self.weights.cpu().numpy())[0])
 
     def empty(self) -> None:
         """
@@ -169,124 +226,6 @@ class ReplayDataset(torch.utils.data.Dataset):
 
     def __len__(self):
         return len(self.data)
-
-
-# For active replay dataloader, need to make a dataloader object which acts like a replay dataloader in rehearsal.py but returns
-# active dynamic replay batches not random
-class BatchSampler(object): ## TODO OPTIMIZE!! super slow
-    def __init__(self, dataset, batch_size, new_classes, old_classes, class_counts=None):
-        super(BatchSampler, self).__init__()
-        self.dataset = dataset
-        self.class_counts = class_counts
-        self.batch_size = batch_size
-        
-        self.old_classes = old_classes
-        self.new_classes = new_classes
-        self.classes = self.old_classes+self.new_classes
-
-        self.class_mapping = { v: k for k,v in self.dataset.class_mapping.items() if k!=-1}
-        self.labels_to_names = { v: k for k,v in self.dataset.class_to_idx.items()}      
-
-        self.init_params(class_counts) 
-
-    def init_params(self, class_ratios=None, class_counts=None):
-
-        if hasattr(self, 'indices'):
-            seen_indices = []
-            seen_labels = []
-            for i,y in enumerate(self.dataset.targets):
-                if i not in self.indices:
-                    seen_indices.append(i)
-                    seen_labels.append(self.dataset.class_mapping[y])
-            self.indices.extend(seen_indices)
-            self.labels.extend(seen_labels)
-        else:
-            self.labels = [ self.dataset.class_mapping[y] for y in  self.dataset.targets]
-            self.indices = [i for i in range(len(self.labels))]
-
-        self.class_counts = class_counts
-        
-        if self.class_counts is None:
-            self.compute_class_counts(class_ratios)
-
-        self.goal = False
-        self.cl_ind = {}
-        self.new_cl_filled= []   
-        self.batch_no=0          
-            
-    def compute_class_counts(self, class_ratios=None):
-
-        if len(self.old_classes)==0:
-            self.class_counts=  { i: c for i, c in enumerate(near_split(int(self.batch_size/2), len(self.new_classes))) }
-        else:
-            if class_ratios is not None:
-                self.class_ratios = class_ratios
-            else:
-                # self.class_ratios = { 0: 3, 1: 1, 2: 6, 3: 8, 4: 6, 5: 3, 6: 3, 7: 1, 8: 6, 9: 8} ## default
-                raise Exception("Both Class counts & Class ratios cannot be None for using custom batch sampler")
-                
-            class_ratios_old = {k: self.class_ratios[k] for k in self.class_ratios if k in self.old_classes}
-            class_ratios_new = {k: self.class_ratios[k] for k in self.class_ratios if k in self.new_classes}
-
-            factor = float(sum(class_ratios_old.values()))
-            class_ratios_old = {k: class_ratios_old[k]/factor for k in class_ratios_old}
-            factor = float(sum(class_ratios_new.values()))
-            class_ratios_new = {k: class_ratios_new[k]/factor for k in class_ratios_new}
-
-            self.class_counts= {k: x for k,x in zip(class_ratios_old, ratio_breakdown(int(self.batch_size/2), list(class_ratios_old.values())) )} \
-                            | {k: x for k,x in zip(class_ratios_new, ratio_breakdown(int(self.batch_size/2), list(class_ratios_new.values())) )}
-
-    def get_data(self):
-             
-        ind= []
-        labels = []
-        counts= {}
-        filled = set()
-        
-        for i, y in zip(self.indices, self.labels):
-
-            if len(filled) == len(self.class_counts):
-                break
-                
-            if y not in counts:
-                counts[y]=0
-            if y not in self.cl_ind:
-                self.cl_ind[y]= []
-            if counts[y] < self.class_counts[y]:
-                self.cl_ind[y].append(i)
-                ind.append(i)
-                labels.append(y)
-                counts[y]+=1
-            else:
-                filled.add(y)
-
-        for i,y in zip(ind, labels):
-            self.labels.remove(y)
-            self.indices.remove(i)
-
-        for cl in self.classes:
-            if cl not in set(self.labels):
-                if cl in self.new_classes:
-                    self.new_cl_filled.append(cl)
-                self.indices.extend(self.cl_ind[cl])
-                self.labels.extend([cl for _ in range(len(self.cl_ind[cl]))])
-
-        if set(self.new_cl_filled) == set(self.new_classes):
-            self.goal = True
-
-        if (self.batch_no==0):
-            print ('class_counts: ', {self.labels_to_names[self.class_mapping[cl]]: counts[cl] for cl in counts})
-        return ind
-
-    def __iter__(self):
-        
-        batch_inds = []
-        while not self.goal:
-            batch_ind = self.get_data()
-            self.batch_no+=1
-            batch_inds.append(batch_ind)
-            yield batch_ind
-        # return iter(batch_inds)
 
 class iDataset(data.Dataset):
     

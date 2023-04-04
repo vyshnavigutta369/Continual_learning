@@ -1,0 +1,24 @@
+title:
+  ImageNet-R, 20 classes per task
+save_dir:
+  ImageNet-R
+save_name:
+  oct-10
+results:
+  1:
+    file: _outputs/Mar16/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base_temp/
+    name: Dual-Prompt
+  2:
+    file: _outputs/Mar16/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_128_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base_temp/
+    name: Dual-Prompt (BCE)
+  3:
+    file: _outputs/Mar16/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_128_shift_2/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base_temp/
+    name: Atte-Prompt
+split_size:
+  20
+num_tasks:
+  10
+xs:
+  Number of Accumulated Classes
+ys:
+  Test Accuracy (%)

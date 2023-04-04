@@ -5,13 +5,13 @@ DEFAULTEXP=-1
 EXP_FLAG=${1:-$DEFAULTEXP}
 
 # gpu's to use - can do 1 per experiment for cifar
-GPUID=2
+GPUID=0
 
 # benchmark settings
 DATE=Mar16
-DATASET=CIFAR100
-FIRST_SPLIT=10
-OTHER_SPLIT=10
+DATASET=CIFAR10
+FIRST_SPLIT=8
+OTHER_SPLIT=2
 
 ###############################################################
 
@@ -23,15 +23,24 @@ MAXTASK=-1 # run every task
 
 # hard coded inputs
 REPEAT=1
-SCHEDULE="250" # epochs
+SCHEDULE="10" # epochs
+
 SCHEDULE_TYPE=cosine
-MODELNAME=resnet18 
+MODELNAME=resnet18
+MODELTYPE=resnet
 BS=128 # batch size
+LR=0.005 # learning rate
+
+# SCHEDULE_TYPE=decay
+# MODELNAME=vit_pt_imnet
+# MODELTYPE=zoo
+# LR=0.00001
+# BS=16 # batch size
 
 WD=0 # weight decay
 MOM=0.9 # momentum
 OPT="SGD" # optimizer
-LR=0.005 # learning rate
+
 
 OLD_VS_NEW=${FIRST_SPLIT}v${OTHER_SPLIT}
 
@@ -67,7 +76,7 @@ do
                         --schedule $SCHEDULE --schedule_type $SCHEDULE_TYPE  --batch_size $BS --loss_type $LOSS_TYPE --replay_type $REPLAY_TYPE \
                         --optimizer $OPT --lr $LR --momentum $MOM --weight_decay $WD \
                         --overwrite $OVERWRITE --max_task $MAXTASK \
-                        --model_name $MODELNAME --model_type resnet \
+                        --model_name $MODELNAME --model_type $MODELTYPE \
                         --learner_type default --learner_name NormalNN --oracle_flag \
                         --log_dir ${OUTDIR} --dual_dataloader True 
 

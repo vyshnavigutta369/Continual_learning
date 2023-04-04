@@ -52,6 +52,7 @@ def create_args():
                         help="decay")
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--batch_size_replay', type=int, default=64)
+    parser.add_argument('--num_replay_samples', type=int, default=-1)
 
     # CL Args
     parser.add_argument('--first_split_size', type=int, default=2)
@@ -71,16 +72,19 @@ def create_args():
     # rehearsal Args
     parser.add_argument('--loss_type', type=str, default='base', help="base, pred_kd, ewc")
     parser.add_argument('--replay_type', type=str, default='random_sample', help="random_sample, gradient_cb")
+    parser.add_argument('--replay_strategy', type=str, default='', help="replay_strategy")
     parser.add_argument('--oracle_dir', type=str, default=None, help="n/a")
     parser.add_argument('--ub_rat', type=float, default=1.0)
 
-    parser.add_argument('--weight_with', type=int, default=0, help='weight_with')
+    parser.add_argument('--class_weighting_with', type=int, default=1, help='class_weighting_with')
     parser.add_argument('--weight_reverse', type=bool,default=False, help='weight_shift_reverse')
     parser.add_argument('--with_class_balance', type=int, default=0, help='with_class_balance')
 
     parser.add_argument('--dual_dataloader', type=bool, default=False, help='dual_dataloader')
     parser.add_argument('--weighted_sampler', type=bool, default=False, help='weighted_sampler')
-
+    parser.add_argument('--custom_replay_loader', type=bool, default=False, help='custom_replay_loader')
+    parser.add_argument('--batch_sampler', type=bool, default=False, help='batch_sampler')
+    
     parser.add_argument('--class_ratios', type=str, default=None, help='class_ratios')
 
     return parser
@@ -206,6 +210,7 @@ if __name__ == '__main__':
                     if mkey == 'avg_acc_scores' or  mkey == 'fwt_scores' or mkey == 'bwt_scores' or mkey == 'gamma_t':
                         result = avg_metrics[mkey]
                         save_file = m_dir+mkey+'.txt'
+                        # print (result)
                         with open(save_file, "w") as f:
                             f.write(str(result))
                         continue

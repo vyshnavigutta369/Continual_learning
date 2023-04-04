@@ -5,7 +5,7 @@ import numpy as np
 import random
 from collections import OrderedDict
 import dataloaders
-from torch.utils.data import DataLoader,  WeightedRandomSampler
+from torch.utils.data import DataLoader,  WeightedRandomSampler, RandomSampler
 import learners
 import yaml
 from torch.utils.tensorboard import SummaryWriter
@@ -97,8 +97,12 @@ class Trainer:
             self.max_task = len(self.task_names)
 
         # datasets and dataloaders
-        train_transform = dataloaders.utils.get_transform(dataset=args.dataset, phase='train', aug=args.train_aug)
-        test_transform  = dataloaders.utils.get_transform(dataset=args.dataset, phase='test', aug=args.train_aug)
+        if args.model_name!= 'vit_pt_imnet':
+            train_transform = dataloaders.utils.get_transform(dataset=args.dataset, phase='train', aug=args.train_aug)
+            test_transform  = dataloaders.utils.get_transform(dataset=args.dataset, phase='test', aug=args.train_aug)
+        else:
+            train_transform = dataloaders.utils.get_transform_(dataset=args.dataset, phase='train', aug=args.train_aug) ## for pretrained modeks
+            test_transform  = dataloaders.utils.get_transform_(dataset=args.dataset, phase='test', aug=args.train_aug)
         self.train_dataset = Dataset(args.dataroot, train=True, tasks=self.tasks,                       
                             download_flag=True, transform=train_transform, 
                             seed=self.seed, validation=args.validation)
@@ -128,6 +132,7 @@ class Trainer:
                         'temp': args.temp,
                         'out_dim': num_classes,
                         'overwrite': args.overwrite == 1,
+                        'workers': args.workers,
                         'model_log_dir': args.log_dir,
                         'mu': args.mu,
                         'beta': args.beta,
@@ -139,15 +144,19 @@ class Trainer:
                         'top_k': self.top_k,
                         'loss_type': args.loss_type,
                         'replay_type': args.replay_type,
+                        'replay_strategy': args.replay_strategy,
                         'batch_size_replay': args.batch_size_replay,
+                        'num_replay_samples': args.num_replay_samples,
                         'ub_rat': args.ub_rat,
                         'buffer_update': args.buffer_update,
                         'reuse_replay_ixs': args.reuse_replay_ixs,
-                        'weight_with': args.weight_with,
+                        'class_weighting_with': args.class_weighting_with,
                         'weight_reverse': args.weight_reverse,
                         'with_class_balance': args.with_class_balance,
                         'dual_dataloader': args.dual_dataloader,
                         'weighted_sampler': args.weighted_sampler,
+                        'custom_replay_loader': args.custom_replay_loader,
+                        'batch_sampler': args.batch_sampler,
                         'class_ratios': args.class_ratios,
                         'new_classes': None,
                         'old_classes': None
@@ -222,17 +231,6 @@ class Trainer:
             else:
                 train_dataset_loader = DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, drop_last=False, num_workers=int(self.workers))
 
-            if len(self.replay_dataset) > 0:
-                if self.learner_config['weighted_sampler']:
-                    sampler = WeightedRandomSampler(self.replay_dataset.weights, num_samples=len(self.replay_dataset), replacement=True)
-                    replay_loader = DataLoader(self.replay_dataset, batch_size=self.batch_size, shuffle=False, drop_last=False, num_workers=int(self.workers), sampler=sampler)
-                else:
-                    replay_loader = DataLoader(self.replay_dataset, batch_size=self.batch_size, shuffle=True, drop_last=False, num_workers=int(self.workers))
-            else:
-                replay_loader = None
-
-            ## MY CHANGES 
-            static_replay_train_loader = dataloaders.DualDataLoader(train_dataset_loader, replay_loader)
             
             # get val target
             if self.oracle_dir is None:
@@ -254,15 +252,19 @@ class Trainer:
                 model_save_dir = self.model_top_dir + '/models/repeat-'+str(self.seed+1)+'/task-'+self.task_names[i]+'/'
             if not os.path.exists(model_save_dir): os.makedirs(model_save_dir)
             
-            if self.learner_config['dual_dataloader'] or self.learner_config['weighted_sampler']:
+            # num_replay_samples = self.learner_config['num_replay_samples'] if self.learner_config['num_replay_samples']!=-1 else len(self.replay_dataset)
+            if self.learner_config['dual_dataloader']:
+                if len(self.replay_dataset) > 0:
+                    replay_loader = DataLoader(self.replay_dataset, batch_size=self.batch_size, drop_last=False, num_workers=int(self.workers))    
+                else:
+                    replay_loader = None
+
+                static_replay_train_loader = dataloaders.DualDataLoader(train_dataset_loader, replay_loader)
+
                 avg_train_time, epochs_converge = self.learner.learn_batch(static_replay_train_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
             else:
-                train_replay_dataset = copy.deepcopy(self.train_dataset)
-                train_replay_dataset.extend(self.replay_dataset)
-                batch_sampler = dataloaders.BatchSampler(train_replay_dataset, self.batch_size*2, list(set(self.train_dataset.targets)), list(set(self.replay_dataset.targets)) )
-                dynamic_replay_train_loader = DataLoader(train_replay_dataset, batch_sampler=batch_sampler)
-                avg_train_time, epochs_converge = self.learner.learn_batch(dynamic_replay_train_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
-
+                avg_train_time, epochs_converge = self.learner.learn_batch(train_dataset_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+            
             # save model
             self.learner.save_model(model_save_dir)
 

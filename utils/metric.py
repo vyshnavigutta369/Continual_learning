@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn import metrics
 import matplotlib.pyplot as plt
 from utils.visualisation import plot_bar
-
+import os
 
 """
 @inproceedings{Hsu18_EvalCL,
@@ -43,6 +43,8 @@ def new_vs_old_class_comparison(new_classes, old_classes, class_features, labels
     
     # metrics = ["MSE", "MMD_linear", "MMD_rbf", "MMD_poly", "CKA_linear", "CKA_kernel"]
    
+    if not os.path.exists(base_path): os.makedirs(base_path)
+
     metrics = ["MMD_poly"]
     paths_to_save_metric_results = [base_path+'new_vs_old_class_' + metric + '.csv' for metric in metrics]
     classes = new_classes.union(old_classes)
@@ -118,50 +120,47 @@ def new_vs_old_class_comparison(new_classes, old_classes, class_features, labels
 
         # { class_mapping[labels_to_names[k]]: new_vs_old_class[k] for k in new_vs_old_class}
         new_vs_old_class = { class_mapping[labels_to_names[k]]: { class_mapping[labels_to_names[k2]]: new_vs_old_class[k][k2] for k2 in new_vs_old_class[k]} for k in new_vs_old_class}
-        return new_vs_old_class
+        sim_to_new_cls = np.array([[ new_vs_old_class[k][cl] for cl in new_vs_old_class[k]] for k in new_vs_old_class]).mean(0)
+        return new_vs_old_class, sim_to_new_cls
         
 
-def distribution_shift_comparison(class_new_features, class_old_features, per_class_correct_predictions):
+def distribution_shift_comparison(labels_to_names, class_mapping, class_new_features, class_old_features, per_class_correct_predictions, per_class_accuracy, per_class_dist_shift, save_dir):
 
     # metrics = ["MSE", "MMD_linear", "MMD_rbf", "MMD_poly", "CKA_linear", "CKA_kernel"]
-    metrics = ["MMD_poly"]
     
     # print ('per_class_total_samples:', per_class_total_samples)
-    per_class_accuracy = {k: float(per_class_correct_predictions[k])/len(class_old_features[k]) for k in per_class_correct_predictions}
-    per_class_dist_shift = {}
+    per_class_accuracy_epoch = {k: float(per_class_correct_predictions[k])/len(class_old_features[k]) for k in per_class_correct_predictions}
+    per_class_dist_shift_epoch = {}
 
-    for metric in metrics:
-        if metric == "MSE":
-            per_class_dist_shift[metric] = {k: float(MSE(torch.Tensor(class_new_features[k]), torch.Tensor(class_old_features[k]), dim=1).sum()) for k in per_class_correct_predictions}
-        elif 'MMD' in metric:
-            MMD_kernel  = MMD()
-            per_class_new_features = { k: torch.stack(class_new_features[k]) for k in class_new_features}
-            per_class_old_features = { k: torch.stack(class_old_features[k]) for k in class_old_features}
-            # per_class_new_features = { k: torch.Tensor(class_new_features[k]) for k in class_new_features}
-            # per_class_old_features = { k: torch.Tensor(class_old_features[k]) for k in class_old_features}
-            if metric == 'MMD_linear':
-                per_class_dist_shift[metric] = {k: float(MMD_kernel.mmd_linear(per_class_new_features[k], per_class_old_features[k]).sum()) for k in per_class_correct_predictions}
-            elif metric == 'MMD_rbf':
-                per_class_dist_shift[metric] = {k: float(MMD_kernel.mmd_rbf(per_class_new_features[k], per_class_old_features[k]).sum()) for k in per_class_correct_predictions}
-            else:
-                per_class_dist_shift[metric] = {k: float(MMD_kernel.mmd_poly(per_class_new_features[k], per_class_old_features[k]).sum()) for k in per_class_correct_predictions}
-        elif 'CKA' in metric:
-            CKA_kernel  = CKA()
-            per_class_new_features = { k: torch.Tensor(class_new_features[k]) for k in class_new_features}
-            per_class_old_features = { k: torch.Tensor(class_old_features[k]) for k in class_old_features}
-            if metric == 'CKA_linear':
-                per_class_dist_shift[metric] = {k: float(CKA_kernel.linear_CKA(per_class_new_features[k], per_class_old_features[k]).sum()) for k in per_class_correct_predictions}
-            elif metric == 'CKA_kernel':
-                per_class_dist_shift[metric] = {k: float(CKA_kernel.kernel_CKA(per_class_new_features[k], per_class_old_features[k]).sum()) for k in per_class_correct_predictions}
+    MMD_kernel  = MMD()
+    per_class_new_features = { k: torch.stack(class_new_features[k]) for k in class_new_features}
+    per_class_old_features = { k: torch.stack(class_old_features[k]) for k in class_old_features}
+    # per_class_new_features = { k: torch.Tensor(class_new_features[k]) for k in class_new_features}
+    # per_class_old_features = { k: torch.Tensor(class_old_features[k]) for k in class_old_features}
 
-        if sum(per_class_dist_shift[metric].values())!=0:
-            factor=1.0/sum(per_class_dist_shift[metric].values())
-            for k in per_class_dist_shift[metric]:
-                per_class_dist_shift[metric][k] = (per_class_dist_shift[metric][k]*factor)
+    per_class_dist_shift_epoch = {k: float(MMD_kernel.mmd_poly(per_class_new_features[k], per_class_old_features[k], return_diag=True)) for k in per_class_correct_predictions}
+
+    if sum(per_class_dist_shift_epoch.values())!=0:
+        factor=1.0/sum(per_class_dist_shift_epoch.values())
+        for k in per_class_dist_shift_epoch:
+            per_class_dist_shift_epoch[k] = (per_class_dist_shift_epoch[k]*factor)
         
-    # per_class_accuracy = {k: per_class_accuracy for k in metrics}
+    # per_class_accuracy_epoch = {k: per_class_accuracy_epoch for k in metrics}
     
-    return per_class_accuracy, per_class_dist_shift
+    per_class_accuracy = { key: per_class_accuracy.get(key,[])+[per_class_accuracy_epoch.get(key,[])] for key in per_class_accuracy_epoch.keys()}
+    # per_class_dist_shift = { key: { key2: per_class_dist_shift[key].get(key2,[])+[per_class_dist_shift_epoch[key].get(key2,[])] for key2 in per_class_dist_shift_epoch[key]} for key in per_class_dist_shift_epoch }
+    per_class_dist_shift = { key: per_class_dist_shift.get(key,[])+[per_class_dist_shift_epoch.get(key,[])] for key in per_class_dist_shift_epoch.keys()}
+
+    # print (per_class_accuracy_epoch)
+    # print (per_class_accuracy)
+    # print (per_class_dist_shift)
+    
+    # print ({ labels_to_names[class_mapping[cl]]: per_class_dist_shift_epoch['MMD_poly'][cl] for cl in per_class_dist_shift_epoch['MMD_poly']})
+    # print ({ labels_to_names[class_mapping[cl]]: per_class_dist_shift['MMD_poly'][cl] for cl in per_class_dist_shift['MMD_poly']})
+    np.save(save_dir+'_after/per_class_accuracy.npy', per_class_accuracy)
+    np.save(save_dir+'_after/per_class_dist_shift.npy', per_class_dist_shift) 
+
+    return per_class_accuracy_epoch, per_class_dist_shift_epoch, per_class_accuracy, per_class_dist_shift
                     
 
 def MSE(input1, input2, dim, p=2):
@@ -194,7 +193,7 @@ class MMD(object):
             return ((gamma*(torch.einsum("abc, dec -> adbe", X, Y)) + coef0) ** degree)
         return ((gamma*(X @ Y.transpose(0,1)) + coef0) ** degree)
 
-    def mmd_poly(self, X, Y, degree=2, gamma=1, coef0=0, labels_end_ind=None):
+    def mmd_poly(self, X, Y, degree=2, gamma=1, coef0=0, labels_end_ind=None, return_diag=False):
         """MMD using polynomial kernel (i.e., k(x,y) = (gamma <X, Y> + coef0)^degree)
         Arguments:
             X {[n_sample1, dim]} -- [X matrix]
@@ -221,7 +220,14 @@ class MMD(object):
 
         
         if labels_end_ind is None:
-            return XX.mean() + YY.mean() - 2 * XY.mean()
+            # print (X.shape)
+            # print (Y.shape)
+            # print ((XX + YY- 2 * XY).shape)
+            if return_diag:
+                # print ('yess')
+                return XX.diag().mean()+YY.diag().mean()-2*XY.diag().mean()
+            else:
+                return XX.mean() + YY.mean() - 2 * XY.mean()
        
         no_of_classes = labels_end_ind.shape[0]
         Dis = torch.zeros(no_of_classes, no_of_classes)
