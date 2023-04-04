@@ -23,19 +23,19 @@ MAXTASK=-1 # run every task
 
 # hard coded inputs
 REPEAT=1
-SCHEDULE="10" # epochs
+SCHEDULE="1000" # epochs
 
-SCHEDULE_TYPE=cosine
-MODELNAME=resnet18
-MODELTYPE=resnet
-BS=128 # batch size
-LR=0.005 # learning rate
+# SCHEDULE_TYPE=cosine
+# MODELNAME=resnet18
+# MODELTYPE=resnet
+# BS=128 # batch size
+# LR=0.005 # learning rate
 
-# SCHEDULE_TYPE=decay
-# MODELNAME=vit_pt_imnet
-# MODELTYPE=zoo
-# LR=0.00001
-# BS=16 # batch size
+SCHEDULE_TYPE=decay
+MODELNAME=vit_pt_imnet
+MODELTYPE=zoo
+LR=0.00001
+BS=16 # batch size
 
 WD=0 # weight decay
 MOM=0.9 # momentum

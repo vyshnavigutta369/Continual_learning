@@ -160,9 +160,11 @@ class TR(NormalNN):
 
             self.init_params_task()
 
-            for epoch in range(0,self.config['schedule'][-1]+1):
+            epoch=0
+
+            while epoch < self.config['schedule'][-1]+1:
                 # print ('epoch: ', epoch)
-                self.epoch=epoch
+                
                 
                 if epoch > 1: 
                     self.scheduler.step()
@@ -175,83 +177,84 @@ class TR(NormalNN):
 
                 self.init_params_epoch()
 
-                if epoch>0:
-                    
-                    for i, data  in enumerate(self.train_loader):
-                        
-                        if self.is_dual_data_loader:
-                            x, y, indices, x_r, y_r, replay_indices = data
-                        else:
-                            x, y, indices = data
-                            if self.replay:
-                                x_r, y_r, replay_indices =  next(self.replay_loader_iter)
-                                
-
-                        self.init_params_batch()
-                                 
-                        self.model.train()
-                        
-                        if self.gpu:
-                            x = x.cuda()
-                            y = y.cuda()
-                            
-                            try:
-                                x_r = x_r.cuda()
-                                y_r = y_r.cuda()
-                                x_tot = torch.cat([x, x_r])
-                                y_tot = torch.cat([y, y_r])
-                                indices = torch.cat([indices, replay_indices])
-                            except:
-                                x_tot = x
-                                y_tot = y
-                                
-                        # for l,ind in zip(y_tot, indices):
-                        #     self.check_replay_counts[int(l)].add(int(ind))
-                        # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})           
-                        
-                        output, new_feats = self.forward(x_tot, pen=True)
-                        if self.replay:
-                            y_hat, _, old_features = self.previous_teacher.generate_scores(x_tot, allowed_predictions=list(range(self.last_valid_out_dim)))
-                            loss = self.update_model(output, y_tot, new_feats, old_features, y_hat)
-                        else:
-                            loss = self.update_model(output, y_tot)
-                        
-                        self.batch_data_weighting(output, y_tot, indices, len(x))
-
-                        if self.with_class_balance==1:
-                            x_bl, y_bl = self.get_class_balanced_data(indices, x_tot, y_tot)
-                            output_bl = self.forward(x_bl, balanced=True)
-                            loss += self.update_model(output_bl, y_bl, new_optimizer=True)
-                        
-                        # measure elapsed time
-                        self.batch_time.update(batch_timer.toc())  
-                        batch_timer.tic()
-                        
-                        # measure accuracy and record loss
-                        y = y.detach()
-                        # accumulate_acc(output[:len(y)], y, acc, topk=(self.top_k,))
-                        losses.update(loss, y.size(0)) 
-                        batch_timer.tic()
-                        self.step_count+=1
-                        
-                        # if self.replay: 
-                        #     self.validation(val_loader, train_val=True)         
-                        
-                # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})
-                self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
-
-                ## PLOTS AND TABLES
                 
-                # Evaluate the performance of current task
-                if val_loader is not None:
-                    self.val_method_task_acc = self.validation(val_loader, train_val=True)
-                    self.analyze()
+                for i, data  in enumerate(self.train_loader):
+                    
+                    epoch += 1
+                    self.epoch=epoch
+
+                    if epoch >= self.config['schedule'][-1]+1:
+                        break
+
+                    if self.is_dual_data_loader:
+                        x, y, indices, x_r, y_r, replay_indices = data
+                    else:
+                        x, y, indices = data
+                        if self.replay:
+                            x_r, y_r, replay_indices =  next(self.replay_loader_iter)
+                            
+
+                    self.init_params_batch()
+                                
+                    self.model.train()
+                    
+                    if self.gpu:
+                        x = x.cuda()
+                        y = y.cuda()
                         
-                # reset
-                losses = AverageMeter()
-                losses_bl = AverageMeter()
-                acc = AverageMeter()
-                acc_bl = AverageMeter()
+                        try:
+                            x_r = x_r.cuda()
+                            y_r = y_r.cuda()
+                            x_tot = torch.cat([x, x_r])
+                            y_tot = torch.cat([y, y_r])
+                            indices = torch.cat([indices, replay_indices])
+                        except:
+                            x_tot = x
+                            y_tot = y
+                            
+                    # for l,ind in zip(y_tot, indices):
+                    #     self.check_replay_counts[int(l)].add(int(ind))
+                    # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})           
+                    
+                    output, new_feats = self.forward(x_tot, pen=True)
+                    if self.replay:
+                        y_hat, _, old_features = self.previous_teacher.generate_scores(x_tot, allowed_predictions=list(range(self.last_valid_out_dim)))
+                        loss = self.update_model(output, y_tot, new_feats, old_features, y_hat)
+                    else:
+                        loss = self.update_model(output, y_tot)
+                    
+                    self.batch_data_weighting(output, y_tot, indices, len(x))
+
+                    if self.with_class_balance==1:
+                        x_bl, y_bl = self.get_class_balanced_data(indices, x_tot, y_tot)
+                        output_bl = self.forward(x_bl, balanced=True)
+                        loss += self.update_model(output_bl, y_bl, new_optimizer=True)
+                    
+                    # measure elapsed time
+                    self.batch_time.update(batch_timer.toc())  
+                    batch_timer.tic()
+                    
+                    # measure accuracy and record loss
+                    y = y.detach()
+                    # accumulate_acc(output[:len(y)], y, acc, topk=(self.top_k,))
+                    losses.update(loss, y.size(0)) 
+                    batch_timer.tic()
+                    self.step_count+=1
+                    
+                    
+                    # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})
+                    if epoch in self.epochs_of_interest:
+                        self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
+                        if val_loader is not None:
+                            self.val_method_task_acc = self.validation(val_loader, train_val=True)
+                        
+                    self.analyze()
+                    
+                    # reset
+                    losses = AverageMeter()
+                    losses_bl = AverageMeter()
+                    acc = AverageMeter()
+                    acc_bl = AverageMeter()
 
             if self.replay:
                 plots(self.per_class_accuracy_task, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc, base_path=self.plot_dir+'_after/')

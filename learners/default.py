@@ -108,7 +108,7 @@ class NormalNN(nn.Module):
         self.per_class_dist_shift = {}
         self.step_count=0
 
-        self.epochs_of_interest = [i for i in range(0, self.config['schedule'][-1], int(self.config['schedule'][-1]/10))]
+        self.epochs_of_interest = [i for i in range(0, self.config['schedule'][-1], int(self.config['schedule'][-1]/100))]
         if self.epochs_of_interest[1]!=1:
             self.epochs_of_interest.insert(1,1)
         if self.epochs_of_interest[-1]!=self.config['schedule'][-1]:
@@ -116,6 +116,7 @@ class NormalNN(nn.Module):
         self.steps_of_interest = []
         self.times_of_interest = []
 
+        print ('epochs_of_interest: ', self.epochs_of_interest)
         self.class_mapping = { v: k for k,v in self.train_dataset.class_mapping.items() if k!=-1}
         self.labels_to_names = { v: k for k,v in self.train_dataset.class_to_idx.items()}
 
@@ -135,7 +136,6 @@ class NormalNN(nn.Module):
 
         if not self.is_oracle:
             self.new_classes = set([self.train_dataset.class_mapping[int(y)] for y in self.train_dataset.targets])
-
         self.classes = self.old_classes.union(self.new_classes) if self.replay else self.new_classes
                 
         self.check_replay_counts = { int(i): set() for i in self.class_mapping}
@@ -160,8 +160,6 @@ class NormalNN(nn.Module):
                 #     if self.epoch==self.epochs_of_interest[-1] and self.is_batch_sampler:
                 #         self.replay_loader.batch_sampler.add(len(self.train_dataset)) ## Full replay addition, TODO if u want to limit amount of replay being added.
             # self.new_classes = set([self.train_dataset.class_mapping[int(y)] for y in self.train_dataset.targets])
-        
-        
 
         # self.check_replay_counts = { int(i): set() for i in self.classes}
             
@@ -432,8 +430,8 @@ class NormalNN(nn.Module):
             self.init_params_task()
 
 
-            for epoch in range(self.config['schedule'][-1]+1):
-                self.epoch=epoch
+            epoch=0
+            while epoch < self.config['schedule'][-1]+1:
 
                 if epoch > 1: 
                     self.scheduler.step()
@@ -448,8 +446,10 @@ class NormalNN(nn.Module):
 
                 for i, (x, y, indices, _, _, _)  in enumerate(train_loader):
 
-                    # verify in train mode
-                    if epoch==0:
+                    epoch += 1
+                    self.epoch=epoch
+
+                    if epoch >= self.config['schedule'][-1]+1:
                         break
 
                     self.model.train()
@@ -482,25 +482,24 @@ class NormalNN(nn.Module):
                     #     accumulate_acc(output_bl, y_bl, acc_bl, topk=(self.top_k,))
                     #     losses_bl.update(loss_bl,  y_bl.size(0))
 
-                # eval update
-                self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
-                self.log(' * Loss {loss.avg:.3f} | Train Acc {acc.avg:.3f}'.format(loss=losses,acc=acc))
-                # if self.with_class_balance==1:
-                #     self.log(' * BL head train Loss {loss.avg:.3f} | BL Train Acc {acc.avg:.3f}'.format(loss=losses_bl,acc=acc_bl))
-
-                # Evaluate the performance of current task
-                if val_loader is not None:
-                    self.val_method_task_acc = self.validation(val_loader, train_val=True)
+                    # eval update
+                    if epoch in self.epochs_of_interest:
+                        self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
+                        self.log(' * Loss {loss.avg:.3f} | Train Acc {acc.avg:.3f}'.format(loss=losses,acc=acc))
+                        
+                        if val_loader is not None:
+                            self.val_method_task_acc = self.validation(val_loader, train_val=True)
+                    
                     self.analyze()
                     # if self.replay and epoch in self.epochs_of_interest:
                     #     val_method_avg_acc = float(sum(self.class_accuracy_epoch.values()))/len(self.class_accuracy_epoch)*100
                     #     self.avg_acc["Oracle"].append(val_method_avg_acc)
 
-                # reset
-                losses = AverageMeter()
-                losses_bl = AverageMeter()
-                acc = AverageMeter()
-                acc_bl = AverageMeter()
+                    # reset
+                    losses = AverageMeter()
+                    losses_bl = AverageMeter()
+                    acc = AverageMeter()
+                    acc_bl = AverageMeter()
                 
         self.model.eval()
 
