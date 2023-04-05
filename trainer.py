@@ -121,6 +121,7 @@ class Trainer:
                         'momentum': args.momentum,
                         'weight_decay': args.weight_decay,
                         'schedule': args.schedule,
+                        'steps': args.steps,
                         'schedule_type': args.schedule_type,
                         'model_type': args.model_type,
                         'model_name': args.model_name,

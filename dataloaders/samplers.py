@@ -96,7 +96,7 @@ class WeightedSampler(Sampler):
         else:
             weights_m = self.weights
         
-        # print ('weights: ', self.weights)
+        print ('weights: ', self.weights)
         weights= (weights_m-weights_m.min())/(weights_m.max()-weights_m.min())
         # weights*= self.class_weights[:self.num_samples]
         # weights = weights.exp()

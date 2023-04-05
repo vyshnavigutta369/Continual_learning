@@ -101,6 +101,8 @@ class NormalNN(nn.Module):
             self.replay_size='Oracle'
             self.new_classes = learner_config['new_classes']
             self.old_classes = learner_config['old_classes']
+
+        self.steps = learner_config['steps'][0] 
             
     def init_params_task(self):
         
@@ -108,15 +110,24 @@ class NormalNN(nn.Module):
         self.per_class_dist_shift = {}
         self.step_count=0
 
-        self.epochs_of_interest = [i for i in range(0, self.config['schedule'][-1], int(self.config['schedule'][-1]/100))]
+        self.epochs_of_interest = [i for i in range(0, self.config['schedule'][-1], int(self.config['schedule'][-1]/10))]
         if self.epochs_of_interest[1]!=1:
             self.epochs_of_interest.insert(1,1)
         if self.epochs_of_interest[-1]!=self.config['schedule'][-1]:
             self.epochs_of_interest.append(self.config['schedule'][-1])
-        self.steps_of_interest = []
+        
+        # self.steps_of_interest = []
+        self.steps_of_interest = [i for i in range(0, self.steps, int(self.steps/10))] if self.steps!=-1 else []
+        # if self.steps_of_interest[1]!=1:
+        #     self.steps_of_interest.insert(1,1)
+        if self.steps!=-1 and self.steps_of_interest[-1]!=self.steps:
+            self.steps_of_interest.append(self.steps)
+       
+       
         self.times_of_interest = []
 
         print ('epochs_of_interest: ', self.epochs_of_interest)
+        print ('steps_of_interest: ', self.steps_of_interest)
         self.class_mapping = { v: k for k,v in self.train_dataset.class_mapping.items() if k!=-1}
         self.labels_to_names = { v: k for k,v in self.train_dataset.class_to_idx.items()}
 
@@ -146,6 +157,7 @@ class NormalNN(nn.Module):
 
     def init_params_epoch(self):
 
+        self.per_class_predictions = {}
         self.per_class_correct_predictions = {}
         self.per_class_old_features = {}
         self.per_class_new_features = {}
@@ -180,9 +192,9 @@ class NormalNN(nn.Module):
         if not os.path.exists(self.plot_dir+'before/'): os.makedirs(self.plot_dir+'before/')
         if not os.path.exists(self.plot_dir+'_after/'): os.makedirs(self.plot_dir+'_after/')
 
-        self.per_class_correct_predictions = { k: float(sum(self.per_class_correct_predictions[k].values())) for k in self.per_class_correct_predictions if self.per_class_correct_predictions}
-        self.per_class_old_features = { k: list(self.per_class_old_features[k].values()) for k in self.per_class_old_features if self.per_class_old_features}
-        self.per_class_new_features = { k: list(self.per_class_new_features[k].values()) for k in self.per_class_new_features if self.per_class_new_features}
+        self.per_class_correct_predictions = { k: float(sum(self.per_class_predictions[k].values())) for k in self.per_class_predictions if self.per_class_predictions}
+        self.processed_per_class_old_features = { k: list(self.per_class_old_features[k].values()) for k in self.per_class_old_features if self.per_class_old_features}
+        self.processed_per_class_new_features = { k: list(self.per_class_new_features[k].values()) for k in self.per_class_new_features if self.per_class_new_features}
 
 
     def process_batch(self):
@@ -211,14 +223,15 @@ class NormalNN(nn.Module):
             
             cl_split = dict_by_class((predictions==labels).int())
             
-            # print ('1:', self.per_class_correct_predictions.keys())
+            # print ('1:', self.per_class_correct_predictions)
             # print ('2:', cl_split.keys())
-            if self.per_class_correct_predictions:
-                self.per_class_correct_predictions = { k: {**self.per_class_correct_predictions.get(k,{}), **cl_split.get(k,{})} for k in list(cl_split.keys())+list(self.per_class_correct_predictions.keys())}
+            if self.per_class_predictions:
+                
+                self.per_class_predictions = { k: {**self.per_class_predictions.get(k,{}), **cl_split.get(k,{})} for k in list(cl_split.keys())+list(self.per_class_predictions.keys())}
             else:
-                self.per_class_correct_predictions = cl_split
+                self.per_class_predictions = cl_split
             
-            # print ('3:', self.per_class_correct_predictions.keys())
+            # print ('3:', self.per_class_predictions)
 
         if old_features is not None:
             cl_split = dict_by_class(old_features)
@@ -325,11 +338,11 @@ class NormalNN(nn.Module):
     def analyze(self):
 
         self.process()
-        # print (self.per_class_correct_predictions)
         
-        if (not self.replay and self.epoch==self.epochs_of_interest[-1]) or (self.replay and self.epoch in self.epochs_of_interest):
+        
+        if (not self.replay and ((self.steps==-1 and self.epoch==self.epochs_of_interest[-1]) or (self.steps!=-1 and self.step_count==self.steps_of_interest[-1]))) or (self.replay and ((self.steps==-1 and self.epoch in self.epochs_of_interest) or (self.steps!=-1 and self.step_count in self.steps_of_interest))):
 
-            self.class_accuracy_epoch, self.class_dist_shift_epoch, self.per_class_accuracy_task, self.per_class_dist_shift = distribution_shift_comparison(self.labels_to_names, self.class_mapping, self.per_class_new_features, self.per_class_old_features, self.per_class_correct_predictions, self.per_class_accuracy_task, self.per_class_dist_shift, self.plot_dir)
+            self.class_accuracy_epoch, self.class_dist_shift_epoch, self.per_class_accuracy_task, self.per_class_dist_shift = distribution_shift_comparison(self.labels_to_names, self.class_mapping, self.processed_per_class_new_features, self.processed_per_class_old_features, self.per_class_correct_predictions, self.per_class_accuracy_task, self.per_class_dist_shift, self.plot_dir)
             
             if not self.is_oracle: 
                 if int(self.class_weighting_with)==1: ## regular dual dataloader
@@ -343,6 +356,7 @@ class NormalNN(nn.Module):
                 elif int(self.class_weighting_with)==12: ## acc shift
                     classes = [ list(self.class_accuracy_epoch.keys()) ][0]
                     class_accuracy_epoch = np.array(list(self.class_accuracy_epoch.values()))
+                    # print (self.class_accuracy_epoch)
                     self.scale_distribution(class_accuracy_epoch, classes)
                     # print ({ self.labels_to_names[self.class_mapping[cl]]: self.class_accuracy_epoch[cl] for cl in self.class_accuracy_epoch})
                 elif int(self.class_weighting_with)==13: ## sim shift TODO not working, incorptorate in dynamic replay criterion/loss function
@@ -385,6 +399,8 @@ class NormalNN(nn.Module):
         self.train_dataset = train_dataset
         self.plot_dir = model_save_dir.replace('_outputs', 'plots_and_tables')
         self.val_target = val_target
+        self.val_loader= val_loader
+        self.epoch=0
 
         task_index = self.tasks.index(task)+1
         if self.tasks[0]!= task:
@@ -430,8 +446,12 @@ class NormalNN(nn.Module):
             self.init_params_task()
 
 
-            epoch=0
-            while epoch < self.config['schedule'][-1]+1:
+            # epoch=0
+            # while epoch < self.config['schedule'][-1]+1:
+            for epoch in range(self.config['schedule'][-1]+1):
+                self.epoch=epoch
+                if self.step_count> self.steps:
+                        break
 
                 if epoch > 1: 
                     self.scheduler.step()
@@ -446,26 +466,37 @@ class NormalNN(nn.Module):
 
                 for i, (x, y, indices, _, _, _)  in enumerate(train_loader):
 
-                    epoch += 1
-                    self.epoch=epoch
+                    # epoch += 1
+                    # self.epoch=epoch
 
-                    if epoch >= self.config['schedule'][-1]+1:
+                    # if epoch >= self.config['schedule'][-1]+1:
+                    #     break
+                    if epoch==0:
                         break
 
-                    self.model.train()
+                    if self.step_count> self.steps:
+                        break
+
+                    self.init_params_batch()
 
                     # send data to gpu
                     if self.gpu:
                         x =x.cuda()
                         y = y.cuda()
+
+                    self.model.train()
                     
                     # model update
-                    output, new_feats = self.model.forward(x, pen=True)    
+                    output, new_feats = self.forward(x, pen=True)    
                     loss = self.update_model(output, y)
                     
                     if self.with_class_balance==1:
-                        output_bl, y_bl = self.get_class_balanced_data(indices, y.detach(), new_feats.detach())
-                        loss_bl = self.update_model(output_bl, y_bl, new_optimizer=True)
+                        x_bl, y_bl = self.get_class_balanced_data(indices, x, y)
+                        output_bl = self.forward(x_bl, balanced=True)
+                        loss += self.update_model(output_bl, y_bl, new_optimizer=True)
+
+                        # output_bl, y_bl = self.get_class_balanced_data(indices, y, new_feats)
+                        # loss_bl = self.update_model(output_bl, y_bl, new_optimizer=True)
 
                     # measure elapsed time
                     self.batch_time.update(batch_timer.toc())  
@@ -478,34 +509,18 @@ class NormalNN(nn.Module):
                     batch_timer.tic()
                     self.step_count+=1
 
-                    # if self.with_class_balance==1:
-                    #     accumulate_acc(output_bl, y_bl, acc_bl, topk=(self.top_k,))
-                    #     losses_bl.update(loss_bl,  y_bl.size(0))
-
-                    # eval update
-                    if epoch in self.epochs_of_interest:
-                        self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
-                        self.log(' * Loss {loss.avg:.3f} | Train Acc {acc.avg:.3f}'.format(loss=losses,acc=acc))
-                        
-                        if val_loader is not None:
-                            self.val_method_task_acc = self.validation(val_loader, train_val=True)
-                    
-                    self.analyze()
-                    # if self.replay and epoch in self.epochs_of_interest:
-                    #     val_method_avg_acc = float(sum(self.class_accuracy_epoch.values()))/len(self.class_accuracy_epoch)*100
-                    #     self.avg_acc["Oracle"].append(val_method_avg_acc)
-
-                    # reset
-                    losses = AverageMeter()
-                    losses_bl = AverageMeter()
-                    acc = AverageMeter()
-                    acc_bl = AverageMeter()
+                    if self.steps!= -1:
+                        losses, losses_b, acc, aacc_bl = self.post_training(acc, losses)
                 
-        self.model.eval()
+                if self.steps == -1:
+                    losses, losses_b, acc, aacc_bl = self.post_training(acc, losses)
 
-        if self.replay:
-            plots(self.per_class_accuracy_task, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc,  base_path=self.plot_dir+'_after/', is_oracle=True)
-        
+                self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
+
+            if self.replay:
+                plots(self.per_class_accuracy_task, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc,  base_path=self.plot_dir+'_after/', is_oracle=True)
+            
+        self.model.eval()
 
         self.last_valid_out_dim = self.valid_out_dim
         self.first_task = False
@@ -524,7 +539,56 @@ class NormalNN(nn.Module):
         loss_supervised = (self.criterion_fn(logits, targets.long()) * data_weights).mean()
         return loss_supervised 
 
-    def update_model(self, logits, targets, new_optimizer=False):
+    def update_model(self, logits, targets, new_features=None, old_features=None, target_KD=None, new_optimizer=False):
+        
+        
+        if self.loss_type!= 'ova':
+            dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]
+            total_loss = self.criterion(logits, targets.long(), dw_cls)
+        else:
+            # class loss
+            if target_KD is not None:
+                target_mod = get_one_hot(targets, self.valid_out_dim)
+                target_mod[:, :self.last_valid_out_dim] = torch.sigmoid(target_KD)
+                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
+            else:
+                target_mod = get_one_hot(targets, self.valid_out_dim)
+                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
+            
+        if self.loss_type == 'pred_kd' and self.replay and not new_optimizer:
+            
+            labels_end_ind = torch.cumsum(torch.bincount(targets.long()), dim=0).cpu()
+            labels_ind = torch.argsort(targets)
+            new_features = new_features[labels_ind]
+            old_features = old_features[labels_ind]
+
+            distilled = self.loss_MMD.mmd_poly(old_features, new_features, labels_end_ind= labels_end_ind)
+            # print ('before norm:', distilled)
+            distilled = distilled/distilled.sum(1)
+            
+            # sim_to_new_cls = self.sim_to_new_cls
+            dw_cls = 1-torch.Tensor(self.sim_to_new_cls)
+            interference_m = torch.divide(distilled, 1-torch.diag(distilled))
+            interference_m *= dw_cls
+            # interference_m /= interference_m.sum(1)
+            interf_loss =  0.04*(interference_m.mean())
+            # print ('total_loss: ', total_loss)
+            # print ('interf_loss: ', interf_loss)
+            total_loss +=  interf_loss
+            
+
+        if not new_optimizer:
+            self.optimizer.zero_grad()
+            total_loss.backward()
+            self.optimizer.step()
+        else:
+            self.new_optimizer.zero_grad()
+            total_loss.backward()
+            self.new_optimizer.step()
+
+        return total_loss.detach()
+
+    def update_model_old(self, logits, targets, new_optimizer=False):
         
         if self.loss_type!= 'ova':
             if self.replay_type == 'random_sample':
@@ -555,6 +619,30 @@ class NormalNN(nn.Module):
             self.new_optimizer.step()
         return total_loss.detach()
 
+    @torch.no_grad()
+    def post_training(self, acc, losses):
+
+        if (self.steps==-1 and self.epoch in self.epochs_of_interest) or (self.step_count in self.steps_of_interest):
+
+            
+            if self.steps==-1:
+                self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
+            else:
+                self.log('Step:{step:.0f}/{total:.0f}'.format(step=self.step_count,total=self.steps))
+            self.log(' * Loss {loss.avg:.3f} | Train Acc {acc.avg:.3f}'.format(loss=losses,acc=acc))
+            
+            if self.val_loader is not None:
+                self.val_method_task_acc = self.validation(self.val_loader, train_val=True)
+            
+            # print ('hellloooo')
+            self.analyze()
+
+        losses = AverageMeter()
+        losses_bl = AverageMeter()
+        acc = AverageMeter()
+        acc_bl = AverageMeter()
+
+        return losses, losses_bl, acc, acc_bl
 
     @torch.no_grad()
     def validation(self, dataloader, model=None, task_in = None,  verbal = True, train_val=False):
@@ -581,24 +669,26 @@ class NormalNN(nn.Module):
                     input = input.cuda()
                     target = target.cuda()
             if task_in is None:
-                output, new_feats = model.forward(input, pen=True, balanced=balanced)
+                with torch.no_grad():
+                    output, new_feats = model.forward(input, pen=True, balanced=balanced)
                 acc = accumulate_acc(output, target, acc, topk=(self.top_k,))
 
                 if not train_val:
                     continue
 
-                if not self.replay and self.epoch<self.epochs_of_interest[-1]:
-                    if self.epoch==1:
+                if (self.steps==-1 and not self.replay and self.epoch<self.epochs_of_interest[-1]) or (self.steps!=-1 and not self.replay and self.step_count<self.steps_of_interest[-1]):
+                    if (self.steps==-1 and self.epoch==1) or (self.steps!=-1 and self.step_count==1):
                         if not hasattr(self, 'old_feats'):
                             self.old_feats=[]
                         self.old_feats.append(new_feats)
                     continue
-                elif not self.replay and self.epoch==self.epochs_of_interest[-1]:
+                elif (self.steps==-1 and not self.replay and self.epoch==self.epochs_of_interest[-1]) or (self.steps!=-1 and not self.replay and self.step_count==self.steps_of_interest[-1]):
                     old_feats = self.old_feats[i]
                 
                 if self.replay:
                     _, _, old_feats = self.previous_teacher.generate_scores(input, allowed_predictions=list(range(self.last_valid_out_dim)), balanced=balanced)
                 predictions = torch.argmax(output, dim=1)
+                # print (predictions)
                 # self.helper(indices.tolist(), target, old_feats, new_feats, predictions)
                 self.split_by_class(indices, target, old_features=old_feats, new_features=new_feats, predictions=predictions)
             else:
@@ -636,7 +726,7 @@ class NormalNN(nn.Module):
         else:
             self.avg_acc["Oracle"].append(val_method_avg_acc)
 
-        self.steps_of_interest.append(self.step_count)
+        # self.steps_of_interest.append(self.step_count)
         # print (self.steps_of_interest)
         self.times_of_interest.append(round(self.batch_time.avg,3))
         # print (self.times_of_interest)

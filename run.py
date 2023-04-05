@@ -48,6 +48,8 @@ def create_args():
     parser.add_argument('--weight_decay', type=float, default=0)
     parser.add_argument('--schedule', nargs="+", type=int, default=[2],
                         help="The list of epoch numbers to reduce learning rate by factor of 0.1. Last number is the end epoch")
+    parser.add_argument('--steps', nargs="+", type=int, default=[-1],
+                        help="The list of step numbers to reduce learning rate by factor of 0.1. Last number is the end step")
     parser.add_argument('--schedule_type', type=str, default='decay',
                         help="decay")
     parser.add_argument('--batch_size', type=int, default=64)

@@ -77,12 +77,14 @@ class ReplayDataset(torch.utils.data.Dataset):
         self.class_weights = []
         # self.weights=[]
 
-    def extend(self, dataset, class_replay_counts=None, class_replay_ratios=None, class_replay_weights=None, weights=None, replay_strategy=''):
+    def extend(self, images, targets, class_mapping, class_replay_counts=None, class_replay_ratios=None, class_replay_weights=None, weights=None, replay_strategy=''):
         
         to_replay_class_count = {}
-        self.class_mapping = dataset.class_mapping
+        # self.class_mapping = dataset.class_mapping
+        self.class_mapping = class_mapping
 
-        for i, (data, target) in enumerate(zip(dataset.data, dataset.targets)):
+        for i, (data, target) in enumerate(zip(images, targets)):
+            
             if class_replay_ratios is not None:
                 self.data.extend([data for _ in range(class_replay_ratios[self.class_mapping[target]])])
                 self.targets.extend([target for _ in range(class_replay_ratios[self.class_mapping[target]])])
@@ -324,18 +326,37 @@ class iDataset(data.Dataset):
         """
         
         # print (index)
-        img, target = self.data[index], self.targets[index]
-        # doing this so that it is consistent with all other datasets
-        # to return a PIL Image
-        img = Image.fromarray(img)
+        if not isinstance(index, int):
 
-        if self.transform is not None:
-            if simple:
-                img = self.simple_transform(img)
-            else:
-                img = self.transform(img)
+            data = np.array(self.data)
+            targets = np.array(self.targets)[index]
+            imgs = []
+            for i, (ix, target) in enumerate(zip(index, targets)):
+            
+                img = data[ix]
+                img = Image.fromarray(img) 
 
-        return img, self.class_mapping[target], index   ## MY CHANGES
+                if self.transform is not None:
+                    if simple:
+                        img = self.simple_transform(img)
+                    else:
+                        img = self.transform(img)
+                imgs.append(img)
+                targets[i] = self.class_mapping[target]
+            return torch.stack(imgs, axis=0), torch.Tensor(targets), index ## CORRECT
+        else:
+            img, target = self.data[index], self.targets[index]
+            # doing this so that it is consistent with all other datasets
+            # to return a PIL Image
+            img = Image.fromarray(img)
+
+            if self.transform is not None:
+                if simple:
+                    img = self.simple_transform(img)
+                else:
+                    img = self.transform(img)
+
+            return img, self.class_mapping[target], index   ## MY CHANGES
 
     def load_dataset(self, t, train=True):
         

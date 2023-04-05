@@ -25,19 +25,19 @@ MAXTASK=-1 # run every task
 REPEAT=1
 SCHEDULE="1000" # epochs
 
-# SCHEDULE_TYPE=cosine
-# MODELNAME=resnet18 
-# MODELTYPE=resnet
-# LR=0.005 # learning rate
-# BS=128 # batch size
-# RS=128
+SCHEDULE_TYPE=cosine
+MODELNAME=resnet18 
+MODELTYPE=resnet
+LR=0.005 # learning rate
+BS=128 # batch size
+RS=128
 
-SCHEDULE_TYPE=decay
-MODELNAME=vit_pt_imnet
-MODELTYPE=zoo
-LR=0.00001
-BS=16 # batch size
-RS=16
+# SCHEDULE_TYPE=decay
+# MODELNAME=vit_pt_imnet
+# MODELTYPE=zoo
+# LR=0.00001
+# BS=16 # batch size
+# RS=16
 
 RN=1000 ## replay samples
 
@@ -54,7 +54,7 @@ REPLAY_TYPES=("random_sample")
 REPLAY_STRATEGIES=('margin_proba_shift_min')
 LOSS_TYPES=("base")
 # clratios='{"airplane":3,"automobile":1,"deer":5,"dog":5,"frog":5,"horse":3,"ship":3,"truck":1,"bird":5,"cat":5}'
-clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'
+# clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'
 
 DEBUG=0
 if [ $DEBUG -eq 1 ] 

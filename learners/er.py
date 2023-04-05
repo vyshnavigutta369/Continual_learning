@@ -114,6 +114,7 @@ class TR(NormalNN):
         self.train_dataset = train_dataset
         self.replay_dataset = replay_dataset
         self.val_target = val_target
+        self.val_loader = val_loader
         self.model_save_dir = model_save_dir
         self.plot_dir = self.model_save_dir.replace('_outputs', 'plots_and_tables')
         self.epoch=0
@@ -160,11 +161,15 @@ class TR(NormalNN):
 
             self.init_params_task()
 
-            epoch=0
+            # print (self.epochs_of_interest)            
+            # print (self.steps_of_interest)
 
-            while epoch < self.config['schedule'][-1]+1:
-                # print ('epoch: ', epoch)
-                
+            # epoch=0
+            # while epoch < self.config['schedule'][-1]+1:
+            for epoch in range(self.config['schedule'][-1]+1):
+                self.epoch=epoch
+                if self.steps!=-1 and self.step_count> self.steps:
+                        break
                 
                 if epoch > 1: 
                     self.scheduler.step()
@@ -176,15 +181,22 @@ class TR(NormalNN):
                 batch_timer.tic()
 
                 self.init_params_epoch()
-
                 
                 for i, data  in enumerate(self.train_loader):
                     
-                    epoch += 1
-                    self.epoch=epoch
+                    # epoch += 1
+                    # self.epoch=epoch
 
-                    if epoch >= self.config['schedule'][-1]+1:
+                    # if epoch==0:
+                    #     break
+
+                    if self.steps!=-1 and self.step_count> self.steps:
                         break
+
+                    # if epoch >= self.config['schedule'][-1]+1:
+                    #     break
+
+                    self.init_params_batch()
 
                     if self.is_dual_data_loader:
                         x, y, indices, x_r, y_r, replay_indices = data
@@ -192,9 +204,7 @@ class TR(NormalNN):
                         x, y, indices = data
                         if self.replay:
                             x_r, y_r, replay_indices =  next(self.replay_loader_iter)
-                            
-
-                    self.init_params_batch()
+                        
                                 
                     self.model.train()
                     
@@ -241,20 +251,14 @@ class TR(NormalNN):
                     batch_timer.tic()
                     self.step_count+=1
                     
-                    
-                    # print ('check replay_counts: ', {self.labels_to_names[self.class_mapping[cl]]: len(self.check_replay_counts[cl]) for cl in self.check_replay_counts})
-                    if epoch in self.epochs_of_interest:
-                        self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
-                        if val_loader is not None:
-                            self.val_method_task_acc = self.validation(val_loader, train_val=True)
-                        
-                    self.analyze()
-                    
-                    # reset
-                    losses = AverageMeter()
-                    losses_bl = AverageMeter()
-                    acc = AverageMeter()
-                    acc_bl = AverageMeter()
+                    if self.steps!= -1:
+                        losses, losses_b, acc, aacc_bl = self.post_training(acc, losses)
+                
+                if self.steps == -1:
+                    losses, losses_b, acc, aacc_bl = self.post_training(acc, losses)
+
+
+                self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
 
             if self.replay:
                 plots(self.per_class_accuracy_task, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc, base_path=self.plot_dir+'_after/')
@@ -286,7 +290,7 @@ class TR(NormalNN):
         else:
             print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
             self.data_indices = torch.argsort(self.data_indices).long()
-            self.replay_dataset.extend(self.train_dataset, class_replay_weights= self.class_replay_weights, weights = self.data_weights[self.data_indices],replay_strategy=self.replay_strategy)
+            self.replay_dataset.extend(self.train_dataset.data[self.data_indices], self.train_dataset.targets[self.data_indices], self.train_dataset.class_mapping, class_replay_weights= self.class_replay_weights, weights = self.data_weights[self.data_indices], replay_strategy=self.replay_strategy)
             
             self.num_replay_samples = self.num_replay_samples_init if self.num_replay_samples_init!=-1 else len(self.replay_dataset)
             if self.is_custom_replay_loader:
@@ -303,55 +307,6 @@ class TR(NormalNN):
             # if self.replay_strategy:
             #     self.replay_dataset.get_weight_distribution(self.replay_strategy)  
         print ('size of replay dataset:',  len(self.replay_dataset))
-
-    def update_model(self, logits, targets, new_features=None, old_features=None, target_KD=None, new_optimizer=False):
-        
-        
-        if self.loss_type!= 'ova':
-            dw_cls = self.dw_k[-1 * torch.ones(targets.size()).long()]
-            total_loss = self.criterion(logits, targets.long(), dw_cls)
-        else:
-            # class loss
-            if target_KD is not None:
-                target_mod = get_one_hot(targets, self.valid_out_dim)
-                target_mod[:, :self.last_valid_out_dim] = torch.sigmoid(target_KD)
-                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
-            else:
-                target_mod = get_one_hot(targets, self.valid_out_dim)
-                total_loss = self.ce_loss(torch.sigmoid(logits), target_mod)
-            
-        if self.loss_type == 'pred_kd' and self.replay and not new_optimizer:
-            
-            labels_end_ind = torch.cumsum(torch.bincount(targets.long()), dim=0).cpu()
-            labels_ind = torch.argsort(targets)
-            new_features = new_features[labels_ind]
-            old_features = old_features[labels_ind]
-
-            distilled = self.loss_MMD.mmd_poly(old_features, new_features, labels_end_ind= labels_end_ind)
-            # print ('before norm:', distilled)
-            distilled = distilled/distilled.sum(1)
-            
-            # sim_to_new_cls = self.sim_to_new_cls
-            dw_cls = 1-torch.Tensor(self.sim_to_new_cls)
-            interference_m = torch.divide(distilled, 1-torch.diag(distilled))
-            interference_m *= dw_cls
-            # interference_m /= interference_m.sum(1)
-            interf_loss =  0.04*(interference_m.mean())
-            # print ('total_loss: ', total_loss)
-            # print ('interf_loss: ', interf_loss)
-            total_loss +=  interf_loss
-            
-
-        if not new_optimizer:
-            self.optimizer.zero_grad()
-            total_loss.backward()
-            self.optimizer.step()
-        else:
-            self.new_optimizer.zero_grad()
-            total_loss.backward()
-            self.new_optimizer.step()
-
-        return total_loss.detach()
 
     
 def get_one_hot(target,num_class):
