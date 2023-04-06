@@ -116,7 +116,7 @@ class NormalNN(nn.Module):
         if self.epochs_of_interest[-1]!=self.config['schedule'][-1]:
             self.epochs_of_interest.append(self.config['schedule'][-1])
         
-        self.steps_of_interest = [i for i in range(0, self.steps, int(self.steps/100))] if self.steps!=-1 else []
+        self.steps_of_interest = [i for i in range(0, self.steps, int(self.steps/10))] if self.steps!=-1 else []
         if self.steps!=-1 and self.steps_of_interest[1]!=1:
             self.steps_of_interest.insert(1,1)
         if self.steps!=-1 and self.steps_of_interest[-1]!=self.steps:
