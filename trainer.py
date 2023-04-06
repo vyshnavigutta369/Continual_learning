@@ -12,6 +12,7 @@ from torch.utils.tensorboard import SummaryWriter
 from datasets import concatenate_datasets
 import copy
 
+
 class Trainer:
 
     def __init__(self, args, seed, metric_keys, save_keys):
@@ -53,6 +54,12 @@ class Trainer:
             self.dataset_size = [32,32,3]
             class_order = np.arange(num_classes).tolist()
             class_order_logits = np.arange(num_classes).tolist()
+        elif args.dataset == 'SUPER-CIFAR100': ## TODO add class order logits
+            Dataset = dataloaders.iCIFAR100
+            num_classes = 100
+            self.dataset_size = [32,32,3]
+            class_order = np.array(dataloaders.utils.dataset_stats['SUPER-CIFAR100']['classes'])
+            class_order_logits = np.array(dataloaders.utils.dataset_stats['SUPER-CIFAR100']['classes'])
         elif args.dataset == 'ImageNet':   ## TODO add class order logits
             Dataset = dataloaders.iIMAGENET
             num_classes = 1000
@@ -110,7 +117,10 @@ class Trainer:
         self.test_dataset = Dataset(args.dataroot, train=False, tasks=self.tasks,                                 
                                 download_flag=False, transform=test_transform, 
                                 seed=self.seed, validation=args.validation)
-
+        self.labels_to_names = self.train_dataset.class_to_idx.items()
+        self.class_mapping = self.train_dataset.class_mapping
+        
+        print (class_order)
         # for oracle
         self.oracle_flag = args.oracle_flag
         self.add_dim = 0

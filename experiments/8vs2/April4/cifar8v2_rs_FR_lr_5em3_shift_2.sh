@@ -67,7 +67,7 @@ else
     TEMP=''
 fi
 
-CLASS_WEIGHTING_WITH=(1)
+CLASS_WEIGHTING_WITH=(12)
 
 for ((i=0;i<${#LOSS_TYPES[@]};++i))
 do

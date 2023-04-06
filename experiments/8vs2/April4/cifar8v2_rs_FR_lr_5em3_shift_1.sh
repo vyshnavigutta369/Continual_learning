@@ -9,9 +9,9 @@ GPUID=2
 
 # benchmark settings
 DATE=Apr4
-DATASET=CIFAR10
-FIRST_SPLIT=8
-OTHER_SPLIT=2
+DATASET=SUPER-CIFAR100
+FIRST_SPLIT=10
+OTHER_SPLIT=10
 
 ###############################################################
 
@@ -24,21 +24,21 @@ MAXTASK=-1 # run every task
 # hard coded inputs
 REPEAT=1
 SCHEDULE="10" # epochs
-STEPS="1000"
+STEPS="-1"
 
-# SCHEDULE_TYPE=cosine
-# MODELNAME=resnet18 
-# MODELTYPE=resnet
-# LR=0.005 # learning rate
-# BS=128 # batch size
-# RS=128
+SCHEDULE_TYPE=cosine
+MODELNAME=resnet18 
+MODELTYPE=resnet
+LR=0.005 # learning rate
+BS=128 # batch size
+RS=128
 
-SCHEDULE_TYPE=decay
-MODELNAME=vit_pt_imnet
-MODELTYPE=zoo
-LR=0.00001
-BS=16 # batch size
-RS=16
+# SCHEDULE_TYPE=decay
+# MODELNAME=vit_pt_imnet
+# MODELTYPE=zoo
+# LR=0.00001
+# BS=16 # batch size
+# RS=16
 
 RN=1000 ## replay samples
 
