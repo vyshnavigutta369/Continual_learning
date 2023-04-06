@@ -8,7 +8,7 @@ EXP_FLAG=${1:-$DEFAULTEXP}
 GPUID=2
 
 # benchmark settings
-DATE=Apr5
+DATE=Apr4
 DATASET=CIFAR10
 FIRST_SPLIT=8
 OTHER_SPLIT=2
@@ -26,17 +26,17 @@ REPEAT=1
 SCHEDULE="10" # epochs
 STEPS="1000"
 
-# SCHEDULE_TYPE=cosine
-# MODELNAME=resnet18
-# MODELTYPE=resnet
-# BS=128 # batch size
-# LR=0.005 # learning rate
+SCHEDULE_TYPE=cosine
+MODELNAME=resnet18
+MODELTYPE=resnet
+BS=128 # batch size
+LR=0.005 # learning rate
 
-SCHEDULE_TYPE=decay
-MODELNAME=vit_pt_imnet
-MODELTYPE=zoo
-LR=0.00001
-BS=16 # batch size
+# SCHEDULE_TYPE=decay
+# MODELNAME=vit_pt_imnet
+# MODELTYPE=zoo
+# LR=0.00001
+# BS=16 # batch size
 
 WD=0 # weight decay
 MOM=0.9 # momentum

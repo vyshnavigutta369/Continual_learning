@@ -79,7 +79,7 @@ do
                         --overwrite $OVERWRITE --max_task $MAXTASK \
                         --model_name $MODELNAME --model_type $MODELTYPE \
                         --learner_type default --learner_name NormalNN --oracle_flag \
-                        --log_dir ${OUTDIR} --with_class_balance 1 
+                        --log_dir ${OUTDIR} --with_class_balance 1  --dual_dataloader True 
 
                 # OUTDIR=_outputs/${DATE}/twotask_${OLD_VS_NEW}_${DATASET}/LR_${LR}_schedule_${SCHEDULE_TYPE}/Oracle/bh_reptype_${REPLAY_TYPE}_loss_${LOSS_TYPE}${TEMP}
                 # PLOT_DIR=plots_and_tables/${DATE}/twotask_${OLD_VS_NEW}_${DATASET}/LR_${LR}_schedule_${SCHEDULE_TYPE}/Oracle/bh_reptype_${REPLAY_TYPE}_loss_${LOSS_TYPE}${TEMP}/
