@@ -24,6 +24,7 @@ MAXTASK=-1 # run every task
 # hard coded inputs
 REPEAT=1
 SCHEDULE="100" # epochs
+STEPS="1000"
 
 SCHEDULE_TYPE=cosine
 MODELNAME=resnet18 
@@ -31,6 +32,7 @@ MODELTYPE=resnet
 LR=0.005 # learning rate
 BS=128 # batch size
 RS=128
+
 
 # SCHEDULE_TYPE=decay
 # MODELNAME=vit_pt_imnet
@@ -56,7 +58,7 @@ REPLAY_TYPES=("random_sample")
 REPLAY_STRATEGIES=('margin_proba_shift_min')
 LOSS_TYPES=("base")
 # clratios='{"airplane":3,"automobile":1,"deer":5,"dog":5,"frog":5,"horse":3,"ship":3,"truck":1,"bird":5,"cat":5}'
-clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'
+# clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'
 DEBUG=1
 if [ $DEBUG -eq 1 ] 
 then   
@@ -67,7 +69,7 @@ else
     TEMP=''
 fi
 
-CLASS_WEIGHTING_WITH=(1)
+CLASS_WEIGHTING_WITH=(12)
 
 for ((i=0;i<${#LOSS_TYPES[@]};++i))
 do
@@ -96,9 +98,9 @@ do
                                 mkdir -p $OUTDIR
 
                                 python -u run.py --dataset $DATASET --train_aug --rand_split --gpuid $GPUID --repeat $REPEAT \
-                                        --first_split_size $FIRST_SPLIT --other_split_size $OTHER_SPLIT --schedule $SCHEDULE --schedule_type $SCHEDULE_TYPE --batch_size $BS \
+                                        --first_split_size $FIRST_SPLIT --other_split_size $OTHER_SPLIT --schedule $SCHEDULE --steps $STEPS --schedule_type $SCHEDULE_TYPE --batch_size $BS \
                                         --batch_size_replay $RS --replay_type $REPLAY_TYPE  --num_replay_samples $RN --replay_strategy $REPLAY_STRATEGY \
-                                        --loss_type $LOSS_TYPE --class_weighting_with $SHIFT \
+                                        --loss_type $LOSS_TYPE --class_weighting_with $SHIFT --weight_reverse True \
                                         --optimizer $OPT --lr $LR --momentum $MOM --weight_decay $WD \
                                         --overwrite $OVERWRITE --max_task $MAXTASK \
                                         --model_name $MODELNAME --model_type $MODELTYPE \

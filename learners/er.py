@@ -84,26 +84,29 @@ class TR(NormalNN):
     def batch_data_weighting(self, output, labels, indices, train_data_batch_size):
         
         if not self.replay_strategy:
-            self.data_weights = torch.concat([self.data_weights, torch.ones(len(indices[:train_data_batch_size])).cuda() ]) 
-            self.data_indices = torch.concat([self.data_indices, indices[:train_data_batch_size]]) 
+            # self.data_weights = torch.concat([self.data_weights, torch.ones(len(indices[:train_data_batch_size])).cuda() ]) 
+            # self.data_indices = torch.concat([self.data_indices, indices[:train_data_batch_size]]) 
+            for ix in indices[:train_data_batch_size]:
+                self.data_weights[int(ix)] = 1
             return
 
-        if self.epoch==self.epochs_of_interest[-1]:
-            batch_weights = dataloaders.compute_weights(self.replay_strategy, output[:train_data_batch_size], labels[:train_data_batch_size])
-            # if self.is_custom_replay_loader and hasattr(self, 'replay_loader') and self.is_batch_sampler:
-            #     self.replay_loader.batch_sampler.update_weights(batch_new_weights=batch_weights, indices=len(self.replay_loader.batch_sampler)+indices[:train_data_batch_size])
-            
-            self.data_weights = torch.concat([self.data_weights, batch_weights]) 
-            self.data_indices = torch.concat([self.data_indices, indices[:train_data_batch_size]]) 
+        
+        batch_weights = dataloaders.compute_weights(self.replay_strategy, output[:train_data_batch_size], labels[:train_data_batch_size])
+        # if self.is_custom_replay_loader and hasattr(self, 'replay_loader') and self.is_batch_sampler:
+        #     self.replay_loader.batch_sampler.update_weights(batch_new_weights=batch_weights, indices=len(self.replay_loader.batch_sampler)+indices[:train_data_batch_size])
+        for ix, w in zip(indices[:train_data_batch_size],batch_weights):
+            self.data_weights[int(ix)] = w
+        # self.data_weights = torch.concat([self.data_weights, batch_weights]) 
+        # self.data_indices = torch.concat([self.data_indices, indices[:train_data_batch_size]]) 
                 
         if self.replay:
             # replay_batch_weights = dataloaders.compute_weights(self.replay_strategy, output[train_data_batch_size:], labels[train_data_batch_size:])
             # if self.is_custom_replay_loader and self.is_batch_sampler:
             #     self.replay_loader.batch_sampler.update_weights(batch_new_weights=replay_batch_weights, indices=indices[train_data_batch_size:])
-            if self.epoch==self.epochs_of_interest[-1]: ## and self.is_custom_replay_loader?
+            # if (self.steps==-1 and self.epoch==self.epochs_of_interest[-1]) or (self.steps!=-1 and self.step_count==self.steps_of_interest[-1]): ## and self.is_custom_replay_loader?
                 # self.replay_loader.sampler.update_weights(batch_new_weights=replay_batch_weights, indices=indices[train_data_batch_size:])
-                replay_batch_weights = dataloaders.compute_weights(self.replay_strategy, output[train_data_batch_size:], labels[train_data_batch_size:]) ##TODO remove this and uncomment at line 100
-                self.replay_dataset.update_weights(batch_new_weights=replay_batch_weights, indices=indices[train_data_batch_size:])
+            replay_batch_weights = dataloaders.compute_weights(self.replay_strategy, output[train_data_batch_size:], labels[train_data_batch_size:]) ##TODO remove this and uncomment at line 100
+            self.replay_dataset.update_weights(batch_new_weights=replay_batch_weights, indices=indices[train_data_batch_size:])
         
     def learn_batch(self, train_loader, train_dataset, replay_dataset, model_save_dir, val_target, task, val_loader=None):
         
@@ -289,13 +292,16 @@ class TR(NormalNN):
             self.replay_dataset.extend(self.train_dataset, class_replay_ratios= self.class_replay_ratios)
         else:
             print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
-            self.data_indices = torch.argsort(self.data_indices).long()
-            self.replay_dataset.extend(self.train_dataset.data[self.data_indices], self.train_dataset.targets[self.data_indices], self.train_dataset.class_mapping, class_replay_weights= self.class_replay_weights, weights = self.data_weights[self.data_indices], replay_strategy=self.replay_strategy)
+            # self.data_indices = torch.argsort(self.data_indices).long()
+            self.data_indices = torch.Tensor(list(self.data_weights.keys())).long()
+            self.data_weights = torch.Tensor(list(self.data_weights.values())).cuda()
+            
+            self.replay_dataset.extend(self.train_dataset.data[self.data_indices], self.train_dataset.targets[self.data_indices], self.train_dataset.class_mapping, class_replay_weights= self.class_replay_weights, weights = self.data_weights, replay_strategy=self.replay_strategy)
             
             self.num_replay_samples = self.num_replay_samples_init if self.num_replay_samples_init!=-1 else len(self.replay_dataset)
             if self.is_custom_replay_loader:
                 if not hasattr(self, 'replay_loader'):
-                    self.initialise_replay_loader(self.data_weights[self.data_indices])
+                    self.initialise_replay_loader(self.data_weights)
                 # if self.is_batch_sampler:
                 #     self.replay_loader.batch_sampler.sampler.num_samples=self.num_replay_samples
                 #     self.replay_loader.batch_sampler.sampler.class_weights= torch.Tensor(self.replay_dataset.class_weights).cuda()
@@ -303,7 +309,7 @@ class TR(NormalNN):
                 # self.replay_loader.sampler.num_samples=self.num_replay_samples
                 self.replay_loader.sampler.class_weights= torch.Tensor(self.replay_dataset.class_weights).cuda()
                 self.replay_loader.sampler.weights= torch.Tensor(self.replay_dataset.sample_weights).cuda()
-
+                print ('weights after task: ', self.data_weights)
             # if self.replay_strategy:
             #     self.replay_dataset.get_weight_distribution(self.replay_strategy)  
         print ('size of replay dataset:',  len(self.replay_dataset))

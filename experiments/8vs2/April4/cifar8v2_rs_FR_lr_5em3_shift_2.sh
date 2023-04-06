@@ -24,7 +24,7 @@ MAXTASK=-1 # run every task
 # hard coded inputs
 REPEAT=1
 SCHEDULE="10" # epochs
-STEPS="10"
+STEPS="-1"
 
 SCHEDULE_TYPE=cosine
 MODELNAME=resnet18 
@@ -47,7 +47,6 @@ MOM=0.9 # momentum
 OPT="SGD" # optimizer
 
 
-
 OLD_VS_NEW=${FIRST_SPLIT}v${OTHER_SPLIT}
 
 
@@ -68,7 +67,7 @@ else
     TEMP=''
 fi
 
-CLASS_WEIGHTING_WITH=(12)
+CLASS_WEIGHTING_WITH=(1)
 
 for ((i=0;i<${#LOSS_TYPES[@]};++i))
 do
@@ -99,7 +98,7 @@ do
                                 python -u run.py --dataset $DATASET --train_aug --rand_split --gpuid $GPUID --repeat $REPEAT \
                                         --first_split_size $FIRST_SPLIT --other_split_size $OTHER_SPLIT --schedule $SCHEDULE --steps $STEPS --schedule_type $SCHEDULE_TYPE --batch_size $BS \
                                         --batch_size_replay $RS --replay_type $REPLAY_TYPE  --num_replay_samples $RN --replay_strategy $REPLAY_STRATEGY \
-                                        --loss_type $LOSS_TYPE --class_weighting_with $SHIFT --weight_reverse True\
+                                        --loss_type $LOSS_TYPE --class_weighting_with $SHIFT --weight_reverse True \
                                         --optimizer $OPT --lr $LR --momentum $MOM --weight_decay $WD \
                                         --overwrite $OVERWRITE --max_task $MAXTASK \
                                         --model_name $MODELNAME --model_type $MODELTYPE \

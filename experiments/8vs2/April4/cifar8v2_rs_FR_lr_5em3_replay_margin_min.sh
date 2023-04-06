@@ -5,7 +5,7 @@ DEFAULTEXP=-1
 EXP_FLAG=${1:-$DEFAULTEXP}
 
 # gpu's to use - can do 1 per experiment for cifar
-GPUID=1
+GPUID=0
 
 # benchmark settings
 DATE=Mar16
@@ -23,7 +23,8 @@ MAXTASK=-1 # run every task
 
 # hard coded inputs
 REPEAT=1
-SCHEDULE="1000" # epochs
+SCHEDULE="10" # epochs
+STEPS="1000"
 
 SCHEDULE_TYPE=cosine
 MODELNAME=resnet18 
@@ -95,7 +96,7 @@ do
                                 mkdir -p $OUTDIR
 
                                 python -u run.py --dataset $DATASET --train_aug --rand_split --gpuid $GPUID --repeat $REPEAT \
-                                        --first_split_size $FIRST_SPLIT --other_split_size $OTHER_SPLIT --schedule $SCHEDULE --schedule_type $SCHEDULE_TYPE --batch_size $BS \
+                                        --first_split_size $FIRST_SPLIT --other_split_size $OTHER_SPLIT --schedule $SCHEDULE --steps $STEPS --schedule_type $SCHEDULE_TYPE --batch_size $BS \
                                         --batch_size_replay $RS --replay_type $REPLAY_TYPE  --num_replay_samples $RN --replay_strategy $REPLAY_STRATEGY \
                                         --loss_type $LOSS_TYPE --class_weighting_with $SHIFT \
                                         --optimizer $OPT --lr $LR --momentum $MOM --weight_decay $WD \

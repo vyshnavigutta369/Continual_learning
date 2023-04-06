@@ -62,6 +62,7 @@ def new_vs_old_class_comparison(new_classes, old_classes, class_features, labels
                 new_vs_old_class[labels_to_names[class_mapping[cl]]] = { labels_to_names[class_mapping[k]]: float(MSE(per_class_features[k], per_class_features[cl], dim = dim)) for k in classes}  
 
         elif 'MMD' in metric:
+            # print (class_features[0])
             MMD_kernel  = MMD()
             per_class_features = { k: torch.stack(class_features[k]) for k in class_features}
             # per_class_features = { k: torch.tensor(class_features[k]) for k in class_features}
@@ -138,6 +139,7 @@ def distribution_shift_comparison(labels_to_names, class_mapping, class_new_feat
     # per_class_new_features = { k: torch.Tensor(class_new_features[k]) for k in class_new_features}
     # per_class_old_features = { k: torch.Tensor(class_old_features[k]) for k in class_old_features}
 
+    
     per_class_dist_shift_epoch = {k: float(MMD_kernel.mmd_poly(per_class_new_features[k], per_class_old_features[k], return_diag=True)) for k in per_class_correct_predictions}
 
     if sum(per_class_dist_shift_epoch.values())!=0:

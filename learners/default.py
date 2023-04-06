@@ -5,7 +5,7 @@ from torch.nn import functional as F
 import models
 
 import copy
-from collections import Counter
+from collections import Counter, OrderedDict
 
 import numpy as np
 import os, math
@@ -116,10 +116,9 @@ class NormalNN(nn.Module):
         if self.epochs_of_interest[-1]!=self.config['schedule'][-1]:
             self.epochs_of_interest.append(self.config['schedule'][-1])
         
-        # self.steps_of_interest = []
-        self.steps_of_interest = [i for i in range(0, self.steps, int(self.steps/10))] if self.steps!=-1 else []
-        # if self.steps_of_interest[1]!=1:
-        #     self.steps_of_interest.insert(1,1)
+        self.steps_of_interest = [i for i in range(0, self.steps, int(self.steps/100))] if self.steps!=-1 else []
+        if self.steps!=-1 and self.steps_of_interest[1]!=1:
+            self.steps_of_interest.insert(1,1)
         if self.steps!=-1 and self.steps_of_interest[-1]!=self.steps:
             self.steps_of_interest.append(self.steps)
        
@@ -154,6 +153,7 @@ class NormalNN(nn.Module):
         if not self.is_oracle and self.replay and self.is_custom_replay_loader:
             self.replay_loader_iter = cycle(self.replay_loader)
 
+        self.data_weights = OrderedDict()
 
     def init_params_epoch(self):
 
@@ -162,9 +162,7 @@ class NormalNN(nn.Module):
         self.per_class_old_features = {}
         self.per_class_new_features = {}
         
-        if not self.is_oracle:
-            self.data_weights = torch.Tensor([]).cuda()
-            self.data_indices = torch.Tensor([])
+        
             # if self.replay:
             #     self.old_classes = set([self.replay_dataset.class_mapping[int(y)] for y in self.replay_dataset.targets])
                 # if self.is_custom_replay_loader:
@@ -310,7 +308,7 @@ class NormalNN(nn.Module):
 
         return loss, output
         
-    def scale_distribution(self, data, classes, rnge=(1,7)):
+    def scale_distribution(self, data, classes, rnge=(1,8)):
 
         t_max = rnge[0]
         t_min = rnge[1]
@@ -350,11 +348,11 @@ class NormalNN(nn.Module):
                 elif int(self.class_weighting_with)==2: ## custom weighting 50%-50%
                     self.class_replay_ratios= { cl: self.class_ratios_manual[cl] for cl in self.class_ratios_manual if cl in self.new_classes}
                 elif int(self.class_weighting_with)==11 and self.epoch!=0: ## dist shift
-                    classes = [ list(self.class_dist_shift_epoch[k].keys()) for k in self.class_dist_shift_epoch][0]
-                    class_dist_shift_epoch_mean = np.mean([ list(self.class_dist_shift_epoch[k].values()) for k in self.class_dist_shift_epoch], axis=0)
-                    self.scale_distribution(class_dist_shift_epoch_mean, classes)
+                    classes = list(self.class_dist_shift_epoch.keys())
+                    class_dist_shift_epoch = np.array(list(self.class_dist_shift_epoch.values()))
+                    self.scale_distribution(class_dist_shift_epoch, classes)
                 elif int(self.class_weighting_with)==12: ## acc shift
-                    classes = [ list(self.class_accuracy_epoch.keys()) ][0]
+                    classes = list(self.class_accuracy_epoch.keys()) 
                     class_accuracy_epoch = np.array(list(self.class_accuracy_epoch.values()))
                     # print (self.class_accuracy_epoch)
                     self.scale_distribution(class_accuracy_epoch, classes)
@@ -362,9 +360,9 @@ class NormalNN(nn.Module):
                 elif int(self.class_weighting_with)==13: ## sim shift TODO not working, incorptorate in dynamic replay criterion/loss function
                     if self.replay:
                         base_path = self.plot_dir+'_after/new_vs_old/epoch_' + str(self.epoch)+'/' if self.epoch>0 else self.plot_dir+'_before/new_vs_old/'
-                        self.sim_table, self.sim_to_new_cls = new_vs_old_class_comparison(self.new_classes, self.old_classes, self.per_class_new_features, self.labels_to_names, self.class_mapping, replay_size = self.replay_size, base_path=base_path, is_oracle=self.is_oracle)
+                        self.sim_table, self.sim_to_new_cls = new_vs_old_class_comparison(self.new_classes, self.old_classes, self.processed_per_class_new_features, self.labels_to_names, self.class_mapping, replay_size = self.replay_size, base_path=base_path, is_oracle=self.is_oracle)
                         # self.sim_to_new_cls = 1-np.array([[ sim_table[k][cl] for cl in sim_table[k]] for k in sim_table]).mean(0) ## for interference
-                        classes = [ list(self.sim_table[k].keys()) for k in self.sim_table][0]
+                        classes = list(self.sim_table.keys())
                         self.scale_distribution(self.sim_to_new_cls, classes)
                     else:
                         # self.class_ratios = { k: 1 for k in self.classes}
