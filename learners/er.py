@@ -122,6 +122,7 @@ class TR(NormalNN):
         self.plot_dir = self.model_save_dir.replace('_outputs', 'plots_and_tables')
         self.epoch=0
         self.init_params_epoch()
+        
 
         if not self.overwrite:
             try:
@@ -142,6 +143,7 @@ class TR(NormalNN):
         # trains
         # self.check_replay_counts = { int(i): set() for i in self.classes}
         if need_train:
+            timer = Timer()
             if self.reset_optimizer:  # Reset optimizer before learning each task
                 self.log('Optimizer is reset!')
                 self.init_optimizer()

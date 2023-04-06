@@ -340,10 +340,12 @@ class NormalNN(nn.Module):
         
         if (not self.replay and ((self.steps==-1 and self.epoch==self.epochs_of_interest[-1]) or (self.steps!=-1 and self.step_count==self.steps_of_interest[-1]))) or (self.replay and ((self.steps==-1 and self.epoch in self.epochs_of_interest) or (self.steps!=-1 and self.step_count in self.steps_of_interest))):
 
+            # print ('helllllooooooooooooooooooo1')
             self.class_accuracy_epoch, self.class_dist_shift_epoch, self.per_class_accuracy_task, self.per_class_dist_shift = distribution_shift_comparison(self.labels_to_names, self.class_mapping, self.processed_per_class_new_features, self.processed_per_class_old_features, self.per_class_correct_predictions, self.per_class_accuracy_task, self.per_class_dist_shift, self.plot_dir)
             
             if not self.is_oracle: 
                 if int(self.class_weighting_with)==1: ## regular dual dataloader
+                    # print ('helllllooooooooooooooooooo2')
                     self.class_replay_ratios= { i:1 for i in self.new_classes}
                 elif int(self.class_weighting_with)==2: ## custom weighting 50%-50%
                     self.class_replay_ratios= { cl: self.class_ratios_manual[cl] for cl in self.class_ratios_manual if cl in self.new_classes}
@@ -726,7 +728,7 @@ class NormalNN(nn.Module):
 
         # self.steps_of_interest.append(self.step_count)
         # print (self.steps_of_interest)
-        self.times_of_interest.append(round(self.batch_time.avg,3))
+        self.times_of_interest.append(round(self.batch_time.sum,3))
         # print (self.times_of_interest)
 
     def data_weighting(self, dataset, num_seen=None):

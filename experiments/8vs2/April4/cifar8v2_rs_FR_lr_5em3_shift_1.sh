@@ -23,8 +23,8 @@ MAXTASK=-1 # run every task
 
 # hard coded inputs
 REPEAT=1
-SCHEDULE="10" # epochs
-STEPS="-1"
+SCHEDULE="100" # epochs ## TODO should not be small (eg: 10) for cifar100
+STEPS="1000"
 
 SCHEDULE_TYPE=cosine
 MODELNAME=resnet18 
