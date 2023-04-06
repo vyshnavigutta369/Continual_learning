@@ -5,13 +5,13 @@ DEFAULTEXP=-1
 EXP_FLAG=${1:-$DEFAULTEXP}
 
 # gpu's to use - can do 1 per experiment for cifar
-GPUID=2
+GPUID=0
 
 # benchmark settings
-DATE=Apr4
-DATASET=CIFAR10
-FIRST_SPLIT=8
-OTHER_SPLIT=2
+DATE=Apr5
+DATASET=CIFAR100
+FIRST_SPLIT=10
+OTHER_SPLIT=10
 
 ###############################################################
 
@@ -26,19 +26,19 @@ REPEAT=1
 SCHEDULE="100" # epochs ## TODO should not be small (eg: 10) for cifar100
 STEPS="1000"
 
-SCHEDULE_TYPE=cosine
-MODELNAME=resnet18 
-MODELTYPE=resnet
-LR=0.005 # learning rate
-BS=128 # batch size
-RS=128
+# SCHEDULE_TYPE=cosine
+# MODELNAME=resnet18 
+# MODELTYPE=resnet
+# LR=0.005 # learning rate
+# BS=128 # batch size
+# RS=128
 
-# SCHEDULE_TYPE=decay
-# MODELNAME=vit_pt_imnet
-# MODELTYPE=zoo
-# LR=0.00001
-# BS=16 # batch size
-# RS=16
+SCHEDULE_TYPE=decay
+MODELNAME=vit_pt_imnet
+MODELTYPE=zoo
+LR=0.00001
+BS=16 # batch size
+RS=16
 
 RN=1000 ## replay samples
 
@@ -57,7 +57,7 @@ REPLAY_TYPES=("random_sample")
 REPLAY_STRATEGIES=('margin_proba_shift_min')
 LOSS_TYPES=("base")
 # clratios='{"airplane":3,"automobile":1,"deer":5,"dog":5,"frog":5,"horse":3,"ship":3,"truck":1,"bird":5,"cat":5}'
-clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'
+# clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'
 DEBUG=0
 if [ $DEBUG -eq 1 ] 
 then   
