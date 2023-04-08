@@ -5,7 +5,7 @@ DEFAULTEXP=-1
 EXP_FLAG=${1:-$DEFAULTEXP}
 
 # gpu's to use - can do 1 per experiment for cifar
-GPUID=0
+GPUID=1
 
 # benchmark settings
 DATE=Apr5
@@ -24,7 +24,7 @@ MAXTASK=-1 # run every task
 # hard coded inputs
 REPEAT=1
 SCHEDULE="100" # epochs
-STEPS="1000"
+STEPS="5000"
 
 # SCHEDULE_TYPE=cosine
 # MODELNAME=resnet18 

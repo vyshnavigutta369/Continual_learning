@@ -57,6 +57,7 @@ class TR(NormalNN):
         if self.class_weighting_with==2:
             self.class_ratios_manual= json.loads(learner_config['class_ratios'])
         self.num_replay_samples_init = learner_config['num_replay_samples']
+        self.task_wise_cl_ratios = learner_config['task_wise_cl_ratios']
         
     ##########################################
     #           MODEL TRAINING               #
@@ -123,7 +124,7 @@ class TR(NormalNN):
         self.epoch=0
         self.init_params_epoch()
         
-
+        self.task_index = [list (x) for x in self.tasks].index(list(task))
         if not self.overwrite:
             try:
                 self.load_model(model_save_dir)
@@ -181,13 +182,13 @@ class TR(NormalNN):
                     if hasattr(self, 'new_scheduler'):
                         self.new_scheduler.step()
 
-                for param_group in self.optimizer.param_groups:
-                    self.log('LR:', param_group['lr'])
+                # for param_group in self.optimizer.param_groups:
+                #     self.log('LR:', param_group['lr'])
                 batch_timer.tic()
 
                 self.init_params_epoch()
                 
-                for i, data  in enumerate(self.train_loader):
+                for data  in self.train_loader:
                     
                     # epoch += 1
                     # self.epoch=epoch
@@ -263,7 +264,7 @@ class TR(NormalNN):
                     losses, losses_b, acc, aacc_bl = self.post_training(acc, losses)
 
 
-                self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
+                # self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
 
             if self.replay:
                 plots(self.per_class_accuracy_task, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc, base_path=self.plot_dir+'_after/')
@@ -288,15 +289,16 @@ class TR(NormalNN):
 
     def extend_replay(self):
 
+        self.data_indices = torch.Tensor(list(self.data_weights.keys())).long()
+        self.data_weights = torch.Tensor(list(self.data_weights.values())).cuda()
         
         if self.is_dual_data_loader and not self.replay_strategy:
             print ('class_ratios_for_replay: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_ratios[cl] for cl in self.class_replay_ratios})
-            self.replay_dataset.extend(self.train_dataset, class_replay_ratios= self.class_replay_ratios)
+            self.replay_dataset.extend(self.train_dataset.data[self.data_indices], self.train_dataset.targets[self.data_indices], self.train_dataset.class_mapping,  class_replay_ratios= self.class_replay_ratios)
         else:
             print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
             # self.data_indices = torch.argsort(self.data_indices).long()
-            self.data_indices = torch.Tensor(list(self.data_weights.keys())).long()
-            self.data_weights = torch.Tensor(list(self.data_weights.values())).cuda()
+            
             
             self.replay_dataset.extend(self.train_dataset.data[self.data_indices], self.train_dataset.targets[self.data_indices], self.train_dataset.class_mapping, class_replay_weights= self.class_replay_weights, weights = self.data_weights, replay_strategy=self.replay_strategy)
             

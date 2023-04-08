@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader,  WeightedRandomSampler, RandomSampler
 import learners
 import yaml
 from torch.utils.tensorboard import SummaryWriter
-from datasets import concatenate_datasets
+# from datasets import concatenate_datasets
 import copy
 
 
@@ -120,7 +120,12 @@ class Trainer:
         self.labels_to_names = self.train_dataset.class_to_idx.items()
         self.class_mapping = self.train_dataset.class_mapping
         
-        print (class_order)
+        # print (class_order)
+        self.task_wise_ratios = dataloaders.utils.dataset_stats['SUPER-CIFAR100']['task_wise_cl_ratios'] if args.dataset == 'SUPER-CIFAR100' else []
+        self.task_wise_classes = dataloaders.utils.dataset_stats['SUPER-CIFAR100']['classes'] if args.dataset == 'SUPER-CIFAR100' else []
+        # print (np.array(self.task_wise_ratios).shape)
+        # self.labels_to_names = { v: k for k,v in self.train_dataset.class_to_idx.items()}
+        self.task_wise_cl_ratios = [{self.train_dataset.class_mapping[c]:y for c,y in zip(self.task_wise_classes,x)} for x in self.task_wise_ratios] if args.dataset == 'SUPER-CIFAR100' else []
         # for oracle
         self.oracle_flag = args.oracle_flag
         self.add_dim = 0
@@ -170,7 +175,8 @@ class Trainer:
                         'batch_sampler': args.batch_sampler,
                         'class_ratios': args.class_ratios,
                         'new_classes': None,
-                        'old_classes': None
+                        'old_classes': None,
+                        'task_wise_cl_ratios': self.task_wise_cl_ratios
                         }
         self.learner_type, self.learner_name = args.learner_type, args.learner_name
         self.learner = learners.__dict__[self.learner_type].__dict__[self.learner_name](self.learner_config)

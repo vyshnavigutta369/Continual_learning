@@ -1,0 +1,83 @@
+WARNING: Ignoring invalid distribution -ip (/nethome/vgutta7/miniconda3/lib/python3.9/site-packages)
+WARNING: Ignoring invalid distribution -ip (/nethome/vgutta7/miniconda3/lib/python3.9/site-packages)
+WARNING: Ignoring invalid distribution -ip (/nethome/vgutta7/miniconda3/lib/python3.9/site-packages)
+WARNING: Ignoring invalid distribution -ip (/nethome/vgutta7/miniconda3/lib/python3.9/site-packages)
+WARNING: Ignoring invalid distribution -ip (/nethome/vgutta7/miniconda3/lib/python3.9/site-packages)
+WARNING: Ignoring invalid distribution -ip (/nethome/vgutta7/miniconda3/lib/python3.9/site-packages)
+
+[notice] A new release of pip available: 22.3 -> 23.0.1
+[notice] To update, run: pip install --upgrade pip
+/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Traceback (most recent call last):
+  File "/coc/pskynet4/vgutta7/Continual_learning/run.py", line 194, in <module>
+    avg_metrics, oracle_acc = trainer.train(avg_metrics)  
+  File "/coc/pskynet4/vgutta7/Continual_learning/trainer.py", line 277, in train
+    avg_train_time, epochs_converge = self.learner.learn_batch(train_dataset_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 281, in learn_batch
+    self.extend_replay()
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 296, in extend_replay
+    print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
+  File "/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1207, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'TR' object has no attribute 'class_replay_weights'
+/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Traceback (most recent call last):
+  File "/coc/pskynet4/vgutta7/Continual_learning/run.py", line 194, in <module>
+    avg_metrics, oracle_acc = trainer.train(avg_metrics)  
+  File "/coc/pskynet4/vgutta7/Continual_learning/trainer.py", line 277, in train
+    avg_train_time, epochs_converge = self.learner.learn_batch(train_dataset_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 281, in learn_batch
+    self.extend_replay()
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 296, in extend_replay
+    print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
+  File "/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1207, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'TR' object has no attribute 'class_replay_weights'
+/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Traceback (most recent call last):
+  File "/coc/pskynet4/vgutta7/Continual_learning/run.py", line 194, in <module>
+    avg_metrics, oracle_acc = trainer.train(avg_metrics)  
+  File "/coc/pskynet4/vgutta7/Continual_learning/trainer.py", line 277, in train
+    avg_train_time, epochs_converge = self.learner.learn_batch(train_dataset_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 281, in learn_batch
+    self.extend_replay()
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 296, in extend_replay
+    print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
+  File "/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1207, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'TR' object has no attribute 'class_replay_weights'
+/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Traceback (most recent call last):
+  File "/coc/pskynet4/vgutta7/Continual_learning/run.py", line 194, in <module>
+    avg_metrics, oracle_acc = trainer.train(avg_metrics)  
+  File "/coc/pskynet4/vgutta7/Continual_learning/trainer.py", line 277, in train
+    avg_train_time, epochs_converge = self.learner.learn_batch(train_dataset_loader, self.train_dataset, self.replay_dataset, model_save_dir, val_target, task, test_loader)
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 281, in learn_batch
+    self.extend_replay()
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 296, in extend_replay
+    print ('class_replay_weights: ', { self.labels_to_names[self.class_mapping[cl]]: self.class_replay_weights[cl] for cl in self.class_replay_weights})
+  File "/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1207, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'TR' object has no attribute 'class_replay_weights'
+Traceback (most recent call last):
+  File "/coc/pskynet4/vgutta7/Continual_learning/run.py", line 182, in <module>
+    trainer = Trainer(args, seed, metric_keys, save_keys)
+  File "/coc/pskynet4/vgutta7/Continual_learning/trainer.py", line 176, in __init__
+    self.learner = learners.__dict__[self.learner_type].__dict__[self.learner_name](self.learner_config)
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/er.py", line 37, in __init__
+    super(TR, self).__init__(learner_config)
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/default.py", line 70, in __init__
+    self.cuda()
+  File "/coc/pskynet4/vgutta7/Continual_learning/learners/default.py", line 883, in cuda
+    torch.cuda.set_device(self.config['gpuid'][0])
+  File "/nethome/vgutta7/miniconda3/lib/python3.9/site-packages/torch/cuda/__init__.py", line 314, in set_device
+    torch._C._cuda_setDevice(device)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.

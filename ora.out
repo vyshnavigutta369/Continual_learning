@@ -1,0 +1,2859 @@
+Requirement already satisfied: torch in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (1.12.1)
+Requirement already satisfied: torchvision in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (0.13.1)
+Requirement already satisfied: typing-extensions in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from torch) (4.3.0)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from torchvision) (9.2.0)
+Requirement already satisfied: requests in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from torchvision) (2.27.1)
+Requirement already satisfied: numpy in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from torchvision) (1.23.4)
+Requirement already satisfied: idna<4,>=2.5 in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from requests->torchvision) (3.3)
+Requirement already satisfied: certifi>=2017.4.17 in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from requests->torchvision) (2022.9.14)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from requests->torchvision) (1.26.8)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /nethome/vgutta7/miniconda3/lib/python3.9/site-packages (from requests->torchvision) (2.0.4)
+************************************
+* STARTING TRIAL 1
+************************************
+=============================================
+Shuffling....
+pre-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+post-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+=============================================
+first split size:  10
+Files already downloaded and verified
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+ResNet(
+  (conv1): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (last_balanced): Linear(in_features=64, out_features=100, bias=True)
+  (last_unbalanced): Linear(in_features=64, out_features=100, bias=True)
+)
+#parameter of model: 184856
+==============TRAINING===============
+====================== 1 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 10
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 6.903 | Train Acc 5.469
+ * Val Acc 7.700, Total time 3.70
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Epoch:12/100
+LR: 0.004925546630773869
+Step:500/5000
+ * Loss 2.913 | Train Acc 46.875
+ * Val Acc 14.000, Total time 4.28
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Epoch:23/100
+LR: 0.004704403844771127
+Epoch:24/100
+LR: 0.004677220154149337
+Step:1000/5000
+ * Loss 1.840 | Train Acc 75.000
+ * Val Acc 43.900, Total time 5.22
+Epoch:25/100
+LR: 0.004648882429441257
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Epoch:29/100
+LR: 0.004524135262330097
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Epoch:32/100
+LR: 0.004418828150443467
+Epoch:33/100
+LR: 0.004381533400219318
+Epoch:34/100
+LR: 0.004343157572190956
+Epoch:35/100
+LR: 0.004303710135019718
+Epoch:36/100
+LR: 0.004263200821770461
+Epoch:37/100
+LR: 0.004221639627510075
+Step:1500/5000
+ * Loss 1.971 | Train Acc 65.625
+ * Val Acc 56.800, Total time 3.75
+Epoch:38/100
+LR: 0.004179036806841351
+Epoch:39/100
+LR: 0.004135402871372809
+Epoch:40/100
+LR: 0.004090748587125117
+Epoch:41/100
+LR: 0.004045084971874737
+Epoch:42/100
+LR: 0.003998423292435453
+Epoch:43/100
+LR: 0.003950775061878451
+Epoch:44/100
+LR: 0.0039021520366916487
+Epoch:45/100
+LR: 0.003852566213878946
+Epoch:46/100
+LR: 0.0038020298280001547
+Epoch:47/100
+LR: 0.0037505553481522983
+Epoch:48/100
+LR: 0.0036981554748930483
+Epoch:49/100
+LR: 0.003644843137107058
+Step:2000/5000
+ * Loss 1.467 | Train Acc 62.500
+ * Val Acc 63.900, Total time 3.84
+Epoch:50/100
+LR: 0.0035906314888159443
+Epoch:51/100
+LR: 0.0035355339059327372
+Epoch:52/100
+LR: 0.0034795639829615713
+Epoch:53/100
+LR: 0.0034227355296434434
+Epoch:54/100
+LR: 0.003365062567548867
+Epoch:55/100
+LR: 0.003306559326618259
+Epoch:56/100
+LR: 0.0032472402416509182
+Epoch:57/100
+LR: 0.0031871199487434484
+Epoch:58/100
+LR: 0.003126213281678526
+Epoch:59/100
+LR: 0.0030645352682648827
+Epoch:60/100
+LR: 0.0030021011266294206
+Epoch:61/100
+LR: 0.0029389262614623653
+Epoch:62/100
+LR: 0.002875026260216393
+Step:2500/5000
+ * Loss 1.139 | Train Acc 75.781
+ * Val Acc 69.400, Total time 3.52
+Epoch:63/100
+LR: 0.002810416889260653
+Epoch:64/100
+LR: 0.002745114089990659
+Epoch:65/100
+LR: 0.0026791339748949827
+Epoch:66/100
+LR: 0.0026124928235797436
+Epoch:67/100
+LR: 0.002545207078751856
+Epoch:68/100
+LR: 0.0024772933421620368
+Epoch:69/100
+LR: 0.002408768370508576
+Epoch:70/100
+LR: 0.002339649071302867
+Epoch:71/100
+LR: 0.002269952498697734
+Epoch:72/100
+LR: 0.0021996958492795753
+Epoch:73/100
+LR: 0.0021288964578253635
+Epoch:74/100
+LR: 0.0020575717930255435
+Step:3000/5000
+ * Loss 6.587 | Train Acc 75.000
+ * Val Acc 71.800, Total time 3.55
+Epoch:75/100
+LR: 0.0019857394531739027
+Epoch:76/100
+LR: 0.0019134171618254482
+Epoch:77/100
+LR: 0.0018406227634233893
+Epoch:78/100
+LR: 0.0017673742188962858
+Epoch:79/100
+LR: 0.0016936896012264575
+Epoch:80/100
+LR: 0.001619587090990747
+Epoch:81/100
+LR: 0.0015450849718747373
+Epoch:82/100
+LR: 0.0014702016261615195
+Epoch:83/100
+LR: 0.0013949555301961463
+Epoch:84/100
+LR: 0.0013193652498268637
+Epoch:85/100
+LR: 0.0012434494358242738
+Epoch:86/100
+LR: 0.0011672268192795263
+Epoch:87/100
+LR: 0.0010907162069827125
+Step:3500/5000
+ * Loss 1.255 | Train Acc 79.688
+ * Val Acc 71.500, Total time 4.00
+Epoch:88/100
+LR: 0.0010139364767825624
+Epoch:89/100
+LR: 0.0009369065729286238
+Epoch:90/100
+LR: 0.0008596455013970476
+Epoch:91/100
+LR: 0.0007821723252011547
+Epoch:92/100
+LR: 0.0007045061596879129
+Epoch:93/100
+LR: 0.0006266661678215213
+Epoch:94/100
+LR: 0.0005486715554552257
+Epoch:95/100
+LR: 0.0004705415665925714
+Epoch:96/100
+LR: 0.0003922954786392239
+Epoch:97/100
+LR: 0.0003139525976465665
+Epoch:98/100
+LR: 0.0002355322535482134
+Epoch:99/100
+LR: 0.00015705379539064087
+Step:4000/5000
+ * Loss 1.685 | Train Acc 37.500
+ * Val Acc 72.200, Total time 3.62
+Epoch:100/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-1/
+=> Save Done
+validation split name: 1
+ * Val Acc 72.200, Total time 3.51
+====================== 2 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 20
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 8.360 | Train Acc 3.906
+ * Val Acc 0.000, Total time 4.72
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Step:500/5000
+ * Loss 4.528 | Train Acc 32.812
+ * Val Acc 1.050, Total time 4.14
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Epoch:12/100
+LR: 0.004925546630773869
+Step:1000/5000
+ * Loss 4.179 | Train Acc 36.719
+ * Val Acc 8.100, Total time 4.08
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Step:1500/5000
+ * Loss 3.320 | Train Acc 43.750
+ * Val Acc 18.300, Total time 4.10
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Epoch:23/100
+LR: 0.004704403844771127
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Step:2000/5000
+ * Loss 2.750 | Train Acc 52.344
+ * Val Acc 23.750, Total time 4.39
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Epoch:29/100
+LR: 0.004524135262330097
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Step:2500/5000
+ * Loss 2.504 | Train Acc 53.125
+ * Val Acc 35.100, Total time 4.47
+Epoch:32/100
+LR: 0.004418828150443467
+Epoch:33/100
+LR: 0.004381533400219318
+Epoch:34/100
+LR: 0.004343157572190956
+Epoch:35/100
+LR: 0.004303710135019718
+Epoch:36/100
+LR: 0.004263200821770461
+Epoch:37/100
+LR: 0.004221639627510075
+Step:3000/5000
+ * Loss 2.787 | Train Acc 53.906
+ * Val Acc 35.450, Total time 4.11
+Epoch:38/100
+LR: 0.004179036806841351
+Epoch:39/100
+LR: 0.004135402871372809
+Epoch:40/100
+LR: 0.004090748587125117
+Epoch:41/100
+LR: 0.004045084971874737
+Epoch:42/100
+LR: 0.003998423292435453
+Epoch:43/100
+LR: 0.003950775061878451
+Epoch:44/100
+LR: 0.0039021520366916487
+Step:3500/5000
+ * Loss 2.226 | Train Acc 65.625
+ * Val Acc 40.900, Total time 4.37
+Epoch:45/100
+LR: 0.003852566213878946
+Epoch:46/100
+LR: 0.0038020298280001547
+Epoch:47/100
+LR: 0.0037505553481522983
+Epoch:48/100
+LR: 0.0036981554748930483
+Epoch:49/100
+LR: 0.003644843137107058
+Epoch:50/100
+LR: 0.0035906314888159443
+Step:4000/5000
+ * Loss 1.902 | Train Acc 66.406
+ * Val Acc 45.850, Total time 4.45
+Epoch:51/100
+LR: 0.0035355339059327372
+Epoch:52/100
+LR: 0.0034795639829615713
+Epoch:53/100
+LR: 0.0034227355296434434
+Epoch:54/100
+LR: 0.003365062567548867
+Epoch:55/100
+LR: 0.003306559326618259
+Epoch:56/100
+LR: 0.0032472402416509182
+Step:4500/5000
+ * Loss 1.981 | Train Acc 64.844
+ * Val Acc 52.650, Total time 4.19
+Epoch:57/100
+LR: 0.0031871199487434484
+Epoch:58/100
+LR: 0.003126213281678526
+Epoch:59/100
+LR: 0.0030645352682648827
+Epoch:60/100
+LR: 0.0030021011266294206
+Epoch:61/100
+LR: 0.0029389262614623653
+Epoch:62/100
+LR: 0.002875026260216393
+Epoch:63/100
+LR: 0.002810416889260653
+Step:5000/5000
+ * Loss 1.719 | Train Acc 73.438
+ * Val Acc 54.500, Total time 4.04
+Epoch:64/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-2/
+=> Save Done
+validation split name: 1
+ * Val Acc 57.300, Total time 3.64
+validation split name: 2
+ * Val Acc 50.700, Total time 3.79
+====================== 3 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 30
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 9.144 | Train Acc 2.344
+ * Val Acc 0.000, Total time 5.13
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Step:500/5000
+ * Loss 5.642 | Train Acc 21.094
+ * Val Acc 0.000, Total time 4.77
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Step:1000/5000
+ * Loss 4.693 | Train Acc 32.812
+ * Val Acc 1.800, Total time 4.87
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Epoch:12/100
+LR: 0.004925546630773869
+Step:1500/5000
+ * Loss 4.494 | Train Acc 41.406
+ * Val Acc 5.433, Total time 4.90
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Step:2000/5000
+ * Loss 3.572 | Train Acc 42.188
+ * Val Acc 9.933, Total time 4.90
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Step:2500/5000
+ * Loss 3.889 | Train Acc 47.656
+ * Val Acc 15.133, Total time 4.88
+Epoch:22/100
+LR: 0.004730426794137726
+Epoch:23/100
+LR: 0.004704403844771127
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Step:3000/5000
+ * Loss 3.281 | Train Acc 52.344
+ * Val Acc 17.700, Total time 4.77
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Epoch:29/100
+LR: 0.004524135262330097
+Step:3500/5000
+ * Loss 3.333 | Train Acc 50.000
+ * Val Acc 23.467, Total time 5.01
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Epoch:32/100
+LR: 0.004418828150443467
+Epoch:33/100
+LR: 0.004381533400219318
+Step:4000/5000
+ * Loss 2.863 | Train Acc 47.656
+ * Val Acc 27.667, Total time 4.69
+Epoch:34/100
+LR: 0.004343157572190956
+Epoch:35/100
+LR: 0.004303710135019718
+Epoch:36/100
+LR: 0.004263200821770461
+Epoch:37/100
+LR: 0.004221639627510075
+Epoch:38/100
+LR: 0.004179036806841351
+Step:4500/5000
+ * Loss 3.028 | Train Acc 55.469
+ * Val Acc 31.833, Total time 4.92
+Epoch:39/100
+LR: 0.004135402871372809
+Epoch:40/100
+LR: 0.004090748587125117
+Epoch:41/100
+LR: 0.004045084971874737
+Epoch:42/100
+LR: 0.003998423292435453
+Step:5000/5000
+ * Loss 2.101 | Train Acc 67.188
+ * Val Acc 34.700, Total time 5.24
+Epoch:43/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-3/
+=> Save Done
+validation split name: 1
+ * Val Acc 36.900, Total time 3.45
+validation split name: 2
+ * Val Acc 29.500, Total time 3.83
+validation split name: 3
+ * Val Acc 38.500, Total time 3.97
+====================== 4 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 40
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 9.861 | Train Acc 4.688
+ * Val Acc 0.125, Total time 5.94
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Step:500/5000
+ * Loss 6.304 | Train Acc 17.969
+ * Val Acc 0.000, Total time 5.16
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Step:1000/5000
+ * Loss 5.846 | Train Acc 22.656
+ * Val Acc 2.900, Total time 5.80
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Step:1500/5000
+ * Loss 5.237 | Train Acc 30.469
+ * Val Acc 5.700, Total time 5.35
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Epoch:12/100
+LR: 0.004925546630773869
+Step:2000/5000
+ * Loss 4.229 | Train Acc 40.625
+ * Val Acc 14.300, Total time 5.50
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Step:2500/5000
+ * Loss 3.684 | Train Acc 42.969
+ * Val Acc 19.400, Total time 5.40
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Step:3000/5000
+ * Loss 4.042 | Train Acc 44.531
+ * Val Acc 24.575, Total time 5.41
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Step:3500/5000
+ * Loss 4.551 | Train Acc 37.500
+ * Val Acc 28.975, Total time 5.32
+Epoch:23/100
+LR: 0.004704403844771127
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Step:4000/5000
+ * Loss 3.554 | Train Acc 51.562
+ * Val Acc 32.350, Total time 5.39
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Step:4500/5000
+ * Loss 3.300 | Train Acc 46.094
+ * Val Acc 34.700, Total time 5.73
+Epoch:29/100
+LR: 0.004524135262330097
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Step:5000/5000
+ * Loss 3.438 | Train Acc 53.125
+ * Val Acc 38.750, Total time 5.20
+Epoch:32/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-4/
+=> Save Done
+validation split name: 1
+ * Val Acc 36.400, Total time 3.78
+validation split name: 2
+ * Val Acc 30.400, Total time 3.72
+validation split name: 3
+ * Val Acc 45.100, Total time 3.83
+validation split name: 4
+ * Val Acc 43.700, Total time 3.80
+====================== 5 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 50
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 9.851 | Train Acc 0.781
+ * Val Acc 2.000, Total time 6.41
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Step:500/5000
+ * Loss 6.528 | Train Acc 15.625
+ * Val Acc 2.280, Total time 5.72
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Step:1000/5000
+ * Loss 6.154 | Train Acc 16.406
+ * Val Acc 7.340, Total time 6.08
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Step:1500/5000
+ * Loss 6.023 | Train Acc 21.094
+ * Val Acc 12.060, Total time 5.90
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Step:2000/5000
+ * Loss 5.410 | Train Acc 32.031
+ * Val Acc 18.320, Total time 5.80
+Epoch:11/100
+LR: 0.004938441702975689
+Epoch:12/100
+LR: 0.004925546630773869
+Step:2500/5000
+ * Loss 5.164 | Train Acc 32.812
+ * Val Acc 26.280, Total time 5.98
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Step:3000/5000
+ * Loss 4.702 | Train Acc 34.375
+ * Val Acc 30.780, Total time 5.73
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Step:3500/5000
+ * Loss 4.075 | Train Acc 36.719
+ * Val Acc 34.440, Total time 5.66
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Step:4000/5000
+ * Loss 4.151 | Train Acc 42.188
+ * Val Acc 38.440, Total time 6.05
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Step:4500/5000
+ * Loss 3.900 | Train Acc 42.969
+ * Val Acc 40.960, Total time 5.93
+Epoch:23/100
+LR: 0.004704403844771127
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Step:5000/5000
+ * Loss 3.605 | Train Acc 47.656
+ * Val Acc 43.080, Total time 5.84
+Epoch:26/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-5/
+=> Save Done
+validation split name: 1
+ * Val Acc 47.100, Total time 3.67
+validation split name: 2
+ * Val Acc 36.800, Total time 3.98
+validation split name: 3
+ * Val Acc 45.000, Total time 3.81
+validation split name: 4
+ * Val Acc 41.200, Total time 3.65
+validation split name: 5
+ * Val Acc 44.200, Total time 3.44
+====================== 6 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 60
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 10.348 | Train Acc 1.562
+ * Val Acc 1.433, Total time 6.55
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Step:500/5000
+ * Loss 6.753 | Train Acc 19.531
+ * Val Acc 1.700, Total time 6.73
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Step:1000/5000
+ * Loss 6.370 | Train Acc 22.656
+ * Val Acc 6.000, Total time 6.34
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Step:1500/5000
+ * Loss 5.826 | Train Acc 21.094
+ * Val Acc 10.050, Total time 6.52
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Step:2000/5000
+ * Loss 5.711 | Train Acc 28.125
+ * Val Acc 15.600, Total time 6.62
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Step:2500/5000
+ * Loss 5.175 | Train Acc 36.719
+ * Val Acc 20.400, Total time 6.26
+Epoch:11/100
+LR: 0.004938441702975689
+Epoch:12/100
+LR: 0.004925546630773869
+Step:3000/5000
+ * Loss 4.818 | Train Acc 33.594
+ * Val Acc 26.150, Total time 6.49
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Step:3500/5000
+ * Loss 4.651 | Train Acc 38.281
+ * Val Acc 29.250, Total time 6.55
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Step:4000/5000
+ * Loss 4.276 | Train Acc 38.281
+ * Val Acc 33.183, Total time 6.50
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Step:4500/5000
+ * Loss 3.989 | Train Acc 46.875
+ * Val Acc 35.700, Total time 6.44
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Step:5000/5000
+ * Loss 4.221 | Train Acc 45.312
+ * Val Acc 38.200, Total time 6.41
+Epoch:22/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-6/
+=> Save Done
+validation split name: 1
+ * Val Acc 36.600, Total time 3.93
+validation split name: 2
+ * Val Acc 31.700, Total time 3.87
+validation split name: 3
+ * Val Acc 35.500, Total time 3.81
+validation split name: 4
+ * Val Acc 39.300, Total time 3.77
+validation split name: 5
+ * Val Acc 38.700, Total time 3.71
+validation split name: 6
+ * Val Acc 47.400, Total time 3.69
+====================== 7 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 70
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 11.015 | Train Acc 2.344
+ * Val Acc 1.486, Total time 7.08
+Epoch:1/100
+LR: 0.005
+Step:500/5000
+ * Loss 7.461 | Train Acc 14.062
+ * Val Acc 3.114, Total time 6.99
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Step:1000/5000
+ * Loss 6.900 | Train Acc 14.062
+ * Val Acc 7.571, Total time 6.87
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Step:1500/5000
+ * Loss 6.809 | Train Acc 14.062
+ * Val Acc 11.686, Total time 7.35
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Step:2000/5000
+ * Loss 6.021 | Train Acc 20.312
+ * Val Acc 14.000, Total time 6.68
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Step:2500/5000
+ * Loss 5.610 | Train Acc 26.562
+ * Val Acc 19.343, Total time 7.03
+Epoch:10/100
+LR: 0.004950118288582788
+Step:3000/5000
+ * Loss 6.051 | Train Acc 32.812
+ * Val Acc 24.400, Total time 6.79
+Epoch:11/100
+LR: 0.004938441702975689
+Epoch:12/100
+LR: 0.004925546630773869
+Step:3500/5000
+ * Loss 5.658 | Train Acc 30.469
+ * Val Acc 27.000, Total time 7.01
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Step:4000/5000
+ * Loss 5.558 | Train Acc 29.688
+ * Val Acc 30.943, Total time 6.95
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Step:4500/5000
+ * Loss 5.290 | Train Acc 27.344
+ * Val Acc 33.357, Total time 6.73
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Step:5000/5000
+ * Loss 4.247 | Train Acc 41.406
+ * Val Acc 35.557, Total time 6.87
+Epoch:19/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-7/
+=> Save Done
+validation split name: 1
+ * Val Acc 35.900, Total time 3.46
+validation split name: 2
+ * Val Acc 26.300, Total time 3.87
+validation split name: 3
+ * Val Acc 40.500, Total time 3.88
+validation split name: 4
+ * Val Acc 29.600, Total time 3.79
+validation split name: 5
+ * Val Acc 35.300, Total time 3.53
+validation split name: 6
+ * Val Acc 42.400, Total time 3.78
+validation split name: 7
+ * Val Acc 39.700, Total time 3.42
+====================== 8 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 80
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 10.992 | Train Acc 1.562
+ * Val Acc 1.250, Total time 7.89
+Epoch:1/100
+LR: 0.005
+Step:500/5000
+ * Loss 7.814 | Train Acc 11.719
+ * Val Acc 1.837, Total time 7.19
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Step:1000/5000
+ * Loss 7.291 | Train Acc 11.719
+ * Val Acc 6.088, Total time 7.31
+Epoch:4/100
+LR: 0.0049944493748098505
+Step:1500/5000
+ * Loss 6.916 | Train Acc 20.312
+ * Val Acc 9.300, Total time 7.65
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Step:2000/5000
+ * Loss 6.442 | Train Acc 21.094
+ * Val Acc 14.100, Total time 7.05
+Epoch:7/100
+LR: 0.0049778098230154
+Step:2500/5000
+ * Loss 6.013 | Train Acc 27.344
+ * Val Acc 16.488, Total time 7.15
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Step:3000/5000
+ * Loss 6.337 | Train Acc 20.312
+ * Val Acc 19.225, Total time 7.36
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Step:3500/5000
+ * Loss 6.055 | Train Acc 19.531
+ * Val Acc 22.288, Total time 7.36
+Epoch:12/100
+LR: 0.004925546630773869
+Step:4000/5000
+ * Loss 5.577 | Train Acc 25.781
+ * Val Acc 23.663, Total time 7.47
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Step:4500/5000
+ * Loss 5.458 | Train Acc 22.656
+ * Val Acc 26.200, Total time 7.60
+Epoch:15/100
+LR: 0.004879583809693737
+Step:5000/5000
+ * Loss 5.568 | Train Acc 32.031
+ * Val Acc 28.850, Total time 7.74
+Epoch:16/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-8/
+=> Save Done
+validation split name: 1
+ * Val Acc 32.200, Total time 3.73
+validation split name: 2
+ * Val Acc 24.800, Total time 3.88
+validation split name: 3
+ * Val Acc 31.400, Total time 3.85
+validation split name: 4
+ * Val Acc 19.700, Total time 3.95
+validation split name: 5
+ * Val Acc 31.800, Total time 3.58
+validation split name: 6
+ * Val Acc 35.600, Total time 3.95
+validation split name: 7
+ * Val Acc 28.400, Total time 3.84
+validation split name: 8
+ * Val Acc 29.000, Total time 3.76
+====================== 9 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 90
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 11.865 | Train Acc 2.344
+ * Val Acc 1.156, Total time 8.13
+Epoch:1/100
+LR: 0.005
+Step:500/5000
+ * Loss 8.238 | Train Acc 5.469
+ * Val Acc 3.356, Total time 7.95
+Epoch:2/100
+LR: 0.004999383162408303
+Step:1000/5000
+ * Loss 7.321 | Train Acc 11.719
+ * Val Acc 8.322, Total time 7.79
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Step:1500/5000
+ * Loss 7.118 | Train Acc 14.062
+ * Val Acc 11.511, Total time 7.69
+Epoch:5/100
+LR: 0.004990133642141358
+Step:2000/5000
+ * Loss 6.479 | Train Acc 17.188
+ * Val Acc 14.544, Total time 8.22
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Step:2500/5000
+ * Loss 6.485 | Train Acc 20.312
+ * Val Acc 18.178, Total time 7.80
+Epoch:8/100
+LR: 0.004969804777275899
+Step:3000/5000
+ * Loss 6.101 | Train Acc 22.656
+ * Val Acc 21.589, Total time 7.85
+Epoch:9/100
+LR: 0.004960573506572389
+Step:3500/5000
+ * Loss 6.158 | Train Acc 21.875
+ * Val Acc 23.722, Total time 7.61
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Step:4000/5000
+ * Loss 5.716 | Train Acc 20.312
+ * Val Acc 25.144, Total time 8.07
+Epoch:12/100
+LR: 0.004925546630773869
+Step:4500/5000
+ * Loss 5.429 | Train Acc 34.375
+ * Val Acc 27.500, Total time 7.94
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Step:5000/5000
+ * Loss 5.496 | Train Acc 30.469
+ * Val Acc 30.056, Total time 7.86
+Epoch:15/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-9/
+=> Save Done
+validation split name: 1
+ * Val Acc 30.100, Total time 3.62
+validation split name: 2
+ * Val Acc 24.800, Total time 3.76
+validation split name: 3
+ * Val Acc 30.500, Total time 3.63
+validation split name: 4
+ * Val Acc 31.800, Total time 3.74
+validation split name: 5
+ * Val Acc 28.700, Total time 3.72
+validation split name: 6
+ * Val Acc 33.200, Total time 3.67
+validation split name: 7
+ * Val Acc 30.200, Total time 3.71
+validation split name: 8
+ * Val Acc 21.100, Total time 3.83
+validation split name: 9
+ * Val Acc 38.700, Total time 3.55
+====================== 10 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 100
+=> Load Done
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Epoch:0/100
+LR: 0.005
+Step:1/5000
+ * Loss 12.208 | Train Acc 0.781
+ * Val Acc 1.000, Total time 8.94
+Epoch:1/100
+LR: 0.005
+Step:500/5000
+ * Loss 8.513 | Train Acc 7.812
+ * Val Acc 5.240, Total time 8.29
+Epoch:2/100
+LR: 0.004999383162408303
+Step:1000/5000
+ * Loss 7.728 | Train Acc 11.719
+ * Val Acc 8.550, Total time 8.47
+Epoch:3/100
+LR: 0.004997532801828658
+Step:1500/5000
+ * Loss 7.646 | Train Acc 11.719
+ * Val Acc 10.680, Total time 8.16
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Step:2000/5000
+ * Loss 7.360 | Train Acc 14.062
+ * Val Acc 13.370, Total time 8.60
+Epoch:6/100
+LR: 0.00498458666866564
+Step:2500/5000
+ * Loss 6.682 | Train Acc 21.094
+ * Val Acc 16.690, Total time 8.67
+Epoch:7/100
+LR: 0.0049778098230154
+Step:3000/5000
+ * Loss 6.279 | Train Acc 25.000
+ * Val Acc 18.540, Total time 8.49
+Epoch:8/100
+LR: 0.004969804777275899
+Step:3500/5000
+ * Loss 6.793 | Train Acc 22.656
+ * Val Acc 22.090, Total time 8.58
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Step:4000/5000
+ * Loss 6.199 | Train Acc 21.094
+ * Val Acc 23.930, Total time 8.56
+Epoch:11/100
+LR: 0.004938441702975689
+Step:4500/5000
+ * Loss 5.769 | Train Acc 26.562
+ * Val Acc 26.350, Total time 8.29
+Epoch:12/100
+LR: 0.004925546630773869
+Step:5000/5000
+ * Loss 5.661 | Train Acc 32.812
+ * Val Acc 28.100, Total time 8.28
+Epoch:13/100
+=> Saving class model to: _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-10/
+=> Save Done
+validation split name: 1
+ * Val Acc 34.300, Total time 3.73
+validation split name: 2
+ * Val Acc 24.400, Total time 3.69
+validation split name: 3
+ * Val Acc 30.700, Total time 3.54
+validation split name: 4
+ * Val Acc 21.200, Total time 3.84
+validation split name: 5
+ * Val Acc 28.000, Total time 3.47
+validation split name: 6
+ * Val Acc 33.000, Total time 3.64
+validation split name: 7
+ * Val Acc 28.100, Total time 3.53
+validation split name: 8
+ * Val Acc 26.800, Total time 3.65
+validation split name: 9
+ * Val Acc 25.500, Total time 3.60
+validation split name: 10
+ * Val Acc 28.700, Total time 3.32
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 10
+=> Load Done
+validation split name: 1
+ * Val Acc 72.200, Total time 3.66
+validation split name: 1
+ * Val Acc 75.556, Total time 3.74
+validation split name: 1
+ * Val Acc 72.200, Total time 3.72
+Incremental class: Old valid output dimension: 10
+Incremental class: New Valid output dimension: 20
+=> Load Done
+validation split name: 1
+ * Val Acc 57.300, Total time 3.72
+validation split name: 2
+ * Val Acc 50.700, Total time 3.74
+validation split name: 1
+ * Val Acc 79.111, Total time 3.88
+validation split name: 2
+ * Val Acc 73.889, Total time 3.96
+validation split name: 2
+ * Val Acc 54.000, Total time 4.14
+Incremental class: Old valid output dimension: 20
+Incremental class: New Valid output dimension: 30
+=> Load Done
+validation split name: 1
+ * Val Acc 36.900, Total time 3.61
+validation split name: 2
+ * Val Acc 29.500, Total time 3.71
+validation split name: 3
+ * Val Acc 38.500, Total time 3.36
+validation split name: 1
+ * Val Acc 75.667, Total time 3.73
+validation split name: 2
+ * Val Acc 71.444, Total time 3.65
+validation split name: 3
+ * Val Acc 76.333, Total time 3.72
+validation split name: 3
+ * Val Acc 34.967, Total time 4.63
+Incremental class: Old valid output dimension: 30
+Incremental class: New Valid output dimension: 40
+=> Load Done
+validation split name: 1
+ * Val Acc 36.400, Total time 3.78
+validation split name: 2
+ * Val Acc 30.400, Total time 3.75
+validation split name: 3
+ * Val Acc 45.100, Total time 3.57
+validation split name: 4
+ * Val Acc 43.700, Total time 3.76
+validation split name: 1
+ * Val Acc 75.111, Total time 3.79
+validation split name: 2
+ * Val Acc 70.444, Total time 3.52
+validation split name: 3
+ * Val Acc 75.333, Total time 3.60
+validation split name: 4
+ * Val Acc 70.000, Total time 3.73
+validation split name: 4
+ * Val Acc 38.900, Total time 4.91
+Incremental class: Old valid output dimension: 40
+Incremental class: New Valid output dimension: 50
+=> Load Done
+validation split name: 1
+ * Val Acc 47.100, Total time 3.89
+validation split name: 2
+ * Val Acc 36.800, Total time 3.72
+validation split name: 3
+ * Val Acc 45.000, Total time 3.66
+validation split name: 4
+ * Val Acc 41.200, Total time 3.88
+validation split name: 5
+ * Val Acc 44.200, Total time 3.54
+validation split name: 1
+ * Val Acc 71.444, Total time 3.84
+validation split name: 2
+ * Val Acc 66.778, Total time 3.79
+validation split name: 3
+ * Val Acc 72.889, Total time 3.73
+validation split name: 4
+ * Val Acc 70.444, Total time 3.73
+validation split name: 5
+ * Val Acc 72.333, Total time 3.62
+validation split name: 5
+ * Val Acc 42.860, Total time 5.35
+Incremental class: Old valid output dimension: 50
+Incremental class: New Valid output dimension: 60
+=> Load Done
+validation split name: 1
+ * Val Acc 36.600, Total time 3.64
+validation split name: 2
+ * Val Acc 31.700, Total time 3.73
+validation split name: 3
+ * Val Acc 35.500, Total time 3.83
+validation split name: 4
+ * Val Acc 39.300, Total time 3.76
+validation split name: 5
+ * Val Acc 38.700, Total time 3.72
+validation split name: 6
+ * Val Acc 47.400, Total time 3.82
+validation split name: 1
+ * Val Acc 71.444, Total time 3.83
+validation split name: 2
+ * Val Acc 67.556, Total time 3.79
+validation split name: 3
+ * Val Acc 70.000, Total time 3.47
+validation split name: 4
+ * Val Acc 68.556, Total time 3.66
+validation split name: 5
+ * Val Acc 72.222, Total time 3.61
+validation split name: 6
+ * Val Acc 75.778, Total time 3.73
+validation split name: 6
+ * Val Acc 38.200, Total time 5.60
+Incremental class: Old valid output dimension: 60
+Incremental class: New Valid output dimension: 70
+=> Load Done
+validation split name: 1
+ * Val Acc 35.900, Total time 3.47
+validation split name: 2
+ * Val Acc 26.300, Total time 3.71
+validation split name: 3
+ * Val Acc 40.500, Total time 3.68
+validation split name: 4
+ * Val Acc 29.600, Total time 3.83
+validation split name: 5
+ * Val Acc 35.300, Total time 3.76
+validation split name: 6
+ * Val Acc 42.400, Total time 3.49
+validation split name: 7
+ * Val Acc 39.700, Total time 3.74
+validation split name: 1
+ * Val Acc 68.222, Total time 3.56
+validation split name: 2
+ * Val Acc 65.444, Total time 3.86
+validation split name: 3
+ * Val Acc 71.444, Total time 3.67
+validation split name: 4
+ * Val Acc 68.222, Total time 3.58
+validation split name: 5
+ * Val Acc 69.556, Total time 3.78
+validation split name: 6
+ * Val Acc 71.222, Total time 3.79
+validation split name: 7
+ * Val Acc 63.778, Total time 3.74
+validation split name: 7
+ * Val Acc 35.671, Total time 6.52
+Incremental class: Old valid output dimension: 70
+Incremental class: New Valid output dimension: 80
+=> Load Done
+validation split name: 1
+ * Val Acc 32.200, Total time 3.60
+validation split name: 2
+ * Val Acc 24.800, Total time 3.47
+validation split name: 3
+ * Val Acc 31.400, Total time 3.60
+validation split name: 4
+ * Val Acc 19.700, Total time 3.69
+validation split name: 5
+ * Val Acc 31.800, Total time 3.80
+validation split name: 6
+ * Val Acc 35.600, Total time 3.68
+validation split name: 7
+ * Val Acc 28.400, Total time 3.64
+validation split name: 8
+ * Val Acc 29.000, Total time 3.84
+validation split name: 1
+ * Val Acc 67.111, Total time 3.81
+validation split name: 2
+ * Val Acc 62.667, Total time 3.82
+validation split name: 3
+ * Val Acc 69.111, Total time 3.49
+validation split name: 4
+ * Val Acc 61.000, Total time 3.65
+validation split name: 5
+ * Val Acc 71.222, Total time 3.70
+validation split name: 6
+ * Val Acc 70.000, Total time 3.72
+validation split name: 7
+ * Val Acc 63.222, Total time 3.40
+validation split name: 8
+ * Val Acc 65.111, Total time 3.94
+validation split name: 8
+ * Val Acc 29.113, Total time 6.56
+Incremental class: Old valid output dimension: 80
+Incremental class: New Valid output dimension: 90
+=> Load Done
+validation split name: 1
+ * Val Acc 30.100, Total time 3.63
+validation split name: 2
+ * Val Acc 24.800, Total time 3.52
+validation split name: 3
+ * Val Acc 30.500, Total time 3.76
+validation split name: 4
+ * Val Acc 31.800, Total time 3.93
+validation split name: 5
+ * Val Acc 28.700, Total time 3.49
+validation split name: 6
+ * Val Acc 33.200, Total time 3.87
+validation split name: 7
+ * Val Acc 30.200, Total time 3.64
+validation split name: 8
+ * Val Acc 21.100, Total time 3.70
+validation split name: 9
+ * Val Acc 38.700, Total time 3.70
+validation split name: 1
+ * Val Acc 68.222, Total time 3.52
+validation split name: 2
+ * Val Acc 62.111, Total time 3.77
+validation split name: 3
+ * Val Acc 66.000, Total time 3.45
+validation split name: 4
+ * Val Acc 62.556, Total time 3.64
+validation split name: 5
+ * Val Acc 66.000, Total time 3.67
+validation split name: 6
+ * Val Acc 67.222, Total time 3.73
+validation split name: 7
+ * Val Acc 61.222, Total time 3.73
+validation split name: 8
+ * Val Acc 62.889, Total time 3.72
+validation split name: 9
+ * Val Acc 68.444, Total time 3.86
+validation split name: 9
+ * Val Acc 29.900, Total time 7.27
+Incremental class: Old valid output dimension: 90
+Incremental class: New Valid output dimension: 100
+=> Load Done
+validation split name: 1
+ * Val Acc 34.300, Total time 3.67
+validation split name: 2
+ * Val Acc 24.400, Total time 3.86
+validation split name: 3
+ * Val Acc 30.700, Total time 3.69
+validation split name: 4
+ * Val Acc 21.200, Total time 3.83
+validation split name: 5
+ * Val Acc 28.000, Total time 3.48
+validation split name: 6
+ * Val Acc 33.000, Total time 3.97
+validation split name: 7
+ * Val Acc 28.100, Total time 3.71
+validation split name: 8
+ * Val Acc 26.800, Total time 3.88
+validation split name: 9
+ * Val Acc 25.500, Total time 3.94
+validation split name: 10
+ * Val Acc 28.700, Total time 3.79
+validation split name: 1
+ * Val Acc 65.222, Total time 3.97
+validation split name: 2
+ * Val Acc 61.111, Total time 3.54
+validation split name: 3
+ * Val Acc 64.556, Total time 3.58
+validation split name: 4
+ * Val Acc 62.444, Total time 3.64
+validation split name: 5
+ * Val Acc 65.222, Total time 3.82
+validation split name: 6
+ * Val Acc 66.111, Total time 3.51
+validation split name: 7
+ * Val Acc 62.222, Total time 3.80
+validation split name: 8
+ * Val Acc 64.889, Total time 3.58
+validation split name: 9
+ * Val Acc 65.889, Total time 3.63
+validation split name: 10
+ * Val Acc 72.667, Total time 3.77
+validation split name: 10
+ * Val Acc 28.070, Total time 7.59
+===Summary of experiment repeats: 1 / 1 ===
+acc  | mean: 28.07 std: 0.0
+mem  | mean: 0.0 std: 0.0
+time  | mean: 0.22213462709641604 std: 0.0
+epochs  | mean: 100.0 std: 0.0
+avg_acc_scores | : {'global': array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), 'pt': [], 'pt-local': []}
+fwt_scores | : {'global': array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), 'pt': [], 'pt-local': []}
+bwt_scores | : {'global': array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), 'pt': [], 'pt-local': []}
+gamma_t | : {'global': array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), 'pt': [], 'pt-local': []}
+replay_item_count  | mean: 0.0 std: 0.0
+************************************
+* STARTING TRIAL 1
+************************************
+=============================================
+Shuffling....
+pre-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+post-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+=============================================
+first split size:  10
+Files already downloaded and verified
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+ResNet(
+  (conv1): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (last_balanced): Linear(in_features=64, out_features=100, bias=True)
+  (last_unbalanced): Linear(in_features=64, out_features=100, bias=True)
+)
+#parameter of model: 184856
+==============TRAINING===============
+====================== 1 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 10
+model_save_dir:  _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base/models/repeat-1/task-1/
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Step:1/5000
+ * Loss 6.716 | Train Acc 0.000
+ * Val Acc 7.700, Total time 3.95
+Epoch:0/100
+LR: 0.005
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Step:500/5000
+ * Loss 3.027 | Train Acc 0.000
+ * Val Acc 13.800, Total time 3.66
+Epoch:12/100
+LR: 0.004925546630773869
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Epoch:23/100
+LR: 0.004704403844771127
+Step:1000/5000
+ * Loss 1.474 | Train Acc 0.000
+ * Val Acc 45.100, Total time 3.52
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Epoch:29/100
+LR: 0.004524135262330097
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Epoch:32/100
+LR: 0.004418828150443467
+Epoch:33/100
+LR: 0.004381533400219318
+Epoch:34/100
+LR: 0.004343157572190956
+Epoch:35/100
+LR: 0.004303710135019718
+Epoch:36/100
+LR: 0.004263200821770461
+Step:1500/5000
+ * Loss 1.552 | Train Acc 0.000
+ * Val Acc 58.300, Total time 3.79
+Epoch:37/100
+LR: 0.004221639627510075
+Epoch:38/100
+LR: 0.004179036806841351
+Epoch:39/100
+LR: 0.004135402871372809
+Epoch:40/100
+LR: 0.004090748587125117
+Epoch:41/100
+LR: 0.004045084971874737
+Epoch:42/100
+LR: 0.003998423292435453
+Epoch:43/100
+LR: 0.003950775061878451
+Epoch:44/100
+LR: 0.0039021520366916487
+Epoch:45/100
+LR: 0.003852566213878946
+Epoch:46/100
+LR: 0.0038020298280001547
+Epoch:47/100
+LR: 0.0037505553481522983
+Epoch:48/100
+LR: 0.0036981554748930483
+Step:2000/5000
+ * Loss 5.123 | Train Acc 0.000
+ * Val Acc 61.500, Total time 3.55
+Epoch:49/100
+LR: 0.003644843137107058
+Epoch:50/100
+LR: 0.0035906314888159443
+Epoch:51/100
+LR: 0.0035355339059327372
+Epoch:52/100
+LR: 0.0034795639829615713
+Epoch:53/100
+LR: 0.0034227355296434434
+Epoch:54/100
+LR: 0.003365062567548867
+Epoch:55/100
+LR: 0.003306559326618259
+Epoch:56/100
+LR: 0.0032472402416509182
+Epoch:57/100
+LR: 0.0031871199487434484
+Epoch:58/100
+LR: 0.003126213281678526
+Epoch:59/100
+LR: 0.0030645352682648827
+Epoch:60/100
+LR: 0.0030021011266294206
+Epoch:61/100
+LR: 0.0029389262614623653
+Step:2500/5000
+ * Loss 1.182 | Train Acc 0.000
+ * Val Acc 65.100, Total time 3.64
+Epoch:62/100
+LR: 0.002875026260216393
+Epoch:63/100
+LR: 0.002810416889260653
+Epoch:64/100
+LR: 0.002745114089990659
+Epoch:65/100
+LR: 0.0026791339748949827
+Epoch:66/100
+LR: 0.0026124928235797436
+Epoch:67/100
+LR: 0.002545207078751856
+Epoch:68/100
+LR: 0.0024772933421620368
+Epoch:69/100
+LR: 0.002408768370508576
+Epoch:70/100
+LR: 0.002339649071302867
+Epoch:71/100
+LR: 0.002269952498697734
+Epoch:72/100
+LR: 0.0021996958492795753
+Epoch:73/100
+LR: 0.0021288964578253635
+Step:3000/5000
+ * Loss 0.988 | Train Acc 0.000
+ * Val Acc 72.100, Total time 3.83
+Epoch:74/100
+LR: 0.0020575717930255435
+Epoch:75/100
+LR: 0.0019857394531739027
+Epoch:76/100
+LR: 0.0019134171618254482
+Epoch:77/100
+LR: 0.0018406227634233893
+Epoch:78/100
+LR: 0.0017673742188962858
+Epoch:79/100
+LR: 0.0016936896012264575
+Epoch:80/100
+LR: 0.001619587090990747
+Epoch:81/100
+LR: 0.0015450849718747373
+Epoch:82/100
+LR: 0.0014702016261615195
+Epoch:83/100
+LR: 0.0013949555301961463
+Epoch:84/100
+LR: 0.0013193652498268637
+Epoch:85/100
+LR: 0.0012434494358242738
+Epoch:86/100
+LR: 0.0011672268192795263
+Step:3500/5000
+ * Loss 0.797 | Train Acc 0.000
+ * Val Acc 74.200, Total time 3.78
+Epoch:87/100
+LR: 0.0010907162069827125
+Epoch:88/100
+LR: 0.0010139364767825624
+Epoch:89/100
+LR: 0.0009369065729286238
+Epoch:90/100
+LR: 0.0008596455013970476
+Epoch:91/100
+LR: 0.0007821723252011547
+Epoch:92/100
+LR: 0.0007045061596879129
+Epoch:93/100
+LR: 0.0006266661678215213
+Epoch:94/100
+LR: 0.0005486715554552257
+Epoch:95/100
+LR: 0.0004705415665925714
+Epoch:96/100
+LR: 0.0003922954786392239
+Epoch:97/100
+LR: 0.0003139525976465665
+Epoch:98/100
+LR: 0.0002355322535482134
+Step:4000/5000
+ * Loss 0.771 | Train Acc 0.000
+ * Val Acc 74.700, Total time 3.80
+Epoch:99/100
+LR: 0.00015705379539064087
+Epoch:100/100
+************************************
+* STARTING TRIAL 1
+************************************
+=============================================
+Shuffling....
+pre-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+post-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+=============================================
+first split size:  10
+Files already downloaded and verified
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+ResNet(
+  (conv1): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (last_balanced): Linear(in_features=64, out_features=100, bias=True)
+  (last_unbalanced): Linear(in_features=64, out_features=100, bias=True)
+)
+#parameter of model: 184856
+==============TRAINING===============
+====================== 1 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 10
+model_save_dir:  _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-1/
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Step:1/5000
+ * Loss 6.716 | Train Acc 0.000
+ * Val Acc 7.700, Total time 3.73
+Epoch:0/100
+LR: 0.005
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Step:500/5000
+ * Loss 3.027 | Train Acc 0.000
+ * Val Acc 13.800, Total time 3.68
+Epoch:12/100
+LR: 0.004925546630773869
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Epoch:23/100
+LR: 0.004704403844771127
+Step:1000/5000
+ * Loss 1.474 | Train Acc 0.000
+ * Val Acc 45.100, Total time 3.81
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Epoch:29/100
+LR: 0.004524135262330097
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Epoch:32/100
+LR: 0.004418828150443467
+Epoch:33/100
+LR: 0.004381533400219318
+Epoch:34/100
+LR: 0.004343157572190956
+Epoch:35/100
+LR: 0.004303710135019718
+Epoch:36/100
+LR: 0.004263200821770461
+Step:1500/5000
+ * Loss 1.552 | Train Acc 0.000
+ * Val Acc 58.300, Total time 3.87
+Epoch:37/100
+LR: 0.004221639627510075
+Epoch:38/100
+LR: 0.004179036806841351
+Epoch:39/100
+LR: 0.004135402871372809
+Epoch:40/100
+LR: 0.004090748587125117
+Epoch:41/100
+LR: 0.004045084971874737
+Epoch:42/100
+LR: 0.003998423292435453
+Epoch:43/100
+LR: 0.003950775061878451
+Epoch:44/100
+LR: 0.0039021520366916487
+Epoch:45/100
+LR: 0.003852566213878946
+Epoch:46/100
+LR: 0.0038020298280001547
+Epoch:47/100
+LR: 0.0037505553481522983
+Epoch:48/100
+LR: 0.0036981554748930483
+Step:2000/5000
+ * Loss 5.123 | Train Acc 0.000
+ * Val Acc 61.500, Total time 3.61
+Epoch:49/100
+LR: 0.003644843137107058
+Epoch:50/100
+LR: 0.0035906314888159443
+Epoch:51/100
+LR: 0.0035355339059327372
+Epoch:52/100
+LR: 0.0034795639829615713
+Epoch:53/100
+LR: 0.0034227355296434434
+Epoch:54/100
+LR: 0.003365062567548867
+Epoch:55/100
+LR: 0.003306559326618259
+Epoch:56/100
+LR: 0.0032472402416509182
+Epoch:57/100
+LR: 0.0031871199487434484
+Epoch:58/100
+LR: 0.003126213281678526
+Epoch:59/100
+LR: 0.0030645352682648827
+Epoch:60/100
+LR: 0.0030021011266294206
+Epoch:61/100
+LR: 0.0029389262614623653
+Step:2500/5000
+ * Loss 1.182 | Train Acc 0.000
+ * Val Acc 65.100, Total time 4.00
+Epoch:62/100
+LR: 0.002875026260216393
+Epoch:63/100
+LR: 0.002810416889260653
+Epoch:64/100
+LR: 0.002745114089990659
+Epoch:65/100
+LR: 0.0026791339748949827
+Epoch:66/100
+LR: 0.0026124928235797436
+Epoch:67/100
+LR: 0.002545207078751856
+Epoch:68/100
+LR: 0.0024772933421620368
+Epoch:69/100
+LR: 0.002408768370508576
+Epoch:70/100
+LR: 0.002339649071302867
+Epoch:71/100
+LR: 0.002269952498697734
+Epoch:72/100
+LR: 0.0021996958492795753
+Epoch:73/100
+LR: 0.0021288964578253635
+Step:3000/5000
+ * Loss 0.988 | Train Acc 0.000
+ * Val Acc 72.100, Total time 3.82
+Epoch:74/100
+LR: 0.0020575717930255435
+Epoch:75/100
+LR: 0.0019857394531739027
+Epoch:76/100
+LR: 0.0019134171618254482
+Epoch:77/100
+LR: 0.0018406227634233893
+Epoch:78/100
+LR: 0.0017673742188962858
+Epoch:79/100
+LR: 0.0016936896012264575
+Epoch:80/100
+LR: 0.001619587090990747
+Epoch:81/100
+LR: 0.0015450849718747373
+Epoch:82/100
+LR: 0.0014702016261615195
+Epoch:83/100
+LR: 0.0013949555301961463
+Epoch:84/100
+LR: 0.0013193652498268637
+Epoch:85/100
+LR: 0.0012434494358242738
+Epoch:86/100
+LR: 0.0011672268192795263
+Step:3500/5000
+ * Loss 0.797 | Train Acc 0.000
+ * Val Acc 74.200, Total time 3.95
+Epoch:87/100
+LR: 0.0010907162069827125
+Epoch:88/100
+LR: 0.0010139364767825624
+Epoch:89/100
+LR: 0.0009369065729286238
+Epoch:90/100
+LR: 0.0008596455013970476
+Epoch:91/100
+LR: 0.0007821723252011547
+Epoch:92/100
+LR: 0.0007045061596879129
+Epoch:93/100
+LR: 0.0006266661678215213
+Epoch:94/100
+LR: 0.0005486715554552257
+Epoch:95/100
+LR: 0.0004705415665925714
+Epoch:96/100
+LR: 0.0003922954786392239
+Epoch:97/100
+LR: 0.0003139525976465665
+Epoch:98/100
+LR: 0.0002355322535482134
+Step:4000/5000
+ * Loss 0.771 | Train Acc 0.000
+ * Val Acc 74.700, Total time 3.85
+Epoch:99/100
+LR: 0.00015705379539064087
+Epoch:100/100
+************************************
+* STARTING TRIAL 1
+************************************
+=============================================
+Shuffling....
+pre-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+post-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+=============================================
+first split size:  10
+Files already downloaded and verified
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+ResNet(
+  (conv1): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (last_balanced): Linear(in_features=64, out_features=100, bias=True)
+  (last_unbalanced): Linear(in_features=64, out_features=100, bias=True)
+)
+#parameter of model: 184856
+==============TRAINING===============
+====================== 1 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 10
+model_save_dir:  _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_12/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-1/
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Step:1/5000
+ * Loss 6.716 | Train Acc 0.000
+ * Val Acc 7.700, Total time 3.75
+Epoch:0/100
+LR: 0.005
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Step:500/5000
+ * Loss 3.027 | Train Acc 0.000
+ * Val Acc 13.800, Total time 3.92
+Epoch:12/100
+LR: 0.004925546630773869
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Epoch:23/100
+LR: 0.004704403844771127
+Step:1000/5000
+ * Loss 1.474 | Train Acc 0.000
+ * Val Acc 45.100, Total time 3.78
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Epoch:29/100
+LR: 0.004524135262330097
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Epoch:32/100
+LR: 0.004418828150443467
+Epoch:33/100
+LR: 0.004381533400219318
+Epoch:34/100
+LR: 0.004343157572190956
+Epoch:35/100
+LR: 0.004303710135019718
+Epoch:36/100
+LR: 0.004263200821770461
+Step:1500/5000
+ * Loss 1.552 | Train Acc 0.000
+ * Val Acc 58.300, Total time 3.82
+Epoch:37/100
+LR: 0.004221639627510075
+Epoch:38/100
+LR: 0.004179036806841351
+Epoch:39/100
+LR: 0.004135402871372809
+Epoch:40/100
+LR: 0.004090748587125117
+Epoch:41/100
+LR: 0.004045084971874737
+Epoch:42/100
+LR: 0.003998423292435453
+Epoch:43/100
+LR: 0.003950775061878451
+Epoch:44/100
+LR: 0.0039021520366916487
+Epoch:45/100
+LR: 0.003852566213878946
+Epoch:46/100
+LR: 0.0038020298280001547
+Epoch:47/100
+LR: 0.0037505553481522983
+Epoch:48/100
+LR: 0.0036981554748930483
+Step:2000/5000
+ * Loss 5.123 | Train Acc 0.000
+ * Val Acc 61.500, Total time 3.66
+Epoch:49/100
+LR: 0.003644843137107058
+Epoch:50/100
+LR: 0.0035906314888159443
+Epoch:51/100
+LR: 0.0035355339059327372
+Epoch:52/100
+LR: 0.0034795639829615713
+Epoch:53/100
+LR: 0.0034227355296434434
+Epoch:54/100
+LR: 0.003365062567548867
+Epoch:55/100
+LR: 0.003306559326618259
+Epoch:56/100
+LR: 0.0032472402416509182
+Epoch:57/100
+LR: 0.0031871199487434484
+Epoch:58/100
+LR: 0.003126213281678526
+Epoch:59/100
+LR: 0.0030645352682648827
+Epoch:60/100
+LR: 0.0030021011266294206
+Epoch:61/100
+LR: 0.0029389262614623653
+Step:2500/5000
+ * Loss 1.182 | Train Acc 0.000
+ * Val Acc 65.100, Total time 4.21
+Epoch:62/100
+LR: 0.002875026260216393
+Epoch:63/100
+LR: 0.002810416889260653
+Epoch:64/100
+LR: 0.002745114089990659
+Epoch:65/100
+LR: 0.0026791339748949827
+Epoch:66/100
+LR: 0.0026124928235797436
+Epoch:67/100
+LR: 0.002545207078751856
+Epoch:68/100
+LR: 0.0024772933421620368
+Epoch:69/100
+LR: 0.002408768370508576
+Epoch:70/100
+LR: 0.002339649071302867
+Epoch:71/100
+LR: 0.002269952498697734
+Epoch:72/100
+LR: 0.0021996958492795753
+Epoch:73/100
+LR: 0.0021288964578253635
+Step:3000/5000
+ * Loss 0.988 | Train Acc 0.000
+ * Val Acc 72.100, Total time 3.69
+Epoch:74/100
+LR: 0.0020575717930255435
+Epoch:75/100
+LR: 0.0019857394531739027
+Epoch:76/100
+LR: 0.0019134171618254482
+Epoch:77/100
+LR: 0.0018406227634233893
+Epoch:78/100
+LR: 0.0017673742188962858
+Epoch:79/100
+LR: 0.0016936896012264575
+Epoch:80/100
+LR: 0.001619587090990747
+Epoch:81/100
+LR: 0.0015450849718747373
+Epoch:82/100
+LR: 0.0014702016261615195
+Epoch:83/100
+LR: 0.0013949555301961463
+Epoch:84/100
+LR: 0.0013193652498268637
+Epoch:85/100
+LR: 0.0012434494358242738
+Epoch:86/100
+LR: 0.0011672268192795263
+Step:3500/5000
+ * Loss 0.797 | Train Acc 0.000
+ * Val Acc 74.200, Total time 3.88
+Epoch:87/100
+LR: 0.0010907162069827125
+Epoch:88/100
+LR: 0.0010139364767825624
+Epoch:89/100
+LR: 0.0009369065729286238
+Epoch:90/100
+LR: 0.0008596455013970476
+Epoch:91/100
+LR: 0.0007821723252011547
+Epoch:92/100
+LR: 0.0007045061596879129
+Epoch:93/100
+LR: 0.0006266661678215213
+Epoch:94/100
+LR: 0.0005486715554552257
+Epoch:95/100
+LR: 0.0004705415665925714
+Epoch:96/100
+LR: 0.0003922954786392239
+Epoch:97/100
+LR: 0.0003139525976465665
+Epoch:98/100
+LR: 0.0002355322535482134
+Step:4000/5000
+ * Loss 0.771 | Train Acc 0.000
+ * Val Acc 74.700, Total time 3.72
+Epoch:99/100
+LR: 0.00015705379539064087
+Epoch:100/100
+************************************
+* STARTING TRIAL 1
+************************************
+=============================================
+Shuffling....
+pre-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+post-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+=============================================
+first split size:  10
+Files already downloaded and verified
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+ResNet(
+  (conv1): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): LambdaLayer()
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (last_balanced): Linear(in_features=64, out_features=100, bias=True)
+  (last_unbalanced): Linear(in_features=64, out_features=100, bias=True)
+)
+#parameter of model: 184856
+==============TRAINING===============
+====================== 1 =======================
+Incremental class: Old valid output dimension: 0
+Incremental class: New Valid output dimension: 10
+model_save_dir:  _outputs/Apr5/10v10_CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_12/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base/models/repeat-1/task-1/
+Optimizer is reset!
+epochs_of_interest:  [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+steps_of_interest:  [0, 1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+LR: 0.005
+Step:1/5000
+ * Loss 6.716 | Train Acc 0.000
+ * Val Acc 7.700, Total time 3.91
+Epoch:0/100
+LR: 0.005
+Epoch:1/100
+LR: 0.005
+Epoch:2/100
+LR: 0.004999383162408303
+Epoch:3/100
+LR: 0.004997532801828658
+Epoch:4/100
+LR: 0.0049944493748098505
+Epoch:5/100
+LR: 0.004990133642141358
+Epoch:6/100
+LR: 0.00498458666866564
+Epoch:7/100
+LR: 0.0049778098230154
+Epoch:8/100
+LR: 0.004969804777275899
+Epoch:9/100
+LR: 0.004960573506572389
+Epoch:10/100
+LR: 0.004950118288582788
+Epoch:11/100
+LR: 0.004938441702975689
+Step:500/5000
+ * Loss 3.027 | Train Acc 0.000
+ * Val Acc 13.800, Total time 4.10
+Epoch:12/100
+LR: 0.004925546630773869
+Epoch:13/100
+LR: 0.004911436253643444
+Epoch:14/100
+LR: 0.004896114053108829
+Epoch:15/100
+LR: 0.004879583809693737
+Epoch:16/100
+LR: 0.004861849601988383
+Epoch:17/100
+LR: 0.004842915805643155
+Epoch:18/100
+LR: 0.00482278709228899
+Epoch:19/100
+LR: 0.004801468428384715
+Epoch:20/100
+LR: 0.004778965073991651
+Epoch:21/100
+LR: 0.004755282581475768
+Epoch:22/100
+LR: 0.004730426794137726
+Epoch:23/100
+LR: 0.004704403844771127
+Step:1000/5000
+ * Loss 1.474 | Train Acc 0.000
+ * Val Acc 45.100, Total time 3.67
+Epoch:24/100
+LR: 0.004677220154149337
+Epoch:25/100
+LR: 0.004648882429441257
+Epoch:26/100
+LR: 0.004619397662556434
+Epoch:27/100
+LR: 0.004588773128419906
+Epoch:28/100
+LR: 0.004557016383177227
+Epoch:29/100
+LR: 0.004524135262330097
+Epoch:30/100
+LR: 0.004490137878803078
+Epoch:31/100
+LR: 0.00445503262094184
+Epoch:32/100
+LR: 0.004418828150443467
+Epoch:33/100
+LR: 0.004381533400219318
+Epoch:34/100
+LR: 0.004343157572190956
+Epoch:35/100
+LR: 0.004303710135019718
+Epoch:36/100
+LR: 0.004263200821770461
+Step:1500/5000
+ * Loss 1.552 | Train Acc 0.000
+ * Val Acc 58.300, Total time 4.20
+Epoch:37/100
+LR: 0.004221639627510075
+Epoch:38/100
+LR: 0.004179036806841351
+Epoch:39/100
+LR: 0.004135402871372809
+Epoch:40/100
+LR: 0.004090748587125117
+Epoch:41/100
+LR: 0.004045084971874737
+Epoch:42/100
+LR: 0.003998423292435453
+Epoch:43/100
+LR: 0.003950775061878451
+Epoch:44/100
+LR: 0.0039021520366916487
+Epoch:45/100
+LR: 0.003852566213878946
+Epoch:46/100
+LR: 0.0038020298280001547
+Epoch:47/100
+LR: 0.0037505553481522983
+Epoch:48/100
+LR: 0.0036981554748930483
+Step:2000/5000
+ * Loss 5.123 | Train Acc 0.000
+ * Val Acc 61.500, Total time 3.61
+Epoch:49/100
+LR: 0.003644843137107058
+Epoch:50/100
+LR: 0.0035906314888159443
+Epoch:51/100
+LR: 0.0035355339059327372
+Epoch:52/100
+LR: 0.0034795639829615713
+Epoch:53/100
+LR: 0.0034227355296434434
+Epoch:54/100
+LR: 0.003365062567548867
+Epoch:55/100
+LR: 0.003306559326618259
+Epoch:56/100
+LR: 0.0032472402416509182
+Epoch:57/100
+LR: 0.0031871199487434484
+Epoch:58/100
+LR: 0.003126213281678526
+Epoch:59/100
+LR: 0.0030645352682648827
+Epoch:60/100
+LR: 0.0030021011266294206
+Epoch:61/100
+LR: 0.0029389262614623653
+Step:2500/5000
+ * Loss 1.182 | Train Acc 0.000
+ * Val Acc 65.100, Total time 4.13
+Epoch:62/100
+LR: 0.002875026260216393
+Epoch:63/100
+LR: 0.002810416889260653
+Epoch:64/100
+LR: 0.002745114089990659
+Epoch:65/100
+LR: 0.0026791339748949827
+Epoch:66/100
+LR: 0.0026124928235797436
+Epoch:67/100
+LR: 0.002545207078751856
+Epoch:68/100
+LR: 0.0024772933421620368
+Epoch:69/100
+LR: 0.002408768370508576
+Epoch:70/100
+LR: 0.002339649071302867
+Epoch:71/100
+LR: 0.002269952498697734
+Epoch:72/100
+LR: 0.0021996958492795753
+Epoch:73/100
+LR: 0.0021288964578253635
+Step:3000/5000
+ * Loss 0.988 | Train Acc 0.000
+ * Val Acc 72.100, Total time 3.78
+Epoch:74/100
+LR: 0.0020575717930255435
+Epoch:75/100
+LR: 0.0019857394531739027
+Epoch:76/100
+LR: 0.0019134171618254482
+Epoch:77/100
+LR: 0.0018406227634233893
+Epoch:78/100
+LR: 0.0017673742188962858
+Epoch:79/100
+LR: 0.0016936896012264575
+Epoch:80/100
+LR: 0.001619587090990747
+Epoch:81/100
+LR: 0.0015450849718747373
+Epoch:82/100
+LR: 0.0014702016261615195
+Epoch:83/100
+LR: 0.0013949555301961463
+Epoch:84/100
+LR: 0.0013193652498268637
+Epoch:85/100
+LR: 0.0012434494358242738
+Epoch:86/100
+LR: 0.0011672268192795263
+Step:3500/5000
+ * Loss 0.797 | Train Acc 0.000
+ * Val Acc 74.200, Total time 3.94
+Epoch:87/100
+LR: 0.0010907162069827125
+Epoch:88/100
+LR: 0.0010139364767825624
+Epoch:89/100
+LR: 0.0009369065729286238
+Epoch:90/100
+LR: 0.0008596455013970476
+Epoch:91/100
+LR: 0.0007821723252011547
+Epoch:92/100
+LR: 0.0007045061596879129
+Epoch:93/100
+LR: 0.0006266661678215213
+Epoch:94/100
+LR: 0.0005486715554552257
+Epoch:95/100
+LR: 0.0004705415665925714
+Epoch:96/100
+LR: 0.0003922954786392239
+Epoch:97/100
+LR: 0.0003139525976465665
+Epoch:98/100
+LR: 0.0002355322535482134
+Step:4000/5000
+ * Loss 0.771 | Train Acc 0.000
+ * Val Acc 74.700, Total time 3.82
+Epoch:99/100
+LR: 0.00015705379539064087
+Epoch:100/100
+************************************
+* STARTING TRIAL 1
+************************************
+=============================================
+Shuffling....
+pre-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+post-shuffle:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+=============================================
+first split size:  8
+Files already downloaded and verified
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]

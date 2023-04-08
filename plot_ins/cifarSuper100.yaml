@@ -1,0 +1,34 @@
+title:
+  # SuperCIFAR100, 5 classes per task (20 tasks)
+  SuperCIFAR100, 5-5 split (20 tasks)
+save_dir:
+  SuperCIFAR100-5-5
+save_name:
+  Apr5
+results:
+  1:
+    file: _outputs/Apr5/5v5_SUPER-CIFAR100/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-20/avg_acc_epoch.yaml
+    name: Oracle
+  2:
+    file: _outputs/Apr5/5v5_SUPER-CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-20/avg_acc_epoch.yaml
+    name: Normal dual data loader
+  3:
+    file: _outputs/Apr5/5v5_SUPER-CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_12/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-20/avg_acc_epoch.yaml
+    name: Distribution shift based class weighted replay
+  4:
+    file: _outputs/Apr5/5v5_SUPER-CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_3/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-20/avg_acc_epoch.yaml
+    name: Similarity based class weighted replay
+  5:
+    file: _outputs/Apr5/5v5_SUPER-CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base/models/repeat-1/task-20/avg_acc_epoch.yaml
+    name: Min-Margin sample weighted replay
+  6:
+    file: _outputs/Apr5/5v5_SUPER-CIFAR100/LR_0.005_schedule_cosine/replay_1000_shift_12/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base/models/repeat-1/task-20/avg_acc_epoch.yaml
+    name: Distribution shift + Min-margin class&sample weighted replay
+split_size:
+  95
+num_tasks:
+  2
+xs:
+  Number of Accumulated Classes
+ys:
+  Test Accuracy (%)

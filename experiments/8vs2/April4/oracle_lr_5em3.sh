@@ -5,7 +5,7 @@ DEFAULTEXP=-1
 EXP_FLAG=${1:-$DEFAULTEXP}
 
 # gpu's to use - can do 1 per experiment for cifar
-GPUID=2
+GPUID='0 2'
 
 # benchmark settings
 DATE=Apr4
@@ -24,7 +24,7 @@ MAXTASK=-1 # run every task
 # hard coded inputs
 REPEAT=1
 SCHEDULE="10" # epochs
-STEPS="1000"
+STEPS="-1"
 
 SCHEDULE_TYPE=cosine
 MODELNAME=resnet18
@@ -48,7 +48,7 @@ OLD_VS_NEW=${FIRST_SPLIT}v${OTHER_SPLIT}
 REPLAY_TYPES=("random_sample")
 LOSS_TYPES=("base")
 
-DEBUG=0
+DEBUG=1
 if [ $DEBUG -eq 1 ] 
 then   
     TEMP=_temp
@@ -79,7 +79,7 @@ do
                         --overwrite $OVERWRITE --max_task $MAXTASK \
                         --model_name $MODELNAME --model_type $MODELTYPE \
                         --learner_type default --learner_name NormalNN --oracle_flag \
-                        --log_dir ${OUTDIR} --with_class_balance 1  --dual_dataloader True 
+                        --log_dir ${OUTDIR} --with_class_balance 1 --dual_dataloader True 
 
                 # OUTDIR=_outputs/${DATE}/twotask_${OLD_VS_NEW}_${DATASET}/LR_${LR}_schedule_${SCHEDULE_TYPE}/Oracle/bh_reptype_${REPLAY_TYPE}_loss_${LOSS_TYPE}${TEMP}
                 # PLOT_DIR=plots_and_tables/${DATE}/twotask_${OLD_VS_NEW}_${DATASET}/LR_${LR}_schedule_${SCHEDULE_TYPE}/Oracle/bh_reptype_${REPLAY_TYPE}_loss_${LOSS_TYPE}${TEMP}/

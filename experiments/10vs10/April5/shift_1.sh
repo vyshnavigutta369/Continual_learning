@@ -5,7 +5,7 @@ DEFAULTEXP=-1
 EXP_FLAG=${1:-$DEFAULTEXP}
 
 # gpu's to use - can do 1 per experiment for cifar
-GPUID=0
+GPUID=2
 
 # benchmark settings
 DATE=Apr5
@@ -24,7 +24,7 @@ MAXTASK=-1 # run every task
 # hard coded inputs
 REPEAT=1
 SCHEDULE="100" # epochs ## TODO should not be small (eg: 10) for cifar100
-STEPS="1000"
+STEPS="5000"
 
 # SCHEDULE_TYPE=cosine
 # MODELNAME=resnet18 
@@ -54,7 +54,7 @@ OLD_VS_NEW=${FIRST_SPLIT}v${OTHER_SPLIT}
 # REPLAY_TYPES=("random_sample" "gradient_cb")
 REPLAY_TYPES=("random_sample")
 # REPLAY_STRATEGIES=('loss' 'logit_dist_proba_shift_min' 'confidence_proba_shift_min' 'margin_proba_shift_min' 'replay_count_proba_shift_min' 'logit_dist_proba_shift')
-REPLAY_STRATEGIES=('margin_proba_shift_min')
+REPLAY_STRATEGIES=('nill')
 LOSS_TYPES=("base")
 # clratios='{"airplane":3,"automobile":1,"deer":5,"dog":5,"frog":5,"horse":3,"ship":3,"truck":1,"bird":5,"cat":5}'
 # clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'

@@ -5,7 +5,7 @@ DEFAULTEXP=-1
 EXP_FLAG=${1:-$DEFAULTEXP}
 
 # gpu's to use - can do 1 per experiment for cifar
-GPUID=2
+GPUID='0'
 
 # benchmark settings
 DATE=Apr4
@@ -23,8 +23,8 @@ MAXTASK=-1 # run every task
 
 # hard coded inputs
 REPEAT=1
-SCHEDULE="100" # epochs ## TODO should not be small (eg: 10) for cifar100
-STEPS="1000"
+SCHEDULE="10" # epochs ## TODO should not be small (eg: 10) for cifar100
+STEPS="-1"
 
 SCHEDULE_TYPE=cosine
 MODELNAME=resnet18 
@@ -54,7 +54,7 @@ OLD_VS_NEW=${FIRST_SPLIT}v${OTHER_SPLIT}
 # REPLAY_TYPES=("random_sample" "gradient_cb")
 REPLAY_TYPES=("random_sample")
 # REPLAY_STRATEGIES=('loss' 'logit_dist_proba_shift_min' 'confidence_proba_shift_min' 'margin_proba_shift_min' 'replay_count_proba_shift_min' 'logit_dist_proba_shift')
-REPLAY_STRATEGIES=('margin_proba_shift_min')
+REPLAY_STRATEGIES=('nill')
 LOSS_TYPES=("base")
 # clratios='{"airplane":3,"automobile":1,"deer":5,"dog":5,"frog":5,"horse":3,"ship":3,"truck":1,"bird":5,"cat":5}'
 clratios='{"airplane":2,"automobile":1,"deer":3,"dog":3,"frog":3,"horse":2,"ship":2,"truck":1,"bird":3,"cat":3}'
@@ -104,7 +104,7 @@ do
                                         --overwrite $OVERWRITE --max_task $MAXTASK \
                                         --model_name $MODELNAME --model_type $MODELTYPE \
                                         --learner_type er --learner_name TR \
-                                        --log_dir ${OUTDIR} --with_class_balance 1 --custom_replay_loader $CUSTOM_REPLAY_LOADER
+                                        --log_dir ${OUTDIR}  --custom_replay_loader $CUSTOM_REPLAY_LOADER
 
                                 # OUTDIR=_outputs/${DATE}/${OLD_VS_NEW}_${DATASET}/LR_${LR}_schedule_${SCHEDULE_TYPE}/replay_${RS}_shift_${SHIFT}/bh_reptype_${REPLAY_TYPE}_repstr_${REPLAY_STRATEGY}_loss_${LOSS_TYPE}_b${TEMP}
                                 # BATCH_SAMPLER=True

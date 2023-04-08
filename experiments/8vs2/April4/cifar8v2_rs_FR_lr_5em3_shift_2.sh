@@ -40,7 +40,7 @@ RS=128
 # BS=16 # batch size
 # RS=16
 
-RN=1000 ## replay samples
+RN=2000 ## replay samples
 
 WD=0 # weight decay
 MOM=0.9 # momentum

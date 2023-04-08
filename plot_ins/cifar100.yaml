@@ -6,14 +6,14 @@ save_name:
   oct-10
 results:
   1:
-    file: _outputs/Mar16/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base_temp/
+    file: _outputs/Apr5/10v10_CIFAR100/LR_0.00001_schedule_decay/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-10/avg_acc_epoch.yaml
     name: Dual-Prompt
   2:
-    file: _outputs/Mar16/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_128_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base_temp/
+    file: _outputs/Apr5/10v10_CIFAR100/LR_0.00001_schedule_decay/replay_1000_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base/models/repeat-1/task-10/avg_acc_epoch.yaml
     name: Dual-Prompt (BCE)
-  3:
-    file: _outputs/Mar16/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_128_shift_2/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base_temp/
-    name: Atte-Prompt
+  # 3:
+  #   file: _outputs/Mar16/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_128_shift_2/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base_temp/
+  #   name: Atte-Prompt
 split_size:
   20
 num_tasks:

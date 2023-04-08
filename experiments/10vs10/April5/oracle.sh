@@ -24,7 +24,7 @@ MAXTASK=-1 # run every task
 # hard coded inputs
 REPEAT=1
 SCHEDULE="100" # epochs
-STEPS="1000"
+STEPS="5000"
 
 # SCHEDULE_TYPE=cosine
 # MODELNAME=resnet18

@@ -1,0 +1,33 @@
+title:
+  CIFAR10, 2 tasks (1st-8, 2nd-2)
+save_dir:
+  CIFAR10-8v2
+save_name:
+  Apr5
+results:
+  1:
+    file: _outputs/Apr5/8v2_CIFAR10/LR_0.005_schedule_cosine/Oracle/reptype_random_sample_loss_base/models/repeat-1/task-2/avg_acc_epoch.yaml
+    name: Oracle
+  2:
+    file: _outputs/Apr5/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-2/avg_acc_epoch.yaml
+    name: Normal dual data loader
+  3:
+    file: _outputs/Apr5/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_1000_shift_12/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-2/avg_acc_epoch.yaml
+    name: Distribution shift based class weighted replay
+  # 4:
+  #   file: _outputs/Apr5/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_1000_shift_3/bh_reptype_random_sample_repstr_nill_loss_base/models/repeat-1/task-2/avg_acc_epoch.yaml
+  #   name: Similarity based class weighted replay
+  5:
+    file: _outputs/Apr5/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_1000_shift_1/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base/models/repeat-1/task-2/avg_acc_epoch.yaml
+    name: Min-Margin sample weighted replay
+  6:
+    file: _outputs/Apr5/8v2_CIFAR10/LR_0.005_schedule_cosine/replay_1000_shift_12/bh_reptype_random_sample_repstr_margin_proba_shift_min_loss_base/models/repeat-1/task-2/avg_acc_epoch.yaml
+    name: Distribution shift class weighted + Min-margin sample weighted replay
+split_size:
+  8
+num_tasks:
+  2
+xs:
+  Number of Accumulated Classes
+ys:
+  Test Accuracy (%)

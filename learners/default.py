@@ -308,7 +308,7 @@ class NormalNN(nn.Module):
 
         return loss, output
         
-    def scale_distribution(self, data, classes, rnge=(1,8)):
+    def scale_distribution(self, data, classes, rnge=(1,10)):
 
         t_max = rnge[0]
         t_min = rnge[1]
@@ -349,6 +349,8 @@ class NormalNN(nn.Module):
                     self.class_replay_ratios= { i:1 for i in self.new_classes}
                 elif int(self.class_weighting_with)==2: ## custom weighting 50%-50%
                     self.class_replay_ratios= { cl: self.class_ratios_manual[cl] for cl in self.class_ratios_manual if cl in self.new_classes}
+                elif int(self.class_weighting_with)==3: ## custom weighting 50%-50%
+                    self.class_replay_ratios= self.task_wise_cl_ratios[(self.task_index+1)%len(self.tasks)]
                 elif int(self.class_weighting_with)==11 and self.epoch!=0: ## dist shift
                     classes = list(self.class_dist_shift_epoch.keys())
                     class_dist_shift_epoch = np.array(list(self.class_dist_shift_epoch.values()))
@@ -402,13 +404,13 @@ class NormalNN(nn.Module):
         self.val_loader= val_loader
         self.epoch=0
 
-        task_index = self.tasks.index(task)+1
-        if self.tasks[0]!= task:
+        self.task_index = [list(x) for x in self.tasks].index(list(task))
+        if list(self.tasks[0])!= list(task): 
             self.replay=True ## TODO need to chage this
-            model_save_dir_prev = model_save_dir.replace('task-'+str(task_index), 'task-'+str(task_index-1))
+            model_save_dir_prev = model_save_dir.replace('task-'+str(self.task_index+1), 'task-'+str(self.task_index+1-1))
             self.load_prev_model(model_save_dir_prev)
             self.previous_teacher = Teacher(solver=self.prev_model)
-            self.last_valid_out_dim = len(self.tasks[task_index-2])
+            self.last_valid_out_dim = len(self.tasks[self.task_index+1-2])
             
         self.init_params_epoch()
 
@@ -450,7 +452,7 @@ class NormalNN(nn.Module):
             # while epoch < self.config['schedule'][-1]+1:
             for epoch in range(self.config['schedule'][-1]+1):
                 self.epoch=epoch
-                if self.step_count> self.steps:
+                if self.steps!=-1 and self.step_count> self.steps:
                         break
 
                 if epoch > 1: 
@@ -458,8 +460,8 @@ class NormalNN(nn.Module):
                     if hasattr(self, 'new_scheduler'):
                         self.new_scheduler.step()
                         
-                for param_group in self.optimizer.param_groups:
-                    self.log('LR:', param_group['lr'])
+                # for param_group in self.optimizer.param_groups:
+                #     self.log('LR:', param_group['lr'])
                 batch_timer.tic()
 
                 self.init_params_epoch()
@@ -471,10 +473,10 @@ class NormalNN(nn.Module):
 
                     # if epoch >= self.config['schedule'][-1]+1:
                     #     break
-                    if epoch==0:
-                        break
+                    # if epoch==0:
+                    #     break
 
-                    if self.step_count> self.steps:
+                    if self.steps!=-1 and self.step_count> self.steps:
                         break
 
                     self.init_params_batch()
@@ -515,7 +517,7 @@ class NormalNN(nn.Module):
                 if self.steps == -1:
                     losses, losses_b, acc, aacc_bl = self.post_training(acc, losses)
 
-                self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
+                # self.log('Epoch:{epoch:.0f}/{total:.0f}'.format(epoch=self.epoch,total=self.config['schedule'][-1]))
 
             if self.replay:
                 plots(self.per_class_accuracy_task, self.per_class_dist_shift, self.labels_to_names, self.class_mapping, self.epochs_of_interest, self.steps_of_interest, self.times_of_interest, self.replay_size,  self.avg_acc,  base_path=self.plot_dir+'_after/', is_oracle=True)
