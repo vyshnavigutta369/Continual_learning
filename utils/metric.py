@@ -86,10 +86,12 @@ def new_vs_old_class_comparison(new_classes, old_classes, class_features, labels
         df = pd.DataFrame(new_vs_old_class).T
         df.to_csv(path)
 
-        if plot_fig:
+        # if plot_fig:
+        if False:
 
-            colors  = ['r','g', 'b', 'y', 'tomato', 'k', 'c', 'maroon', 'olive', 'm']
+            colors = ['r','g', 'b', 'y', 'tomato', 'k', 'c', 'maroon', 'olive', 'm']
             colors = {labels_to_names[class_mapping[k]]:c for k, c in zip(class_mapping.keys(), colors)}
+
 
             for new_cl in new_vs_old_class.keys():
 
@@ -156,7 +158,7 @@ def distribution_shift_comparison(class_new_features, class_old_features, per_cl
                     
 def per_class_plots(per_class_accuracy, per_class_dist_shift, task_acc, labels_to_names, class_mapping, epochs_of_interest, replay_size, base_path = 'plots_and_tables/'):
 
-    colors  = ['r','g', 'b', 'y', 'tomato', 'k', 'c', 'maroon', 'olive', 'm']
+    colors = ['r','g', 'b', 'y', 'tomato', 'k', 'c', 'maroon', 'olive', 'm']
     colors_a = {labels_to_names[class_mapping[k]]:c for k, c in zip(class_mapping.keys(), colors)}
     colors_b = { k: c for k, c in zip(task_acc.keys(), colors)}
     colors = {**colors_a, **colors_b}
@@ -208,13 +210,13 @@ def per_class_plots(per_class_accuracy, per_class_dist_shift, task_acc, labels_t
 
         plt.clf()
 
-    for metric in per_class_accuracy:
+    # for metric in per_class_accuracy:
 
-        to_plot, labels, plot_colors = plot_utils(per_class_accuracy[metric])     
-        plot(to_plot, labels, plot_colors, xlabel='epochs', ylabel='accuracy', y_lim_bottom=0.3, title='Replay samples per class: '+ str(replay_size), fig_name = base_path+'per_class_accuracy_' + metric + '.png', sort_handles=True)
+    #     to_plot, labels, plot_colors = plot_utils(per_class_accuracy[metric])     
+    #     plot(to_plot, labels, plot_colors, xlabel='epochs', ylabel='accuracy', y_lim_bottom=0.3, title='Replay samples per class: '+ str(replay_size), fig_name = base_path+'per_class_accuracy_' + metric + '.png', sort_handles=True)
         
-        to_plot, labels, plot_colors = plot_utils(per_class_dist_shift[metric])
-        plot(to_plot, labels, plot_colors, xlabel='epochs', ylabel='distribution shift between task one and task two model', y_lim_bottom=0, title='Replay samples per class: '+ str(replay_size), fig_name = base_path+'per_class_dist_shift_' + metric + '.png', sort_handles=True)
+    #     to_plot, labels, plot_colors = plot_utils(per_class_dist_shift[metric])
+    #     plot(to_plot, labels, plot_colors, xlabel='epochs', ylabel='distribution shift between task one and task two model', y_lim_bottom=0, title='Replay samples per class: '+ str(replay_size), fig_name = base_path+'per_class_dist_shift_' + metric + '.png', sort_handles=True)
         
     to_plot, labels, plot_colors = plot_utils(task_acc)     
     print ('helloooooo', to_plot)

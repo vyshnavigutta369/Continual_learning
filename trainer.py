@@ -62,9 +62,12 @@ class Trainer:
         else:
             raise ValueError('Dataset not implemented!')
 
-        # load tasks
-        class_order = [0,1,2,3,4,5,6,7,8,9]
-        class_order_logits = [0,1,2,3,4,5,6,7,8,9]
+        # load tasks for cifar 10
+        class_order = np.arange(100)
+        class_order_logits = np.arange(100)
+        # # load tasks for cifar 10
+        # class_order = [0,1,2,3,4,5,6,7,8,9]
+        # class_order_logits = [0,1,2,3,4,5,6,7,8,9]
         # class_order = [0,1,4,5,6,7,8,9,2,3]
         # class_order_logits = [0,1,4,5,6,7,8,9,2,3]
         # if args.rand_split:

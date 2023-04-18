@@ -94,6 +94,44 @@ class TR(NormalNN):
 
         # print ('per_class_correct_predictions:', self.per_class_correct_predictions)
 
+    # sets model optimizers
+    def init_optimizer(self):
+
+        # parse optimizer args
+        print('*****************************************')
+        print('*****************************************')
+        print('*****************************************')
+        # params_to_opt = list(self.model.parameters())
+        # params_to_optimize = (
+        #     itertools.chain([x[1] for x in self.model.named_parameters() if ('attn2.to_k' in x[0] or 'attn2.to_v' in x[0])])
+        # )
+        params_to_opt = list(self.model.last.parameters())
+        params_to_opt += [x[1] for x in self.model.named_parameters() if ('attn.qkv' in x[0])]
+        print('*****************************************')
+        print('*****************************************')
+        print('*****************************************')
+        
+        optimizer_arg = {'params':params_to_opt,
+                         'lr':self.config['lr'],
+                         'weight_decay':self.config['weight_decay']}
+        if self.config['optimizer'] in ['SGD','RMSprop']:
+            optimizer_arg['momentum'] = self.config['momentum']
+        elif self.config['optimizer'] in ['Rprop']:
+            optimizer_arg.pop('weight_decay')
+        elif self.config['optimizer'] == 'amsgrad':
+            optimizer_arg['amsgrad'] = True
+            self.config['optimizer'] = 'Adam'
+        elif self.config['optimizer'] == 'Adam':
+            optimizer_arg['betas'] = (self.config['momentum'],0.999)
+
+        # create optimizers
+        self.optimizer = torch.optim.__dict__[self.config['optimizer']](**optimizer_arg)
+        
+        # create schedules
+        if self.schedule_type == 'cosine':
+            self.scheduler = CosineSchedule(self.optimizer, K=self.schedule[-1])
+        elif self.schedule_type == 'decay':
+            self.scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=self.schedule, gamma=0.1)
 
     ##########################################
     #           MODEL TRAINING               #
@@ -144,14 +182,11 @@ class TR(NormalNN):
             # self.epochs_of_interest = [1,10] 
             self.epochs_of_interest[0] = 1
             self.epochs_of_interest.append(self.config['schedule'][-1])
+            ### for oracle debug!!!!
+            if int(self.config['schedule'][-1]) > 2000:
+                self.epochs_of_interest = [1000,2000,5000,10000]
+            # self.epochs_of_interest = [10,100]
             print(self.epochs_of_interest)
-            # if self.epochs_of_interest[1]!=1:
-            #     self.epochs_of_interest.insert(1,1)
-            # if self.epochs_of_interest[-1]!=self.config['schedule'][-1]:
-            #     self.epochs_of_interest.append(self.config['schedule'][-1])
-            # print(self.epochs_of_interest)
-            # self.epochs_of_interest = [1,2,3,4,5,10,20,30,40,50,100,200,300,400,500,600,700,800,900,1000]
-            # print(apple)
             if self.task_acc is None:
                 self.task_acc = { "Oracle": {epoch: [] for epoch in self.epochs_of_interest}, "Method": {epoch: [] for epoch in self.epochs_of_interest}, "FinalAcc": None}
 

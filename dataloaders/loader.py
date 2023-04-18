@@ -90,7 +90,8 @@ class ReplayDataset(torch.utils.data.Dataset):
                 self.targets.append(target)
                 
                 if smart:
-                    if target == 0 or target == 1:
+                    # if target == 0 or target == 1:
+                    if target in [8,13,48,58,90]:
                         self.data.append(data)
                         self.targets.append(target)
         else: 
@@ -100,8 +101,9 @@ class ReplayDataset(torch.utils.data.Dataset):
                 if target not in to_replay_class_count.keys():
                     to_replay_class_count[target] = 0
                 
-                if target == 0 or target == 1:
-                    replay_size_edit = replay_size * 2.5
+                # if target == 0 or target == 1:
+                if target in [8,13,48,58,90]:
+                    replay_size_edit = replay_size * 10
                 else:
                     replay_size_edit = replay_size * 0.5
                 
@@ -257,6 +259,19 @@ class iDataset(data.Dataset):
         self.load()
         self.num_classes = len(np.unique(self.targets))
 
+        # super classes!
+        self.tasks=[]
+        for super_k in np.unique(self.course_targets):
+            ind_task = np.where(self.course_targets == super_k)[0]
+            ind_task_labels = [self.targets[ind_task[i]] for i in range(len(ind_task))]
+            classes_in_task = np.unique(ind_task_labels)
+            if super_k == 0:
+                self.tasks.append(classes_in_task.tolist())
+            elif super_k == 19:
+                self.tasks.append(classes_in_task.tolist())
+            else:
+                self.tasks[0].extend(classes_in_task.tolist())
+
         # remap labels to match task order
         c = 0
         # print ('tasks: ', self.tasks)
@@ -316,10 +331,12 @@ class iDataset(data.Dataset):
             # print ('self tasks', self.tasks)
             # print ('self targets', self.targets)
             for task in self.tasks:
+                
                 locs = np.isin(self.targets, task).nonzero()[0]
                 # print ('locs: ', locs)
                 self.archive.append((self.data[locs].copy(), self.targets[locs].copy()))
-
+        
+            
 
     def __getitem__(self, index, simple = False):
         """
@@ -371,242 +388,6 @@ class iDataset(data.Dataset):
         tmp = '    Transforms (if any): '
         fmt_str += '{0}{1}\n'.format(tmp, self.transform.__repr__().replace('\n', '\n' + ' ' * len(tmp)))
         return fmt_str
-
-class iCIFAR2(iDataset):
-    """`CIFAR10 <https://www.cs.toronto.edu/~kriz/cifar.html>`_ Dataset.
-    This is a subclass of the iDataset Dataset.
-    """
-    base_folder = 'cifar-10-batches-py'
-    url = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
-    filename = "cifar-10-python.tar.gz"
-    tgz_md5 = 'c58f30108f718f92721af3b95e74349a'
-    train_list = [
-        ['data_batch_1', 'c99cafc152244af753f735de768cd75f'],
-        ['data_batch_2', 'd4bba439e000b95fd0a9bffe97cbabec'],
-        ['data_batch_3', '54ebc095f3ab1f0389bbae665268c751'],
-        ['data_batch_4', '634d18415352ddfa80567beed471001a'],
-        ['data_batch_5', '482c414d41f54cd18b22e5b47cb7c3cb'],
-    ]
-
-    test_list = [
-        ['test_batch', '40351d587109b95175f43aff81a1287e'],
-    ]
-    meta = {
-        'filename': 'batches.meta',
-        'key': 'label_names',
-        'md5': '5ff9c542aee3614f3951f8cda6e48888',
-    }
-    im_size=32
-    nch=3
-
-    def load(self):
-
-        # download dataset
-        if self.download_flag:
-            self.download()
-
-        if not self._check_integrity():
-            raise RuntimeError('Dataset not found or corrupted.' +
-                               ' You can use download=True to download it')
-
-        if self.train or self.validation:
-            downloaded_list = self.train_list
-        else:
-            downloaded_list = self.test_list
-
-        self.data = []
-        self.targets = []
-        self.course_targets = []
-
-        # now load the picked numpy arrays
-        for file_name, checksum in downloaded_list:
-            file_path = os.path.join(self.root, self.base_folder, file_name)
-            with open(file_path, 'rb') as f:
-                if sys.version_info[0] == 2:
-                    entry = pickle.load(f)
-                else:
-                    entry = pickle.load(f, encoding='latin1')
-
-                # data =[]
-                # labels =[]
-                # for (sample, label) in zip(entry['data'], entry['labels']):
-                #     if label==2 or label==3:
-                #         # print ('helllloooooooo')
-                #         data.append(sample)
-                #         labels.append(label)
-                self.data.append(entry['data'])
-                
-                # print (entry['batch_label'])
-                if 'labels' in entry:
-                    # print ('hello', entry['labels'])
-                    # if entry['labels'] == 2 or entry['labels'] == 3:
-                    #     print ('yes')
-                    self.targets.extend(entry['labels'])
-                else:
-                    self.targets.extend(entry['fine_labels'])
-                if 'coarse_labels' in entry:
-                    self.course_targets.extend(entry['coarse_labels'])
-                
-        
-        self.data = np.vstack(self.data).reshape(-1, 3, 32, 32)
-        # print ('no of classes', len(self.data))
-        self.data = self.data.transpose((0, 2, 3, 1))  # convert to HWC
-        self._load_meta()
-        # print (self.class_to_idx)
-
-    def download(self):
-        import tarfile
-
-        if self._check_integrity():
-            print('Files already downloaded and verified')
-            return
-
-        download_url(self.url, self.root, self.filename, self.tgz_md5)
-
-        # extract file
-        with tarfile.open(os.path.join(self.root, self.filename), "r:gz") as tar:
-            tar.extractall(path=self.root)
-
-    def _load_meta(self):
-        path = os.path.join(self.root, self.base_folder, self.meta['filename'])
-        if not check_integrity(path, self.meta['md5']):
-            raise RuntimeError('Dataset metadata file not found or corrupted.' +
-                               ' You can use download=True to download it')
-        with open(path, 'rb') as infile:
-            if sys.version_info[0] == 2:
-                data = pickle.load(infile)
-            else:
-                data = pickle.load(infile, encoding='latin1')
-            self.classes = data[self.meta['key']]
-        self.class_to_idx = {_class: i for i, _class in enumerate(self.classes)}
-
-    def _check_integrity(self):
-        root = self.root
-        for fentry in (self.train_list + self.test_list):
-            filename, md5 = fentry[0], fentry[1]
-            fpath = os.path.join(root, self.base_folder, filename)
-            if not check_integrity(fpath, md5):
-                return False
-        return True
-
-class iCIFAR8(iDataset):
-    """`CIFAR10 <https://www.cs.toronto.edu/~kriz/cifar.html>`_ Dataset.
-    This is a subclass of the iDataset Dataset.
-    """
-    base_folder = 'cifar-10-batches-py'
-    url = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
-    filename = "cifar-10-python.tar.gz"
-    tgz_md5 = 'c58f30108f718f92721af3b95e74349a'
-    train_list = [
-        ['data_batch_1', 'c99cafc152244af753f735de768cd75f'],
-        ['data_batch_2', 'd4bba439e000b95fd0a9bffe97cbabec'],
-        ['data_batch_3', '54ebc095f3ab1f0389bbae665268c751'],
-        ['data_batch_4', '634d18415352ddfa80567beed471001a'],
-        ['data_batch_5', '482c414d41f54cd18b22e5b47cb7c3cb'],
-    ]
-
-    test_list = [
-        ['test_batch', '40351d587109b95175f43aff81a1287e'],
-    ]
-    meta = {
-        'filename': 'batches.meta',
-        'key': 'label_names',
-        'md5': '5ff9c542aee3614f3951f8cda6e48888',
-    }
-    im_size=32
-    nch=3
-
-    def load(self):
-
-        # download dataset
-        if self.download_flag:
-            self.download()
-
-        if not self._check_integrity():
-            raise RuntimeError('Dataset not found or corrupted.' +
-                               ' You can use download=True to download it')
-
-        if self.train or self.validation:
-            downloaded_list = self.train_list
-        else:
-            downloaded_list = self.test_list
-
-        self.data = []
-        self.targets = []
-        self.course_targets = []
-
-        # now load the picked numpy arrays
-        for file_name, checksum in downloaded_list:
-            file_path = os.path.join(self.root, self.base_folder, file_name)
-            with open(file_path, 'rb') as f:
-                if sys.version_info[0] == 2:
-                    entry = pickle.load(f)
-                else:
-                    entry = pickle.load(f, encoding='latin1')
-
-                data =[]
-                labels =[]
-                for (sample, label) in zip(entry['data'], entry['labels']):
-                    if label == 2 or label ==3:
-                        continue
-                    data.append(sample)
-                    labels.append(label)
-                self.data.append(data)
-                
-                # print (entry['batch_label'])
-                if 'labels' in entry:
-                    # print ('hello', entry['labels'])
-                    # if entry['labels'] == 2 or entry['labels'] == 3:
-                    #     print ('yes')
-                    self.targets.extend(labels)
-                else:
-                    self.targets.extend(['fine_labels'])
-                if 'coarse_labels' in entry:
-                    self.course_targets.extend(entry['coarse_labels'])
-                
-        print ('number of distinct classes', len(set(self.targets)))
-        print ('no of classes', len(self.data))
-        self.data = np.vstack(self.data).reshape(-1, 3, 32, 32)
-        self.data = self.data.transpose((0, 2, 3, 1))  # convert to HWC
-        self._load_meta()
-        # print (self.class_to_idx)
-
-    def download(self):
-        import tarfile
-
-        if self._check_integrity():
-            print('Files already downloaded and verified')
-            return
-
-        download_url(self.url, self.root, self.filename, self.tgz_md5)
-
-        # extract file
-        with tarfile.open(os.path.join(self.root, self.filename), "r:gz") as tar:
-            tar.extractall(path=self.root)
-
-    def _load_meta(self):
-        path = os.path.join(self.root, self.base_folder, self.meta['filename'])
-        if not check_integrity(path, self.meta['md5']):
-            raise RuntimeError('Dataset metadata file not found or corrupted.' +
-                               ' You can use download=True to download it')
-        with open(path, 'rb') as infile:
-            if sys.version_info[0] == 2:
-                data = pickle.load(infile)
-            else:
-                data = pickle.load(infile, encoding='latin1')
-            self.classes = data[self.meta['key']]
-        self.class_to_idx = {_class: i for i, _class in enumerate(self.classes)}
-
-    def _check_integrity(self):
-        root = self.root
-        for fentry in (self.train_list + self.test_list):
-            filename, md5 = fentry[0], fentry[1]
-            fpath = os.path.join(root, self.base_folder, filename)
-            if not check_integrity(fpath, md5):
-                return False
-        return True
-
-
 
 class iCIFAR10(iDataset):
     """`CIFAR10 <https://www.cs.toronto.edu/~kriz/cifar.html>`_ Dataset.
